@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #1b1e2b;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .sidebar {
+            background-color: #2a2d3e;
+            height: 100vh;
+            position: fixed;
+            width: 250px;
+            padding: 20px;
+            color: #fff;
+        }
+        .sidebar a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+        }
+        .sidebar a.active, .sidebar a:hover {
+            background-color: #4b4f66;
+        }
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+        .dashboard-header {
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background-color: #292d3e;
+            color: #fff;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .draft { background-color: orange; }
+        .published { background-color: green; }
+
+        .table td, .table th {
+            vertical-align: middle;
+        }
+
+        .sidebar {
+            height: 100vh;
+            background-color: #292d3e;
+            position: fixed;
+            width: 250px;
+        }
+
+        .sidebar .nav-link {
+            color: #fff;
+        }
+
+        .sidebar .nav-link:hover {
+            background-color: #404561;
+        }
+
+        .main-content {
+            margin-left: 260px;
+            padding: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            .main-content {
+                margin-left: 0;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+    <h2 class="mb-4"><a href="/">CMS</a></h2>
+    <a href="#" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+    <a href="#"><i class="fas fa-book"></i> Courses</a>
+    <a href="#"><i class="fas fa-users"></i> Users</a>
+    <a href="#"><i class="fas fa-cogs"></i> Settings</a>
+</div>
+
+<!-- Main Content -->
+<div class="main-content">
+    <div class="container">
+        <!-- Header Section -->
+        <div class="row dashboard-header">
+            <div class="col-md-6">
+                <h1>Dashboard</h1>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <a href="#" class="btn btn-primary">New Post</a>
+            </div>
+        </div>
+
+        <!-- Overview Cards -->
+        <div class="row text-center mb-4">
+            <div class="col-md-3">
+                <div class="card p-3">
+                    <h3>2,000</h3>
+                    <p>Total Posts</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card p-3">
+                    <h3>367</h3>
+                    <p>Assets</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card p-3">
+                    <h3>13,234</h3>
+                    <p>Users</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card p-3">
+                    <h3>120</h3>
+                    <p>Comments</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Posts Section -->
+        <div class="card p-4 mb-4">
+            <h2 class="mb-4">Recent Posts</h2>
+            <div class="table-responsive">
+                <table class="table table-dark table-striped">
+                    <thead>
+                        <tr>
+                            <th>Post</th>
+                            <th>Type</th>
+                            <th>Category</th>
+                            <th>Date</th>
+                            <th>Author</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Revolutionize how you build the web...</td>
+                            <td>Image</td>
+                            <td>Courses</td>
+                            <td>7 July, 2021 1:42pm</td>
+                            <td><img src="author1.png" alt="Reva Yokk" class="rounded-circle" width="30"> Reva Yokk</td>
+                            <td><span class="status-indicator draft"></span> Draft</td>
+                        </tr>
+                        <tr>
+                            <td>Guide to Static Sites with Gatsby.js</td>
+                            <td>Video</td>
+                            <td>Marketing</td>
+                            <td>6 July, 2021 2:42pm</td>
+                            <td><img src="author2.png" alt="March Menon" class="rounded-circle" width="30"> March Menon</td>
+                            <td><span class="status-indicator draft"></span> Draft</td>
+                        </tr>
+                        <tr>
+                            <td>The Modern JavaScript Courses</td>
+                            <td>Link</td>
+                            <td>Workshop</td>
+                            <td>5 July, 2021 5:42pm</td>
+                            <td><img src="author3.png" alt="Lisa Menon" class="rounded-circle" width="30"> Lisa Menon</td>
+                            <td><span class="status-indicator published"></span> Published</td>
+                        </tr>
+                        <tr>
+                            <td>Online WordPress Courses Become..</td>
+                            <td>Image</td>
+                            <td>Company</td>
+                            <td>3 July, 2021 10:42am</td>
+                            <td><img src="author4.png" alt="Maria Pinto" class="rounded-circle" width="30"> Maria Pinto</td>
+                            <td><span class="status-indicator published"></span> Published</td>
+                        </tr>
+                        <tr>
+                            <td>How to become Java Developer</td>
+                            <td>Image</td>
+                            <td>Company</td>
+                            <td>4 July, 2021 12:42pm</td>
+                            <td><img src="author5.png" alt="John Deo" class="rounded-circle" width="30"> John Deo</td>
+                            <td><span class="status-indicator published"></span> Published</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS (Optional, for interactive components) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

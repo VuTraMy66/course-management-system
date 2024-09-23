@@ -8,6 +8,17 @@ public class HomeController {
 
     @GetMapping("/")
     public String home() {
-        return "index";  // This will map to src/main/resources/templates/index.html
+        return "index";  
     }
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
+    @GetMapping("/register")
+    public String register() {
+        return "register";
+    }
+    
 }

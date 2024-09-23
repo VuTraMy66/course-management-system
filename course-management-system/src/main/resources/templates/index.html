@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Home</title>
+    <link type="text/css" rel="stylesheet" href="bootstrap.min.css" th:href="@{bootstrap.min.css}">
+</head>
+<body>
+    <div class="col-3"></div>
+    <div class="container-md">
+        <h1 class="text-center">Course List</h1>
+        <a href="/add" class="btn btn-success">Add Course</a>
+        <table class="table table-bordered">
+            <thead>
+                <tr style="vertical-align: middle;" class="text-center">
+                    <th>Course ID</th>
+                    <th>Course Level</th>
+                    <th class="col-2">Course Name</th>
+                    <th class="col-2">Course Name (Vietnamese)</th>
+                    <th>Credit Theory</th>
+                    <th>Credit Lab</th>
+                    <th class="col-5">Description</th>
+                    <th class="col-2">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="course : ${courses}">
+                    <td th:text="${course.courseId}" class="text-center">Course ID</td>
+                    <td th:text="${course.courseLevelId}" class="text-center">Course Level</td>
+                    <td th:text="${course.name}">Course Name</td>
+                    <td th:text="${course.nameVn}">Course Name (Vietnamese)</td>
+                    <td th:text="${course.creditTheory}" class="text-center">Credit Theory</td>
+                    <td th:text="${course.creditLab}" class="text-center">Credit Lab</td>
+                    <td th:text="${course.description}" class="justify-content-center">Description</td>
+                    <td class="text-center">
+                        <a th:href="@{/edit(course_id=${course.courseId})}" class="btn btn-primary">Edit</a>
+                        <a th:href="@{/delete(course_id=${course.courseId})}" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

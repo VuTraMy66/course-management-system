@@ -12,4 +12,5 @@ public class AdminController {
         model.addAttribute("title", "Admin Dashboard");
         return "admin"; 
     }
+
 }

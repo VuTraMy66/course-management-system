@@ -1,31 +1,40 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        .navbar-nav .nav-item .nav-link:hover {
+            color: #5A87C7 !important;
+            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+            font-weight: 500;
+        }
+    </style>
+</head>
 <body th:fragment="navbar">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg border-bottom" style="background-color: #f5f5f5; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/">Course Management System</a>
+            <a class="navbar-brand text-dark ms-2 fw-bold" href="/" style="font-size: 1.5rem;">Course Management System</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/">Home</a>
+                        <a class="nav-link text-dark" href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/courses">Courses</a>
+                        <a class="nav-link text-dark" href="/courses">Courses</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/teacher">Teachers</a>
-                    </li>
-                    <li class="nav-item"></li>
-                        <a class="nav-link" href="/account">Account</a>
-                    </li>
-                    <li class="nav-item"></li>
-                        <a class="nav-link" href="/admin">Admin</a>
+                        <a class="nav-link text-dark" href="/teacher">Teachers</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/login">Login</a>
+                        <a class="nav-link text-dark" href="/account">Account</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="/admin">Admin</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="/login">Login</a>
                     </li>
                 </ul>
             </div>

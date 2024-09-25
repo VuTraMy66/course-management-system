@@ -20,5 +20,20 @@ public class HomeController {
     public String registerPage() {
         return "register";
     }
+
+    @GetMapping("/teacher")
+    public String teacherPage() {
+        return "teacher";
+    }
+
+    @GetMapping("/learner")
+    public String learnerPage() {
+        return "learner";
+    }
+
+    @GetMapping("/course")
+    public String courseList() {
+        return "course";
+    }
     
 }

@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher - Course Management System</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #e8f0fa;
+        }
+
+        .mt-n5 {
+            margin-top: -2rem !important;
+        }
+        
+        .btn-primary {
+            color: #fff; 
+            background-color: #5A87C7 !important;
+            border-color: #5A87C7 !important;
+
+            transition: background-color 0.3s ease, border-color 0.3s ease !important;
+        }
+        .btn-primary:hover {
+            color: #fff; 
+            background-color:  #4B6F9D!important; 
+            border-color: #4B6F9D !important; 
+        }
+
+        .btn-primary:active {
+            color: #fff;
+            background-color: #4B6F9D !important;
+            border-color: #4B6F9D  !important; 
+            box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125) !important; 
+        }
+
+        .btn-primary:disabled {
+            color: #fff;
+            background-color: #5A87C7 !important;
+            border-color: #5A87C7 !important; 
+        }
+
+        .rounded-bottom-md-2 {
+            border-bottom-left-radius: 0.375rem !important;
+            border-bottom-right-radius: 0.375rem !important;
+            border: 1px solid #000000;
+        }
+
+        .shadow-sm {
+            box-shadow: 0px 1px 3px rgba(0, 0, 0, .09) !important;
+        }
+
+        .nav-icon {
+            display: inline-block;
+            width: 1rem;   
+            height: 1rem;  
+            stroke-width: 2;
+        }
+
+        .sidenav.navbar .navbar-nav .nav-item .nav-link {
+            align-items: center;
+            background-color: transparent;
+            border-bottom: 0;
+            border-radius: .5rem;
+            color: #696969 !important;
+            display: flex;
+            font-weight: 500;
+            padding: .3rem .5rem !important;
+            position: relative;
+            margin-bottom: .125rem;
+        }
+
+        .sidenav.navbar .navbar-nav .nav-item .nav-link:hover {
+            background-color: #5A87C7;
+            border-radius: 0.5rem;
+            color: #F3EFE3 !important;
+        }
+
+        .sidenav.navbar .navbar-header {
+            color: #696969;
+            font-size: .6875rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            margin-bottom: .2rem;
+            padding: .3rem .4rem;
+            text-transform: uppercase;
+        }
+
+        .fw-semibold {
+            font-weight: 600 !important;
+        }
+
+        .fs-6 {
+            font-size: .75rem !important;
+        }
+
+        .img-4by3-lg {
+            width: 6.5rem;
+        }
+
+        .dropdown-header {
+            color: #696969;
+            padding: .25rem 1.2rem;
+            font-size: .6875rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            margin-bottom: .2rem;
+            text-transform: uppercase;
+            display: block;
+            white-space: nowrap;
+        }
+
+        .card {
+            background-color: #f5f5f5; 
+            color: #696969;
+            border: none;
+            box-shadow: 0 2px 4px rgba(105, 105, 105, 0.3)
+        }
+
+        .card-header {
+            background-color: #f5f5f5;
+            color: #696969;
+            border-bottom: 1px solid var #696969;
+            margin-bottom: 0;
+            padding: 1rem 1.5rem;
+        }
+
+        .table>:not(caption)>*>*  {
+            padding: .75rem 1.5rem !important;
+        }
+
+        .ms-3 {
+            margin-left: 1rem !important;
+        }
+
+        .mb-0 {
+            margin-bottom: 0 !important;
+        }
+
+        .h5, h5 {
+            font-size: .875rem;
+        }
+
+        .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+            font-family: Inter, sans-serif;
+            font-weight: 600;
+            line-height: 1.5;
+            margin-bottom: .5rem;
+            margin-top: 0;
+        }
+
+        .text-dark-hover{
+            color: #212529;
+            text-decoration: none;
+        }
+
+        .text-dark-hover:hover {
+            color: #5A87C7;
+        }
+
+        .table-centered td, .table-centered th {
+            vertical-align: middle !important;
+        }
+
+        .btn-icon {
+            align-items: center;
+            display: inline-flex;
+            flex-shrink: 0;
+            justify-content: center;
+            padding: 0;
+            position: relative;
+        }
+
+        .btn-icon.btn-sm {
+            font-size: 0.5rem;
+            height: 2.1875rem;
+            width: 2.1875rem;
+        }
+
+        .btn-ghost {
+            color: #212529;
+            background-color: transparent;
+            border-color: transparent;
+            border: 0.5rem;
+        }
+
+        .btn-ghost:hover {
+            color: #5A87C7;
+            background-color: #f8f9fa;
+            border-color: #f8f9fa;
+        }
+
+        .btn-ghost:active {
+            color: #4B6F9D;                 
+            background-color: #f8f9fa;
+            border-color: #f8f9fa;
+        }
+
+        .btn-ghost:disabled {
+            color: #212529;
+            background-color: transparent;
+            border-color: transparent;
+        }
+
+        .dropdown-item {
+            align-items: center;
+            border-radius: .5rem;
+            display: flex;
+            font-weight: 500;
+            line-height: 28px;
+            padding: .125rem 1rem;
+            color: #696969;
+        }
+
+        .dropdown-item:hover {
+            background-color: #5A87C7;
+            color: #F3EFE3;
+        }
+
+        .dropdown-item-icon {
+            display: inline-block;
+            width: 1rem;   
+            height: 1rem;  
+            stroke-width: 2;
+        }
+
+        .navbar-nav .nav-item .nav-link:hover {
+            color: #5A87C7 !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div th:replace="fragments/navbar.html :: navbar"></div>
+
+    <!-- Profile Section -->
+    <section class=" pt-5 pb-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-12">
+                    <div class="rounded-top" style="background: url(https://png.pngtree.com/thumb_back/fh260/background/20190813/pngtree-digital-technology-blue-background-banner-image_298195.jpg) no-repeat; background-size: cover; height: 100px;"></div>
+                    <div class="card px-4 pt-2 pb-4 shadow-sm rounded-top-0 rounded-bottom-0 rounded-bottom-md-2">
+                        <div class="d-flex align-items-end justify-content-between">
+                            <div class="d-flex align-items-center">
+                                <div class="me-2 position-relative d-flex justify-content-end align-items-end mt-n5">
+                                    <img class="avatar-x1 rounded-circle position-relative" src="https://cellphones.com.vn/sforum/wp-content/uploads/2024/02/anh-avatar-cute-58.jpg" alt="Teacher Avatar" style="width: 5rem; height: 5rem; border: 4px solid #f5f5f5;">
+                                </div>
+                                <div class="lh-1">
+                                    <h2 class="mb-0 mt-0 ms-1" style="color: #333; font-size: 1.5rem; font-family: Inter, sans-serif;">Jenny Wilson</h2>
+                                    <p class="mb-0 d-block ms-1 pt-1" style="color: #64748b; font-family: Inter, sans-serif; font-size: 0.938rem;">@Teacher</p>
+                                </div>
+                            </div>
+                            <div>
+                                <a class="btn btn-primary create-course-btn d-none d-md-block" href="#">Create New Course</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-0 mt-md-4">
+                <div class="col-lg-3 col-md-4 col-12">
+                    <div th:replace="fragments/sidebar.html :: sidebar"></div>
+                </div>
+    
+                <div class="col-lg-9 col-md-8 col-12">
+                    <div class="card mb-4">
+                        <!-- Card header -->
+                        <div class="card-header">
+                            <h3 class="mb-0">Courses</h3>
+                            <span>Manage your courses and its update like live, draft and insight.</span>
+                        </div>
+                        <!-- Card body -->
+                        <div class="card-body">
+                            <!-- Form -->
+                            <form class="row gx-3">
+                                <div class="col-lg-9 col-md-7 col-12 mb-lg-0 mb-2">
+                                    <input type="search" class="form-control" placeholder="Search Your Courses">
+                                </div>
+                                <div class="col-lg-3 col-md-5 col-12">
+                                    <select class="form-select" data-choices="">
+                                        <option value="">Date Created</option>
+                                        <option value="Newest">Newest</option>
+                                        <option value="High Rated">High Rated</option>
+                                        <option value="Law Rated">Law Rated</option>
+                                        <option value="High Earned">High Earned</option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- Table -->
+                        <div class="table-responsive overflow-y-hidden">
+                            <table class="table mb-0 text-nowrap table-hover table-centered text-nowrap">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Courses</th>
+                                        <th>Students</th>
+                                        <th>Rating</th>
+                                        <th>Status</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div>
+                                                    <a href="#">
+                                                        <img src="../assets/images/course/course-wordpress.jpg" alt="course" class="rounded img-4by3-lg">
+                                                    </a>
+                                                </div>
+                                                <div class="ms-3">
+                                                    <h4 class="mb-1 h5">
+                                                        <a href="#" class="text-inherit">Create a Website with WordPress</a>
+                                                    </h4>
+                                                    <ul class="list-inline fs-6 mb-0">
+                                                        <li class="list-inline-item">
+                                                            <span class="align-text-bottom">
+                                                                
+                                                            </span>
+                                                            <span>1h 30m</span>
+                                                        </li>
+                                                        <li class="list-inline-item">
+                                                            <svg class="me-1 mt-n1" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE"></rect>
+                                                                <rect x="7" y="5" width="2" height="9" rx="1" fill="#DBD8E9"></rect>
+                                                                <rect x="11" y="2" width="2" height="12" rx="1" fill="#DBD8E9"></rect>
+                                                            </svg>
+                                                            Beginner
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>11,200</td>
+                                        <td>
+                                            <span class="lh-1">
+                                                <span class="text-warning">4.5</span>
+                                                <span class="mx-1 align-text-top">
+                                                    
+                                                </span>
+                                                (3,250)
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-success">Live</span>
+                                        </td>
+                                        <td>
+                                            <span class="dropdown dropstart">
+                                                <a
+                                                    class="btn-icon btn btn-ghost btn-sm rounded-circle"
+                                                    href="#"
+                                                    role="button"
+                                                    id="courseDropdown"
+                                                    data-bs-toggle="dropdown"
+                                                    data-bs-offset="-20,20"
+                                                    aria-expanded="false">
+                                                    <i class="fe fe-more-vertical"></i>
+                                                </a>
+                                                <span class="dropdown-menu" aria-labelledby="courseDropdown">
+                                                    <span class="dropdown-header">Setting</span>
+                                                    <a class="dropdown-item" href="#">
+                                                        <i class="fe fe-edit dropdown-item-icon"></i>
+                                                        Edit
+                                                    </a>
+                                                    <a class="dropdown-item" href="#">
+                                                        <i class="fe fe-trash dropdown-item-icon"></i>
+                                                        Remove
+                                                    </a>
+                                                </span>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div>
+                                                    <a href="#">
+                                                        <img src="../assets/images/course/course-node.jpg" alt="course" class="rounded img-4by3-lg">
+                                                    </a>
+                                                </div>
+                                                <div class="ms-3">
+                                                    <h4 class="mb-1 h5">
+                                                        <a href="#" class="text-inherit">Learn Node.js - Tutorials Courses</a>
+                                                    </h4>
+                                                    <ul class="list-inline fs-6 mb-0">
+                                                        <li class="list-inline-item">
+                                                            <span class="align-text-bottom">
+                                                                
+                                                            </span>
+                                                            <span>3h 40m</span>
+                                                        </li>
+                                                        <li class="list-inline-item">
+                                                            <svg class="me-1 mt-n1" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE"></rect>
+                                                                <rect x="7" y="5" width="2" height="9" rx="1" fill="#754FFE"></rect>
+                                                                <rect x="11" y="2" width="2" height="12" rx="1" fill="#DBD8E9"></rect>
+                                                            </svg>
+                                                            Intermediate
+                                                        </li>
+                                                    </ul>
+                                                    <div class="progress mt-2" style="height: 3px">
+                                                        <div
+                                                            class="progress-bar bg-success"
+                                                            role="progressbar"
+                                                            style="width: 25%"
+                                                            aria-valuenow="25"
+                                                            aria-valuemin="0"
+                                                            aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>0</td>
+                                        <td>
+                                            <span class="lh-1">
+                                                <span class="text-warning">4.5</span>
+                                                <span class="mx-1 align-text-top">
+                                                    
+                                                </span>
+                                                (5,300)
+                                            </span>
+                                        </td>
+                                        <td><span class="badge bg-info">Darft</span></td>
+                                        <td>
+                                            <span class="dropdown dropstart">
+                                                <a
+                                                    class="btn-icon btn btn-ghost btn-sm rounded-circle"
+                                                    href="#"
+                                                    role="button"
+                                                    id="courseDropdown1"
+                                                    data-bs-toggle="dropdown"
+                                                    data-bs-offset="-20,20"
+                                                    aria-expanded="false">
+                                                    <i class="fe fe-more-vertical"></i>
+                                                </a>
+                                                <span class="dropdown-menu" aria-labelledby="courseDropdown1">
+                                                    <span class="dropdown-header">Setting</span>
+                                                    <a class="dropdown-item" href="#">
+                                                        <i class="fe fe-edit dropdown-item-icon"></i>
+                                                        Edit
+                                                    </a>
+                                                    <a class="dropdown-item" href="#">
+                                                        <i class="fe fe-trash dropdown-item-icon"></i>
+                                                        Remove
+                                                    </a>
+                                                </span>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div>
+                                                    <a href="#">
+                                                        <img src="../assets/images/course/course-laravel.jpg" alt="course" class="rounded img-4by3-lg">
+                                                    </a>
+                                                </div>
+                                                <div class="ms-3">
+                                                    <h4 class="mb-1 h5">
+                                                        <a href="#" class="text-inherit">The Ultimate Advanced Laravel..</a>
+                                                    </h4>
+                                                    <ul class="list-inline fs-6 mb-0">
+                                                        <li class="list-inline-item">
+                                                            <span class="align-text-bottom">
+                                                                
+                                                            </span>
+                                                            <span>3h 40m</span>
+                                                        </li>
+                                                        <li class="list-inline-item">
+                                                            <svg class="me-1 mt-n1" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE"></rect>
+                                                                <rect x="7" y="5" width="2" height="9" rx="1" fill="#754FFE"></rect>
+                                                                <rect x="11" y="2" width="2" height="12" rx="1" fill="#754FFE"></rect>
+                                                            </svg>
+                                                            Advance
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>3200</td>
+                                        <td>
+                                            <span class="lh-1">
+                                                <span class="text-warning">4.5</span>
+                                                <span class="mx-1 align-text-top">
+                                                    
+                                                </span>
+                                                (6,380)
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-success">Live</span>
+                                        </td>
+                                        <td>
+                                            <span class="dropdown dropstart">
+                                                <a
+                                                    class="btn-icon btn btn-ghost btn-sm rounded-circle"
+                                                    href="#"
+                                                    role="button"
+                                                    id="courseDropdown2"
+                                                    data-bs-toggle="dropdown"
+                                                    data-bs-offset="-20,20"
+                                                    aria-expanded="false">
+                                                    <i class="fe fe-more-vertical"></i>
+                                                </a>
+    
+                                                <span class="dropdown-menu" aria-labelledby="courseDropdown2">
+                                                    <span class="dropdown-header">Setting</span>
+                                                    <a class="dropdown-item" href="#">
+                                                        <i class="fe fe-edit dropdown-item-icon"></i>
+                                                        Edit
+                                                    </a>
+                                                    <a class="dropdown-item" href="#">
+                                                        <i class="fe fe-trash dropdown-item-icon"></i>
+                                                        Remove
+                                                    </a>
+                                                </span>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div>
+                                                    <a href="#">
+                                                        <img src="../assets/images/course/course-gatsby.jpg" alt="course" class="rounded img-4by3-lg">
+                                                    </a>
+                                                </div>
+                                                <div class="ms-3">
+                                                    <h4 class="mb-1 h5">
+                                                        <a href="#" class="text-inherit">Gatsby Tutorial - Fast Website...</a>
+                                                    </h4>
+                                                    <ul class="list-inline fs-6 mb-0">
+                                                        <li class="list-inline-item">
+                                                            <span class="align-text-bottom">
+                                                                
+                                                            </span>
+                                                            <span>4h 10m</span>
+                                                        </li>
+                                                        <li class="list-inline-item">
+                                                            <svg class="me-1 mt-n1" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE"></rect>
+                                                                <rect x="7" y="5" width="2" height="9" rx="1" fill="#DBD8E9"></rect>
+                                                                <rect x="11" y="2" width="2" height="12" rx="1" fill="#DBD8E9"></rect>
+                                                            </svg>
+                                                            Beginner
+                                                        </li>
+                                                    </ul>
+                                                    <div class="progress mt-2" style="height: 3px">
+                                                        <div
+                                                            class="progress-bar bg-success"
+                                                            role="progressbar"
+                                                            style="width: 25%"
+                                                            aria-valuenow="25"
+                                                            aria-valuemin="0"
+                                                            aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>0</td>
+                                        <td>
+                                            <span class="lh-1">
+                                                <span class="text-warning">4.5</span>
+                                                <span class="mx-1 align-text-top">
+                                                    
+                                                </span>
+                                                (5,400)
+                                            </span>
+                                        </td>
+                                        <td><span class="badge bg-info">Darft</span></td>
+                                        <td>
+                                            <span class="dropdown dropstart">
+                                                <a
+                                                    class="btn-icon btn btn-ghost btn-sm rounded-circle"
+                                                    href="#"
+                                                    role="button"
+                                                    id="courseDropdown3"
+                                                    data-bs-toggle="dropdown"
+                                                    data-bs-offset="-20,20"
+                                                    aria-expanded="false">
+                                                    <i class="fe fe-more-vertical"></i>
+                                                </a>
+                                                <span class="dropdown-menu" aria-labelledby="courseDropdown3">
+                                                    <span class="dropdown-header">Setting</span>
+                                                    <a class="dropdown-item" href="#">
+                                                        <i class="fe fe-edit dropdown-item-icon"></i>
+                                                        Edit
+                                                    </a>
+                                                    <a class="dropdown-item" href="#">
+                                                        <i class="fe fe-trash dropdown-item-icon"></i>
+                                                        Remove
+                                                    </a>
+                                                </span>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div>
+                                                    <a href="#"><img src="../assets/images/course/course-sass.jpg" alt="course" class="rounded img-4by3-lg"></a>
+                                                </div>
+                                                <div class="ms-3">
+                                                    <h4 class="mb-1 h5">
+                                                        <a href="#" class="text-inherit">Learn SCSS-Lang Courses - Basic</a>
+                                                    </h4>
+                                                    <ul class="list-inline fs-6 mb-0">
+                                                        <li class="list-inline-item">
+                                                            <span class="align-text-bottom">
+                                                                
+                                                            </span>
+                                                            <span>2h 59m</span>
+                                                        </li>
+                                                        <li class="list-inline-item">
+                                                            <svg class="me-1 mt-n1" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE"></rect>
+                                                                <rect x="7" y="5" width="2" height="9" rx="1" fill="#754FFE"></rect>
+                                                                <rect x="11" y="2" width="2" height="12" rx="1" fill="#754FFE"></rect>
+                                                            </svg>
+                                                            Advance
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>0</td>
+                                        <td>
+                                            <span class="lh-1">
+                                                <span class="text-warning">4.5</span>
+                                                <span class="mx-1 align-text-top">
+                                                    
+                                                </span>
+                                                (7,800)
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-warning">Pending</span>
+                                        </td>
+                                        <td>
+                                            <span class="dropdown dropstart">
+                                                <a
+                                                    class="btn-icon btn btn-ghost btn-sm rounded-circle"
+                                                    href="#"
+                                                    role="button"
+                                                    id="courseDropdown4"
+                                                    data-bs-toggle="dropdown"
+                                                    data-bs-offset="-20,20"
+                                                    aria-expanded="false">
+                                                    <i class="fe fe-more-vertical"></i>
+                                                </a>
+                                                <span class="dropdown-menu" aria-labelledby="courseDropdown4">
+                                                    <span class="dropdown-header">Setting</span>
+                                                    <a class="dropdown-item" href="#">
+                                                        <i class="fe fe-edit dropdown-item-icon"></i>
+                                                        Edit
+                                                    </a>
+                                                    <a class="dropdown-item" href="#">
+                                                        <i class="fe fe-trash dropdown-item-icon"></i>
+                                                        Remove
+                                                    </a>
+                                                </span>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div>
+                                                    <a href="#"><img src="../assets/images/course/course-gatsby.jpg" alt="course" class="rounded img-4by3-lg"></a>
+                                                </div>
+                                                <div class="ms-3">
+                                                    <h4 class="mb-1 h5">
+                                                        <a href="#" class="text-inherit">Gatsby Tutorial - Fast Website</a>
+                                                    </h4>
+                                                    <ul class="list-inline fs-6 mb-0">
+                                                        <li class="list-inline-item">
+                                                            <span class="align-text-bottom">
+                                                            
+                                                            </span>
+                                                            <span>4h 10m</span>
+                                                        </li>
+                                                        <li class="list-inline-item">
+                                                            <svg class="me-1 mt-n1" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE"></rect>
+                                                                <rect x="7" y="5" width="2" height="9" rx="1" fill="#DBD8E9"></rect>
+                                                                <rect x="11" y="2" width="2" height="12" rx="1" fill="#DBD8E9"></rect>
+                                                            </svg>
+                                                            Beginner
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>23</td>
+                                        <td>
+                                            <span class="lh-1">
+                                                <span class="text-warning">4.5</span>
+                                                <span class="mx-1 align-text-top">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" fill="currentColor" class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" >
+                                                    </svg>
+                                                </span>
+                                                (9,200)
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-danger">Deleted</span>
+                                        </td>
+                                        <td>
+                                            <span class="dropdown dropstart">
+                                                <a
+                                                    class="btn-icon btn btn-ghost btn-sm rounded-circle"
+                                                    href="#"
+                                                    id="courseDropdown5"
+                                                    data-bs-toggle="dropdown"
+                                                    data-bs-offset="-20,20"
+                                                    aria-expanded="false">
+                                                    <i class="fe fe-more-vertical"></i>
+                                                </a>
+                                                <span class="dropdown-menu" aria-labelledby="courseDropdown5">
+                                                    <span class="dropdown-header">Setting</span>
+                                                    <a class="dropdown-item" href="#">
+                                                        <i class="fe fe-edit dropdown-item-icon"></i>
+                                                        Edit
+                                                    </a>
+                                                    <a class="dropdown-item" href="#">
+                                                        <i class="fe fe-trash dropdown-item-icon"></i>
+                                                        Remove
+                                                    </a>
+                                                </span>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        feather.replace();
+    </script>
+</body>
+</html>

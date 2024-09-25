@@ -22,8 +22,18 @@ public class HomeController {
     }
 
     @GetMapping("/teacher")
-    public String teacherPage() {
+    public String teacherDashboard() {
         return "teacher";
+    }
+
+    @GetMapping("teacher-course")
+    public String teacherCourse() {
+        return "teacher-course";
+    }
+
+    @GetMapping("teacher-student")
+    public String teacherStudent() {
+        return "teacher-student";
     }
 
     @GetMapping("/learner")
@@ -35,5 +45,4 @@ public class HomeController {
     public String courseList() {
         return "course";
     }
-    
 }

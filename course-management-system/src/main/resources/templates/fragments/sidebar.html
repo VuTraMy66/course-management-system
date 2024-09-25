@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body th:fragment="sidebar">
+    <nav class="navbar navbar-expand-md shadow-sm sidenav mb-4 mb-lg-0 rounded p-3" style="background-color: #f5f5f5;">
+        <div class="collapse navbar-collapse" id="sidenav">
+            <div class="navbar-nav flex-column" style="width: 100%;">
+                <span class="navbar-header">Dashboard</span>
+                <ul class="list-unstyled ms-n2 mb-4 col-12">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/teacher">
+                            <i class="nav-icon me-2" data-feather="home"></i> My Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/teacher-course">
+                            <i class="nav-icon me-2" data-feather="book"></i> My Courses
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/teacher-review">
+                            <i class="nav-icon me-2" data-feather="star"></i> Reviews
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/teacher-student">
+                            <i class="nav-icon me-2" data-feather="users"></i> Students
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="nav-icon me-2" data-feather="help-circle"></i> Quiz
+                        </a>
+                    </li>
+                </ul>
+                <span class="navbar-header">Account Setting</span>
+                <ul class="list-unstyled ms-n2 mb-4">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="nav-icon me-2" data-feather="settings"></i> Profile
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="nav-icon me-2" data-feather="user"></i> Security
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="nav-icon me-2" data-feather="bell"></i> Notifications
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="nav-icon me-2" data-feather="lock"></i> Profile Privacy
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="nav-icon me-2" data-feather="power"></i> Sign Out
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</body>
+</html>

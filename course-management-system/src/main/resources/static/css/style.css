@@ -1,5 +1,3 @@
-.navbar-nav .nav-item .nav-link:hover {
-    color: #5A87C7 !important;
-    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
-    font-weight: 500;
+body {
+    background-color: #1e6ecf;
 }

@@ -36,9 +36,9 @@ public class HomeController {
         return "teacher-student";
     }
 
-    @GetMapping("/learner")
-    public String learnerPage() {
-        return "learner";
+    @GetMapping("/student")
+    public String studentDashboard() {
+        return "student";
     }
 
     @GetMapping("/course")

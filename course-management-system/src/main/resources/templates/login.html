@@ -8,10 +8,44 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        body {
+            background-color: #e8f0fa;
+            font-family: Inter, sans-serif;
+        }
+
         .card {
             border-radius: 15px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #f5f5f5; 
+            color: #696969;
         }
+
+        .btn-primary {
+            color: #fff; 
+            background-color: #5A87C7 !important;
+            border-color: #5A87C7 !important;
+            transition: background-color 0.3s ease, border-color 0.3s ease !important;
+        }
+
+        .btn-primary:hover {
+            color: #fff; 
+            background-color:  #4B6F9D!important; 
+            border-color: #4B6F9D !important; 
+        }
+
+        .btn-primary:active {
+            color: #fff;
+            background-color: #4B6F9D !important;
+            border-color: #4B6F9D  !important; 
+            box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125) !important; 
+        }
+
+        .btn-primary:disabled {
+            color: #fff;
+            background-color: #5A87C7 !important;
+            border-color: #5A87C7 !important; 
+        }
+
         .divider:after,
         .divider:before {
             content: "";

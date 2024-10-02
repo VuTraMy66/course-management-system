@@ -4,210 +4,464 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome for Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/feather-icons"></script>
     <style>
         body {
-            background-color: #1b1e2b;
-            color: #fff;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .sidebar {
-            background-color: #2a2d3e;
-            height: 100vh;
-            position: fixed;
-            width: 250px;
-            padding: 20px;
-            color: #fff;
-        }
-        .sidebar a {
-            color: #fff;
-            text-decoration: none;
-            display: block;
-            padding: 10px;
-        }
-        .sidebar a.active, .sidebar a:hover {
-            background-color: #4b4f66;
-        }
-        .main-content {
-            margin-left: 250px;
-            padding: 20px;
-        }
-        .dashboard-header {
-            margin-bottom: 30px;
-        }
-
-        .card {
-            background-color: #292d3e;
-            color: #fff;
-        }
-
-        .status-indicator {
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-        }
-
-        .draft { background-color: orange; }
-        .published { background-color: green; }
-
-        .table td, .table th {
-            vertical-align: middle;
-        }
-
-        .sidebar {
-            height: 100vh;
-            background-color: #292d3e;
-            position: fixed;
-            width: 250px;
-        }
-
-        .sidebar .nav-link {
-            color: #fff;
-        }
-
-        .sidebar .nav-link:hover {
-            background-color: #404561;
-        }
-
-        .main-content {
-            margin-left: 260px;
-            padding: 20px;
-        }
-
-        @media (max-width: 768px) {
-            .sidebar {
-                width: 100%;
-                height: auto;
-                position: relative;
-            }
-            .main-content {
-                margin-left: 0;
-            }
+            background-color: #e8f0fa;
+            font-family: "Inter", sans-serif;
         }
         
+        .containe {
+            display: flex;
+            width: 100%;
+            height: 100vh;
+        }
+
+        .col-20 {
+            flex: 0 0 20%;
+        }
+
+        .col-80 {
+            flex: 0 0 80%;
+        }
+
+        .navbar-vertical {
+            background-color: #f5f5f5;
+            bottom: 0;
+            display: block;
+            height: 100vh;
+            max-width: 307.2px;
+            padding: 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+
+        .navbar-vertical .navbar-nav .nav-item .nav-link {
+            align-items: center;
+            color: #0b1324;
+            display: flex;
+            font-weight: 500;
+            line-height: 1.8;
+            padding: .5rem 1.5rem;
+            transition: all .5s;
+            font-size: 1rem;
+        }
+
+        .navbar-vertical .navbar-nav .nav-icon {
+            width: 1rem;   
+            height: 1rem;  
+        }
+
+        .col-80 .navbar {
+            padding: .625rem 1.5rem;
+            background-color: #f5f5f5;
+        }
+
+        .me-2 {
+            margin-right: .5rem !important;
+        }
+
+        .ms-2 {
+            margin-left: .5rem !important;
+        }
+
+        .ms-3 {
+            margin-left: 1rem !important;
+        }
+
+        .lh-1 {
+            line-height: 1 !important;
+        }
+
+        .mb-1 {
+            margin-bottom: .25rem !important;
+        }
+
+        .ms-lg-3 {
+            margin-left: 1rem !important;
+        }
+
+        .ps-3 {
+            padding-left: 1rem !important;
+        }
+
+        .ps-6 {
+            padding-left: 2.5rem !important;
+        }
+
+        .search-icon {
+            width: 15px;
+            height: 15px;
+            color: #495057;
+        }
+
+        .form-control {
+            font-size: .875rem;
+            color: #495057;
+            display: block;
+            font-weight: 400;
+            line-height: 1.6;
+            padding: .5rem 1rem;
+            border-radius: 0.375rem;
+        }
+
+        .navbar-expand-lg {
+            flex-wrap: nowrap;
+            justify-content: flex-start;
+        }
+
+        .navbar-expand-lg .navbar-nav {
+            flex-direction: row;
+        }
+
+        .ms-auto {
+            margin-left: auto !important;
+        }
+
+        .btn-icon {
+            align-items: center;
+            display: inline-flex;
+            flex-shrink: 0;
+            font-size: .92969rem;
+            font-weight: 400;
+            height: 2.5rem;
+            justify-content: center;
+            padding: 0;
+            position: relative;
+            width: 2.5rem;
+        }
+
+        .rounded-circle {
+            border-radius: 50% !important;
+        }
+
+        .btn-light {
+            background-color: #e4e4e4;
+        }
+
+        .avatar {
+            display: inline-block;
+            position: relative;
+        }
+
+        .avatar-md {
+            height: 2.5rem;
+            width: 2.5rem;
+        }
+
+        .avatar img {
+            height: 100%;
+            object-fit: cover;
+            width: 100%;
+        }
+
+        .navbar .dropdown-menu {
+            border: none;
+            line-height: 1.2rem;
+            margin: 1.125rem 0;
+            min-width: 14rem;
+            padding: 1rem .75rem;
+            top: 28px;
+        }
+
+        .navbar .dropdown-menu-end {
+            left: auto;
+            right: 0;
+        }
+
+        .dropdown-item {
+            align-items: center;
+            border-radius: .25rem;
+            display: flex;
+            font-weight: 500;
+            line-height: 28px;
+            padding: .125rem 1rem;
+        }
+
+        .h2, h2 {
+          font-size: 1.5rem;
+      }
     </style>
 </head>
 <body>
-
-<!-- Sidebar -->
-<div class="sidebar">
-    <h2 class="mb-4"><a href="/">CMS</a></h2>
-    <a href="#" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-    <a href="#"><i class="fas fa-book"></i> Courses</a>
-    <a href="#"><i class="fas fa-users"></i> Users</a>
-    <a href="#"><i class="fas fa-cogs"></i> Settings</a>
-</div>
-
-<!-- Main Content -->
-<div class="main-content">
-    <div class="container">
-        <!-- Header Section -->
-        <div class="row dashboard-header">
-            <div class="col-md-6">
-                <h1>Dashboard</h1>
-            </div>
-            <div class="col-md-6 text-md-end">
-                <a href="#" class="btn btn-primary">New Post</a>
-            </div>
+    <section class="containe">
+        <div class="col-20">
+            <nav class="navbar-vertical navbar">
+                <div class="vh-100" data-simplebar>
+                    <!-- Brand logo -->
+                    <a class="navbar-brand" href="../../index.html">
+                        <img src="https://geeksui.codescandy.com/geeks/assets/images/brand/logo/logo-inverse.svg" alt="Geeks" />
+                    </a>
+                    <!-- Navbar nav -->
+                    <ul class="navbar-nav flex-column" id="sideNavbar">
+                        <li class="nav-item">
+                            <a
+                                class="nav-link"
+                                href="#"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#navDashboard"
+                                aria-expanded="false"
+                                aria-controls="navDashboard">
+                                <i data-feather="home" class="nav-icon me-2"></i>
+                                Dashboard
+                            </a>
+                            <div id="navDashboard" class="collapse show" data-bs-parent="#sideNavbar">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="admin-dashboard.html">Overview</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="dashboard-analytics.html">Analytics</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#navCourses" aria-expanded="false" aria-controls="navCourses">
+                                <i data-feather="book" class="nav-icon me-2"></i>
+                                Courses
+                            </a>
+                            <div id="navCourses" class="collapse" data-bs-parent="#sideNavbar">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="admin-course-overview.html">All Courses</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="admin-course-category.html">Courses Category</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="../../pages/dashboard/admin-course-category-single.html">Category Single</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link  collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#navProfile" aria-expanded="false" aria-controls="navProfile">
+                                <i data-feather="user" class="nav-icon me-2"></i>
+                                User
+                            </a>
+                            <div id="navProfile" class="collapse " data-bs-parent="#sideNavbar">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="admin-instructor.html">Instructor</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="admin-students.html">Students</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a
+                                class="nav-link  collapsed "
+                                href="#"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#navAuthentication"
+                                aria-expanded="false"
+                                aria-controls="navAuthentication">
+                                <i data-feather="lock" class="nav-icon me-2"></i>
+                                Authentication
+                            </a>
+                            <div id="navAuthentication" class="collapse " data-bs-parent="#sideNavbar">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="sign-in.html">Sign In</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="sign-up.html">Sign Up</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="forget-password.html">Forget Password</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="notification-history.html">Notifications</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="404-error.html">404 Error</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a
+                                class="nav-link collapsed"
+                                href="#"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#navecommerce"
+                                aria-expanded="false"
+                                aria-controls="navecommerce">
+                                <i data-feather="shopping-bag" class="nav-icon me-2"></i>
+                                Ecommerce
+                            </a>
+                            <div id="navecommerce" class="collapse " data-bs-parent="#sideNavbar">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a
+                                            class="nav-link collapsed "
+                                            href="#"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#navproduct"
+                                            aria-expanded="false"
+                                            aria-controls="navproduct">
+                                            Product
+                                        </a>
+                                        <div id="navproduct" class="collapse " data-bs-parent="#navProduct">
+                                            <ul class="nav flex-column">
+                                                <li class="nav-item">
+                                                    <a class="nav-link " href="../../pages/dashboard/ecommerce/product-grid.html">Grid</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link " href="../../pages/dashboard/ecommerce/product-grid-with-sidebar.html">Grid Sidebar</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link " href="../../pages/dashboard/ecommerce/products.html">Products</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link " href="../../pages/dashboard/ecommerce/product-single.html">Product Single</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link " href="../../pages/dashboard/ecommerce/product-single-v2.html">Product Single v2</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link " href="../../pages/dashboard/ecommerce/add-product.html">Add Product</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="../../pages/dashboard/ecommerce/shopping-cart.html">Shopping Cart</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="../../pages/dashboard/ecommerce/checkout.html">Checkout</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="../../pages/dashboard/ecommerce/order.html">Order</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="../../pages/dashboard/ecommerce/order-single.html">Order Single</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="../../pages/dashboard/ecommerce/order-history.html">Order History</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="../../pages/dashboard/ecommerce/order-summary.html">Order Summary</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="../../pages/dashboard/ecommerce/customers.html">Customers</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="../../pages/dashboard/ecommerce/customer-single.html">Customer Single</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="../../pages/dashboard/ecommerce/add-customer.html">Add Customer</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="../../pages/help-center.html">
+                                <i data-feather="help-circle" class="nav-icon me-2"></i>
+                                Help Center
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
         </div>
-
-        <!-- Overview Cards -->
-        <div class="row text-center mb-4">
-            <div class="col-md-3">
-                <div class="card p-3">
-                    <h3>2,000</h3>
-                    <p>Total Posts</p>
+        <div class="col-80">
+            <nav class="navbar-default navbar navbar-expand-lg">
+                <div class="ms-lg-3 d-none d-md-none d-lg-block">
+                    <!-- Form -->
+                    <form class="d-flex align-items-center">
+                        <span class="position-absolute ps-3">
+                            <i data-feather="search" class="search-icon"></i>
+                        </span>
+                        <input type="search" class="form-control ps-6" placeholder="Search Entire Dashboard" />
+                    </form>
                 </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card p-3">
-                    <h3>367</h3>
-                    <p>Assets</p>
+                <!--Navbar nav -->
+                <div class="ms-auto d-flex">
+                    <ul class="navbar-nav navbar-right-wrap ms-2 d-flex nav-top-wrap">
+                        <li class="dropdown stopevent">
+                            <a
+                                class="btn btn-light btn-icon rounded-circle indicator indicator-primary"
+                                href="#"
+                                role="button"
+                                id="dropdownNotification"
+                                data-bs-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false">
+                                <i data-feather="bell"></i>
+                            </a>
+                        </li>
+                        <li class="dropdown ms-2">
+                            <a class="rounded-circle" href="#" role="button" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
+                                <div class="avatar avatar-md avatar-indicators avatar-online">
+                                    <img alt="avatar" src="https://geeksui.codescandy.com/geeks/assets/images/avatar/avatar-1.jpg" class="rounded-circle" />
+                                </div>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUser">
+                                <div class="dropdown-item">
+                                    <div class="d-flex">
+                                        <div class="avatar avatar-md avatar-indicators avatar-online">
+                                            <img alt="avatar" src="https://geeksui.codescandy.com/geeks/assets/images/avatar/avatar-1.jpg" class="rounded-circle" />
+                                        </div>
+                                        <div class="ms-3 lh-1">
+                                            <h5 class="mb-1">Annette Black</h5>
+                                            <p class="mb-0">annette@geeksui.com</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="dropdown-divider"></div>
+                                <ul class="list-unstyled">
+                                    <li class="dropdown-submenu dropstart-lg">
+                                        <a class="dropdown-item dropdown-list-group-item dropdown-toggle" href="#">
+                                            <i data-feather="circle" class="sub-icon me-2"></i>
+                                            Status
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="../../pages/profile-edit.html">
+                                            <i data-feather="user" class="sub-icon me-2"></i>
+                                            Profile
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="../../pages/student-subscriptions.html">
+                                            <i data-feather="star" class="sub-icon me-2"></i>
+                                            Subscription
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">
+                                            <i data-feather="settings" class="sub-icon me-2"></i>
+                                            Settings
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="dropdown-divider"></div>
+                                <ul class="list-unstyled">
+                                    <li>
+                                        <a class="dropdown-item" href="../../index.html">
+                                            <i data-feather="power" class=" me-2"></i>
+                                            Sign Out
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card p-3">
-                    <h3>13,234</h3>
-                    <p>Users</p>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card p-3">
-                    <h3>120</h3>
-                    <p>Comments</p>
-                </div>
-            </div>
+            </nav>
+            
         </div>
-
-        <!-- Recent Posts Section -->
-        <div class="card p-4 mb-4">
-            <h2 class="mb-4">Recent Posts</h2>
-            <div class="table-responsive">
-                <table class="table table-dark table-striped">
-                    <thead>
-                        <tr>
-                            <th>Post</th>
-                            <th>Type</th>
-                            <th>Category</th>
-                            <th>Date</th>
-                            <th>Author</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Revolutionize how you build the web...</td>
-                            <td>Image</td>
-                            <td>Courses</td>
-                            <td>7 July, 2021 1:42pm</td>
-                            <td><img src="author1.png" alt="Reva Yokk" class="rounded-circle" width="30"> Reva Yokk</td>
-                            <td><span class="status-indicator draft"></span> Draft</td>
-                        </tr>
-                        <tr>
-                            <td>Guide to Static Sites with Gatsby.js</td>
-                            <td>Video</td>
-                            <td>Marketing</td>
-                            <td>6 July, 2021 2:42pm</td>
-                            <td><img src="author2.png" alt="March Menon" class="rounded-circle" width="30"> March Menon</td>
-                            <td><span class="status-indicator draft"></span> Draft</td>
-                        </tr>
-                        <tr>
-                            <td>The Modern JavaScript Courses</td>
-                            <td>Link</td>
-                            <td>Workshop</td>
-                            <td>5 July, 2021 5:42pm</td>
-                            <td><img src="author3.png" alt="Lisa Menon" class="rounded-circle" width="30"> Lisa Menon</td>
-                            <td><span class="status-indicator published"></span> Published</td>
-                        </tr>
-                        <tr>
-                            <td>Online WordPress Courses Become..</td>
-                            <td>Image</td>
-                            <td>Company</td>
-                            <td>3 July, 2021 10:42am</td>
-                            <td><img src="author4.png" alt="Maria Pinto" class="rounded-circle" width="30"> Maria Pinto</td>
-                            <td><span class="status-indicator published"></span> Published</td>
-                        </tr>
-                        <tr>
-                            <td>How to become Java Developer</td>
-                            <td>Image</td>
-                            <td>Company</td>
-                            <td>4 July, 2021 12:42pm</td>
-                            <td><img src="author5.png" alt="John Deo" class="rounded-circle" width="30"> John Deo</td>
-                            <td><span class="status-indicator published"></span> Published</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Bootstrap JS (Optional, for interactive components) -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    </section>
+    <script>
+        feather.replace();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

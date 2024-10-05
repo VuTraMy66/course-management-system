@@ -81,7 +81,7 @@
                         <div class="card-body">
                             <form>
                                 <!-- Username input -->
-                                <div class="form-floating mb-4">
+                                <div class="form-floating mb-3">
                                     <input type="username" id="username" class="form-control form-control-lg" placeholder="Username"/>
                                     <label class="form-label" for="username">Username</label>
                                 </div>
@@ -96,6 +96,21 @@
                                 <div class="form-floating mb-3">
                                     <input type="password" id="repeatPassword" class="form-control form-control-lg" placeholder="Repeat Password"/>
                                     <label class="form-label" for="repeatPassword">Repeat password</label>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="ms-1">I am a:</label>
+                                    <div class="row" style="margin: 0;">
+                                        <div class="form-check col-6">
+                                            <input class="form-check-input" type="radio" id="instructor" name="role" value="instructor" required>
+                                            <label class="form-check-label" for="instructor">Instructor</label>
+                                        </div>
+                                        <div class="form-check col-6">
+                                            <input class="form-check-input" type="radio" id="student" name="role" value="student" required>
+                                            <label class="form-check-label" for="student">Student</label>
+                                        </div>
+                                    </div>
+                                    
                                 </div>
 
                                 <div class="d-flex justify-content-between align-items-center">

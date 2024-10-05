@@ -21,6 +21,18 @@ public class HomeController {
         return "register";
     }
 
+    // Student's view
+    @GetMapping("/student")
+    public String studentDashboard() {
+        return "student";
+    }
+
+    @GetMapping("/course")
+    public String courseList() {
+        return "course";
+    }
+
+    // Teacher's view
     @GetMapping("/teacher")
     public String teacherDashboard() {
         return "teacher";
@@ -36,13 +48,7 @@ public class HomeController {
         return "teacher-student";
     }
 
-    @GetMapping("/student")
-    public String studentDashboard() {
-        return "student";
-    }
+    
 
-    @GetMapping("/course")
-    public String courseList() {
-        return "course";
-    }
+    
 }

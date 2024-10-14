@@ -32,6 +32,11 @@ public class HomeController {
         return "course";
     }
 
+    @GetMapping("/instructor")
+    public String instructor() {
+        return "instructor";
+    }
+
     // Teacher's view
     @GetMapping("/teacher")
     public String teacherDashboard() {

@@ -4,111 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Course Management System</title>
-    
-    <!-- Bootstrap CSS -->
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+    <link rel="stylesheet" th:href="@{/css/navbar.css}"/>
     <style>
-        body {
-            background-color: #e8f0fa;
-            font-family: "Inter", sans-serif;
-        }
-
-        .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
-            font-family: "Inter", sans-serif;
-            font-weight: 600;
-            line-height: 1.5;
-            margin-bottom: .5rem;
-            margin-top: 0;
-        }
-
-        .py-xl-8 {
-            padding-bottom: 3.5rem !important;
-            padding-top: 3.5rem !important;
-        }
-
-        .py-xl-6 {
-            padding-bottom: 2.5rem !important;
-            padding-top: 2.5rem !important;
-        }
-        
-        .text-primary {
-            color: #5A87C7 !important;
-        }
-        
-        .fw-semibold {
-            font-weight: 600 !important;
-        }
-
-        .col-xxl-5 {
-            flex: 0 0 auto;
-            width: 41.66666667%;
-        }
-
-        .gap-2 {
-            gap: .5rem !important;
-        }
-
-        .gap-3 {
-            gap: 1rem !important;
-        }
-
-        .gap-5 {
-            gap: 2rem !important;
-        }
-
-        .display-2 {
-            font-size: 3.5rem;
-        }
-
-        .btn-primary {
-            color: #fff; 
-            background-color: #5A87C7 !important;
-            border-color: #5A87C7 !important;
-            transition: background-color 0.3s ease, border-color 0.3s ease !important;
-        }
-
-        .btn-primary:hover {
-            color: #fff; 
-            background-color:  #4B6F9D!important; 
-            border-color: #4B6F9D !important; 
-        }
-
-        .btn-primary:active {
-            color: #fff;
-            background-color: #4B6F9D !important;
-            border-color: #4B6F9D  !important; 
-            box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125) !important; 
-        }
-
-        .btn-primary:disabled {
-            color: #fff;
-            background-color: #5A87C7 !important;
-            border-color: #5A87C7 !important; 
-        }
-
         .start-10 {
             left: 10% !important;
         }
 
         .bottom-10 {
             bottom: 10% !important;
-        }
-
-        .avatar {
-            display: inline-block;
-            position: relative;
-        }
-
-        .avatar-md {
-            height: 2.5rem;
-            width: 2.5rem;
-        }
-
-        .avatar img {
-            height: 100%;
-            object-fit: cover;
-            width: 100%;
         }
 
         .avatar-group img {
@@ -127,15 +34,18 @@
             border: 3px solid #fff;
         }
 
-        .fs-4 {
-            font-size: 1rem !important;
+        .h4 .text-inherit {
+            text-decoration: none;
+            color: #212529;
+        }
+
+        .h4 .text-inherit:hover{
+            color: #5A87C7;
         }
     </style>
 </head>
 <body>
     <div th:replace="fragments/navbar.html :: navbar"></div>
-
-    <!-- Hero Section -->
     <section class="py-xl-8 py-6">
         <div class="container py-xl-6">
             <div class="row align-items-center gy-6 gy-xl-0">
@@ -168,8 +78,8 @@
                             </ul>
                         </div>
                         <div class="d-grid d-md-flex flex-row gap-2">
-                            <a href="#!" class="btn btn-primary btn-lg">Join For Free</a>
-                            <a href="#!" class="btn btn-outline-secondary btn-lg">Explore Courses</a>
+                            <a href="#!" class="btn btn-primary btn-lg" style="font-weight: 600;">Join For Free</a>
+                            <a href="#!" class="btn btn-outline-secondary btn-lg" style="font-weight: 500;">Explore Courses</a>
                         </div>
                     </div>
                 </div>
@@ -256,7 +166,6 @@
             </div>
         </div>
     </section>
-    
     <section>
         <div class="container">
             <div class="row">
@@ -266,90 +175,752 @@
             </div>
         </div>
     </section>
-
-    <!-- Features Section -->
-    <section class="py-5">
+    <section class="py-xl-8 py-6">
         <div class="container">
             <div class="row">
-                <div class="col-md-4">
-                    <div class="card text-center">
-                        <div class="card-body">
-                            <h5 class="card-title">Manage Courses</h5>
-                            <p class="card-text">Easily create, update, and delete courses in one click.</p>
-                            <a href="#" class="btn btn-primary">View Courses</a>
+                <div class="col-xl-10 col-md-10 col-12 mx-auto">
+                    <div class="d-flex flex-column gap-2 text-center mb-xl-7 mb-5">
+                        <h2 class="h1 mb-0 mt-5">Courses Categories</h2>
+                        <p class="mb-0 px-xl-5">Discover a world of knowledge through our diverse range of courses.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row gy-4">
+                <div class="col-xl-3 col-lg-4 col-md-6 col-12">
+                    <div class="card-hover-svg card card-body d-flex flex-column gap-4">
+                        <div>
+                            <span class="icon-shape icon-xxl">
+                                <img src="https://eduport.webestica.com/assets/images/element/data-science.svg"></img>
+                            </span>
+                        </div>
+                        <div>
+                            <h3 class="mb-0">Data Science</h3>
+                            <span class="text-gray-500">
+                                <span class="fw-bold">10</span>
+                                Courses
+                            </span>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="card text-center">
-                        <div class="card-body">
-                            <h5 class="card-title">Track Progress</h5>
-                            <p class="card-text">Monitor your progress and keep track of completed courses.</p>
-                            <a href="#" class="btn btn-primary">Track Progress</a>
+                <div class="col-xl-3 col-lg-4 col-md-6 col-12">
+                    <div class="card-hover-svg card card-body d-flex flex-column gap-4">
+                        <div>
+                            <span class="icon-shape icon-xxl">
+                                <img src="https://eduport.webestica.com/assets/images/element/online.svg">
+                            </span>
+                        </div>
+                        <div>
+                            <h3 class="mb-0">Programming</h3>
+                            <span class="text-gray-500">
+                                <span class="fw-bold">23</span>
+                                Courses
+                            </span>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="card text-center">
-                        <div class="card-body">
-                            <h5 class="card-title">Interactive Learning</h5>
-                            <p class="card-text">Engage in interactive learning with assignments and quizzes.</p>
-                            <a href="#" class="btn btn-primary">Start Learning</a>
+                <div class="col-xl-3 col-lg-4 col-md-6 col-12">
+                    <div class="card-hover-svg card card-body d-flex flex-column gap-4">
+                        <div>
+                            <span class="icon-shape icon-xxl">
+                                <img src="https://eduport.webestica.com/assets/images/element/coding.svg">
+                            </span>
+                        </div>
+                        <div>
+                            <h3 class="mb-0">Web Development</h3>
+                            <span class="text-gray-500">
+                                <span class="fw-bold">21</span>
+                                Courses
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-md-6 col-12">
+                    <div class="card-hover-svg card card-body d-flex flex-column gap-4">
+                        <div class="">
+                            <span class="icon-shape icon-xxl">
+                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 500 500" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <style type="text/css"> .st0{fill:#FFFFFF;stroke:#FFFFFF;stroke-width:10;stroke-miterlimit:10;} .st1{fill:#206494;} .st2{fill:#76D3E8;} </style> <g id="border"> <path class="st0" d="M439.3,188.3c-19.7-32.9-39.1-46.2-51.3-51.5c0,0,0,0,0,0c0,0,0,0,0,0c-0.7-0.3-1.4-0.6-2-0.8 c-0.1,0-0.1,0-0.2-0.1c-0.6-0.2-1.2-0.5-1.8-0.6c-0.1,0-0.1,0-0.2-0.1c-0.6-0.2-1.2-0.4-1.7-0.5c0,0,0,0-0.1,0 c-0.5-0.2-1-0.3-1.5-0.4c-0.1,0-0.1,0-0.2,0c-0.4-0.1-0.9-0.2-1.3-0.3c0,0-0.1,0-0.1,0c-0.4-0.1-0.8-0.2-1.1-0.2c0,0,0,0,0,0 c-0.3-0.1-0.6-0.1-0.9-0.2c0,0,0,0-0.1,0c-0.3,0-0.5-0.1-0.7-0.1c0,0,0,0,0,0c0,0,0,0,0,0c-0.6-0.1-0.9-0.1-0.9-0.1 c-15.4-38.1-83.6-54.1-83.6-54.1l-42.9-1.4c-10.1,0.6-45.9,8.8-84.8,25.7v0c0,0,0,0,0,0c-1.6,0.7-3.3,1.4-4.9,2.2c0,0,0,0,0,0v0 c-32.9,14.8-67.4,35.7-90.1,63.4v0c0,0,0,0,0,0c-1.4,1.6-2.7,3.3-3.9,5c0,0,0,0,0,0l0,0c-17,22.7-25.9,49.7-20.2,81.3 c1.2,6.5,2.5,12.5,3.8,18.1l0,0c0,0,0,0,0,0c24,99.3,75.5,77.5,78,76.4c0,0,0,0,0,0c0.1,0,0.1,0,0.1,0s54.6,44,98.9,31.9 c20.1-5.5,29.5-10.1,33.9-13.6h0c0,0,0,0,0,0c2.7-2.1,3.5-3.7,3.6-4.9c0,0,0,0,0,0c0-0.2,0-0.3,0-0.4v0l0,0 c-0.1-0.8-0.4-1.2-0.4-1.2c20.1,9.4,31.2,13.2,44.8,26.5c13.7,13.3,34.3,33.9,34.3,33.9l18.6-5.1l-14.8-31.1c0,0,23.6,13,57.6-22.6 c25.3-26.4,24.9-50.9,23-61.7h0c0,0,0,0,0,0c0-0.3-0.1-0.5-0.1-0.8c0-0.1,0-0.1,0-0.2c-0.2-0.8-0.3-1.5-0.5-2.1 c0-0.1,0-0.2-0.1-0.2c0-0.2-0.1-0.3-0.1-0.5c0-0.1,0-0.1-0.1-0.2c-0.1-0.2-0.1-0.5-0.2-0.7c0-0.1,0-0.1-0.1-0.2 c0-0.1-0.1-0.2-0.1-0.3c0,0,0,0,0,0h0c-0.1-0.4-0.2-0.7-0.2-0.7C455,273.1,471.6,242.4,439.3,188.3z"></path> </g> <g id="object" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:svg="http://www.w3.org/2000/svg"> <g> <path class="st1" d="M126.8,349.9c0,0-59.6,28.4-82-94.5s177.7-175.9,204-177.5l42.9,1.4c0,0,68.2,16,83.6,54.1 c0,0,31.5,0.9,63.9,55s15.7,84.8-14.4,107.5c0,0,12.5,32-21.6,67.5s-57.6,22.6-57.6,22.6l14.8,31.1l-18.6,5.1 c0,0-20.6-20.6-34.3-33.9c-13.7-13.3-24.7-17.1-44.8-26.5c0,0,7.2,8-37.1,20.1C181.4,393.9,126.8,349.9,126.8,349.9z"></path> <path class="st2" d="M380.9,137.7c6.4,5.6,10.2,9,6.2,19.4c-2.2,5.6-15.6,8.7-26.6,9.7c-1.2-2.4-3.6-4-6.4-4 c-3.9,0-7.1,3.2-7.1,7.1c0,3.9,3.2,7.1,7.1,7.1c3.1,0,5.8-2,6.7-4.8c10-0.9,27.7-3.9,31.3-13.2c4.4-11.4,0.9-17.3-4.1-22.2 c-5.9-2.6-10-3.3-11.8-3.5C377.8,134.9,379.4,136.3,380.9,137.7z"></path> <path class="st2" d="M426.4,301.7c-0.4-2.5-0.9-4.3-1.2-5.2c-5,0.4-19.5,0.6-30.2-1.9c-10.7-2.5-19.2-9.6-23.6-13.9 c0.2-0.7,0.4-1.5,0.4-2.3c0-3.9-3.2-7.1-7.1-7.1c-3.9,0-7.1,3.2-7.1,7.1c0,3.9,3.2,7.1,7.1,7.1c1.2,0,2.3-0.3,3.2-0.8 c4.9,4.7,14.1,12.2,25.9,15c7.4,1.8,16.6,2.3,23.7,2.3C421.2,302,424.5,301.8,426.4,301.7z"></path> <path class="st2" d="M271.9,277.1c-3.2,0-5.9,2.2-6.8,5.1c-8.5,2.1-19.6,2.7-32.2-8c-6.5-5.5-12-18.2-14.1-23.5 c2.2-1.2,3.8-3.5,3.8-6.2c0-3.9-3.2-7.1-7.1-7.1s-7.1,3.2-7.1,7.1c0,3.1,2.1,5.8,4.9,6.7c1.7,4.5,7.9,20.1,16.2,27.1 c8.8,7.4,17,10,24.3,10.4c0,0.1-0.1,0.1-0.1,0.2c-3.5,7.3-6.9,14.1-22.6,14.6c-11.5,0.3-23.3-7.7-23.4-7.8l-3.1,4.4c0,0,0,0,0,0 c-5,5.3-12.2,4.3-26.3-2.8c-5.5-2.8-9.4-7.6-11.7-11.5c1.1-1.2,1.8-2.9,1.8-4.6c0-3.9-3.2-7.1-7.1-7.1c-3.9,0-7.1,3.2-7.1,7.1 c0,3.9,3.2,7.1,7.1,7.1c0.2,0,0.3,0,0.5-0.1c2.7,4.5,7.2,10.4,14.1,13.8c2.1,1.1,4.3,2.1,6.5,3.1c-0.8,8.4-8.1,21.5-23.2,33.5 c-9.1,7.3-32.4,11.1-32.6,11.1l0,0.1c0.3-0.1,0.4-0.2,0.4-0.2s2.1,1.7,5.8,4.3c7.9-1.7,22.4-5.4,29.7-11.2 c13.9-11,23.3-24.7,25-35.8c3.1,1,6.2,1.7,9.1,1.7c4.7,0,9-1.6,12.6-6c4.9,2.6,12.8,6,21,6c0.3,0,0.6,0,0.8,0 c19-0.5,23.6-10,27.3-17.6c0.5-0.9,0.9-1.8,1.3-2.7c2.1-0.2,4.1-0.6,5.9-1c1.2,2.2,3.5,3.7,6.2,3.7c3.9,0,7.1-3.2,7.1-7.1 C279,280.3,275.8,277.1,271.9,277.1z"></path> <path class="st2" d="M241.9,355.8c-2.6-1.7-5.4-5.6-7.5-9.1c1-1.2,1.7-2.8,1.7-4.5c0-3.9-3.2-7.1-7.1-7.1c-3.9,0-7.1,3.2-7.1,7.1 c0,3.9,3.2,7.1,7.1,7.1c0.2,0,0.4,0,0.7-0.1c2.3,3.9,5.6,8.7,9.3,11.1c6.8,4.5,14.3,7.3,20.7,7.9c3.1-2.4,3.6-4.2,3.6-5.3 C258.1,363.2,250,361.2,241.9,355.8z"></path> <path class="st2" d="M251.3,134.6c-3.9,0-7.1,3.2-7.1,7.1c0,1.2,0.3,2.4,0.9,3.4c-3.1,2-8,3.5-13.8,3.4 c-4.6-0.1-20.1-1.7-24.6-19.4c4.6-3.2,7.7-7.5,8.4-11.6c0.1,0,0.2,0,0.3,0c3.9,0,7.1-3.2,7.1-7.1c0-3.9-3.2-7.1-7.1-7.1 c-3.9,0-7.1,3.2-7.1,7.1c0,1.9,0.8,3.7,2,4.9l-0.5,0.1c0.4,3.4-4,9-11.2,11.9c-3.7,1.5-16.4,5.3-25.9-7.5 c-4.5-6-7.6-13.7-8.6-16.4c-1.6,0.7-3.3,1.4-5,2.2c1.2,3.2,4.4,11,9.2,17.5c5.6,7.5,13.2,11.5,21.4,11.5c3.5,0,7.2-0.7,10.8-2.2 c0.4-0.2,0.8-0.4,1.2-0.5c4,13.6,14.9,21.8,29.4,22c0.2,0,0.4,0,0.6,0c7.2,0,13.6-2.1,17.7-5.4c0.6,0.1,1.2,0.2,1.8,0.2 c3.9,0,7.1-3.2,7.1-7.1C258.4,137.8,255.2,134.6,251.3,134.6z"></path> <path class="st2" d="M102.8,192c-2.9,0-5.4,1.7-6.5,4.2c-4.6,0.7-10.4-0.1-17.3-7.3c-5.2-5.4-9.9-19.1-10.1-19.8 c-1.4,1.6-2.7,3.3-3.9,5c1.9,4.9,5.7,13.9,10.1,18.5c7,7.3,13.3,9.2,18.5,9.2c0.9,0,1.7-0.1,2.5-0.2c1,2.7,3.6,4.6,6.6,4.6 c3.9,0,7.1-3.2,7.1-7.1C109.9,195.2,106.7,192,102.8,192z"></path> <path class="st2" d="M111.3,259c-3.9,0-7.1,3.2-7.1,7.1c0,0.4,0.1,0.8,0.1,1.2c-5.4,1.7-12.4,2.8-18.4-2.7 c-3.6-3.3-5.1-9.1-5.8-12.7c1.6-1.3,2.6-3.3,2.6-5.5c0-3.9-3.2-7.1-7.1-7.1c-3.9,0-7.1,3.2-7.1,7.1c0,3.7,2.8,6.7,6.4,7 c0.8,4,2.6,10.1,6.4,14.2c-2.7,5.3-7.2,13.1-16.9,13.1c-0.1,0-0.2,0-0.2,0c-7.2-0.1-15-7.5-15.1-7.6l-0.3,0.4 c0.6,2.7,1.3,5.3,2,7.7c3.5,2.4,8.4,4.8,13.4,4.9c0.1,0,0.2,0,0.3,0c12.2,0,18.1-9.2,21.2-15.1c3.6,2.2,7.3,3,10.8,3 c4.1,0,7.9-1.1,10.9-2.1c1.1,0.8,2.5,1.2,4,1.2c3.9,0,7.1-3.2,7.1-7.1C118.4,262.2,115.2,259,111.3,259z"></path> </g> </g> </g></svg>
+                            </span>
+                        </div>
+                        <div>
+                            <h3 class="mb-0">Artificial Intelligence</h3>
+                            <span class="text-gray-500">
+                                <span class="fw-bold">8</span>
+                                Courses
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-md-6 col-12">
+                    <div class="card-hover-svg card card-body d-flex flex-column gap-4">
+                        <div class="">
+                            <span class="icon-shape icon-xxl">
+                                <img src="https://eduport.webestica.com/assets/images/element/artist.svg">
+                            </span>
+                        </div>
+                        <div>
+                            <h3 class="mb-0">UI / UX Design</h3>
+                            <span class="text-gray-500">
+                                <span class="fw-bold">21</span>
+                                Courses
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-md-6 col-12">
+                    <div class="card-hover-svg card card-body d-flex flex-column gap-4">
+                        <div class="">
+                            <span class="icon-shape icon-xxl">
+                                <svg viewBox="0 0 50 50" id="Layer_1" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <style type="text/css"> .st0{fill:#4D4C4D;} .st1{fill:#E8E4E7;} .st2{fill:#53B2E4;} .st3{fill:#656766;} .st4{fill:#FFCA65;} .st5{fill:#BC8D5D;} .st6{fill:#D3D3D3;} .st7{fill:#ED6F62;} .st8{fill:#86BE57;} </style> <g> <g> <rect class="st0" height="10.7" width="1" x="25.4" y="17.5"></rect> </g> <g> <path class="st0" d="M39.3,36.8h-1v-5.1c0-1.5-1.3-2.8-2.8-2.8H16.2c-1.5,0-2.8,1.3-2.8,2.8v5.1h-1v-5.1c0-2.1,1.7-3.8,3.8-3.8 h19.3c2.1,0,3.8,1.7,3.8,3.8V36.8z"></path> </g> <g> <path class="st1" d="M49,13.8c0,4.7-3.8,8.5-8.5,8.5c-4.7,0-30.5,0-32.3,0c-3.9,0-7.1-3.2-7.1-7.1c0-3.9,3.2-7.1,7.1-7.1 c0.2,0,0.4,0,0.6,0c1.4-4.4,5.5-7.6,10.4-7.6c2.8,0,5.3,1,7.2,2.7c1.1-1.2,2.7-2,4.5-2c3,0,5.4,2.1,6,4.8c1.1-0.5,2.3-0.8,3.6-0.8 C45.2,5.2,49,9.1,49,13.8z"></path> </g> <g> <circle class="st2" cx="25.9" cy="28.5" r="2.8"></circle> </g> <g> <g> <g> <rect class="st0" height="1.5" width="8.7" x="6.7" y="46.3"></rect> </g> <g> <path class="st3" d="M16.2,47.7H5.9c-0.5,0-0.9,0.4-0.9,0.9v0c0,0.5,0.4,0.9,0.9,0.9h10.3c0.5,0,0.9-0.4,0.9-0.9v0 C17.1,48.1,16.7,47.7,16.2,47.7z"></path> </g> <g> <path class="st3" d="M19.2,32.7H2.9c-1.1,0-1.9,0.9-1.9,1.9v10c0,1.1,0.9,1.9,1.9,1.9h16.3c1.1,0,1.9-0.9,1.9-1.9v-10 C21.1,33.6,20.2,32.7,19.2,32.7z"></path> </g> </g> <g> <path class="st1" d="M2.9,44.2c-0.5,0-1-0.4-1-1v-8.6c0-0.5,0.4-1,1-1h16.3c0.5,0,1,0.4,1,1v8.6c0,0.5-0.4,1-1,1H2.9z"></path> </g> <g> <path class="st2" d="M20.2,35.2v-0.6c0-0.5-0.4-1-1-1H2.9c-0.5,0-1,0.4-1,1v0.6H20.2z"></path> </g> <g> <rect class="st4" height="7.3" width="5.6" x="2.9" y="36"></rect> </g> <g> <rect class="st5" height="2.8" width="9.6" x="9.5" y="36"></rect> </g> <g> <rect class="st6" height="0.8" width="9.6" x="9.5" y="39.6"></rect> </g> <g> <rect class="st6" height="0.8" width="9.6" x="9.5" y="41"></rect> </g> <g> <rect class="st6" height="0.8" width="9.6" x="9.5" y="42.5"></rect> </g> <g> <g> <rect class="st0" height="1.5" width="8.7" x="34.6" y="46.3"></rect> </g> <g> <path class="st3" d="M44.1,47.7H33.8c-0.5,0-0.9,0.4-0.9,0.9v0c0,0.5,0.4,0.9,0.9,0.9h10.3c0.5,0,0.9-0.4,0.9-0.9v0 C45,48.1,44.6,47.7,44.1,47.7z"></path> </g> <g> <path class="st3" d="M47.1,32.7H30.8c-1.1,0-1.9,0.9-1.9,1.9v10c0,1.1,0.9,1.9,1.9,1.9h16.3c1.1,0,1.9-0.9,1.9-1.9v-10 C49,33.6,48.1,32.7,47.1,32.7z"></path> </g> </g> <g> <path class="st1" d="M30.8,44.2c-0.5,0-1-0.4-1-1v-8.6c0-0.5,0.4-1,1-1h16.3c0.5,0,1,0.4,1,1v8.6c0,0.5-0.4,1-1,1H30.8z"></path> </g> <g> <path class="st2" d="M48.1,35.2v-0.6c0-0.5-0.4-1-1-1H30.8c-0.5,0-1,0.4-1,1v0.6H48.1z"></path> </g> <g> <rect class="st7" height="7.3" width="5.6" x="30.8" y="36"></rect> </g> <g> <rect class="st8" height="2.8" width="9.6" x="37.5" y="36"></rect> </g> <g> <rect class="st6" height="0.8" width="9.6" x="37.5" y="39.6"></rect> </g> <g> <rect class="st6" height="0.8" width="9.6" x="37.5" y="41"></rect> </g> <g> <rect class="st6" height="0.8" width="9.6" x="37.5" y="42.5"></rect> </g> </g> </g> </g></svg>
+                            </span>
+                        </div>
+                        <div>
+                            <h3 class="mb-0">Cloud Computing</h3>
+                            <span class="text-gray-500">
+                                <span class="fw-bold">18</span>
+                                Courses
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-md-6 col-12">
+                    <div class="card-hover-svg card card-body d-flex flex-column gap-4">
+                        <div class="">
+                            <span class="icon-shape icon-xxl">
+                                <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--emojione" preserveAspectRatio="xMidYMid meet" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M50 4.1c0-2-2.1-4.1-4.3-4.1H18.3C16.1 0 14 2.1 14 4.1v55.7c0 2.1 2.1 4.1 4.3 4.1h27.5c2.1 0 4.3-2.1 4.3-4.1V4.1z" fill="#5c6d6d"> </path> <path d="M49 59c0 2-2 4-4 4H19c-2 0-4-2-4-4V5c0-2 2-4 4-4h26c2 0 4 2 4 4v54" fill="#212528"> </path> <g fill="#94989b"> <circle cx="43.5" cy="4.5" r="1"> </circle> <path d="M35 4.5c0 .3-.1.5-.3.5h-5.4c-.2 0-.3-.2-.3-.5c0-.2.1-.5.3-.5h5.4c.2 0 .3.3.3.5"> </path> </g> <path fill="#3e4347" d="M17 8h30v48H17z"> </path> <path d="M35.8 60.2c0 .4-.3.8-.8.8h-6c-.4 0-.8-.3-.8-.8v-1.5c0-.4.3-.8.8-.8h6c.4 0 .8.3.8.8v1.5" fill="#94989b"> </path> <path d="M24 14.7c0 .5-.4.8-.8.8h-3.3c-.5 0-.8-.4-.8-.8v-3.3c0-.5.4-.8.8-.8h3.3c.5 0 .8.4.8.8v3.3" fill="#42ade2"> </path> <path d="M31 14.7c0 .5-.4.8-.8.8h-3.3c-.5 0-.8-.4-.8-.8v-3.3c0-.5.4-.8.8-.8h3.3c.5 0 .8.4.8.8v3.3" fill="#c7e755"> </path> <path d="M38 14.7c0 .5-.4.8-.8.8h-3.3c-.5 0-.8-.4-.8-.8v-3.3c0-.5.4-.8.8-.8h3.3c.5 0 .8.4.8.8v3.3" fill="#f2b200"> </path> <path d="M45 14.7c0 .5-.4.8-.8.8h-3.3c-.5 0-.8-.4-.8-.8v-3.3c0-.5.4-.8.8-.8h3.3c.5 0 .8.4.8.8v3.3" fill="#42ade2"> </path> <path d="M24 53.2c0 .5-.4.8-.8.8h-3.3c-.5 0-.8-.4-.8-.8v-3.3c0-.5.4-.8.8-.8h3.3c.5 0 .8.4.8.8v3.3" fill="#c7e755"> </path> <path d="M31 53.2c0 .5-.4.8-.8.8h-3.3c-.5 0-.8-.4-.8-.8v-3.3c0-.5.4-.8.8-.8h3.3c.5 0 .8.4.8.8v3.3" fill="#ff435e"> </path> <path d="M38 53.2c0 .5-.4.8-.8.8h-3.3c-.5 0-.8-.4-.8-.8v-3.3c0-.5.4-.8.8-.8h3.3c.5 0 .8.4.8.8v3.3" fill="#42ade2"> </path> <path d="M45 53.2c0 .5-.4.8-.8.8h-3.3c-.5 0-.8-.4-.8-.8v-3.3c0-.5.4-.8.8-.8h3.3c.5 0 .8.4.8.8v3.3" fill="#c28fef"> </path> <path d="M24 33.9c0 .5-.4.8-.8.8h-3.3c-.5 0-.8-.4-.8-.8v-3.3c0-.5.4-.8.8-.8h3.3c.5 0 .8.4.8.8v3.3" fill="#c7e755"> </path> <path d="M31 33.9c0 .5-.4.8-.8.8h-3.3c-.5 0-.8-.4-.8-.8v-3.3c0-.5.4-.8.8-.8h3.3c.5 0 .8.4.8.8v3.3" fill="#c28fef"> </path> <path d="M38 33.9c0 .5-.4.8-.8.8h-3.3c-.5 0-.8-.4-.8-.8v-3.3c0-.5.4-.8.8-.8h3.3c.5 0 .8.4.8.8v3.3" fill="#42ade2"> </path> <path d="M24 27.5c0 .5-.4.8-.8.8h-3.3c-.5 0-.8-.4-.8-.8v-3.3c0-.5.4-.8.8-.8h3.3c.5 0 .8.4.8.8v3.3" fill="#ff435e"> </path> <path d="M31 27.5c0 .5-.4.8-.8.8h-3.3c-.5 0-.8-.4-.8-.8v-3.3c0-.5.4-.8.8-.8h3.3c.5 0 .8.4.8.8v3.3" fill="#f2b200"> </path> <path d="M38 27.5c0 .5-.4.8-.8.8h-3.3c-.5 0-.8-.4-.8-.8v-3.3c0-.5.4-.8.8-.8h3.3c.5 0 .8.4.8.8v3.3" fill="#c7e755"> </path> <path d="M45 27.5c0 .5-.4.8-.8.8h-3.3c-.5 0-.8-.4-.8-.8v-3.3c0-.5.4-.8.8-.8h3.3c.5 0 .8.4.8.8v3.3" fill="#f2b200"> </path> <path d="M24 21.1c0 .5-.4.8-.8.8h-3.3c-.5 0-.8-.4-.8-.8v-3.3c0-.5.4-.8.8-.8h3.3c.5 0 .8.4.8.8v3.3" fill="#c28fef"> </path> <path d="M31 21.1c0 .5-.4.8-.8.8h-3.3c-.5 0-.8-.4-.8-.8v-3.3c0-.5.4-.8.8-.8h3.3c.5 0 .8.4.8.8v3.3" fill="#42ade2"> </path> <path d="M38 21.1c0 .5-.4.8-.8.8h-3.3c-.5 0-.8-.4-.8-.8v-3.3c0-.5.4-.8.8-.8h3.3c.5 0 .8.4.8.8v3.3" fill="#ff435e"> </path> <path d="M45 21.1c0 .5-.4.8-.8.8h-3.3c-.5 0-.8-.4-.8-.8v-3.3c0-.5.4-.8.8-.8h3.3c.5 0 .8.4.8.8v3.3" fill="#c28fef"> </path> </g></svg>
+                            </span>
+                        </div>
+                        <div>
+                            <h3 class="mb-0">Mobile App Development</h3>
+                            <span class="text-gray-500">
+                                <span class="fw-bold">28</span>
+                                Courses
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-md-6 col-12">
+                    <div class="card-hover-svg card card-body d-flex flex-column gap-4">
+                        <div class="">
+                            <span class="icon-shape icon-xxl">
+                                <svg height="200px" width="200px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <circle style="fill:#FFD15D;" cx="256" cy="256" r="256"></circle> <path style="fill:#F9B54C;" d="M504.601,317.269L309.036,120.961l-99.294,15.515l6.034,180.739l-54.61,61.661l130.555,130.631 C395.855,494.966,479.91,417.794,504.601,317.269z"></path> <path style="fill:#324A5E;" d="M330.99,245.972h-36.411v-71.739c0-21.511-17.306-39.012-38.579-39.012s-38.579,17.501-38.579,39.012 v71.739H181.01v-71.739c0-41.589,33.64-75.423,74.99-75.423s74.99,33.833,74.99,75.423V245.972z"></path> <path style="fill:#2B3B4E;" d="M256,98.809c-0.193,0-0.381,0.014-0.574,0.014v36.412c0.191-0.003,0.381-0.016,0.574-0.016 c21.273,0,38.579,17.501,38.579,39.012v71.739h36.411v-71.739C330.99,132.644,297.35,98.809,256,98.809z"></path> <path style="fill:#FC6F58;" d="M304.412,398.222h-96.825c-36.1,0-65.365-29.265-65.365-65.365V227.556h227.556v105.301 C369.778,368.957,340.513,398.222,304.412,398.222z"></path> <path style="fill:#F1543F;" d="M255.426,227.556v170.667h48.986c36.1,0,65.365-29.265,65.365-65.365V227.556H255.426z"></path> <path style="fill:#324A5E;" d="M274.101,294.357c0-9.997-8.104-18.101-18.101-18.101c-9.997,0-18.101,8.104-18.101,18.101 c0,6.516,3.455,12.21,8.62,15.398v23.983c0,4.91,3.979,8.888,8.888,8.888h1.186c4.91,0,8.888-3.979,8.888-8.888v-23.983 C270.646,306.567,274.101,300.873,274.101,294.357z"></path> <path style="fill:#2B3B4E;" d="M256,276.256c-0.193,0-0.381,0.022-0.574,0.029v66.341h1.167c4.91,0,8.888-3.979,8.888-8.888v-23.983 c5.165-3.188,8.62-8.882,8.62-15.398C274.101,284.36,265.997,276.256,256,276.256z"></path> </g></svg>
+                            </span>
+                        </div>
+                        <div>
+                            <h3 class="mb-0">Cyber Security</h3>
+                            <span class="text-gray-500">
+                                <span class="fw-bold">7</span>
+                                Courses
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-md-6 col-12">
+                    <div class="card-hover-svg card card-body d-flex flex-column gap-4">
+                        <div class="">
+                            <span class="icon-shape icon-xxl">
+                                <svg fill="#000000" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path id="blockchain_1_" d="M30,30.36h-6c-0.199,0-0.36-0.161-0.36-0.36v-2.64h-4.28V30c0,0.199-0.161,0.36-0.36,0.36h-6 c-0.199,0-0.36-0.161-0.36-0.36v-2.64H8.36V30c0,0.199-0.161,0.36-0.36,0.36H2c-0.199,0-0.36-0.161-0.36-0.36v-6 c0-0.199,0.161-0.36,0.36-0.36h2.64v-4.28H2c-0.199,0-0.36-0.161-0.36-0.36v-6c0-0.199,0.161-0.36,0.36-0.36h2.64V8.36H2 C1.801,8.36,1.64,8.199,1.64,8V2c0-0.199,0.161-0.36,0.36-0.36h6c0.199,0,0.36,0.161,0.36,0.36v2.64h4.28V2 c0-0.199,0.161-0.36,0.36-0.36h6c0.199,0,0.36,0.161,0.36,0.36v2.64h4.279V2c0-0.199,0.161-0.36,0.36-0.36h6 c0.199,0,0.36,0.161,0.36,0.36v6c0,0.199-0.161,0.36-0.36,0.36h-2.64v4.28H30c0.199,0,0.36,0.161,0.36,0.36v6 c0,0.199-0.161,0.36-0.36,0.36h-2.64v4.279H30c0.199,0,0.36,0.161,0.36,0.36v6C30.36,30.199,30.199,30.36,30,30.36z M24.36,29.64 h5.279v-5.28H24.36V29.64z M13.36,29.64h5.28v-5.28h-5.28C13.36,24.36,13.36,29.64,13.36,29.64z M2.36,29.64h5.28v-5.28H2.36V29.64z M19.36,26.64h4.279V24c0-0.199,0.161-0.36,0.36-0.36h2.64v-4.28H24c-0.199,0-0.36-0.161-0.36-0.36v-2.64h-4.28V19 c0,0.199-0.161,0.36-0.36,0.36h-2.64v4.279H19c0.199,0,0.36,0.161,0.36,0.36V26.64z M8.36,26.64h4.28V24 c0-0.199,0.161-0.36,0.36-0.36h2.64v-4.28H13c-0.199,0-0.36-0.161-0.36-0.36v-2.64H8.36V19c0,0.199-0.161,0.36-0.36,0.36H5.36v4.279 H8c0.199,0,0.36,0.161,0.36,0.36V26.64z M27,18.64h2.64v-5.28h-5.28v5.28H27z M16,18.64h2.64v-5.28h-5.28v5.28H16z M5,18.64h2.64 v-5.28H2.36v5.28H5z M19.36,15.64h4.279V13c0-0.199,0.161-0.36,0.36-0.36h2.64V8.36H24c-0.199,0-0.36-0.161-0.36-0.36V5.36h-4.28V8 c0,0.199-0.161,0.36-0.36,0.36h-2.64v4.28H19c0.199,0,0.36,0.161,0.36,0.36V15.64z M8.36,15.64h4.28V13 c0-0.199,0.161-0.36,0.36-0.36h2.64V8.36H13c-0.199,0-0.36-0.161-0.36-0.36V5.36H8.36V8c0,0.199-0.161,0.36-0.36,0.36H5.36v4.28H8 c0.199,0,0.36,0.161,0.36,0.36V15.64z M27,7.64h2.64V2.36h-5.28v5.28C24.36,7.64,27,7.64,27,7.64z M16,7.64h2.64V2.36h-5.28v5.28 C13.36,7.64,16,7.64,16,7.64z M5,7.64h2.64V2.36H2.36v5.28C2.36,7.64,5,7.64,5,7.64z"></path> <rect id="_Transparent_Rectangle" style="fill:none;" width="32" height="32"></rect> </g></svg>
+                            </span>
+                        </div>
+                        <div>
+                            <h3 class="mb-0">Blockchain</h3>
+                            <span class="text-gray-500">
+                                <span class="fw-bold">12</span>
+                                Courses
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-md-6 col-12">
+                    <div class="card-hover-svg card card-body d-flex flex-column gap-4">
+                        <div class="">
+                            <span class="icon-shape icon-xxl">
+                                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 504 504" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <circle style="fill:#324A5E;" cx="252" cy="252" r="252"></circle> <g> <rect x="245" y="304" style="fill:#FFD05B;" width="14" height="59.5"></rect> <rect x="94.5" y="371.4" style="fill:#FFD05B;" width="315" height="14"></rect> </g> <path style="fill:#F1543F;" d="M406.8,188.6H97.2c-1.5,0-2.7-1.2-2.7-2.7V97.2c0-1.5,1.2-2.7,2.7-2.7h309.5c1.5,0,2.7,1.2,2.7,2.7 v88.7C409.5,187.4,408.3,188.6,406.8,188.6z"></path> <path style="fill:#4CDBC4;" d="M406.8,311.6H97.2c-1.5,0-2.7-1.2-2.7-2.7v-88.7c0-1.5,1.2-2.7,2.7-2.7h309.5c1.5,0,2.7,1.2,2.7,2.7 v88.7C409.5,310.3,408.3,311.6,406.8,311.6z"></path> <rect x="221.2" y="347.4" style="fill:#F1543F;" width="61.7" height="62.1"></rect> <rect x="119.2" y="118.6" style="fill:#FFFFFF;" width="45.9" height="45.9"></rect> <rect x="186.8" y="118.6" style="fill:#324A5E;" width="45.9" height="45.9"></rect> <rect x="365.9" y="118.6" style="fill:#FFFFFF;" width="18.9" height="45.9"></rect> <rect x="331.9" y="118.6" style="fill:#54C0EB;" width="18.9" height="45.9"></rect> <rect x="297.9" y="118.6" style="fill:#FFFFFF;" width="18.9" height="45.9"></rect> <rect x="338.9" y="241.5" style="fill:#324A5E;" width="45.9" height="45.9"></rect> <rect x="271.3" y="241.5" style="fill:#FFFFFF;" width="45.9" height="45.9"></rect> <rect x="119.2" y="241.5" style="fill:#324A5E;" width="18.9" height="45.9"></rect> <rect x="153.2" y="241.5" style="fill:#FFFFFF;" width="18.9" height="45.9"></rect> <rect x="187.3" y="241.5" style="fill:#FF7058;" width="18.9" height="45.9"></rect> <rect x="209.8" y="188.6" style="fill:#FFD05B;" width="84.5" height="28.8"></rect> </g></svg>
+                            </span>
+                        </div>
+                        <div>
+                            <h3 class="mb-0">Network Administration</h3>
+                            <span class="text-gray-500">
+                                <span class="fw-bold">9</span>
+                                Courses
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-md-6 col-12">
+                    <div class="card-hover-svg card card-body d-flex flex-column gap-4">
+                        <div class="">
+                            <span class="icon-shape icon-xxl">
+                                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 511.998 511.998" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <rect x="238.731" y="347.216" style="fill:#2A2A33;" width="38.208" height="62.923"></rect> <path style="fill:#3F3F4D;" d="M442.884,74.745H72.779c-12.426,0-22.499,10.073-22.499,22.499V341.4 c0,12.426,10.073,22.499,22.499,22.499h370.105c12.426,0,22.499-10.073,22.499-22.499V97.244 C465.382,84.818,455.309,74.745,442.884,74.745z"></path> <path style="fill:#74D6FF;" d="M420.609,106.102H95.054c-7.41,0-13.417,6.007-13.417,13.417v199.605 c0,7.41,6.007,13.417,13.417,13.417h325.556c7.41,0,13.417-6.007,13.417-13.417V119.519 C434.025,112.109,428.019,106.102,420.609,106.102z"></path> <path style="fill:#FFFFFF;" d="M324.155,169.375c-3.37-14.438-16.316-25.192-31.78-25.192c-6.943,0-13.376,2.174-18.666,5.87 c-6.865-10.987-19.061-18.302-32.972-18.302c-21.461,0-38.859,17.397-38.859,38.859c0,0.017,0,0.033,0,0.05 c0.004,2.724,2.289,4.897,5.013,4.897h112.382C322.513,175.557,324.892,172.531,324.155,169.375z"></path> <path style="fill:#735359;" d="M168.912,220.767L117.4,332.542h173.94l-51.512-111.774C225.878,190.5,182.862,190.5,168.912,220.767 z"></path> <g> <path style="fill:#8C656D;" d="M239.828,220.767c-8.699-18.876-28.702-25.976-45.911-21.31c10.386,2.817,19.755,9.917,25.006,21.31 l51.512,111.773h20.905L239.828,220.767z"></path> <path style="fill:#8C656D;" d="M420.609,332.542c7.41,0,13.417-6.007,13.417-13.417v-40.667l-50.723-110.062 c-15.594-33.836-63.683-33.836-79.277,0l-75.649,164.146H420.609z"></path> </g> <path style="fill:#A3767F;" d="M383.302,168.395c-9.519-20.654-31.139-28.676-50.091-24.116 c12.098,2.911,23.11,10.933,29.186,24.116l50.723,110.062v40.667c0,7.41-6.007,13.417-13.417,13.417h20.905 c7.41,0,13.417-6.007,13.417-13.417v-40.667L383.302,168.395z"></path> <path style="fill:#55A681;" d="M81.637,266.278v52.847c0,7.41,6.007,13.417,13.417,13.417h197.27 C224.93,274.076,146.488,254.084,81.637,266.278z"></path> <g> <path style="fill:#5FBA91;" d="M277.506,332.542h14.818c-67.393-58.465-145.836-78.457-210.687-66.264v18.97 C143.124,278.724,212.211,293.523,277.506,332.542z"></path> <path style="fill:#5FBA91;" d="M434.025,319.125v-50.829c0,0-122.482-17.972-192.192,64.245h178.777 C428.019,332.542,434.025,326.535,434.025,319.125z"></path> </g> <path style="fill:#6BD1A3;" d="M242.727,331.517c83.259-57.844,191.297-41.992,191.297-41.992v-21.229 C434.025,268.296,312.585,250.491,242.727,331.517z"></path> <g> <path style="fill:#E6E6E6;" d="M481.764,182.529c-5.398-12.791-18.056-21.768-32.811-21.768c-10.864,0-20.585,4.873-27.114,12.545 c-3.8-1.69-8.005-2.636-12.433-2.636c-14.135,0-26.028,9.573-29.566,22.587c-1.483-0.357-3.023-0.569-4.616-0.569 c-8.331,0-15.449,5.187-18.301,12.508c-1.335,3.425,1.197,7.125,4.873,7.125h137.144c2.831,0,5.217-2.254,5.223-5.085 c0-0.018,0-0.036,0-0.053C504.162,194.305,494.331,183.724,481.764,182.529z"></path> <path style="fill:#E6E6E6;" d="M133.04,182.529c-5.398-12.791-18.056-21.768-32.811-21.768c-10.864,0-20.585,4.873-27.114,12.545 c-3.8-1.69-8.005-2.636-12.433-2.636c-14.135,0-26.028,9.573-29.567,22.587c-1.483-0.357-3.023-0.569-4.616-0.569 c-8.331,0-15.449,5.187-18.301,12.508c-1.335,3.425,1.197,7.125,4.873,7.125h137.144c2.83,0,5.217-2.254,5.223-5.085 c0-0.018,0-0.036,0-0.053C155.437,194.305,145.607,183.724,133.04,182.529z"></path> </g> <path style="fill:#3F3F4D;" d="M274.225,398.557h-32.787c-21.371,0-38.696,17.325-38.696,38.696l0,0h110.177l0,0 C312.92,415.882,295.595,398.557,274.225,398.557z"></path> <path d="M72.777,66.906c-16.728,0-30.337,13.61-30.337,30.337v70.205c-7.14,3.855-13,9.916-16.548,17.406 c-11.162,0.238-20.931,7.052-25,17.495c-1.567,4.022-1.048,8.551,1.389,12.116c2.437,3.566,6.47,5.694,10.788,5.694H42.44v121.239 c0,16.728,13.61,30.338,30.337,30.338h158.109v20.202c-20.591,4.793-35.984,23.284-35.984,45.314c0,4.329,3.509,7.839,7.839,7.839 h110.177c4.33,0,7.839-3.51,7.839-7.839c0-22.03-15.393-40.52-35.985-45.314v-20.202h158.11c16.728,0,30.337-13.61,30.337-30.338 V220.161h25.717c7.187,0,13.047-5.79,13.062-12.977c0-15.345-10.446-28.258-24.949-31.708c-3.383-6.183-8.16-11.334-13.831-15.153 v-63.08c0-16.728-13.61-30.337-30.337-30.337H72.777V66.906z M17.664,204.483c2.191-2.479,5.365-3.955,8.832-3.955 c0.895,0,1.803,0.114,2.775,0.349c4.121,0.997,8.293-1.47,9.405-5.563c2-7.353,7.513-13.052,14.424-15.498 c5.456-1.928,11.536-1.701,16.825,0.652c3.174,1.412,6.903,0.564,9.155-2.082c7.102-8.344,18.763-11.758,29.253-8.584 c7.75,2.358,14.216,8.04,17.48,15.775c1.12,2.657,3.61,4.483,6.48,4.756c7.801,0.742,13.886,6.614,15.086,14.15L17.664,204.483 L17.664,204.483z M351.005,214.469c2.437,3.565,6.47,5.693,10.787,5.693h36.734l17.908,38.859c-1.285-0.052-2.626-0.096-4.02-0.133 c-0.03,0-0.061-0.001-0.091-0.002c-12.116-0.204-24.23,0.141-36.292,1.341c-4.308,0.429-7.455,4.267-7.026,8.575 c0.866,8.711,10.578,6.763,16.506,6.357c17.991-1.254,32.641-0.496,40.672,0.186v43.78c0,3.075-2.502,5.577-5.576,5.577H260.106 c1.918-1.8,3.882-3.558,5.893-5.266c20.89-17.712,45.512-29.399,71.882-36.473c1.567-0.42,3.138-0.825,4.713-1.214 c9.559-2.36,6.21-17.66-3.729-15.231c-13.952,3.41-27.67,8.051-40.698,14.112c-9.256,4.278-17.976,9.159-26.148,14.637 c-0.077,0.052-0.154,0.105-0.231,0.157c-2.71,1.823-5.366,3.705-7.955,5.661c-3.159-2.087-6.339-4.103-9.538-6.053 c0,0,53.547-116.19,53.55-116.194c1.818-3.945,3.446-7.998,5.779-11.679c0.02-0.031,0.039-0.063,0.059-0.093 c6.545-10.112,17.622-16.208,29.981-16.208c14.14,0,26.6,7.978,32.518,20.82l2.805,6.085c-1.522,1.961-2.855,4.099-3.967,6.316 c-0.131,0.261-0.277,0.512-0.402,0.777c-1.566,0.035-3.141,0.214-4.678,0.511c-5.148,0.991-9.834,3.399-13.565,6.923 C350.515,197.818,345.875,206.965,351.005,214.469z M415.79,220.161h10.394v22.554L415.79,220.161z M295.703,167.718H209.85 c1.462-15.753,14.757-28.127,30.886-28.127c10.766,0,20.606,5.464,26.324,14.617c1.138,1.823,2.976,3.098,5.08,3.528 c2.108,0.43,4.296-0.024,6.057-1.254c7.32-5.114,17.135-5.867,25.141-1.909c-2.15,2.73-3.996,5.688-5.575,8.782 C297.03,164.786,296.376,166.258,295.703,167.718z M343.661,135.179c-10.363,0-20.096,2.986-28.279,8.354 c-6.719-4.664-14.681-7.188-23.01-7.188c-5.747,0-11.341,1.199-16.496,3.507c-8.795-10.092-21.471-15.94-35.142-15.94 c-25.749,0-46.698,20.949-46.698,46.76c0.01,7.017,5.776,12.725,12.852,12.725h81.588L259.856,245.5l-12.911-28.014 c-9.044-19.625-29.494-30.279-50.887-26.512c-4.264,0.75-7.112,4.815-6.361,9.08c0.752,4.265,4.821,7.115,9.081,6.36 c11.88-2.093,26.977,2.549,33.928,17.634l18.518,40.182l-4.17,9.049l-6.41,13.91c-26.074-14.087-53.218-23.686-80.57-28.52 l15.954-34.619c0.458-0.993,1.008-2.015,1.729-3.216c2.229-3.712,1.026-8.527-2.684-10.757c-3.712-2.228-8.528-1.027-10.757,2.684 c-1.008,1.678-1.834,3.222-2.526,4.725l-17.917,38.876c-8.279-0.889-16.562-1.345-24.823-1.345c-10.007,0-19.917,0.686-29.577,2.037 V220.16h60.738c7.187,0,13.047-5.79,13.062-12.978c0-15.345-10.446-28.258-24.949-31.708c-6.625-12.105-18.564-20.295-32.175-22.154 c-5.55-0.758-11.25-0.444-16.677,0.948v-34.751c0-3.075,2.502-5.577,5.577-5.577h325.557c3.074,0,5.576,2.502,5.576,5.577v39.851 c-2.287,1.41-4.451,3.034-6.46,4.865c-0.523-0.146-1.053-0.26-1.581-0.384c-2.864-0.67-5.799-1.021-8.74-1.021 c-6.232,0-12.464,1.567-17.97,4.484l-1.014-2.199C381.91,146.649,363.993,135.179,343.661,135.179z M251.166,311.575 c-0.278-0.177-5.089,4.925-5.521,5.356c-2.529,2.524-5.022,5.096-7.393,7.77H95.051c-3.075,0-5.577-2.502-5.577-5.577v-46.228 c9.621-1.461,19.542-2.2,29.577-2.2c9.327,0,18.687,0.623,28.043,1.837c0.155,0.03,0.306,0.069,0.463,0.09 c31.59,4.218,62.732,15.068,92.565,32.245c0.057,0.036,0.111,0.075,0.17,0.109C243.972,307.102,247.602,309.31,251.166,311.575z M304.07,429.414h-92.482c3.477-13.231,15.541-23.017,29.848-23.017h32.786C288.53,406.397,300.593,416.183,304.07,429.414z M246.564,390.718v-18.98h22.53v18.98H246.564z M457.541,341.4c0,8.083-6.576,14.659-14.658,14.659H72.777 c-8.083,0-14.658-6.577-14.658-14.659V220.161h15.677v46.116v52.847c0,11.72,9.536,21.256,21.256,21.256h325.557 c11.72,0,21.255-9.536,21.255-21.256v-50.829v-48.134h15.678V341.4H457.541z M461.895,171.809 c5.562,2.929,10.089,7.712,12.644,13.768c1.12,2.657,3.61,4.483,6.48,4.756c7.801,0.742,13.886,6.614,15.086,14.15H366.389 c0.155-0.175,0.325-0.332,0.489-0.498c1.509-1.517,3.429-2.605,5.507-3.116c2.596-0.639,4.77,0.221,7.307,0.221 c3.354,0.065,6.437-2.037,7.551-5.29c1.432-4.179,3.181-7.86,6.431-10.967c4.216-4.029,9.892-6.327,15.729-6.327 c3.21,0,6.323,0.66,9.249,1.96c4.072,1.809,7.428-0.323,10.161-3.201c2.416-2.542,5.329-4.639,8.503-6.109 c3.605-1.668,7.566-2.559,11.637-2.559c4.432,0,8.875,1.095,12.803,3.147C461.8,171.77,461.849,171.786,461.895,171.809z M457.541,97.244v56.535c-2.816-0.563-5.718-0.857-8.59-0.857c-2.376,0-4.745,0.205-7.089,0.593V119.52 c0-11.72-9.535-21.256-21.255-21.256H95.051c-11.72,0-21.256,9.536-21.256,21.256v42.384c-0.96,0.738-1.895,1.51-2.815,2.327 c-4.213-1.011-8.525-1.604-12.863-1.315V97.244c0-8.083,6.576-14.658,14.658-14.658h370.105 C450.965,82.585,457.541,89.16,457.541,97.244z"></path> </g></svg>
+                            </span>
+                        </div>
+                        <div>
+                            <h3 class="mb-0">Virtual Reality</h3>
+                            <span class="text-gray-500">
+                                <span class="fw-bold">0</span>
+                                Courses
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-md-6 col-12">
+                    <div class="card-hover-svg card card-body d-flex flex-column gap-4">
+                        <div class="">
+                            <span class="icon-shape icon-xxl">
+                                <svg height="200px" width="200px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 60 60" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path style="fill:#424A60;" d="M24,35v-0.375V34.25v-8.625V25.25h0.034C24.013,25.374,24,25.499,24,25.625 c0-2.437,3.862-4.552,9.534-5.625H3.608C1.616,20,0,21.615,0,23.608v11.783C0,37.385,1.616,39,3.608,39H24V35z"></path> </g> <g> <path style="fill:#556080;" d="M24.034,53H24v-9v-0.375V43.25V39H3.608C1.616,39,0,40.615,0,42.608v11.783 C0,56.385,1.616,58,3.608,58h28.718C27.601,56.931,24.378,55.103,24.034,53z"></path> </g> <path style="fill:#556080;" d="M54.392,20H3.608C1.616,20,0,18.384,0,16.392V4.608C0,2.616,1.616,1,3.608,1h50.783 C56.384,1,58,2.616,58,4.608v11.783C58,18.384,56.384,20,54.392,20z"></path> <circle style="fill:#7383BF;" cx="9.5" cy="10.5" r="3.5"></circle> <circle style="fill:#7383BF;" cx="49" cy="9" r="1"></circle> <circle style="fill:#7383BF;" cx="45" cy="9" r="1"></circle> <circle style="fill:#7383BF;" cx="51" cy="12" r="1"></circle> <circle style="fill:#7383BF;" cx="47" cy="12" r="1"></circle> <circle style="fill:#7383BF;" cx="41" cy="9" r="1"></circle> <circle style="fill:#7383BF;" cx="43" cy="12" r="1"></circle> <circle style="fill:#7383BF;" cx="37" cy="9" r="1"></circle> <circle style="fill:#7383BF;" cx="39" cy="12" r="1"></circle> <circle style="fill:#7383BF;" cx="33" cy="9" r="1"></circle> <circle style="fill:#7383BF;" cx="35" cy="12" r="1"></circle> <circle style="fill:#7383BF;" cx="9.5" cy="29.5" r="3.5"></circle> <circle style="fill:#7383BF;" cx="9.5" cy="48.5" r="3.5"></circle> <g> <path style="fill:#1A9172;" d="M42,48.75c-9.941,0-18-2.854-18-6.375V53h0.034c0.548,3.346,8.381,6,17.966,6s17.418-2.654,17.966-6 H60V42.375C60,45.896,51.941,48.75,42,48.75z"></path> <path style="fill:#1A9172;" d="M24,42v0.375c0-0.126,0.013-0.251,0.034-0.375H24z"></path> <path style="fill:#1A9172;" d="M59.966,42C59.987,42.124,60,42.249,60,42.375V42H59.966z"></path> </g> <g> <path style="fill:#25AE88;" d="M42,38c-9.941,0-18-2.854-18-6.375V42.75h0.034c0.548,3.346,8.381,6,17.966,6s17.418-2.654,17.966-6 H60V31.625C60,35.146,51.941,38,42,38z"></path> <path style="fill:#25AE88;" d="M24,31.25v0.375c0-0.126,0.013-0.251,0.034-0.375H24z"></path> <path style="fill:#25AE88;" d="M59.966,31.25C59.987,31.374,60,31.499,60,31.625V31.25H59.966z"></path> </g> <ellipse style="fill:#88C057;" cx="42" cy="21.375" rx="18" ry="6.375"></ellipse> <g> <path style="fill:#61B872;" d="M42,27.75c-9.941,0-18-2.854-18-6.375V32h0.034c0.548,3.346,8.381,6,17.966,6s17.418-2.654,17.966-6 H60V21.375C60,24.896,51.941,27.75,42,27.75z"></path> <path style="fill:#61B872;" d="M24,21v0.375c0-0.126,0.013-0.251,0.034-0.375H24z"></path> <path style="fill:#61B872;" d="M59.966,21C59.987,21.124,60,21.249,60,21.375V21H59.966z"></path> </g> </g></svg>
+                            </span>
+                        </div>
+                        <div>
+                            <h3 class="mb-0">Database Management</h3>
+                            <span class="text-gray-500">
+                                <span class="fw-bold">12</span>
+                                Courses
+                            </span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Testimonials Section -->
-    <section class="bg-light py-5">
+    <section class="py-xl-8 py-6">
         <div class="container">
-            <h2 class="text-center">What Our Users Say</h2>
             <div class="row">
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <p class="card-text">"This platform has transformed my learning experience. The courses are well-structured!"</p>
-                            <footer class="blockquote-footer">Jane Doe, Learner</footer>
+                <div class="col-lg-6 col-md-8 col-12 mx-auto">
+                    <div class="d-flex flex-column gap-2 text-center mb-xl-7 mb-5">
+                        <h2 class="mb-0 h1">Featured Courses</h2>
+                        <p class="mb-0">Whether you want to advance your career, learn a new skill, or explore a passion, we have the right course for you.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-xl-3 col-lg-4 col-md-6 col-12">
+                    <div class="card border">
+                        <a href="#!">
+                            <img src="https://geeksui.codescandy.com/geeks/assets/images/course/figma.jpg" alt="figma" class="card-img-top img-fluid w-100" />
+                        </a>
+                        <div class="card-body d-flex flex-column gap-4">
+                            <div class="d-flex flex-column gap-2">
+                                <div>
+                                    <span class="badge text-light-emphasis bg-light-subtle border border-light-subtle rounded-pill">UX / UI Design</span>
+                                </div>
+                                <h3 class="mb-0 h4">
+                                    <a href="#!" class="text-inherit">Figma UI / UX Design Course for the Beginner</a>
+                                </h3>
+                                <small class="text-secondary">Jitu Chauhan</small>
+                                <div class="lh-1">
+                                    <span class="text-secondary fw-semibold">5.0</span>
+                                    <span class="align-text-top">
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                    </span>
+                                    <span class="text-gray-500">(245)</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <p class="card-text">"As a teacher, I love how easy it is to create and manage courses!"</p>
-                            <footer class="blockquote-footer">John Smith, Teacher</footer>
+                <div class="col-xl-3 col-lg-4 col-md-6 col-12">
+                    <div class="card border">
+                        <a href="#!">
+                            <img src="https://geeksui.codescandy.com/geeks/assets/images/course/python.jpg" alt="figma" class="card-img-top img-fluid w-100" />
+                        </a>
+                        <div class="card-body d-flex flex-column gap-4">
+                            <div class="d-flex flex-column gap-2">
+                                <div>
+                                    <span class="badge text-light-emphasis bg-light-subtle border border-light-subtle rounded-pill">Web Development</span>
+                                </div>
+                                <h3 class="mb-0 h4">
+                                    <a href="#!" class="text-inherit">Master the basics of data analysis with Python</a>
+                                </h3>
+                                <small class="text-secondary">Sandip Chauhan</small>
+                                <div class="lh-1">
+                                    <span class="text-secondary fw-semibold">4.5</span>
+                                    <span class="align-text-top">
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                    </span>
+                                    <span class="text-gray-500">(3,124)</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <p class="card-text">"The progress tracking feature helps me stay on top of my studies!"</p>
-                            <footer class="blockquote-footer">Emily Johnson, Learner</footer>
+                <div class="col-xl-3 col-lg-4 col-md-6 col-12">
+                    <div class="card border">
+                        <a href="#!">
+                            <img src="https://geeksui.codescandy.com/geeks/assets/images/course/nuxt.jpg" alt="figma" class="card-img-top img-fluid w-100" />
+                        </a>
+                        <div class="card-body d-flex flex-column gap-4">
+                            <div class="d-flex flex-column gap-2">
+                                <div>
+                                    <span class="badge text-light-emphasis bg-light-subtle border border-light-subtle rounded-pill">Design</span>
+                                </div>
+                                <h3 class="mb-0 h4">
+                                    <a href="#!" class="text-inherit">About the Nuxt.js Fundamentals course</a>
+                                </h3>
+                                <small class="text-secondary">Manasvi Suthar</small>
+                                <div class="lh-1">
+                                    <span class="text-secondary fw-semibold">4.5</span>
+                                    <span class="align-text-top">
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                    </span>
+                                    <span class="text-gray-500">(121)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-md-6 col-12">
+                    <div class="card border">
+                        <a href="#!">
+                            <img src="https://geeksui.codescandy.com/geeks/assets/images/course/bootstrap.jpg" alt="figma" class="card-img-top img-fluid w-100" />
+                        </a>
+                        <div class="card-body d-flex flex-column gap-4">
+                            <div class="d-flex flex-column gap-2">
+                                <div>
+                                    <span class="badge text-light-emphasis bg-light-subtle border border-light-subtle rounded-pill">Programming</span>
+                                </div>
+                                <h3 class="mb-0 h4">
+                                    <a href="#!" class="text-inherit">Create Modern Website Using HTML,CSS And Bootstrap</a>
+                                </h3>
+                                <small class="text-secondary">Anita Parmar</small>
+                                <div class="lh-1">
+                                    <span class="text-secondary fw-semibold">4.5</span>
+                                    <span class="align-text-top">
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                    </span>
+                                    <span class="text-gray-500">(13,245)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row my-4">
+                <div class="col-xl-3 col-lg-4 col-md-6 col-12">
+                    <div class="card border">
+                        <a href="#!">
+                            <img src="https://geeksui.codescandy.com/geeks/assets/images/course/nuxt.jpg" alt="figma" class="card-img-top img-fluid w-100" />
+                        </a>
+                        <div class="card-body d-flex flex-column gap-4">
+                            <div class="d-flex flex-column gap-2">
+                                <div>
+                                    <span class="badge text-light-emphasis bg-light-subtle border border-light-subtle rounded-pill">Design</span>
+                                </div>
+                                <h3 class="mb-0 h4">
+                                    <a href="#!" class="text-inherit">About the Nuxt.js Fundamentals course</a>
+                                </h3>
+                                <small class="text-secondary">Manasvi Suthar</small>
+                                <div class="lh-1">
+                                    <span class="text-secondary fw-semibold">4.5</span>
+                                    <span class="align-text-top">
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                    </span>
+                                    <span class="text-gray-500">(121)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-md-6 col-12">
+                    <div class="card border">
+                        <a href="#!">
+                            <img src="https://geeksui.codescandy.com/geeks/assets/images/course/bootstrap.jpg" alt="figma" class="card-img-top img-fluid w-100" />
+                        </a>
+                        <div class="card-body d-flex flex-column gap-4">
+                            <div class="d-flex flex-column gap-2">
+                                <div>
+                                    <span class="badge text-light-emphasis bg-light-subtle border border-light-subtle rounded-pill">Web Development</span>
+                                </div>
+                                <h3 class="mb-0 h4">
+                                    <a href="#!" class="text-inherit">Create Modern Website Using HTML, CSS And Bootstrap</a>
+                                </h3>
+                                <small class="text-secondary">Anita Parmar</small>
+                                <div class="lh-1">
+                                    <span class="text-secondary fw-semibold">4.5</span>
+                                    <span class="align-text-top">
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                    </span>
+                                    <span class="text-gray-500">(13,245)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-md-6 col-12">
+                    <div class="card border">
+                        <a href="#!">
+                            <img src="https://geeksui.codescandy.com/geeks/assets/images/course/nuxt.jpg" alt="figma" class="card-img-top img-fluid w-100" />
+                        </a>
+                        <div class="card-body d-flex flex-column gap-4">
+                            <div class="d-flex flex-column gap-2">
+                                <div>
+                                    <span class="badge text-light-emphasis bg-light-subtle border border-light-subtle rounded-pill">Design</span>
+                                </div>
+                                <h3 class="mb-0 h4">
+                                    <a href="#!" class="text-inherit">About the Nuxt.js Fundamentals course</a>
+                                </h3>
+                                <small class="text-secondary">Manasvi Suthar</small>
+                                <div class="lh-1">
+                                    <span class="text-secondary fw-semibold">4.5</span>
+                                    <span class="align-text-top">
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                    </span>
+                                    <span class="text-gray-500">(121)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-md-6 col-12">
+                    <div class="card border">
+                        <a href="#!">
+                            <img src="https://geeksui.codescandy.com/geeks/assets/images/course/bootstrap.jpg" alt="figma" class="card-img-top img-fluid w-100" />
+                        </a>
+                        <div class="card-body d-flex flex-column gap-4">
+                            <div class="d-flex flex-column gap-2">
+                                <div>
+                                    <span class="badge text-light-emphasis bg-light-subtle border border-light-subtle rounded-pill">Programming</span>
+                                </div>
+                                <h3 class="mb-0 h4">
+                                    <a href="#!" class="text-inherit">Create Modern Website Using HTML,CSS And Bootstrap</a>
+                                </h3>
+                                <small class="text-secondary">Anita Parmar</small>
+                                <div class="lh-1">
+                                    <span class="text-secondary fw-semibold">4.5</span>
+                                    <span class="align-text-top">
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                    </span>
+                                    <span class="text-gray-500">(13,245)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row my-4">
+                <div class="col-xl-3 col-lg-4 col-md-6 col-12">
+                    <div class="card border">
+                        <a href="#!">
+                            <img src="https://geeksui.codescandy.com/geeks/assets/images/course/nuxt.jpg" alt="figma" class="card-img-top img-fluid w-100" />
+                        </a>
+                        <div class="card-body d-flex flex-column gap-4">
+                            <div class="d-flex flex-column gap-2">
+                                <div>
+                                    <span class="badge text-light-emphasis bg-light-subtle border border-light-subtle rounded-pill">Design</span>
+                                </div>
+                                <h3 class="mb-0 h4">
+                                    <a href="#!" class="text-inherit">About the Nuxt.js Fundamentals course</a>
+                                </h3>
+                                <small class="text-secondary">Manasvi Suthar</small>
+                                <div class="lh-1">
+                                    <span class="text-secondary fw-semibold">4.5</span>
+                                    <span class="align-text-top">
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                    </span>
+                                    <span class="text-gray-500">(121)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-md-6 col-12">
+                    <div class="card border">
+                        <a href="#!">
+                            <img src="https://geeksui.codescandy.com/geeks/assets/images/course/bootstrap.jpg" alt="figma" class="card-img-top img-fluid w-100" />
+                        </a>
+                        <div class="card-body d-flex flex-column gap-4">
+                            <div class="d-flex flex-column gap-2">
+                                <div>
+                                    <span class="badge text-light-emphasis bg-light-subtle border border-light-subtle rounded-pill">Web Development</span>
+                                </div>
+                                <h3 class="mb-0 h4">
+                                    <a href="#!" class="text-inherit">Create Modern Website Using HTML,CSS And Bootstrap</a>
+                                </h3>
+                                <small class="text-secondary">Anita Parmar</small>
+                                <div class="lh-1">
+                                    <span class="text-secondary fw-semibold">4.5</span>
+                                    <span class="align-text-top">
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                    </span>
+                                    <span class="text-gray-500">(13,245)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="text-center mt-8">
+                        <a href="#!" class="btn btn-outline-primary">
+                            <span>Show All Courses</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-xl-8 py-6">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-flex flex-column gap-4 text-center mb-xl-7 mb-5">
+                        <div class="d-flex flex-column gap-2">
+                            <h2 class="h1 mb-0">The reviews speak for themselves</h2>
+                            <p class="mb-0">From critical skills to technical topics, Udemy supports your professional development.</p>
+                        </div>
+                        <div class="lh-1 d-flex flex-row gap-3 align-items-center justify-content-center">
+                            <span>4.5/5</span>
+                            <span class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
+                                <path
+                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
+                                <path
+                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
+                                <path
+                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
+                                <path
+                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
+                                <path
+                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
+                                </svg>
+                            </span>
+                            <span class="text-primary">8,500+ reviews</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row gy-5">
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="card shadow-lg">
+                        <div class="card-body p-5 d-flex flex-column gap-3">
+                            <div class="lh-1">
+                                <span class="align-text-top">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
+                                        <path
+                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
+                                        <path
+                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
+                                        <path
+                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
+                                        <path
+                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-star-half text-warning" viewBox="0 0 16 16">
+                                        <path
+                                        d="M5.354 5.119 7.538.792A.52.52 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327 4.898.696A.54.54 0 0 1 16 6.32a.55.55 0 0 1-.17.445l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.5.5 0 0 1-.146.05c-.342.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.172-.403.6.6 0 0 1 .085-.302.51.51 0 0 1 .37-.245zM8 12.027a.5.5 0 0 1 .232.056l3.686 1.894-.694-3.957a.56.56 0 0 1 .162-.505l2.907-2.77-4.052-.576a.53.53 0 0 1-.393-.288L8.001 2.223 8 2.226z" />
+                                    </svg>
+                                </span>
+                                <span class="ms-2">4.5/5</span>
+                            </div>
+                            <div class="d-flex flex-column gap-6">
+                                <div class="d-flex flex-column gap-2">
+                                    <span class="h4 mb-0">Transformative Learning Experience!</span>
+                                    <p class="mb-0 fs-5">
+                                        "I was struggling to grasp the concepts in my subject until I enrolled in this course. The interactive lessons and the support from the instructors were incredible. I feel more
+                                        confident and prepared for my exams now. Highly recommend it to anyone looking to excel!"
+                                    </p>
+                                </div>
+                                <div class="d-flex flex-column gap-4">
+                                    <div class="d-flex flex-row gap-3 align-items-center">
+                                        <div>
+                                            <img src="https://geeksui.codescandy.com/geeks/assets/images/avatar/avatar-1.jpg" alt="avatar" class="rounded-circle icon-shape icon-xl" />
+                                        </div>
+                                        <div class="d-flex flex-column">
+                                            <span>Jitu Chauhan</span>
+                                            <span class="text-secondary">Technical Co-Founder, CTO at Block</span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row gap-2 align-items-center">
+                                        <a href="#!" class="icon-link icon-link-hover">
+                                            <span>View this Bootstrap 5 course</span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="card shadow-lg">
+                        <div class="card-body p-5 d-flex flex-column gap-3">
+                            <div class="lh-1">
+                                <span class="align-text-top">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
+                                        <path
+                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
+                                        <path
+                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
+                                        <path
+                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
+                                        <path
+                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
+                                        <path
+                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
+                                    </svg>
+                                </span>
+                                <span class="ms-2">5.0/5</span>
+                            </div>
+                            <div class="d-flex flex-column gap-6">
+                                <div class="d-flex flex-column gap-2">
+                                    <span class="h4 mb-0">Top-Notch Content and Teaching!</span>
+                                    <p class="mb-0">
+                                        "This course exceeded my expectations. The material is presented in a clear and engaging way, making even the most complex topics easy to understand. The quizzes and
+                                        assignments helped reinforce my learning. I can’t thank the team enough for this fantastic resource."
+                                    </p>
+                                </div>
+                                <div class="d-flex flex-column gap-4">
+                                    <div class="d-flex flex-row gap-3 align-items-center">
+                                        <div>
+                                            <img src="https://geeksui.codescandy.com/geeks/assets/images/avatar/avatar-4.jpg" alt="avatar" class="rounded-circle icon-shape icon-xl" />
+                                        </div>
+                                        <div class="d-flex flex-column">
+                                            <span>Vallabh Sompura</span>
+                                            <span class="text-secondary">College Freshman</span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row gap-2 align-items-center">
+                                        <a href="#!" class="icon-link icon-link-hover">
+                                            <span>View this Figma UI / UX course</span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="card shadow-lg">
+                        <div class="card-body p-5 d-flex flex-column gap-3">
+                            <div class="lh-1">
+                                <span class="align-text-top">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
+                                        <path
+                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
+                                        <path
+                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
+                                        <path
+                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
+                                        <path
+                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
+                                        <path
+                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
+                                    </svg>
+                                </span>
+                                <span class="ms-2">5.0/5</span>
+                            </div>
+                            <div class="d-flex flex-column gap-6">
+                                <div class="d-flex flex-column gap-2">
+                                    <span class="h4 mb-0">Perfect for Career Advancement!</span>
+                                    <p class="mb-0">
+                                        "As a working professional, I needed a course that fit into my busy schedule. This course was perfect! The flexible pacing allowed me to learn at my own speed, and the
+                                        practical applications taught in the course have already helped me in my job. I’m looking forward to taking more courses from this platform."
+                                    </p>
+                                </div>
+                                <div class="d-flex flex-column gap-4">
+                                    <div class="d-flex flex-row gap-3 align-items-center">
+                                        <div>
+                                        <img src="https://geeksui.codescandy.com/geeks/assets/images/avatar/avatar-3.jpg" alt="avatar" class="rounded-circle icon-shape icon-xl" />
+                                        </div>
+                                        <div class="d-flex flex-column">
+                                        <span>Anita Parmar</span>
+                                        <span class="text-secondary">Marketing Specialist</span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row gap-2 align-items-center">
+                                        <a href="#!" class="icon-link icon-link-hover">
+                                            <span>Read full Story</span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Call to Action Section -->
-    <section class="py-5 text-center">
-        <div class="container">
-            <h2>Join Us Today!</h2>
-            <p>Sign up now to start managing your courses and improving your learning journey!</p>
-            <a href="#" class="btn btn-success btn-lg">Sign Up</a>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-light text-center py-4">
-        <p>&copy; 2024 Course Management System. All rights reserved.</p>
-    </footer>
-
-    <!-- Bootstrap JS and dependencies -->
+    <div th:replace="fragments/footer.html :: footer"></div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+</bod>
 </html>

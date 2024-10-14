@@ -8,13 +8,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.css" rel="stylesheet">
     <script src="https://unpkg.com/feather-icons"></script>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
     <style>
-        /* Basic Styling */
-        body {
-            background-color: #e8f0fa;
-            font-family: "Inter", sans-serif;
-        }
-
         /* Container Layout */
         .containe {
             display: flex;
@@ -81,39 +76,6 @@
             background-color: #f5f5f5;
         }
 
-        /* Spacing Utilities */
-        .me-2 {
-            margin-right: .5rem !important;
-        }
-
-        .ms-2 {
-            margin-left: .5rem !important;
-        }
-
-        .ms-3 {
-            margin-left: 1rem !important;
-        }
-
-        .ms-lg-3 {
-            margin-left: 1rem !important;
-        }
-
-        .ps-3 {
-            padding-left: 1rem !important;
-        }
-
-        .ps-6 {
-            padding-left: 2.5rem !important;
-        }
-
-        .mb-1 {
-            margin-bottom: .25rem !important;
-        }
-
-        .lh-1 {
-            line-height: 1 !important;
-        }
-
         /* Form Controls */
         .form-control {
             font-size: .875rem;
@@ -133,10 +95,6 @@
 
         .navbar-expand-lg .navbar-nav {
             flex-direction: row;
-        }
-
-        .ms-auto {
-            margin-left: auto !important;
         }
 
         /* Button Styling */
@@ -161,43 +119,8 @@
             background-color: #e4e4e4;
         }
 
-        .btn-primary {
-            color: #fff;
-            background-color: #5A87C7 !important;
-            border-color: #5A87C7 !important;
-            transition: background-color 0.3s ease, border-color 0.3s ease !important;
-        }
-
-        .btn-primary:hover {
-            color: #fff;
-            background-color: #4B6F9D !important;
-            border-color: #4B6F9D !important;
-        }
-
         .btn:focus {
             box-shadow: none;
-        }
-
-        /* Avatar */
-        .avatar {
-            display: inline-block;
-            position: relative;
-        }
-
-        .avatar-md {
-            height: 2.5rem;
-            width: 2.5rem;
-        }
-
-        .avatar-xs {
-            height: 1.5rem;
-            width: 1.5rem;
-        }
-
-        .avatar img {
-            height: 100%;
-            object-fit: cover;
-            width: 100%;
         }
 
         /* Dropdown Menu */
@@ -215,110 +138,16 @@
             right: 0;
         }
 
-        .dropdown-item {
-            align-items: center;
-            border-radius: .25rem;
-            display: flex;
-            font-weight: 500;
-            line-height: 28px;
-            padding: .125rem 1rem;
-        }
-
-        .dropdown-menu {
-            position: absolute;
-            inset: 0px 0px auto auto;
-            margin: 0px;
-            box-shadow: 0 8px 12px 1px rgba(11, 9, 36, .29);
-            padding: .5rem;
-            z-index: 1000;
-        }
-
-        .dropdown-item-icon {
-            display: inline-block;
-            width: 14px;
-            min-height: 14px;
-        }
-
-        .dropdown-item:hover {
-            background-color: #5A87C7;
-            color: #F3EFE3;
-        }
-
         /* Cards */
         .card {
-            background-color: #f5f5f5;
-            color: #343a40;
-            border: none;
-            box-shadow: 0 2px 4px rgba(105, 105, 105, 0.3);
             border-radius: 0.5rem;
         }
 
         .card-body {
-            padding: 1.5rem;
             flex: 1 1 auto;
         }
 
-        .card .gap-3 {
-            gap: 1rem !important;
-        }
-
-        .card .gap-2 {
-            gap: .5rem !important;
-        }
-
-        .card .gap-1 {
-            gap: .25rem !important;
-        }
-
-        .card .flex-column {
-            flex-direction: column !important;
-        }
-
         /* Typography */
-        .h2, h2 {
-            font-size: 1.5rem;
-        }
-
-        .h4, h4 {
-            font-size: 1rem;
-        }
-
-        .h5, h5 {
-            font-size: .875rem;
-        }
-
-        .text-uppercase {
-            text-transform: uppercase !important;
-        }
-
-        .text-primary {
-            color: #5A87C7 !important;
-        }
-
-        .text-dark {
-            color: #212529 !important;
-        }
-
-        .fw-bold {
-            font-weight: 700 !important;
-        }
-
-        .fw-medium {
-            font-weight: 500 !important;
-        }
-
-        .fw-semibold {
-            font-weight: 600 !important;
-        }
-
-        .fs-3 {
-            font-size: 1.25rem !important;
-        }
-
-        .fs-6 {
-            font-size: .75rem !important;
-        }
-
         .ls-md {
             letter-spacing: .1em !important;
         }
@@ -348,14 +177,6 @@
         .img-fluid, .img-thumbnail {
             height: auto;
             max-width: 100%;
-        }
-
-        .text-primary-hover {
-            color: #212529;
-        }
-
-        .text-primary-hover:hover {
-            color: #5A87C7;
         }
     </style>
 </head>
@@ -750,7 +571,7 @@
                         <div class="card">
                             <div class="card-header d-flex align-items-center justify-content-between card-header-height">
                                 <h4 class="mb-0">Popular Instructor</h4>
-                                <a href="#" class="btn btn-outline-secondary btn-sm">View all</a>
+                                <a href="#" class="btn btn-outline-secondary btn-sm fw-semibold">View all</a>
                             </div>
                             <div class="card-body">
                                 <ul class="list-group list-group-flush">
@@ -986,7 +807,7 @@
                         <div class="card">
                             <div class="card-header d-flex align-items-center justify-content-between card-header-height">
                                 <h4 class="mb-0">Recent Courses</h4>
-                                <a href="#" class="btn btn-outline-secondary btn-sm">View all</a>
+                                <a href="#" class="btn btn-outline-secondary btn-sm fw-semibold">View all</a>
                             </div>
                             <div class="card-body">
                                 <ul class="list-group list-group-flush">

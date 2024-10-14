@@ -1,0 +1,45 @@
+.img-4by3-lg {
+    width: 6.5rem;
+}
+
+.table>:not(caption)>*>*  {
+    padding: .75rem 1.5rem !important;
+}
+
+.table-centered td, .table-centered th {
+    vertical-align: middle !important;
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+    color: #5A87C7 !important;
+}
+
+.sidenav.navbar .navbar-header {
+    color: #696969;
+    font-size: .6875rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin-bottom: .2rem;
+    padding: .3rem .4rem;
+    text-transform: uppercase;
+}
+
+.sidenav.navbar .navbar-nav .nav-item .nav-link {
+    align-items: center;
+    background-color: transparent;
+    border-bottom: 0;
+    border-radius: .5rem;
+    color: #696969 !important;
+    display: flex;
+    font-weight: 500;
+    padding: .3rem .7rem !important;
+    position: relative;
+    font-size: 0.95rem;
+}
+
+.sidenav.navbar .navbar-nav .nav-item .nav-link:hover {
+    background-color: #5A87C7;
+    border-radius: 0.5rem;
+    color: #F3EFE3 !important;
+}
+

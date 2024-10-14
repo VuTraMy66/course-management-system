@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instructor - Course Management System</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+    <link rel="stylesheet" th:href="@{/css/navbar.css}"/>
+    <style>
+        .text-reset {
+            opacity: 1;
+            color: inherit !important;
+            text-decoration: none;
+        }
+
+        .bg-secondary {
+            background-color: #dee2e6 !important;
+        }
+
+        .input-group {
+            align-items: stretch;
+            display: flex;
+            flex-wrap: wrap;
+            position: relative;
+            width: 100%;
+        }
+
+        .btn-tag {
+            color: #696969;
+            border-color: #334155;
+            border-radius: 50rem;
+            font-weight: 500;
+        }
+
+        .btn-tag:hover {
+            background-color: #4B6F9D;
+            color:#f5f5f5;
+        }
+    </style>
+</head>
+<body>
+    <div th:replace="fragments/navbar.html :: navbar"></div>
+    <section class="py-md-8 py-6" style="background-image: url(https://geeksui.codescandy.com/geeks/assets/images/mentor/mentor-glow.svg); background-repeat: no-repeat; background-size: contain">
+        <div class="container py-lg-6">
+            <div class="row align-items-center gy-4 justify-content-center">
+                <div class="col-xxl-5 col-xl-6 col-md-10">
+                    <div class="d-flex flex-column gap-5 text-center">
+                        <div class="d-flex flex-column gap-2">
+                            <span class="text-dark fs-5">Learn from top experts, gain real-world skills, and excel in your field.</span>
+                            <h1 class="mb-0 display-2 fw-bold">
+                                <span>1-on-1</span>
+                                <span class="typed-text text-primary" id="typed"></span>
+                                <div>Mentorship</div>
+                            </h1>
+                        </div>
+                        <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+                        <script>
+                            var typed = new Typed('#typed', {
+                                strings: ["Javascript", "Startup", "React", "Marketing", "Branding"],
+                                typeSpeed: 100,
+                                backSpeed: 60,
+                                loop: true
+                            });
+                        </script>
+                        <div class="d-flex flex-column gap-3">
+                            <form>
+                                <div class="input-group mb-3">
+                                    <label for="mentorFind" class="form-label visually-hidden">Find Mentor</label>
+                                    <input
+                                        type="text"
+                                        class="form-control form-control-lg"
+                                        id="mentorFind"
+                                        name="mentorFind"
+                                        placeholder="Search by Skills"
+                                        aria-label="Search by Skills"
+                                        aria-describedby="basic-addon2"/>
+                                    <button class="btn btn-primary btn-lg" id="basic-addon2" style="font-weight: 500; font-style: 0.875rem;">Find mentors</button>
+                                </div>
+                            </form>
+                            <div class="gap-2 d-flex flex-wrap justify-content-center">
+                                <a href="./mentor-list.html" class="btn btn-tag btn-sm">Frontend</a>
+                                <a href="./mentor-list.html" class="btn btn-tag btn-sm">Devops</a>
+                                <a href="./mentor-list.html" class="btn btn-tag btn-sm">UI/UX designer</a>
+                                <a href="./mentor-list.html" class="btn btn-tag btn-sm">Data Science</a>
+                                <a href="./mentor-list.html" class="btn btn-tag btn-sm">Full Stack</a>
+                                <a href="./mentor-list.html" class="btn btn-tag btn-sm">Backend</a>
+                                <a href="./mentor-list.html" class="btn btn-tag btn-sm">Data Analyst</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-6 py-lg-8 bg-light">
+        <div class="container py-lg-6">
+            <div class="row">
+                <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2">
+                    <div class="text-center mb-6 d-flex flex-column gap-2">
+                        <h2 class="mb-0 mx-xl-8 h1">Meet Our Instructors</h2>
+                        <p class="mb-0">We have a team of highly skilled and experienced instructors from various fields who are committed to your success. Get to know them better!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-xxl-3 col-xl-4 col-md-6 col-12">
+                    <div class="card rounded-4 card-bordered card-lift">
+                        <div class="p-3 d-flex flex-column gap-3">
+                            <a href="../mentor/mentor-single.html">
+                                <img src="https://geeksui.codescandy.com/geeks/assets/images/mentor/mentor-img-1.jpg" alt="mentor 1" class="img-fluid w-100 rounded-4" />
+                            </a>
+                            <div class="d-flex flex-column gap-4">
+                                <div class="d-flex flex-column gap-2">
+                                    <div>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <h3 class="mb-0">
+                                                <a href="../mentor/mentor-single.html" class="text-reset">Akshay Sharma</a>
+                                            </h3>
+                                            <span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-patch-check-fill text-success" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708" />
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        <span class="text-gray-800">Software Engineer</span>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-between fs-6">
+                                        <div>
+                                            <span>@ Microsoft</span>
+                                            <div class="vr mx-2 text-gray-200"></div>
+                                            <span>5yrs Exp.</span>
+                                        </div>
+                                        <div class="d-flex gap-1 align-items-center lh-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                            </svg>
+                                            <span class="fw-bold text-dark">5.0</span>
+                                            <span>(12 Reviews)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row justify-content-between align-items-center">
+                                    <a href="#!" class="btn btn-outline-primary" style="width: 100%;">View Profile</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-3 col-xl-4 col-md-6 col-12">
+                    <div class="card rounded-4 card-bordered card-lift">
+                        <div class="p-3 d-flex flex-column gap-3">
+                            <div class="position-relative">
+                                <a href="../mentor/mentor-single.html">
+                                    <img src="https://geeksui.codescandy.com/geeks/assets/images/mentor/mentor-img-2.jpg" alt="mentor 2" class="img-fluid w-100 rounded-4" />
+                                </a>
+                                <div class="position-absolute bottom-0 left-0 p-3">
+                                    <span class="badge text-bg-success">New Mentor</span>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-column gap-4">
+                                <div class="d-flex flex-column gap-2">
+                                    <div>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <h3 class="mb-0"><a href="../mentor/mentor-single.html" class="text-reset">Andrew Lupien</a></h3>
+                                            <span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-patch-check-fill text-success" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708" />
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        <span class="text-gray-800">Quality Assurance Eng</span>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-between fs-6">
+                                        <div>
+                                            <span>@ Amazon</span>
+                                            <div class="vr mx-2 text-gray-200"></div>
+                                            <span>3 yrs Exp.</span>
+                                        </div>
+                                        <div class="d-flex gap-1 align-items-center lh-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
+                                                <path
+                                                d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                            </svg>
+                                            <span class="fw-bold text-dark">0</span>
+                                            <span>(0 Reviews)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row justify-content-between align-items-center">
+                                    <a href="#!" class="btn btn-outline-primary" style="width: 100%;">View Profile</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-3 col-xl-4 col-md-6 col-12">
+                    <div class="card rounded-4 card-bordered card-lift">
+                        <div class="p-3 d-flex flex-column gap-3">
+                            <a href="../mentor/mentor-single.html">
+                                <img src="https://geeksui.codescandy.com/geeks/assets/images/mentor/mentor-img-3.jpg" alt="mentor 3" class="img-fluid w-100 rounded-4" />
+                            </a>
+                            <div class="d-flex flex-column gap-4">
+                                <div class="d-flex flex-column gap-2">
+                                    <div>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <h3 class="mb-0"><a href="../mentor/mentor-single.html" class="text-reset">Bernice Perry</a></h3>
+                                            <span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-patch-check-fill text-success" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708" />
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        <span class="text-gray-800">Senior Business Analyst</span>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-between fs-6">
+                                        <div>
+                                            <span>@ InstaCart</span>
+                                            <div class="vr mx-2 text-gray-200"></div>
+                                            <span>3 yrs Exp.</span>
+                                        </div>
+                                        <div class="d-flex gap-1 align-items-center lh-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
+                                                <path
+                                                d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                            </svg>
+                                            <span class="fw-bold text-dark">5.0</span>
+                                            <span>(12 Reviews)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row justify-content-between align-items-center">
+                                    <a href="#!" class="btn btn-outline-primary" style="width: 100%;">View Profile</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-3 col-xl-4 col-md-6 col-12">
+                    <div class="card rounded-4 card-bordered card-lift">
+                        <div class="p-3 d-flex flex-column gap-3">
+                            <a href="../mentor/mentor-single.html">
+                                <img src="https://geeksui.codescandy.com/geeks/assets/images/mentor/mentor-img-4.jpg" alt="mentor 4" class="img-fluid w-100 rounded-4" />
+                            </a>
+                            <div class="d-flex flex-column gap-4">
+                                <div class="d-flex flex-column gap-2">
+                                    <div>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <h3 class="mb-0"><a href="../mentor/mentor-single.html" class="text-reset">Patrice Long</a></h3>
+                                            <span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-patch-check-fill text-success" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708" />
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        <span class="text-gray-800">Senior Data Engineer</span>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-between fs-6">
+                                        <div>
+                                            <span>@ Zoom</span>
+                                            <div class="vr mx-2 text-gray-200"></div>
+                                            <span>7 yrs Exp.</span>
+                                        </div>
+                                        <div class="d-flex gap-1 align-items-center lh-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
+                                                <path
+                                                d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                            </svg>
+                                            <span class="fw-bold text-dark">5.0</span>
+                                            <span>(22 Reviews)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row justify-content-between align-items-center">
+                                    <a href="#!" class="btn btn-outline-primary" style="width: 100%;">View Profile</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-3 col-xl-4 col-md-6 col-12">
+                    <div class="card rounded-4 card-bordered card-lift">
+                        <div class="p-3 d-flex flex-column gap-3">
+                            <a href="../mentor/mentor-single.html">
+                                <img src="https://geeksui.codescandy.com/geeks/assets/images/mentor/mentor-img-5.jpg" alt="mentor 5" class="img-fluid w-100 rounded-4" />
+                            </a>
+                            <div class="d-flex flex-column gap-4">
+                                <div class="d-flex flex-column gap-2">
+                                    <div>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <h3 class="mb-0"><a href="../mentor/mentor-single.html" class="text-reset">Cathy Diehl</a></h3>
+                                            <span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-patch-check-fill text-success" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708" />
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        <span class="text-gray-800">Frontend Engineer</span>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-between fs-6">
+                                        <div>
+                                            <span>@ Target</span>
+                                            <div class="vr mx-2 text-gray-200"></div>
+                                            <span>2 yrs Exp.</span>
+                                        </div>
+                                        <div class="d-flex gap-1 align-items-center lh-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
+                                                <path
+                                                d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                            </svg>
+                                            <span class="fw-bold text-dark">5.0</span>
+                                            <span>(34 Reviews)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row justify-content-between align-items-center">
+                                    <a href="#!" class="btn btn-outline-primary" style="width: 100%;">View Profile</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-3 col-xl-4 col-md-6 col-12">
+                    <div class="card rounded-4 card-bordered card-lift">
+                        <div class="p-3 d-flex flex-column gap-3">
+                            <div class="position-relative">
+                                <a href="../mentor/mentor-single.html">
+                                    <img src="https://geeksui.codescandy.com/geeks/assets/images/mentor/mentor-img-6.jpg" alt="mentor 6" class="img-fluid w-100 rounded-4" />
+                                </a>
+                                <div class="position-absolute bottom-0 left-0 p-3">
+                                    <span class="badge text-bg-success">New Mentor</span>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-column gap-4">
+                                <div class="d-flex flex-column gap-2">
+                                    <div>
+                                        <div class="d-flex align-items-center gap-2">
+                                        <h3 class="mb-0"><a href="../mentor/mentor-single.html" class="text-reset">James Anderson</a></h3>
+                                        <span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-patch-check-fill text-success" viewBox="0 0 16 16">
+                                            <path
+                                                d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708" />
+                                            </svg>
+                                        </span>
+                                        </div>
+                                        <span class="text-gray-800">UI/UX Designer</span>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-between fs-6">
+                                        <div>
+                                            <span>@ Figma</span>
+                                            <div class="vr mx-2 text-gray-200"></div>
+                                            <span>3 yrs Exp.</span>
+                                        </div>
+                                        <div class="d-flex gap-1 align-items-center lh-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
+                                                <path
+                                                d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                            </svg>
+                                            <span class="fw-bold text-dark">4.5</span>
+                                            <span>(3 Reviews)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row justify-content-between align-items-center">
+                                    <a href="#!" class="btn btn-outline-primary" style="width: 100%;">View Profile</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-3 col-xl-4 col-md-6 col-12">
+                    <div class="card rounded-4 card-bordered card-lift">
+                        <div class="p-3 d-flex flex-column gap-3">
+                            <a href="../mentor/mentor-single.html">
+                                <img src="https://geeksui.codescandy.com/geeks/assets/images/mentor/mentor-img-7.jpg" alt="mentor 7" class="img-fluid w-100 rounded-4" />
+                            </a>
+                            <div class="d-flex flex-column gap-4">
+                                <div class="d-flex flex-column gap-2">
+                                    <div>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <h3 class="mb-0"><a href="../mentor/mentor-single.html" class="text-reset">Cathy Diehl</a></h3>
+                                            <span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-patch-check-fill text-success" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708" />
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        <span class="text-gray-800">Software Engineer</span>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-between fs-6">
+                                        <div>
+                                            <span>@ Microsoft</span>
+                                            <div class="vr mx-2 text-gray-200"></div>
+                                            <span>5 yrs Exp.</span>
+                                        </div>
+                                        <div class="d-flex gap-1 align-items-center lh-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
+                                                <path
+                                                d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                            </svg>
+                                            <span class="fw-bold text-dark">5.0</span>
+                                            <span>(112 Reviews)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row justify-content-between align-items-center">
+                                    <a href="#!" class="btn btn-outline-primary" style="width: 100%;">View Profile</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-3 col-xl-4 col-md-6 col-12">
+                    <div class="card rounded-4 card-bordered card-lift">
+                        <div class="p-3 d-flex flex-column gap-3">
+                            <a href="../mentor/mentor-single.html">
+                                <img src="https://geeksui.codescandy.com/geeks/assets/images/mentor/mentor-img-8.jpg" alt="mentor 8" class="img-fluid w-100 rounded-4" />
+                            </a>
+                            <div class="d-flex flex-column gap-4">
+                                <div class="d-flex flex-column gap-2">
+                                    <div>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <h3 class="mb-0"><a href="../mentor/mentor-single.html" class="text-reset">Patrice Long</a></h3>
+                                            <span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-patch-check-fill text-success" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708" />
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        <span class="text-gray-800">Software Engineer</span>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-between fs-6">
+                                        <div>
+                                            <span>@ Microsoft</span>
+                                            <div class="vr mx-2 text-gray-200"></div>
+                                            <span>5 yrs Exp.</span>
+                                        </div>
+                                        <div class="d-flex gap-1 align-items-center lh-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
+                                                <path
+                                                d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                            </svg>
+                                            <span class="fw-bold text-dark">5.0</span>
+                                            <span>(434 Reviews)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row justify-content-between align-items-center">
+                                    <a href="#!" class="btn btn-outline-primary" style="width: 100%;">View Profile</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="bg-dark-primary py-lg-8 py-6">
+        <div class="container py-lg-6">
+            <div class="row">
+                <div class="col-xxl-6 offset-xxl-3 col-lg-8 offset-lg-2 col-12">
+                    <div class="text-center mb-6 d-flex flex-column gap-2">
+                        <h2 class="mb-0 text-dark h1">Feedback from Our Students</h2>
+                        <p class="mb-0 text-dark">
+                            Our instructors have helped numerous students succeed in their academic journey. Here's what some of them have to say, with an average rating of 4.8 out of 5!
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row gy-4">
+                <div class="col-lg-4 col-12 d-flex flex-column gap-4">
+                    <div class="card card-light-primary rounded-4">
+                        <div class="card-body d-flex flex-column gap-3">
+                            <div class="d-flex flex-row gap-3 align-items-center">
+                                <img src="https://geeksui.codescandy.com/geeks/assets/images/avatar/avatar-1.jpg" alt="avatar 1" class="avatar avatar-md rounded-circle" />
+                                <h5 class="mb-0" style="border: none;">John Doe</h5>
+                            </div>
+                            <div>
+                                <p class="mb-0 fst-italic fs-4 pe-xxl-5">
+                                    “Ms. Smith's lessons were clear, engaging, and incredibly insightful. I felt supported throughout the course and improved tremendously!”
+                                </p>
+                            </div>
+                            <div class="d-flex flex-xl-row gap-2 align-items-center bg-secondary rounded-pill px-3 py-2">
+                                <img src="https://geeksui.codescandy.com/geeks/assets/images/avatar/avatar-10.jpg" alt="avatar 2" class="avatar avatar-md rounded-circle d-lg-none d-md-block d-xl-block" />
+                                <div>
+                                    <div class="d-flex flex-row gap-2 align-items-center">
+                                        <h4 class="mb-0">Akshay sharma</h4>
+                                        <span class="rounded-pill fs-6 px-2 text-success-emphasis bg-success-subtle border border-success">Instructor</span>
+                                    </div>
+                                    <span class="fs-6">Software Engineer at Palantir</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <div class="card card-light-primary rounded-4">
+                            <div class="card-body d-flex flex-column gap-3">
+                                <div class="d-flex flex-row gap-3 align-items-center">
+                                    <img src="https://geeksui.codescandy.com/geeks/assets/images/avatar/avatar-7.jpg" alt="avatar 3" class="avatar avatar-md rounded-circle" />
+                                    <h5 class="mb-0">Gladys Colbert</h5>
+                                </div>
+                                <div>
+                                    <p class="mb-0 fst-italic fs-4 pe-xxl-5">
+                                        “Velit consectetur in adipisicing culpa eiusmod commodo eu ex dolore. Officia irure nisi dolor dolore velit fugiat. Aliqua sint aliqua aute elit eu sunt.”
+                                    </p>
+                                </div>
+                                <div class="d-flex flex-row gap-2 align-items-center bg-secondary rounded-pill px-3 py-2">
+                                    <img src="https://geeksui.codescandy.com/geeks/assets/images/avatar/avatar-8.jpg" alt="avatar 4" class="avatar avatar-md rounded-circle d-lg-none d-md-block d-xl-block" />
+                                    <div>
+                                        <div class="d-flex flex-row gap-2 align-items-center">
+                                            <h4 class="mb-0">Jessica Lupien</h4>
+                                            <span class="rounded-pill fs-6 px-2 text-success-emphasis bg-success-subtle border border-success">Mentor</span>
+                                        </div>
+                                        <span class="fs-6">Senior Data Engineer at Zoom</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-12 d-flex flex-column gap-4">
+                    <div href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <div class="card card-light-primary rounded-4">
+                            <div class="card-body d-flex flex-column gap-3">
+                                <div class="d-flex flex-row gap-3 align-items-center">
+                                    <img src="https://geeksui.codescandy.com/geeks/assets/images/avatar/avatar-2.jpg" alt="avatar 5" class="avatar avatar-md rounded-circle" />
+                                    <h5 class="mb-0">Bev Robertson</h5>
+                                </div>
+                                <div>
+                                    <p class="mb-0 fst-italic fs-4 pe-xxl-5">
+                                        “Velit consectetur in adipisicing culpa eiusmod commodo eu ex dolore.
+                                        <span class="text-primary">Officia irure nisi dolor</span>
+                                        dolore velit fugiat. Aliqua sint aliqua aute elit eu sunt.”
+                                    </p>
+                                </div>
+                                <div class="d-flex flex-row gap-2 align-items-center bg-secondary rounded-pill px-3 py-2">
+                                    <img src="https://geeksui.codescandy.com/geeks/assets/images/avatar/avatar-4.jpg" alt="avatar 6" class="avatar avatar-md rounded-circle d-lg-none d-md-block d-xl-block" />
+                                    <div>
+                                        <div class="d-flex flex-row gap-2 align-items-center">
+                                            <h4 class="mb-0">Andrew Lupien</h4>
+                                            <span class="rounded-pill fs-6 px-2 text-success-emphasis bg-success-subtle border border-success">Mentor</span>
+                                        </div>
+                                        <span class="fs-6">Quality Assurance Engineer at Amazon</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <div class="card card-light-primary rounded-4">
+                            <div class="card-body d-flex flex-column gap-3">
+                                <div class="d-flex flex-row gap-3 align-items-center">
+                                    <img src="https://geeksui.codescandy.com/geeks/assets/images/avatar/avatar-9.jpg" alt="avatar 7" class="avatar avatar-md rounded-circle" />
+                                    <h5 class="mb-0">Doris Esparza</h5>
+                                </div>
+                                <div>
+                                    class="mb-0 fst-italic fs-4 pe-xxl-5">Proident quis deserunt qui ex exercitation veniam id Lorem est cupidatat ipsum irure aliquip ad.</p>
+                                </div>
+                                <div class="d-flex flex-row gap-2 align-items-center bg-secondary rounded-pill px-3 py-2">
+                                    <img src="https://geeksui.codescandy.com/geeks/assets/images/avatar/avatar-10.jpg" alt="avatar 8" class="avatar avatar-md rounded-circle d-lg-none d-md-block d-xl-block" />
+                                <div>
+                                    <div class="d-flex flex-row gap-2 align-items-center">
+                                        <h4 class="mb-0">James Anderson</h4>
+                                        <span class="rounded-pill fs-6 px-2 text-success-emphasis bg-success-subtle border border-success">Mentor</span>
+                                    </div>
+                                    <span class="fs-6">UI/UX Designer at Figma</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-12 d-flex flex-column gap-4">
+                    <div href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <div class="card card-light-primary rounded-4">
+                            <div class="card-body d-flex flex-column gap-3">
+                                <div class="d-flex flex-row gap-3 align-items-center">
+                                    <img src="https://geeksui.codescandy.com/geeks/assets/images/avatar/avatar-5.jpg" alt="avatar 9" class="avatar avatar-md rounded-circle" />
+                                    <h5 class="mb-0">Marlene Turner</h5>
+                                </div>
+                                <div>
+                                    <p class="mb-0 fst-italic fs-4 pe-xxl-5">
+                                        Id duis velit enim officia ad nisi incididunt magna ex dolor minim deserunt dolor. Esse incididunt cillum nostrud esse do quis amet labore amet nulla eiusmod amet nulla Lorem.
+                                        Incididunt ex voluptate irure officia laboris ea proident est qui.
+                                    </p>
+                                </div>
+                                <div class="d-flex flex-row gap-2 align-items-center bg-secondary rounded-pill py-2 px-3">
+                                    <img src="https://geeksui.codescandy.com/geeks/assets/images/avatar/avatar-6.jpg" alt="avatar 10" class="avatar avatar-md rounded-circle d-lg-none d-md-block d-xl-block" />
+                                    <div>
+                                        <!--content-->
+                                        <div class="d-flex flex-row gap-2 align-items-center">
+                                            <h4 class="mb-0">Bernice Perry</h4>
+                                            <span class="rounded-pill fs-6 px-2 text-success-emphasis bg-success-subtle border border-success">Mentor</span>
+                                        </div>
+                                        <span class="fs-6">Senior business analyst at InstaCart</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <div class="card card-light-primary rounded-4">
+                            <div class="card-body d-flex flex-column gap-3">
+                                <div class="d-flex flex-row gap-3 align-items-center">
+                                    <img src="https://geeksui.codescandy.com/geeks/assets/images/avatar/avatar-11.jpg" alt="avatar 11" class="avatar avatar-md rounded-circle" />
+                                    <h5 class="mb-0">Daniel Groleau</h5>
+                                </div>
+                                <div>
+                                    <p class="mb-0 fst-italic fs-4 pe-xxl-5">
+                                        “The generated lorem Ipsum is therefore always free from repetition, injected humour, or words etc generate lorem Ipsum which looks racteristic reasonable...”.
+                                    </p>
+                                </div>
+                                <div class="d-flex flex-row gap-2 align-items-center bg-secondary rounded-pill py-2 px-3">
+                                    <img src="https://geeksui.codescandy.com/geeks/assets/images/avatar/avatar-12.jpg" alt="avatar 12" class="avatar avatar-md rounded-circle d-lg-none d-md-block d-xl-block" />
+                                    <div>
+                                        <div class="d-flex flex-row gap-2 align-items-center">
+                                            <h4 class="mb-0">Patrice Long</h4>
+                                            <span class="rounded-pill fs-6 px-2 text-success-emphasis bg-success-subtle border border-success">Mentor</span>
+                                        </div>
+                                        <span class="fs-6">Software Engineer at Microsoft</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div th:replace="fragments/footer.html :: footer"></div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        feather.replace();
+    </script>
+</body>
+</html>

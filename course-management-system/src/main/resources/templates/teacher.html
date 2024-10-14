@@ -3,251 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teacher - Course Management System</title>
+    <title>My Dashboard - Course Management System</title>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <style>
-        body {
-            background-color: #e8f0fa;
-        }
-
-        .mt-n5 {
-            margin-top: -2rem !important;
-        }
-        
-        .btn-primary {
-            color: #fff; 
-            background-color: #5A87C7 !important;
-            border-color: #5A87C7 !important;
-
-            transition: background-color 0.3s ease, border-color 0.3s ease !important;
-        }
-        .btn-primary:hover {
-            color: #fff; 
-            background-color:  #4B6F9D!important; 
-            border-color: #4B6F9D !important; 
-        }
-
-        .btn-primary:active {
-            color: #fff;
-            background-color: #4B6F9D !important;
-            border-color: #4B6F9D  !important; 
-            box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125) !important; 
-        }
-
-        .btn-primary:disabled {
-            color: #fff;
-            background-color: #5A87C7 !important;
-            border-color: #5A87C7 !important; 
-        }
-
-        .rounded-bottom-md-2 {
-            border-bottom-left-radius: 0.375rem !important;
-            border-bottom-right-radius: 0.375rem !important;
-            border: 1px solid #000000;
-        }
-
-        .shadow-sm {
-            box-shadow: 0px 1px 3px rgba(0, 0, 0, .09) !important;
-        }
-
-        .nav-icon {
-            display: inline-block;
-            width: 1rem;   
-            height: 1rem;  
-            stroke-width: 2;
-        }
-
-        .sidenav.navbar .navbar-nav .nav-item .nav-link {
-            align-items: center;
-            background-color: transparent;
-            border-bottom: 0;
-            border-radius: .5rem;
-            color: #696969 !important;
-            display: flex;
-            font-weight: 500;
-            padding: .3rem .5rem !important;
-            position: relative;
-            margin-bottom: .125rem;
-        }
-
-        .sidenav.navbar .navbar-nav .nav-item .nav-link:hover {
-            background-color: #5A87C7;
-            border-radius: 0.5rem;
-            color: #F3EFE3 !important;
-        }
-
-        .sidenav.navbar .navbar-header {
-            color: #696969;
-            font-size: .6875rem;
-            font-weight: 500;
-            letter-spacing: 1px;
-            margin-bottom: .2rem;
-            padding: .3rem .4rem;
-            text-transform: uppercase;
-        }
-
-        .fw-semibold {
-            font-weight: 600 !important;
-        }
-
-        .fs-6 {
-            font-size: .75rem !important;
-        }
-
-        .img-4by3-lg {
-            width: 6.5rem;
-        }
-
-        .dropdown-header {
-            color: #696969;
-            padding: .25rem 1.2rem;
-            font-size: .6875rem;
-            font-weight: 500;
-            letter-spacing: 1px;
-            margin-bottom: .2rem;
-            text-transform: uppercase;
-            display: block;
-            white-space: nowrap;
-        }
-
-        .card {
-            background-color: #f5f5f5; 
-            color: #696969;
-            border: none;
-            box-shadow: 0 2px 4px rgba(105, 105, 105, 0.3)
-        }
-
-        .card-header {
-            background-color: #f5f5f5;
-            color: #696969;
-            border-bottom: 1px solid var #696969;
-            margin-bottom: 0;
-            padding: 1rem 1.5rem;
-        }
-
-        .table>:not(caption)>*>*  {
-            padding: .75rem 1.5rem !important;
-        }
-
-        .ms-3 {
-            margin-left: 1rem !important;
-        }
-
-        .mb-0 {
-            margin-bottom: 0 !important;
-        }
-
-        .h5, h5 {
-            font-size: .875rem;
-        }
-
-        .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
-            font-family: Inter, sans-serif;
-            font-weight: 600;
-            line-height: 1.5;
-            margin-bottom: .5rem;
-            margin-top: 0;
-        }
-
-        .text-dark-hover{
-            color: #212529;
-            text-decoration: none;
-        }
-
-        .text-dark-hover:hover {
-            color: #5A87C7;
-        }
-
-        .table-centered td, .table-centered th {
-            vertical-align: middle !important;
-        }
-
-        .btn-icon {
-            align-items: center;
-            display: inline-flex;
-            flex-shrink: 0;
-            justify-content: center;
-            padding: 0;
-            position: relative;
-        }
-
-        .btn-icon.btn-sm {
-            font-size: 0.5rem;
-            height: 2.1875rem;
-            width: 2.1875rem;
-        }
-
-        .btn-ghost {
-            color: #212529;
-            background-color: transparent;
-            border-color: transparent;
-            border: 0.5rem;
-        }
-
-        .btn-ghost:hover {
-            color: #5A87C7;
-            background-color: #f8f9fa;
-            border-color: #f8f9fa;
-        }
-
-        .btn-ghost:active {
-            color: #4B6F9D;                 
-            background-color: #f8f9fa;
-            border-color: #f8f9fa;
-        }
-
-        .btn-ghost:disabled {
-            color: #212529;
-            background-color: transparent;
-            border-color: transparent;
-        }
-
-        .dropdown-item {
-            align-items: center;
-            border-radius: .5rem;
-            display: flex;
-            font-weight: 500;
-            line-height: 28px;
-            padding: .125rem 1rem;
-            color: #696969;
-        }
-
-        .dropdown-item:hover {
-            background-color: #5A87C7;
-            color: #F3EFE3;
-        }
-
-        .dropdown-item-icon {
-            display: inline-block;
-            width: 1rem;   
-            height: 1rem;  
-            stroke-width: 2;
-        }
-
-        .navbar-nav .nav-item .nav-link:hover {
-            color: #5A87C7 !important;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+    <link rel="stylesheet" th:href="@{/css/teacher.css}"/>
+    <link rel="stylesheet" th:href="@{/css/navbar.css}"/>
+    <link rel="stylesheet" th:href="@{/css/sidebar.css}"/>
 </head>
 <body>
-    <!-- Navbar -->
     <div th:replace="fragments/navbar.html :: navbar"></div>
-
-    <!-- Profile Section -->
     <section class=" pt-4 pb-5">
         <div class="container">
             <div th:replace="fragments/profile-teacher.html :: profile-teacher"></div>
-
-            <!-- Content -->
             <div class="row mt-0 mt-md-4">
                 <div class="col-lg-3 col-md-4 col-12">
-                    <!-- Sidebar -->
                     <div th:replace="fragments/sidebar.html :: sidebar"></div>
                 </div>
 
-                <!-- Main Content Area -->
                 <div class="col-lg-9 col-md-8 col-12">
                     <div class="row">
                         <div class="col-lg-4 col-md-12 col-12">
@@ -422,8 +197,7 @@
             </div>
         </div>
     </section>
-
-    <!-- Bootstrap JS -->
+    <div th:replace="fragments/footer.html :: footer"></div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         feather.replace();

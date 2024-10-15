@@ -1,3 +1,5 @@
+
+
 .sidenav.navbar .navbar-nav .nav-item .nav-link {
     align-items: center;
     background-color: transparent;
@@ -9,9 +11,16 @@
     padding: .3rem .5rem !important;
     position: relative;
     margin-bottom: .125rem;
+    font-size: 0.875rem;
 }
 
 .sidenav.navbar .navbar-nav .nav-item .nav-link:hover {
+    background-color: #5A87C7;
+    border-radius: 0.5rem;
+    color: #F3EFE3 !important;
+}
+
+.sidenav.navbar .navbar-nav .active>.nav-link {
     background-color: #5A87C7;
     border-radius: 0.5rem;
     color: #F3EFE3 !important;

@@ -6,36 +6,32 @@
             <div class="navbar-nav flex-column" style="width: 100%;">
                 <span class="navbar-header">Dashboard</span>
                 <ul class="list-unstyled ms-n2 mb-4 col-12">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/teacher">
-                            <i class="nav-icon me-2" data-feather="home"></i> My Dashboard
+                    <li th:class="${pageUrl == '/student-dashboard' ? 'nav-item active' : 'nav-item'}">
+                        <a class="nav-link" href="/student-dashboard">
+                            <i class="nav-icon me-2" data-feather="home"></i> Dashboard
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/teacher-course">
+                        <a class="nav-link" href="/student">
                             <i class="nav-icon me-2" data-feather="book"></i> My Courses
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/teacher-review">
-                            <i class="nav-icon me-2" data-feather="star"></i> Reviews
+                    <li th:class="${pageUrl == '/student-review' ? 'nav-item active' : 'nav-item'}">
+                        <a class="nav-link" href="/student-review">
+                            <i class="nav-icon me-2" data-feather="star"></i> My Reviews
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/teacher-student">
-                            <i class="nav-icon me-2" data-feather="users"></i> Students
-                        </a>
-                    </li>
+                    
                     <li class="nav-item">
                         <a class="nav-link" href="#">
-                            <i class="nav-icon me-2" data-feather="help-circle"></i> Quiz
+                            <i class="nav-icon me-2" data-feather="help-circle"></i> Quizzes
                         </a>
                     </li>
                 </ul>
                 <span class="navbar-header">Account Setting</span>
                 <ul class="list-unstyled ms-n2 mb-4">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
+                    <li th:class="${pageUrl == '/student-profile' ? 'nav-item active' : 'nav-item'}">
+                        <a class="nav-link" href="/student-profile">
                             <i class="nav-icon me-2" data-feather="settings"></i> Profile
                         </a>
                     </li>

@@ -8,9 +8,38 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class AdminController {
 
     @GetMapping("/admin")
-    public String adminPage(Model model) {
-        model.addAttribute("title", "Admin Dashboard");
+    public String adminDashboard(Model model) {
+        model.addAttribute("pageUrl", "/admin");
         return "admin"; 
     }
 
+    @GetMapping("/admin-all-course")
+    public String adminAllCourse(Model model) {
+        model.addAttribute("pageUrl", "/admin-all-course");
+        return "admin-all-course"; 
+    }
+
+    @GetMapping("/admin-course-category")
+    public String adminCourseCategory(Model model) {
+        model.addAttribute("pageUrl", "/admin-course-category");
+        return "admin-course-category"; 
+    }
+
+    @GetMapping("/admin-course-category2")
+    public String adminCourseCategory2(Model model) {
+        model.addAttribute("pageUrl", "/admin-course-category2");
+        return "admin-course-category2"; 
+    }
+
+    @GetMapping("/admin-course-detail")
+    public String adminCourseDetail(Model model) {
+        model.addAttribute("pageUrl", "/admin-course-detail");
+        return "admin-course-detail"; 
+    }
+
+    @GetMapping("/admin-student")
+    public String adminStudent(Model model) {
+        model.addAttribute("pageUrl", "/admin-student");
+        return "admin-student"; 
+    }
 }

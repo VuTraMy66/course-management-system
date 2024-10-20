@@ -53,4 +53,8 @@ public class HomeController {
         return "course";
     }
     
+    @GetMapping("/course-detail")
+    public String courseDetail() {
+        return "course-detail";
+    }
 }

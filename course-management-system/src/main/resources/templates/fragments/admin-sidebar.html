@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body th:fragment="admin-sidebar">
+    <nav class="navbar-vertical navbar">
+        <div class="vh-100" data-simplebar>
+            <div class="navbar-brand" style="padding: 1.3rem; align-items: center;"> 
+                <a href="/" style="font-size: 2.3rem; text-decoration: none; color: #5A87C7; font-weight: 700;">
+                    <i data-feather="book-open" class="text-primary" style="width: 50px; height: 50px; font-weight: 700;"></i>
+                    CMS
+                </a>
+            </div>
+            <ul class="navbar-nav flex-column" id="sideNavbar">
+                <li th:class="${pageUrl == '/admin' ? 'nav-item active' : 'nav-item'}">
+                    <a
+                        class="nav-link"
+                        href="/admin">
+                        <i data-feather="home" class="nav-icon me-2"></i>
+                        Dashboard
+                    </a>
+                </li>
+                <li th:class="${pageUrl == '/admin-all-course' ? 'nav-item active' : 'nav-item'}">
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#navCourses" aria-expanded="false" aria-controls="navCourses">
+                        <i data-feather="book" class="nav-icon me-2"></i>
+                        Courses
+                        <span class="chevron-arrow fs-4 ms-auto">
+                            <i class="bi bi-chevron-down"></i>
+                        </span>
+                    </a>
+                    <div id="navCourses" th:class="${pageUrl == '/admin-all-course' || pageUrl == '/admin-course-category' ? 'collapse show' : 'collapse'}" data-bs-parent="#sideNavbar">
+                        <ul class="nav flex-column">
+                            <li th:class="${pageUrl == '/admin-all-course' ? 'nav-item active' : 'nav-item'}">
+                                <a class="nav-link" href="/admin-all-course">All Courses</a>
+                            </li>
+                            <li th:class="${pageUrl == '/admin-course-category' ? 'nav-item active' : 'nav-item'}">
+                                <a class="nav-link " href="/admin-course-category">Courses Category</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " href="/admin-course-category2">Courses Category2</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " href="/admin-course-detail">Category Single</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li th:class="${pageUrl == '/admin-student' ? 'nav-item active' : 'nav-item'}">
+                    <a class="nav-link" href="/admin-student">
+                        <i data-feather="user" class="nav-icon me-2"></i>
+                        Students
+                    </a>
+                </li>
+                <li th:class="${pageUrl == '/admin-review' ? 'nav-item active' : 'nav-item'}">
+                    <a class="nav-link" href="/admin-review">
+                        <i data-feather="message-circle" class="nav-icon me-2"></i>
+                        Reviews
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a
+                        class="nav-link  collapsed "
+                        href="#"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navAuthentication"
+                        aria-expanded="false"
+                        aria-controls="navAuthentication">
+                        <i data-feather="settings" class="nav-icon me-2"></i>
+                        Setting
+                        <span class="chevron-arrow fs-4 ms-auto">
+                            <i class="bi bi-chevron-down"></i>
+                        </span>
+                    </a>
+                    <div id="navAuthentication" class="collapse " data-bs-parent="#sideNavbar">
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link " href="sign-in.html">Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " href="sign-up.html">Forget Password</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " href="forget-password.html">Notifications</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " href="notification-history.html">Log Out</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a
+                        class="nav-link collapsed"
+                        href="#"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navecommerce"
+                        aria-expanded="false"
+                        aria-controls="navecommerce">
+                        <i data-feather="shopping-bag" class="nav-icon me-2"></i>
+                        Ecommerce
+                        <span class="chevron-arrow fs-4 ms-auto">
+                            <i class="bi bi-chevron-down"></i>
+                        </span>
+                    </a>
+                    <div id="navecommerce" class="collapse " data-bs-parent="#sideNavbar">
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link collapsed "
+                                    href="#"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#navproduct"
+                                    aria-expanded="false"
+                                    aria-controls="navproduct">
+                                    Product
+                                </a>
+                                <div id="navproduct" class="collapse " data-bs-parent="#navProduct">
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item">
+                                            <a class="nav-link " href="../../pages/dashboard/ecommerce/product-grid.html">Grid</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link " href="../../pages/dashboard/ecommerce/product-grid-with-sidebar.html">Grid Sidebar</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link " href="../../pages/dashboard/ecommerce/products.html">Products</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link " href="../../pages/dashboard/ecommerce/product-single.html">Product Single</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link " href="../../pages/dashboard/ecommerce/product-single-v2.html">Product Single v2</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link " href="../../pages/dashboard/ecommerce/add-product.html">Add Product</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " href="../../pages/dashboard/ecommerce/shopping-cart.html">Shopping Cart</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " href="../../pages/dashboard/ecommerce/checkout.html">Checkout</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " href="../../pages/dashboard/ecommerce/order.html">Order</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " href="../../pages/dashboard/ecommerce/order-single.html">Order Single</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " href="../../pages/dashboard/ecommerce/order-history.html">Order History</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " href="../../pages/dashboard/ecommerce/order-summary.html">Order Summary</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " href="../../pages/dashboard/ecommerce/customers.html">Customers</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " href="../../pages/dashboard/ecommerce/customer-single.html">Customer Single</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " href="../../pages/dashboard/ecommerce/add-customer.html">Add Customer</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="../../pages/help-center.html">
+                        <i data-feather="help-circle" class="nav-icon me-2"></i>
+                        Help Center
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</body>
+</html>

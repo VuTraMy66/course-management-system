@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Management System</title>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+    <link rel="stylesheet" th:href="@{/css/navbar.css}"/>
+
+    <style>
+        .course-container {
+            min-height: 100vh;
+            position: fixed;
+            width: 100%;
+        }
+
+        .course-container .content {
+            padding-right: 1.25rem;
+            left: 0;
+            margin-left: 25.25rem;
+            position: relative;
+        }
+
+        .tab-content >.active {
+            display: block;
+        }
+
+        .fade {
+            transition: opacity .15s linear;
+        }
+
+        .course-sidebar {
+            border-radius: 0;
+            min-height: 100vh;
+            position: fixed;
+            top: 3.7rem;
+            width: 23.75rem;
+            z-index: 1;
+        }
+
+        .simplebar-wrapper {
+            overflow: hidden;
+            width: inherit;
+            height: inherit;
+            max-width: inherit;
+            max-height: inherit;
+        }
+
+        .simplebar-height-auto-observer-wrapper {
+            box-sizing: inherit !important;
+            height: 100%;
+            width: 100%;
+            max-width: 1px;
+            position: relative;
+            float: left;
+            max-height: 1px;
+            overflow: hidden;
+            z-index: -1;
+            padding: 0;
+            margin: 0;
+            pointer-events: none;
+        }
+
+        .simplebar-mask {
+            direction: inherit;
+            position: absolute;
+            overflow: hidden;
+            padding: 0;
+            margin: 0;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            width: auto !important;
+            height: auto !important;
+            z-index: 0;
+        }
+
+        .simplebar-offset {
+            direction: inherit !important;
+            box-sizing: inherit !important;
+            resize: none !important;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            padding: 0;
+            margin: 0;
+        }
+
+        .simplebar-content-wrapper {
+            direction: inherit;
+            box-sizing: border-box !important;
+            position: relative;
+            display: block;
+            width: auto;
+            max-width: 100%;
+            max-height: 100%;
+            overflow: auto;
+            scrollbar-width: none;
+        }
+
+        .course-container .content .embed-responsive {
+            height: calc(95vh - 137px) !important;
+        }
+
+        .list-group-item {
+            line-height: 48.8px;
+        }
+
+        .active-show {
+            color: #5A87C7;
+        }
+    </style>
+</head>
+<body>
+    <!-- Nav Bar  -->
+    <div th:replace="fragments/navbar.html :: navbar"></div>
+
+    <!-- Container  -->
+    <section class="mt-6 course-container">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="tab-content content" id="course-tabContent">
+                        <div class="tab-pane fade show active" id="course-start" role="tabpanel" aria-labelledby="course-start-tab">
+                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                <div>
+                                    <h3 class="mb-0 text-truncate-line-2">Getting Started With Javascript</h3>
+                                </div>
+                                <div>
+                                    <div class="btn btn-primary btn-sm">Complete</div>
+                                </div>
+                            </div> 
+                            <!-- Video -->
+                            <div class="embed-responsive position-relative w-100 d-block overflow-hidden p-0" style="height: 600px">
+                                <a href="https://www.youtube.com/watch?v=2nZiB1JItbY" target="_blank">
+                                    <img 
+                                        src="https://img.youtube.com/vi/2nZiB1JItbY/0.jpg" 
+                                         alt="Getting Started With Javascript | Javascript Tutorial For Beginners" 
+                                         class="position-absolute top-0 start-0 h-100 w-100" 
+                                         style="object-fit: cover;">
+                                </a>
+                            </div>                            
+                        </div>
+                        <div class="tab-pane fade" id="course-var" role="tabpanel" aria-labelledby="course-var-tab">
+                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                <div>
+                                    <h3 class="mb-0 text-truncate-line-2">Variables & Data Types</h3>
+                                </div>
+                                <div>
+                                    <div class="btn btn-primary btn-sm">Complete</div>
+                                </div>
+                            </div> 
+                            <!-- Video -->
+                            <div class="embed-responsive position-relative w-100 d-block overflow-hidden p-0" style="height: 600px">
+                                <a href="https://www.youtube.com/watch?v=edlFjlzxkSI" target="_blank">
+                                    <img 
+                                        src="https://img.youtube.com/vi/edlFjlzxkSI/0.jpg" 
+                                        alt="Javascript Variables & Data Types | Javascript Tutorial For Beginners" 
+                                        class="position-absolute top-0 start-0 h-100 w-100" 
+                                        style="object-fit: cover;">
+                                </a>
+                            </div>                            
+                        </div>
+                        <div class="tab-pane fade" id="course-func" role="tabpanel" aria-labelledby="course-func-tab">
+                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                <div>
+                                    <h3 class="mb-0 text-truncate-line-2">Functions & Parameters</h3>
+                                </div>
+                                <div>
+                                    <div class="btn btn-primary btn-sm">Complete</div>
+                                </div>
+                            </div> 
+                            <!-- Video -->
+                            <div class="embed-responsive position-relative w-100 d-block overflow-hidden p-0" style="height: 600px">
+                                <a href="https://www.youtube.com/watch?v=2nZiB1JItbY" target="_blank">
+                                    <img 
+                                        src="https://img.youtube.com/vi/2nZiB1JItbY/0.jpg" 
+                                         alt="Getting Started With Javascript | Javascript Tutorial For Beginners" 
+                                         class="position-absolute top-0 start-0 h-100 w-100" 
+                                         style="object-fit: cover;">
+                                </a>
+                            </div>                            
+                        </div>
+                        <div class="tab-pane fade" id="course-func" role="tabpanel" aria-labelledby="course-func-tab">
+                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                <div>
+                                    <h3 class="mb-0 text-truncate-line-2">Functions & Parameters</h3>
+                                </div>
+                                <div>
+                                    <div class="btn btn-primary btn-sm">Complete</div>
+                                </div>
+                            </div> 
+                            <!-- Video -->
+                            <div class="embed-responsive position-relative w-100 d-block overflow-hidden p-0" style="height: 600px">
+                                <a href="https://www.youtube.com/watch?v=xjAu2Y2nJ34" target="_blank">
+                                    <img 
+                                        src="https://img.youtube.com/vi/xjAu2Y2nJ34/0.jpg" 
+                                         alt="Javascript Functions & Parameters | Javascript Tutorial For Beginners" 
+                                         class="position-absolute top-0 start-0 h-100 w-100" 
+                                         style="object-fit: cover;">
+                                </a>
+                            </div>                            
+                        </div>
+                        <div class="tab-pane fade" id="course-func" role="tabpanel" aria-labelledby="course-func-tab">
+                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                <div>
+                                    <h3 class="mb-0 text-truncate-line-2">Functions & Parameters</h3>
+                                </div>
+                                <div>
+                                    <div class="btn btn-primary btn-sm">Complete</div>
+                                </div>
+                            </div> 
+                            <!-- Video -->
+                            <div class="embed-responsive position-relative w-100 d-block overflow-hidden p-0" style="height: 600px">
+                                <a href="https://www.youtube.com/watch?v=2nZiB1JItbY" target="_blank">
+                                    <img 
+                                        src="https://img.youtube.com/vi/2nZiB1JItbY/0.jpg" 
+                                         alt="Getting Started With Javascript | Javascript Tutorial For Beginners" 
+                                         class="position-absolute top-0 start-0 h-100 w-100" 
+                                         style="object-fit: cover;">
+                                </a>
+                            </div>                            
+                        </div>
+                        <div class="tab-pane fade" id="course-func" role="tabpanel" aria-labelledby="course-func-tab">
+                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                <div>
+                                    <h3 class="mb-0 text-truncate-line-2">Functions & Parameters</h3>
+                                </div>
+                                <div>
+                                    <div class="btn btn-primary btn-sm">Complete</div>
+                                </div>
+                            </div> 
+                            <!-- Video -->
+                            <div class="embed-responsive position-relative w-100 d-block overflow-hidden p-0" style="height: 600px">
+                                <a href="https://www.youtube.com/watch?v=2nZiB1JItbY" target="_blank">
+                                    <img 
+                                        src="https://img.youtube.com/vi/2nZiB1JItbY/0.jpg" 
+                                         alt="Getting Started With Javascript | Javascript Tutorial For Beginners" 
+                                         class="position-absolute top-0 start-0 h-100 w-100" 
+                                         style="object-fit: cover;">
+                                </a>
+                            </div>                            
+                        </div>
+                        <div class="tab-pane fade" id="course-func" role="tabpanel" aria-labelledby="course-func-tab">
+                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                <div>
+                                    <h3 class="mb-0 text-truncate-line-2">Functions & Parameters</h3>
+                                </div>
+                                <div>
+                                    <div class="btn btn-primary btn-sm">Complete</div>
+                                </div>
+                            </div> 
+                            <!-- Video -->
+                            <div class="embed-responsive position-relative w-100 d-block overflow-hidden p-0" style="height: 600px">
+                                <a href="https://www.youtube.com/watch?v=2nZiB1JItbY" target="_blank">
+                                    <img 
+                                        src="https://img.youtube.com/vi/2nZiB1JItbY/0.jpg" 
+                                         alt="Getting Started With Javascript | Javascript Tutorial For Beginners" 
+                                         class="position-absolute top-0 start-0 h-100 w-100" 
+                                         style="object-fit: cover;">
+                                </a>
+                            </div>                            
+                        </div>
+                        <div class="tab-pane fade" id="course-func" role="tabpanel" aria-labelledby="course-func-tab">
+                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                <div>
+                                    <h3 class="mb-0 text-truncate-line-2">Functions & Parameters</h3>
+                                </div>
+                                <div>
+                                    <div class="btn btn-primary btn-sm">Complete</div>
+                                </div>
+                            </div> 
+                            <!-- Video -->
+                            <div class="embed-responsive position-relative w-100 d-block overflow-hidden p-0" style="height: 600px">
+                                <a href="https://www.youtube.com/watch?v=2nZiB1JItbY" target="_blank">
+                                    <img 
+                                        src="https://img.youtube.com/vi/2nZiB1JItbY/0.jpg" 
+                                         alt="Getting Started With Javascript | Javascript Tutorial For Beginners" 
+                                         class="position-absolute top-0 start-0 h-100 w-100" 
+                                         style="object-fit: cover;">
+                                </a>
+                            </div>                            
+                        </div>
+                        <div class="tab-pane fade" id="course-func" role="tabpanel" aria-labelledby="course-func-tab">
+                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                <div>
+                                    <h3 class="mb-0 text-truncate-line-2">Functions & Parameters</h3>
+                                </div>
+                                <div>
+                                    <div class="btn btn-primary btn-sm">Complete</div>
+                                </div>
+                            </div> 
+                            <!-- Video -->
+                            <div class="embed-responsive position-relative w-100 d-block overflow-hidden p-0" style="height: 600px">
+                                <a href="https://www.youtube.com/watch?v=2nZiB1JItbY" target="_blank">
+                                    <img 
+                                        src="https://img.youtube.com/vi/2nZiB1JItbY/0.jpg" 
+                                         alt="Getting Started With Javascript | Javascript Tutorial For Beginners" 
+                                         class="position-absolute top-0 start-0 h-100 w-100" 
+                                         style="object-fit: cover;">
+                                </a>
+                            </div>                            
+                        </div>
+                    </div>
+                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content  -->
+    <section class="card course-sidebar" id="courseAccordion">
+        <!-- List group -->
+        <ul class="list-group list-group-flush" style="height: 850px" data-simplebar="init">
+            <div class="simplebar-wrapper" style="margin: 0px;">
+                <div class="simplebar-height-auto-observer-wrapper">
+                    <div class="simplebar-height-auto-observer"></div>
+                </div>
+                <div class="simplebar-mask">
+                    <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
+                        <div class="simplebar-content-wrapper" tabindex="0" role="region" aria-label="scrollable content" style="height: 100%; overflow: hidden;">
+                            <div class="simplebar-content" style="padding: 0px;">
+                                <li class="list-group-item">
+                                    <h4 class="mb-0">Table of Content</h4>
+                                </li>
+                                <!-- List group item --> 
+                                <li class="list-group-item">
+                                    <a class="d-flex align-items-center h4 mb-0 active-show" id="course-start-tab" data-bs-toggle="pill" href="#course-start" role="tab" aria-controls="course-start" aria-selected="true">
+                                        <div class="me-auto">Getting Started With Javascript</div>
+                                        <div class="fs-3"><i class="bi bi-check-circle-fill text-success"></i></div>
+                                    </a>
+                                </li>
+                                <!-- List group item -->
+                                <li class="list-group-item">
+                                    <a class="d-flex align-items-center h4 mb-0" id="course-var-tab" data-bs-toggle="pill" href="#course-var" role="tab" aria-controls="course-var" aria-selected="false">
+                                        <div class="me-auto">Variables & Data Types</div>
+                                        <div class="fs-3"><i class="bi bi-check-circle"></i></div>
+                                    </a>
+                                </li>
+                                <!-- List group item -->
+                                <li class="list-group-item">
+                                    <a class="d-flex align-items-center h4 mb-0" id="course-func-tab" data-bs-toggle="pill" href="#course-func" role="tab" aria-controls="course-func" aria-selected="false">
+                                        <div class="me-auto">Functions & Parameters</div>
+                                        <div class="fs-3"><i class="bi bi-check-circle"></i></div>
+                                    </a>
+                                </li>
+                                <!-- List group item -->
+                                <li class="list-group-item">
+                                    <a class="d-flex align-items-center h4 mb-0" id="course-string-tab" data-bs-toggle="pill" href="#course-string" role="tab" aria-controls="course-string" aria-selected="false">
+                                        <div class="me-auto">String Concatenation</div>
+                                        <div class="fs-3"><i class="bi bi-check-circle"></i></div>
+                                    </a>
+                                </li>
+                                <!-- List group item -->
+                                <li class="list-group-item">
+                                    <a class="d-flex align-items-center h4 mb-0" id="course-if-tab" data-bs-toggle="pill" href="#course-if" role="tab" aria-controls="course-if" aria-selected="false">
+                                        <div class="me-auto">If Else Statements</div>
+                                        <div class="fs-3"><i class="bi bi-check-circle"></i></div>
+                                    </a>
+                                </li>
+                                <!-- List group item -->
+                                <li class="list-group-item">
+                                    <a class="d-flex align-items-center h4 mb-0" id="course-array-tab" data-bs-toggle="pill" href="#course-array" role="tab" aria-controls="course-array" aria-selected="false">
+                                        <div class="me-auto">Array</div>
+                                        <div class="fs-3"><i class="bi bi-check-circle"></i></div>
+                                    </a>
+                                </li>
+                                <!-- List group item -->
+                                <li class="list-group-item">
+                                    <a class="d-flex align-items-center h4 mb-0" id="course-key-tab" data-bs-toggle="pill" href="#course-key" role="tab" aria-controls="course-key" aria-selected="false">
+                                        <div class="me-auto">Objects & Keyword This</div>
+                                        <div class="fs-3"><i class="bi bi-check-circle"></i></div>
+                                    </a>
+                                </li>
+                                <!-- List group item -->
+                                <li class="list-group-item">
+                                    <a class="d-flex align-items-center h4 mb-0" id="course-loop-tab" data-bs-toggle="pill" href="#course-loop" role="tab" aria-controls="course-loop" aria-selected="false">
+                                        <div class="me-auto">For Loop And While Loop</div>
+                                        <div class="fs-3"><i class="bi bi-check-circle"></i></div>
+                                    </a>
+                                </li>
+                                <!-- List group item -->
+                                <li class="list-group-item">
+                                    <a class="d-flex align-items-center h4 mb-0" id="course-dom-tab" data-bs-toggle="pill" href="#course-dom" role="tab" aria-controls="course-dom" aria-selected="true">
+                                        <div class="me-auto">Dom Manipulation</div>
+                                        <div class="fs-3"><i class="bi bi-check-circle"></i></div>
+                                    </a>
+                                </li>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ul>
+    </section>
+
+    <script>
+        const listItems = document.querySelectorAll('.list-group-item a');
+
+        listItems.forEach(item => {
+            item.addEventListener('click', function () {
+                listItems.forEach(li => li.classList.remove('active-show'));
+                
+                this.classList.add('active-show');
+            });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        feather.replace();
+    </script>
+</body>
+</html>

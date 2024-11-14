@@ -7,3 +7,10 @@
     font-size: 1.5rem;
 }
 
+.navbar .nav-item {
+    transition: 3s ease-in-out;
+}
+
+.navbar .nav-item:hover > .nav-link {
+    text-decoration: underline;
+}

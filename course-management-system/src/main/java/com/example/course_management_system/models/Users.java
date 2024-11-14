@@ -12,7 +12,7 @@ import jakarta.persistence.Table;
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
+    @Column(name = "userId")
     private int userId;
 
     @Column(name = "username")
@@ -21,23 +21,36 @@ public class Users {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "fullname")
-    private String fullname;
+    @Column(name = "firstname")
+    private String firstname;
 
-    @Column(name = "email")
+    @Column(name = "lastname")
+    private String lastname;
+
+    @Column(name = "phone")
+    private String phone;
+
+    @Column(name = "email", unique = true)
     private String email;
 
+    @Column(name = "avatar")
+    private String avatar = "https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg";
+
     @Column(name = "role")
-    private String role;
+    private String role = "User";
 
     public Users() {}
 
-    public Users(int userId, String username, String password, String email, String role) {
+    public Users(int userId, String username, String password, String firstname, String lastname, String phone, String email, String avatar, String role) {
         this.userId = userId;
         this.username = username;
         this.password = password;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.phone = phone;
         this.email = email;
-        this.role = role;
+        this.avatar = (avatar != null) ? avatar : this.avatar;
+        this.role = (role != null) ? role : this.role;
     }
 
     public int getUserId() {
@@ -55,12 +68,37 @@ public class Users {
     public void setUsername(String username) {
         this.username = username;
     }
+
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getEmail() {
@@ -70,11 +108,19 @@ public class Users {
     public void setEmail(String email) {
         this.email = email;
     }
-    
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
     public String getRole() {
         return role;
     }
-                        
+
     public void setRole(String role) {
         this.role = role;
     }

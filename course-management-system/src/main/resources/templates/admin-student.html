@@ -335,31 +335,31 @@
                                         <table class="table mb-0 text-nowrap table-hover table-centered">
                                             <thead class="table-light">
                                                 <tr>
-                                                <th>Name</th>
-                                                <th>Username</th>
-                                                <th>Enrolled</th>
-                                                <th>Joined At</th>
-                                                <th>Certificate</th>
-                                                <th>Action</th>
+                                                    <th>Name</th>
+                                                    <th>Username</th>
+                                                    <th>Enrolled</th>
+                                                    <th>Joined At</th>
+                                                    <th>Certificate</th>
+                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
+                                                <tr th:each="user : ${users}">
                                                     <td>
                                                         <div class="d-flex align-items-center flex-row gap-2">
                                                             <div class="position-relative">
-                                                                <img src="https://geeksui.codescandy.com/geeks/assets/images/avatar/avatar-11.jpg" alt="" class="rounded-circle avatar-md" />
+                                                                <img th:src="${user.avatar}" alt="" class="rounded-circle avatar-md" />
                                                                 <a href="#" class="position-absolute mt-5 ms-n4">
                                                                     <span class="status bg-success"></span>
                                                                 </a>
                                                             </div>
-                                                            <h5 class="mb-0">Guy Hawkins</h5>
+                                                            <h5 class="mb-0" th:text="${user.firstname} + ' ' + ${user.lastname}"></h5>
                                                         </div>
                                                     </td>
-                                                    <td>@guyhawkins</td>
+                                                    <td>@<span th:text="${user.username}"></span></td>
                                                     <td>6 Courses</td>
-                                                    <td>7 July, 2020</td>
-                                                    <td>$5,274</td>
+                                                    <td th:text="${#dates.format(user.dateCreated, 'dd-MM-yyyy HH:mm:ss')}"></td>
+                                                    <!-- <td>{{ user.certificate }}</td> -->
                                                     <td>
                                                         <div class="hstack gap-4">
                                                             <a href="#" data-feather="mail" data-bs-toggle="tooltip" data-placement="top" title="Message" style="height: 15px; width: 15px;"></a>

@@ -2,6 +2,7 @@ package com.example.course_management_system.controllers;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,14 +54,22 @@ public class AdminController {
         model.addAttribute("pageUrl", "/admin-edit-course");
         return "admin-edit-course"; 
     }
+  
+    @Autowired private AdminService adminService;
 
     // Show all student created accounts
     @GetMapping("/admin-student")
     public String adminStudent(Model model) {
-        List<Users> users = AdminService.getAllStudents();
-        model.addAttribute("users", users);
-        model.addAttribute("pageUrl", "/admin-student");
-        return "admin-student"; 
+        try {
+            List<Users> users = adminService.getAllStudents();
+            model.addAttribute("users", users);
+            model.addAttribute("pageUrl", "/admin-student");
+            return "admin-student"; 
+        } catch (Exception e) {
+            e.printStackTrace();
+            model.addAttribute("errorMessage", "An error occurred while fetching users.");
+            return "error-page";
+        }
     }
 
     @GetMapping("/admin-review")

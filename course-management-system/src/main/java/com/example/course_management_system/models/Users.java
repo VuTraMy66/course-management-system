@@ -1,6 +1,7 @@
 package com.example.course_management_system.models;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,7 +16,7 @@ public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private int user_id;
+    private int userId;
 
     @Column(name = "username")
     private String username;
@@ -46,8 +47,7 @@ public class Users {
 
     public Users() {}
 
-    public Users(int user_id, String username, String password, String firstname, String lastname, String phone, String email, String avatar, String role) {
-        this.user_id = user_id;
+    public Users(String username, String password, String firstname, String lastname, String phone, String email, String avatar) {
         this.username = username;
         this.password = password;
         this.firstname = firstname;
@@ -55,16 +55,6 @@ public class Users {
         this.phone = phone;
         this.email = email;
         this.avatar = (avatar != null) ? avatar : this.avatar;
-        this.role = (role != null) ? role : this.role;
-        this.dateCreated = dateCreated != null ? dateCreated : LocalDateTime.now();
-    }
-
-    public int getUserId() {
-        return user_id;
-    }
-
-    public void setUserId(int user_id) {
-        this.user_id = user_id;
     }
 
     public String getUsername() {
@@ -123,20 +113,9 @@ public class Users {
         this.avatar = avatar;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public LocalDateTime getDateCreated() {
-        return dateCreated;
-    }
-
-    public void setDateCreated(LocalDateTime dateCreated) {
-        this.dateCreated = dateCreated;
+    public String getFormattedDateCreated() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return dateCreated.format(formatter);
     }
 
 }

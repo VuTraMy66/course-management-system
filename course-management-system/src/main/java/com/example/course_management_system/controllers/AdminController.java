@@ -61,9 +61,17 @@ public class AdminController {
     @GetMapping("/admin-student")
     public String adminStudent(Model model) {
         try {
+            // Fetch all students
             List<Users> users = adminService.getAllStudents();
+
+             // Calculate the total number of students
+            int totalStudents = users.size();
+
+            // Add users and total number of students to the model
             model.addAttribute("users", users);
+            model.addAttribute("totalStudents", totalStudents);
             model.addAttribute("pageUrl", "/admin-student");
+            
             return "admin-student"; 
         } catch (Exception e) {
             e.printStackTrace();

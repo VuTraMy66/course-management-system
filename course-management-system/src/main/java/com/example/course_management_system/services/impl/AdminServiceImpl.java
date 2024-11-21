@@ -15,15 +15,24 @@ public class AdminServiceImpl implements AdminService {
     @Autowired 
     private UsersRepository userRepository;  
 
+    public AdminServiceImpl(UsersRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+    
     @Override  
     public List<Users> getAllStudents() {  
-        return userRepository.findByRole("student");  
+        return (List<Users>) userRepository.findByRole("student");  
     }
 
     @Override
     public Optional<Users> findUserById(int id) {
         throw new UnsupportedOperationException("Unimplemented method 'findUserById'");
-    }  
+    }
+
+    // @Override
+    // public Optional<Users> findUserById(int id) {
+    //     throw new UnsupportedOperationException("Unimplemented method 'findUserById'");
+    // }  
 
     // @Override  
     // public void saveUser(User user) {  

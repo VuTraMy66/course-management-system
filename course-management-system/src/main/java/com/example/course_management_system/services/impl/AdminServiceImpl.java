@@ -25,6 +25,11 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    public void deleteStudent(int userId) {
+        userRepository.deleteById(userId);
+    }
+
+    @Override
     public Optional<Users> findUserById(int id) {
         throw new UnsupportedOperationException("Unimplemented method 'findUserById'");
     }

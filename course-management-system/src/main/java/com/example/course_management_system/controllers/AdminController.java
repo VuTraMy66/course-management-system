@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.example.course_management_system.models.Users;
 import com.example.course_management_system.services.AdminService;
@@ -70,6 +71,7 @@ public class AdminController {
             // Add users and total number of students to the model
             model.addAttribute("users", users);
             model.addAttribute("totalStudents", totalStudents);
+
             model.addAttribute("pageUrl", "/admin-student");
             
             return "admin-student"; 
@@ -79,6 +81,24 @@ public class AdminController {
             return "error-page";
         }
     }
+
+    // Delete student
+    @GetMapping("/admin-delete-student/{userId}")
+    public String adminDeleteStudent(@PathVariable("userId") int userId, Model model) {
+        try {
+            // Delete student
+            adminService.deleteStudent(userId);
+            
+            model.addAttribute("successMessage", "Student deleted successfully.");
+
+            return "redirect:/admin-student";
+        } catch (Exception e) {
+            e.printStackTrace();
+            model.addAttribute("errorMessage", "An error occurred while deleting student.");
+            return "error-page";
+        }
+    }
+            
 
     @GetMapping("/admin-review")
     public String adminReview(Model model) {

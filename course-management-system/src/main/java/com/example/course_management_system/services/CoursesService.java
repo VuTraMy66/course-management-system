@@ -2,12 +2,23 @@ package com.example.course_management_system.services;
 
 import java.util.List;
 
-import com.example.course_management_system.models.Courses;
+import org.springframework.stereotype.Service;
 
-public interface CoursesService {
+import com.example.course_management_system.models.Courses;
+import com.example.course_management_system.repositories.CoursesRepositories;
+
+@Service
+public class CoursesService {
+    public final CoursesRepositories coursesRepositories;
+
+    public CoursesService (CoursesRepositories coursesRepositories) {
+        this.coursesRepositories = coursesRepositories;
+    }
 
     // Retrieve all courses
-    List<Courses> getAllCourses();
+    public List<Courses> getAllCourses() {
+        return coursesRepositories.findAll();
+    }
 
     //  Retrieve a course by its ID
     // Courses getCourseById(int courseId);
@@ -25,4 +36,31 @@ public interface CoursesService {
     // void deleteCourse(int courseId);
 }
 
+// @Override
+    //  public Courses getCourseById(int courseId) {
+    //     throw new UnsupportedOperationException("Unimplemented method 'getCourseById'");
 
+    //  }
+        
+    // @Override
+    // public List<Courses> getCoursesByName(String name) {
+    //     return coursesRepositories.findByName(name);
+    // }
+
+    // @Override
+    // public List<Courses> getCoursesByCategory(String category) {
+    //     return coursesRepositories.findByCategory(category);
+    // }
+
+    // @Override
+    // public Courses createCourse(Courses course) {
+    //     return coursesRepositories.save(course);
+    // }
+
+    // @Override
+    // public void deleteCourse(int courseId) {
+    //     if (!coursesRepositories.existsById(courseId)) {
+    //         throw new RuntimeException("Course not found with ID: " + courseId);
+    //     }
+    //     coursesRepositories.deleteById(courseId);
+    // }

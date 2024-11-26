@@ -9,7 +9,7 @@ import com.example.course_management_system.models.Courses;
 import com.example.course_management_system.services.CoursesService;
 
 @RestController
-@RequestMapping("/api/courses")
+// @RequestMapping("/api/courses")
 public class CourseController {
 
     @Autowired

@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.example.course_management_system.models.Reviews;
 import com.example.course_management_system.models.Users;
 import com.example.course_management_system.services.AdminService;
 
@@ -104,14 +105,14 @@ public class AdminController {
     public String adminReview(Model model) {
         try {
             // Fetch all reviews
-            // List<Reviews> reviews = adminService.getAllStudentsAll();
+            List<Users> reviews = adminService.getAllStudents();
     
             // Add the list of reviews to the model
-            // model.addAttribute("reviews", reviews);
+            model.addAttribute("reviews", reviews);
     
             // Calculate the total number of reviews
-            // int totalReviews = reviews.size();
-            // model.addAttribute("totalReviews", totalReviews);
+            int totalReviews = reviews.size();
+            model.addAttribute("totalReviews", totalReviews);
         } catch (Exception e) {
             model.addAttribute("errorMessage", "An error occurred while fetching reviews.");
         }

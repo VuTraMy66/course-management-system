@@ -6,23 +6,23 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.course_management_system.models.Reviews;
 import com.example.course_management_system.models.Users;
 import com.example.course_management_system.repositories.UsersRepository;
 import com.example.course_management_system.services.AdminService;
 
 @Service
 public class AdminServiceImpl implements AdminService {
-    @Autowired 
-    private UsersRepository userRepository;  
+    @Autowired
+    private UsersRepository userRepository;
+    // private EnrollmentRepository enrollmentRepository;
 
     public AdminServiceImpl(UsersRepository userRepository) {
         this.userRepository = userRepository;
     }
-    
-    @Override  
-    public List<Users> getAllStudents() {  
-        return (List<Users>) userRepository.findByRole("student");  
+
+    @Override
+    public List<Users> getAllStudents() {
+        return (List<Users>) userRepository.findByRole("student");
     }
 
     @Override
@@ -35,11 +35,10 @@ public class AdminServiceImpl implements AdminService {
         throw new UnsupportedOperationException("Unimplemented method 'findUserById'");
     }
 
-    @Override
-    public List<Reviews> getAllStudentsAll() {
-
-        throw new UnsupportedOperationException("Unimplemented method 'getAllStudentsAll'");
-    }
+    // @Override
+    // public List<Reviews> getAllStudentsAll() {
+    //     throw new UnsupportedOperationException("Unimplemented method 'getAllStudentsAll'");
+    // }
 
     @Override
     public void deleteSession(int sessionId) {
@@ -48,26 +47,28 @@ public class AdminServiceImpl implements AdminService {
 
     // @Override
     // public Optional<Users> findUserById(int id) {
-    //     throw new UnsupportedOperationException("Unimplemented method 'findUserById'");
-    // }  
+    // throw new UnsupportedOperationException("Unimplemented method
+    // 'findUserById'");
+    // }
 
-    // @Override  
-    // public void saveUser(User user) {  
-    //     userRepository.save(user);  
-    // }  
+    // @Override
+    // public void saveUser(User user) {
+    // userRepository.save(user);
+    // }
 
-    // @Override  
-    // public void deleteUser(Long id) {  
-    //     userRepository.deleteById(id);  
-    // }  
+    // @Override
+    // public void deleteUser(Long id) {
+    // userRepository.deleteById(id);
+    // }
 
-    // @Override  
-    // public Optional<User> findUserById(Long id) {  
-    //     return userRepository.findById(id);  
-    // }  
+    // @Override
+    // public Optional<User> findUserById(Long id) {
+    // return userRepository.findById(id);
+    // }
 
     // @Override
     // public Optional<Users> findUserById(int id) {
-    //     throw new UnsupportedOperationException("Unimplemented method 'findUserById'");
+    // throw new UnsupportedOperationException("Unimplemented method
+    // 'findUserById'");
     // }
 }

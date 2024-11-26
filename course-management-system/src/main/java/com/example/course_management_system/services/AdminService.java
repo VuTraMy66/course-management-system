@@ -17,6 +17,9 @@ public interface AdminService {
 
     Optional<Users> findUserById(int id);
 
-    List<Reviews> getAllStudentsAll(); 
+    List<Reviews> getAllStudentsAll();
+
+    void deleteSession(int sessionId); 
+
 }
 

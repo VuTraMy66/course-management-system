@@ -41,6 +41,11 @@ public class AdminServiceImpl implements AdminService {
         throw new UnsupportedOperationException("Unimplemented method 'getAllStudentsAll'");
     }
 
+    @Override
+    public void deleteSession(int sessionId) {
+        throw new UnsupportedOperationException("Unimplemented method 'deleteSession'");
+    }
+
     // @Override
     // public Optional<Users> findUserById(int id) {
     //     throw new UnsupportedOperationException("Unimplemented method 'findUserById'");

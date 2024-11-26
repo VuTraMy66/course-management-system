@@ -105,7 +105,7 @@ public class AdminController {
     public String adminReview(Model model) {
         try {
             // Fetch all reviews
-            List<Users> reviews = adminService.getAllStudents();
+            List<Reviews> reviews = adminService.getAllReviews();
     
             // Add the list of reviews to the model
             model.addAttribute("reviews", reviews);

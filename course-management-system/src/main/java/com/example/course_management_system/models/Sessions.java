@@ -26,7 +26,7 @@ public class Sessions {
 
     @ManyToOne
         @JoinColumn(name = "courseId")
-        private int courseId;
+        private Courses course;
 
     @Column(name = "description")
     private String description;
@@ -38,11 +38,11 @@ public class Sessions {
     public Sessions() {}
 
     // Constructor with parameters
-    public Sessions(int sessionId, String title, String videoUrl, int courseId, String description, int duration) {
+    public Sessions(int sessionId, String title, String videoUrl, Courses course, String description, int duration) {
         this.sessionId = sessionId;
         this.title = title;
         this.videoUrl = videoUrl;
-        this.courseId = courseId;
+        this.course = course;
         this.description = description;
         this.duration = duration;
     }
@@ -72,12 +72,12 @@ public class Sessions {
         this.videoUrl = videoUrl;
     }
 
-    public int getCourseId() {
-        return courseId;
+    public Courses getCourse() {
+        return course;
     }
 
-    public void setCourseId(int courseId) {
-        this.courseId = courseId;
+    public void setCourse(Courses course) {
+        this.course = course;
     }
 
     public String getDescription() {

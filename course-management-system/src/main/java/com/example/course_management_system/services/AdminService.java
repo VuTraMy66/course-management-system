@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.example.course_management_system.models.Courses;
 import com.example.course_management_system.models.Users;
 import com.example.course_management_system.repositories.CoursesRepositories;
+import com.example.course_management_system.repositories.SessionRepository;
 import com.example.course_management_system.repositories.UsersRepository;
 
 @Service
@@ -16,6 +17,7 @@ public class AdminService {
     @Autowired
     private UsersRepository userRepository;
     private CoursesRepositories coursesRepositories;
+    private SessionRepository sessionRepository;
     // private EnrollmentRepository enrollmentRepository;
 
     public AdminService(UsersRepository userRepository) {
@@ -46,7 +48,9 @@ public class AdminService {
 
     //List<Reviews> getAllStudentsAll();
 
-    void deleteSession(int sessionId); 
+    public void deleteSession(int sessionId){
+        sessionRepository.deleteById(sessionId);
+    } 
 
     // List<Reviews> getAllStudentsAll(); 
 

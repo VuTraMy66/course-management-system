@@ -13,16 +13,17 @@ import com.example.course_management_system.services.AdminService;
 
 @Service
 public class AdminServiceImpl implements AdminService {
-    @Autowired 
-    private UsersRepository userRepository;  
+    @Autowired
+    private UsersRepository userRepository;
+    // private EnrollmentRepository enrollmentRepository;
 
     public AdminServiceImpl(UsersRepository userRepository) {
         this.userRepository = userRepository;
     }
-    
-    @Override  
-    public List<Users> getAllStudents() {  
-        return (List<Users>) userRepository.findByRole("student");  
+
+    @Override
+    public List<Users> getAllStudents() {
+        return (List<Users>) userRepository.findByRole("student");
     }
 
     @Override
@@ -41,27 +42,34 @@ public class AdminServiceImpl implements AdminService {
     }
 
     // @Override
-    // public Optional<Users> findUserById(int id) {
-    //     throw new UnsupportedOperationException("Unimplemented method 'findUserById'");
-    // }  
-
-    // @Override  
-    // public void saveUser(User user) {  
-    //     userRepository.save(user);  
-    // }  
-
-    // @Override  
-    // public void deleteUser(Long id) {  
-    //     userRepository.deleteById(id);  
-    // }  
-
-    // @Override  
-    // public Optional<User> findUserById(Long id) {  
-    //     return userRepository.findById(id);  
-    // }  
+    // public List<Reviews> getAllStudentsAll() {
+    //     throw new UnsupportedOperationException("Unimplemented method 'getAllStudentsAll'");
+    // }
 
     // @Override
     // public Optional<Users> findUserById(int id) {
-    //     throw new UnsupportedOperationException("Unimplemented method 'findUserById'");
+    // throw new UnsupportedOperationException("Unimplemented method
+    // 'findUserById'");
+    // }
+
+    // @Override
+    // public void saveUser(User user) {
+    // userRepository.save(user);
+    // }
+
+    // @Override
+    // public void deleteUser(Long id) {
+    // userRepository.deleteById(id);
+    // }
+
+    // @Override
+    // public Optional<User> findUserById(Long id) {
+    // return userRepository.findById(id);
+    // }
+
+    // @Override
+    // public Optional<Users> findUserById(int id) {
+    // throw new UnsupportedOperationException("Unimplemented method
+    // 'findUserById'");
     // }
 }

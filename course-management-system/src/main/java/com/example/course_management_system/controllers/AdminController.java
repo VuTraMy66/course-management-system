@@ -121,7 +121,21 @@ public String adminAllCourse(Model model) {
 
     @GetMapping("/admin-review")
     public String adminReview(Model model) {
+        try {
+            // Fetch all reviews
+            // List<Reviews> reviews = adminService.getAllStudentsAll();
+    
+            // Add the list of reviews to the model
+            // model.addAttribute("reviews", reviews);
+    
+            // Calculate the total number of reviews
+            // int totalReviews = reviews.size();
+            // model.addAttribute("totalReviews", totalReviews);
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "An error occurred while fetching reviews.");
+        }
+    
         model.addAttribute("pageUrl", "/admin-review");
-        return "admin-review"; 
+        return "admin-review";
     }
 }

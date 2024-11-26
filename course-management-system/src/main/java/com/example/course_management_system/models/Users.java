@@ -2,7 +2,6 @@ package com.example.course_management_system.models;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -46,7 +45,7 @@ public class Users {
     @Column(name = "dateCreated")
     private LocalDateTime dateCreated;
 
-    private List<Enrollments> enrollments;
+    // private List<Enrollments> enrollments;
 
     public Users() {}
 

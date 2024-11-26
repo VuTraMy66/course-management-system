@@ -6,10 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.course_management_system.models.Enrollments;
-import com.example.course_management_system.models.Reviews;
 import com.example.course_management_system.models.Users;
-import com.example.course_management_system.repositories.EnrollmentRepository;
 import com.example.course_management_system.repositories.UsersRepository;
 import com.example.course_management_system.services.AdminService;
 
@@ -17,7 +14,7 @@ import com.example.course_management_system.services.AdminService;
 public class AdminServiceImpl implements AdminService {
     @Autowired
     private UsersRepository userRepository;
-    private EnrollmentRepository enrollmentRepository;
+    // private EnrollmentRepository enrollmentRepository;
 
     public AdminServiceImpl(UsersRepository userRepository) {
         this.userRepository = userRepository;
@@ -38,11 +35,10 @@ public class AdminServiceImpl implements AdminService {
         throw new UnsupportedOperationException("Unimplemented method 'findUserById'");
     }
 
-    @Override
-    public List<Reviews> getAllStudentsAll() {
-
-        throw new UnsupportedOperationException("Unimplemented method 'getAllStudentsAll'");
-    }
+    // @Override
+    // public List<Reviews> getAllStudentsAll() {
+    //     throw new UnsupportedOperationException("Unimplemented method 'getAllStudentsAll'");
+    // }
 
     // @Override
     // public Optional<Users> findUserById(int id) {

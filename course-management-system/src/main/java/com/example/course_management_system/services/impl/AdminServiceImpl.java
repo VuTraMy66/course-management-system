@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.course_management_system.models.Enrollments;
+import com.example.course_management_system.models.Reviews;
 import com.example.course_management_system.models.Users;
 import com.example.course_management_system.repositories.EnrollmentRepository;
 import com.example.course_management_system.repositories.UsersRepository;
@@ -14,17 +15,17 @@ import com.example.course_management_system.services.AdminService;
 
 @Service
 public class AdminServiceImpl implements AdminService {
-    @Autowired 
+    @Autowired
     private UsersRepository userRepository;
     private EnrollmentRepository enrollmentRepository;
 
     public AdminServiceImpl(UsersRepository userRepository) {
         this.userRepository = userRepository;
     }
-    
-    @Override  
-    public List<Users> getAllStudents() {  
-        return (List<Users>) userRepository.findByRole("student");  
+
+    @Override
+    public List<Users> getAllStudents() {
+        return (List<Users>) userRepository.findByRole("student");
     }
 
     @Override
@@ -36,4 +37,37 @@ public class AdminServiceImpl implements AdminService {
     public Optional<Users> findUserById(int id) {
         throw new UnsupportedOperationException("Unimplemented method 'findUserById'");
     }
+
+    @Override
+    public List<Reviews> getAllStudentsAll() {
+
+        throw new UnsupportedOperationException("Unimplemented method 'getAllStudentsAll'");
+    }
+
+    // @Override
+    // public Optional<Users> findUserById(int id) {
+    // throw new UnsupportedOperationException("Unimplemented method
+    // 'findUserById'");
+    // }
+
+    // @Override
+    // public void saveUser(User user) {
+    // userRepository.save(user);
+    // }
+
+    // @Override
+    // public void deleteUser(Long id) {
+    // userRepository.deleteById(id);
+    // }
+
+    // @Override
+    // public Optional<User> findUserById(Long id) {
+    // return userRepository.findById(id);
+    // }
+
+    // @Override
+    // public Optional<Users> findUserById(int id) {
+    // throw new UnsupportedOperationException("Unimplemented method
+    // 'findUserById'");
+    // }
 }

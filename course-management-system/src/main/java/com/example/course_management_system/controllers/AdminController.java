@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.example.course_management_system.models.Courses;
 import com.example.course_management_system.models.Users;
 import com.example.course_management_system.services.AdminService;
 
@@ -20,11 +21,29 @@ public class AdminController {
         return "admin"; 
     }
 
-    @GetMapping("/admin-all-course")
-    public String adminAllCourse(Model model) {
+    // Show all courses
+@GetMapping("/admin-all-course")
+public String adminAllCourse(Model model) {
+    try {
+        // Fetch all courses
+        List<Courses> courses = adminService.getAllCourses();
+
+        // Calculate the total number of courses
+        int totalCourses = courses.size();
+
+        // Add courses and total number of courses to the model
+        model.addAttribute("courses", courses);
+        model.addAttribute("totalCourses", totalCourses);
+
         model.addAttribute("pageUrl", "/admin-all-course");
+
         return "admin-all-course"; 
+    } catch (Exception e) {
+        e.printStackTrace();
+        model.addAttribute("errorMessage", "An error occurred while fetching courses.");
+        return "error-page";
     }
+}
 
     @GetMapping("/admin-course-category")
     public String adminCourseCategory(Model model) {

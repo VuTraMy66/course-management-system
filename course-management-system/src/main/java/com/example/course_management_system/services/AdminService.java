@@ -20,10 +20,11 @@ public interface AdminService {
 
     Optional<Users> findUserById(int id);
 
-<<<<<<< HEAD
     List<Courses> getAllCourses(); 
-=======
+
     // List<Reviews> getAllStudentsAll(); 
->>>>>>> 435172488850d45cf74358ebb87e287118a98c6f
+
+    // List<Reviews> getAllStudentsAll(); 
+
 }
 

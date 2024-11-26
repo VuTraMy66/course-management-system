@@ -2,6 +2,7 @@ package com.example.course_management_system.models;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -49,7 +50,7 @@ public class Users {
 
     public Users() {}
 
-    public Users(int userId, String username, String password, String firstname, String lastname, String phone, String email, String avatar) {
+    public Users(int userId, String username, String password, String firstname, String lastname, String phone, String email, String avatar, String role) {
         this.userId = userId;
         this.username = username;
         this.password = password;
@@ -58,6 +59,7 @@ public class Users {
         this.phone = phone;
         this.email = email;
         this.avatar = (avatar != null) ? avatar : this.avatar;
+        this.role = role;
     }
 
     public int getUserId() {
@@ -123,6 +125,10 @@ public class Users {
     public String getFormattedDateCreated() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return dateCreated.format(formatter);
+    }
+
+    public String getRole() {
+        return role;
     }
 
 }

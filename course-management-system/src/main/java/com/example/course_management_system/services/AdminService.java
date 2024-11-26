@@ -6,13 +6,16 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.course_management_system.models.Courses;
 import com.example.course_management_system.models.Users;
+import com.example.course_management_system.repositories.CoursesRepositories;
 import com.example.course_management_system.repositories.UsersRepository;
 
 @Service
 public class AdminService {
     @Autowired
     private UsersRepository userRepository;
+    private CoursesRepositories coursesRepositories;
     // private EnrollmentRepository enrollmentRepository;
 
     public AdminService(UsersRepository userRepository) {
@@ -36,7 +39,13 @@ public class AdminService {
     }
 
     // Course
+    public List<Courses> getAllCourses() {
+        return coursesRepositories.findAll();
+    }
 
     // List<Reviews> getAllStudentsAll(); 
+
+    // List<Reviews> getAllStudentsAll(); 
+
 }
 

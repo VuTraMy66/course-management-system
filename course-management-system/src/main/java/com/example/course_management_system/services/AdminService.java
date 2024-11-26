@@ -43,6 +43,11 @@ public class AdminService {
         return coursesRepositories.findAll();
     }
 
+
+    //List<Reviews> getAllStudentsAll();
+
+    void deleteSession(int sessionId); 
+
     // List<Reviews> getAllStudentsAll(); 
 
     // List<Reviews> getAllStudentsAll(); 

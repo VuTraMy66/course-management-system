@@ -26,6 +26,11 @@ public class CoursesService {
         return coursesRepositories.findById(courseId);  
     }
 
+    //Retrive all course of single category
+    public List<Courses> getCoursesByCategory(String category){
+        return coursesRepositories.findByCategory(category);
+    }
+
     //delete course
     public void deleteCourse(int courseId) {
         if (!coursesRepositories.existsById(courseId)) {

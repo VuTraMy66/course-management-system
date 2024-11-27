@@ -10,6 +10,9 @@ import java.util.Optional;
 
 import com.example.course_management_system.models.Courses;
 import com.example.course_management_system.services.CoursesService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 // @RequestMapping("/api/courses")
@@ -18,16 +21,22 @@ public class CourseController {
     @Autowired
     private CoursesService coursesService;
 
-    @GetMapping
+    @GetMapping()
     public List<Courses> getAllCourses() {
         return coursesService.getAllCourses();
     }
 
 
-    @GetMapping
+    @GetMapping("/course/Id/{courseId}")
     public Optional<Courses> getCourseById(@PathVariable int courseId) {
         return coursesService.getCourseById(courseId);
     }
+
+    @GetMapping("/course/category/{category}")
+    public List<Courses> getCourseByCategory(@PathVariable String category) {
+        return coursesService.getCoursesByCategory(category);
+    }
+    
 
     // @DeleteMapping("/delete-course/{courseId}")
     // public ResponseEntity<String> deleteCourse(@PathVariable int courseId) {

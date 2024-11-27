@@ -52,7 +52,7 @@ public class AdminController {
     @Autowired
     private CoursesService coursesService;
 
-    @GetMapping("/admin/course/{courseId}")
+    @GetMapping("/admin/single-course/{courseId}")
     public String AdminSingleCourse(@PathVariable int courseId, Model model) {
         try {
             // Fetch course by id using Optional
@@ -93,11 +93,24 @@ public class AdminController {
     }
 
 
-    @GetMapping("/admin/course-category")
-    public String adminCourseCategory(Model model) {
-        model.addAttribute("pageUrl", "/admin-course-category");
-        return "admin-course-category"; 
+    @GetMapping("/admin/courses/{category}")
+    public String adminCoursesByCategory(@PathVariable("category") String category, Model model) {
+        try {
+            // Fetch all courses for the given category
+            List<Courses> courses = coursesService.getCoursesByCategory(category);
+            model.addAttribute("courses", courses);  // Add courses to model
+            model.addAttribute("category", category);  // Add category to model for display
+            model.addAttribute("pageUrl", "/admin-course-category");
+
+            // Return the view name to display courses
+            return "admin-course-category";  // This will render admin-course-category.html in templates
+        } catch (Exception e) {
+            e.printStackTrace();
+            model.addAttribute("errorMessage", "An error occurred while loading courses.");
+            return "error-page";  // Render an error page if something goes wrong
+        }
     }
+    
 
     @GetMapping("/admin/course-category2")
     public String adminCourseCategory2(Model model) {

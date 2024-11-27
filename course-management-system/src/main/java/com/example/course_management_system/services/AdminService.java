@@ -57,6 +57,12 @@ public class AdminService {
     }
 
 
+    //view all course of single category
+    public List<Courses> getCourseByCategory(String category ){
+        return  coursesRepositories.findByCategory(category);
+    }
+
+
     //delete course
     public void deleteCourse(int courseId) {
         if (!coursesRepositories.existsById(courseId)) {

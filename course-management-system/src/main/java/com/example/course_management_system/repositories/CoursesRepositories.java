@@ -25,4 +25,5 @@ public interface CoursesRepositories extends JpaRepository<Courses, Integer> {
     Optional<Courses> findById(int courseId);
 
     void deleteById(int courseId);
+
 }

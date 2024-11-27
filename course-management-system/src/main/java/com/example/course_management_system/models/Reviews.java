@@ -1,6 +1,7 @@
 package com.example.course_management_system.models;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,7 +18,7 @@ import jakarta.persistence.Table;
 public class Reviews {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "reviewId")
+    @Column(name = "review_id")
     private int reviewId;
 
     @Column(name = "comment")
@@ -26,26 +27,26 @@ public class Reviews {
     @Column(name = "rating")
     private int rating;
 
-    @Column(name = "reviewDate")
-    private LocalDateTime reviewDate = LocalDateTime.now();
+    @Column(name = "review_date")
+    private LocalDateTime reviewDate;
 
     @ManyToOne
-        @JoinColumn(name = "userId")
-        private int userId;
+        @JoinColumn(name = "user_id")
+        private Users user;
 
     @ManyToOne
-        @JoinColumn(name = "courseId")
-        private int courseId;
+        @JoinColumn(name = "course_id")
+        private Courses course;
 
     public Reviews() {}
 
-    public Reviews(int reviewId, String comment, int rating, LocalDateTime reviewDate, int userId, int courseId){
+    public Reviews(int reviewId, String comment, int rating, LocalDateTime reviewDate, Users user, Courses course){
         this.reviewId = reviewId;
         this.comment = comment;
         this.rating = rating;
         this.reviewDate = reviewDate;
-        this.userId = userId;
-        this.courseId = courseId;
+        this.user = user;
+        this.course = course;
     }
 
     public int getReviewID(){
@@ -72,25 +73,23 @@ public class Reviews {
         this.rating = rating;
     }
 
-    public LocalDateTime getReviewDate(){
-        return reviewDate;
-    }
-    public void setReviewDate(LocalDateTime reviewDate){
-        this.reviewDate = reviewDate;
+    public String getFormattedReviewDate(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+        return reviewDate.format(formatter);
     }
 
-    public int getUserId(){
-        return userId;
+    public Users getUser(){
+        return user;
     }
-    public void setUserId(int userId){
-        this.userId = userId;
+    public void setUser(Users user){
+        this.user = user;
     }
 
-    public int getCourseId(){
-        return courseId;
+    public Courses getCourse(){
+        return course;
     }
-    public void setCourseId(int courseId){
-        this.courseId = courseId;
+    public void setCourse(Courses course){
+        this.course = course;
     }
 
 }

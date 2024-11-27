@@ -26,9 +26,10 @@ public class AdminController {
     private CourseService courseService;
     private ReviewService reviewService;
 
-    public AdminController(AdminService adminService, CourseService courseService) {
+    public AdminController(AdminService adminService, CourseService courseService, ReviewService reviewService) {
         this.adminService = adminService;
         this.courseService = courseService;
+        this.reviewService = reviewService;
     }
 
     @RequestMapping("/admin")
@@ -132,7 +133,7 @@ public class AdminController {
     }
 
     // Delete student
-    @GetMapping("/admin-delete-student/{userId}")
+    @GetMapping("/admin/delete-student/{userId}")
     public String adminDeleteStudent(@PathVariable("userId") int userId, Model model) {
         try {
             // Delete student
@@ -140,7 +141,7 @@ public class AdminController {
             
             model.addAttribute("successMessage", "Student deleted successfully.");
 
-            return "redirect:/admin-student";
+            return "redirect:/admin/student";
         } catch (Exception e) {
             e.printStackTrace();
             model.addAttribute("errorMessage", "An error occurred while deleting student.");
@@ -151,25 +152,21 @@ public class AdminController {
 
     @GetMapping("/admin/review")
     public String adminReview(Model model) {
+    try {
         List<Reviews> reviews = reviewService.getAllReviews();
         model.addAttribute("reviews", reviews);
-        // try {
-        //     // Fetch all reviews
-        //     List<Reviews> reviews = reviewService.getAllReviews();
-    
-        //     // Add the list of reviews to the model
-        //     model.addAttribute("reviews", reviews);
-    
-        //     // Calculate the total number of reviews
-        //     int totalReviews = reviews.size();
-        //     model.addAttribute("totalReviews", totalReviews);
-        // } catch (Exception e) {
-        //     model.addAttribute("errorMessage", "An error occurred while fetching reviews.");
-        // }
-    
         model.addAttribute("pageUrl", "/admin/review");
         return "admin-review";
+    } catch (Exception e) {
+        // Log the exception (you can use a logger here)
+        System.err.println("Error retrieving reviews: " + e.getMessage());
+        
+        // Add error message to model to inform user (optional)
+        model.addAttribute("errorMessage", "Failed to load reviews. Please try again later.");
+        
+        return "error"; // Return an error page or redirect to an error view
     }
+}
 
     // delete sessions funct
     @GetMapping("/admin-delete-sessions/{sessionId}")

@@ -13,6 +13,7 @@ import com.example.course_management_system.repositories.UsersRepository;
 
 @Service
 public class AdminService {
+    
     @Autowired
     private UsersRepository userRepository;
     private SessionRepository sessionRepository;

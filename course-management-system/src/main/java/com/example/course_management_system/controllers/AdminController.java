@@ -19,7 +19,12 @@ public class AdminController {
 
     @Autowired 
     private AdminService adminService;
-    private CourseService coursesService;
+    private CourseService courseService;
+
+    public AdminController(AdminService adminService, CourseService courseService) {
+        this.adminService = adminService;
+        this.courseService = courseService;
+    }
 
     @RequestMapping("/admin")
     public String showAdminDashboard(Model model) {
@@ -30,25 +35,28 @@ public class AdminController {
     // Show all courses
     @GetMapping("/admin/all-course")
     public String adminAllCourse(Model model) {
-        try {
-            // Fetch all courses
-            List<Courses> courses = coursesService.getAllCourses();
+        List<Courses> coursesInAd = courseService.getAllCourses();
+        model.addAttribute("coursesInAd", coursesInAd);
+        return "admin-all-course";
+        // try {
+        //     // Fetch all courses
+        //     List<Courses> courses = courseService.getAllCourses();
 
-            // Calculate the total number of courses
-            int totalCourses = courses.size();
+        //     // Calculate the total number of courses
+        //     int totalCourses = courses.size();
 
-            // Add courses and total number of courses to the model
-            model.addAttribute("courses", courses);
-            model.addAttribute("totalCourses", totalCourses);
+        //     // Add courses and total number of courses to the model
+        //     model.addAttribute("courses", courses);
+        //     model.addAttribute("totalCourses", totalCourses);
 
-            model.addAttribute("pageUrl", "/admin/all-course");
+        //     model.addAttribute("pageUrl", "/admin/all-course");
 
-            return "admin-all-course"; 
-        } catch (Exception e) {
-            e.printStackTrace();
-            model.addAttribute("errorMessage", "An error occurred while fetching courses.");
-            return "error-page";
-        }
+        //     return "admin-all-course"; 
+        // } catch (Exception e) {
+        //     e.printStackTrace();
+        //     model.addAttribute("errorMessage", "An error occurred while fetching courses.");
+        //     return "error-page";
+        // }
     }
 
     @GetMapping("/admin/course-category")

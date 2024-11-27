@@ -2,6 +2,7 @@ package com.example.course_management_system.services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.course_management_system.models.Courses;
@@ -9,15 +10,17 @@ import com.example.course_management_system.repositories.CourseRepository;
 
 @Service
 public class CourseService {
-    public final CourseRepository coursesRepositories;
-
-    public CourseService (CourseRepository coursesRepositories) {
-        this.coursesRepositories = coursesRepositories;
+    
+    @Autowired
+    private CourseRepository courseRepository;
+    
+        public CourseService (CourseRepository courseRepository) {
+            this.courseRepository = courseRepository;
     }
 
     // Retrieve all courses
     public List<Courses> getAllCourses() {
-        return coursesRepositories.findAll();
+        return courseRepository.findAll();
     }
 
     //  Retrieve a course by its ID

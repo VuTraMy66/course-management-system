@@ -14,7 +14,11 @@ import com.example.course_management_system.services.CourseService;
 public class CourseController {
 
     @Autowired
-    private CourseService courseService;
+    private final CourseService courseService;
+
+    public CourseController(CourseService courseService) {
+        this.courseService = courseService;
+    }
 
     @GetMapping("/course")
     public String showAllCourses(Model model) {

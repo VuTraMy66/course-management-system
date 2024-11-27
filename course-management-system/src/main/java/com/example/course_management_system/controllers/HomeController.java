@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 @Controller
 public class HomeController {
 
-    @GetMapping("/home")
+    @GetMapping({"/home", "/"})
     public String viewHomePage() {
         return "index";
     }
@@ -47,14 +47,5 @@ public class HomeController {
         model.addAttribute("pageUrl", request.getRequestURI());
         return "/student-review";
     }
-
-    @GetMapping("/course")
-    public String courseList() {
-        return "course";
-    }
     
-    @GetMapping("/course-detail")
-    public String courseDetail() {
-        return "course-detail";
-    }
 }

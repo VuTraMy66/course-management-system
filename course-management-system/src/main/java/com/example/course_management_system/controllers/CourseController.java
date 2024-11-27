@@ -1,23 +1,30 @@
 package com.example.course_management_system.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
-import com.example.course_management_system.models.Courses;
-import com.example.course_management_system.services.CoursesService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 
-@RestController
-// @RequestMapping("/api/courses")
+import com.example.course_management_system.models.Courses;
+import com.example.course_management_system.services.CourseService;
+
+@Controller
 public class CourseController {
 
     @Autowired
-    private CoursesService coursesService;
+    private CourseService courseService;
 
-    @GetMapping
-    public List<Courses> getAllCourses() {
-        return coursesService.getAllCourses();
+    @GetMapping("/course")
+    public String showAllCourses(Model model) {
+        List<Courses> courses = courseService.getAllCourses();
+        model.addAttribute("courses", courses);
+        return "course";
+    }
+
+    @GetMapping("/course/detail")
+    public String courseDetail() {
+        return "course-detail";
     }
 }
-

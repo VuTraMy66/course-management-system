@@ -12,9 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.course_management_system.models.Courses;
 import com.example.course_management_system.models.Users;
 import com.example.course_management_system.services.AdminService;
+import com.example.course_management_system.services.CourseService;
 
 @Controller
 public class AdminController {
+
+    @Autowired 
+    private AdminService adminService;
+    private CourseService coursesService;
 
     @RequestMapping("/admin")
     public String showAdminDashboard(Model model) {
@@ -27,7 +32,7 @@ public class AdminController {
     public String adminAllCourse(Model model) {
         try {
             // Fetch all courses
-            List<Courses> courses = adminService.getAllCourses();
+            List<Courses> courses = coursesService.getAllCourses();
 
             // Calculate the total number of courses
             int totalCourses = courses.size();
@@ -76,10 +81,10 @@ public class AdminController {
         return "admin-edit-course"; 
     }
   
-    @Autowired private AdminService adminService;
+
 
     // Show all student created accounts
-    @GetMapping("/admin-student")
+    @GetMapping("/admin/student")
     public String adminStudent(Model model) {
         try {
             // Fetch all students
@@ -92,7 +97,7 @@ public class AdminController {
             model.addAttribute("users", users);
             model.addAttribute("totalStudents", totalStudents);
 
-            model.addAttribute("pageUrl", "/admin-student");
+            model.addAttribute("pageUrl", "/admin/student");
             
             return "admin-student"; 
         } catch (Exception e) {

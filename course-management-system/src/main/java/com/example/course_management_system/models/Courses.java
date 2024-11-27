@@ -1,6 +1,8 @@
 package com.example.course_management_system.models;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,7 +16,7 @@ public class Courses {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "courseId")
+    @Column(name = "course_id")
     private int courseId;
 
     @Column(name = "name")
@@ -26,10 +28,10 @@ public class Courses {
     @Column(name = "category")
     private String category;
 
-    @Column(name = "createdAt")
-    private LocalDateTime createdAt = LocalDateTime.now();
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
 
-    @Column(name = "skillLevel")
+    @Column(name = "skill_level")
     private String skillLevel;
 
     @Column(name = "status")
@@ -39,11 +41,11 @@ public class Courses {
     private int duration;
 
     @Column(name = "image")
-    private byte[] image;
+    private String image;
 
     public Courses() {}
 
-    public Courses(String name, String description, String category, String skillLevel, String status, int duration, byte[] image) {
+    public Courses(String name, String description, String category, String skillLevel, String status, int duration, String image) {
         this.name = name;
         this.description = description;
         this.category = category;
@@ -51,6 +53,7 @@ public class Courses {
         this.status = status;
         this.duration = duration;
         this.image = image;
+        this.createdAt = LocalDateTime.now();
     }
 
     // Getters and setters
@@ -90,8 +93,9 @@ public class Courses {
         this.category = category;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
+    public String getFormattedCreatedAt() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return createdAt.format(formatter);
     }
 
     public String getSkillLevel() {
@@ -122,6 +126,12 @@ public class Courses {
         return duration;
     }
 
+    public String getFormattedDuration() {
+        int hours = duration / 60;
+        int minutes = duration % 60;
+        return String.format("%02d:%02d", hours, minutes);
+    }
+
     public void setDuration(int duration) {
         if (duration <= 0) {
             throw new IllegalArgumentException("Duration must be greater than 0");
@@ -129,11 +139,11 @@ public class Courses {
         this.duration = duration;
     }
 
-    public byte[] getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(byte[] image) {
+    public void setImage(String image) {
         this.image = image;
     }
 }

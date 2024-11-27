@@ -5,13 +5,13 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.example.course_management_system.models.Courses;
-import com.example.course_management_system.repositories.CoursesRepositories;
+import com.example.course_management_system.repositories.CourseRepository;
 
 @Service
-public class CoursesService {
-    public final CoursesRepositories coursesRepositories;
+public class CourseService {
+    public final CourseRepository coursesRepositories;
 
-    public CoursesService (CoursesRepositories coursesRepositories) {
+    public CourseService (CourseRepository coursesRepositories) {
         this.coursesRepositories = coursesRepositories;
     }
 

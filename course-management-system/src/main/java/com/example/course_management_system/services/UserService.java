@@ -17,12 +17,12 @@ public class UserService {
         return userRepository.findByUsername(username);  
     }
 
-    public Users handleUserLogin(String username, String password) {
-        Users user = userRepository.findByUsername(username);
+    // public Users handleUserLogin(String username, String password) {
+    //     Users user = userRepository.findByUsername(username);
         
-        if (user != null && user.getPassword().equals(password)) {
-            return user;
-        }
-        return null;
-    }
+    //     if (user != null && user.getPassword().equals(password)) {
+    //         return user;
+    //     }
+    //     return null;
+    // }
 }

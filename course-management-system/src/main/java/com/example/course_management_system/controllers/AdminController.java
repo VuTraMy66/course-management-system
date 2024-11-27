@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.course_management_system.models.Courses;
+import com.example.course_management_system.models.Reviews;
 import com.example.course_management_system.models.Users;
 import com.example.course_management_system.services.AdminService;
 import com.example.course_management_system.services.CourseService;
+import com.example.course_management_system.services.ReviewService;
 
 @Controller
 public class AdminController {
@@ -22,6 +24,7 @@ public class AdminController {
     @Autowired 
     private AdminService adminService;
     private CourseService courseService;
+    private ReviewService reviewService;
 
     public AdminController(AdminService adminService, CourseService courseService) {
         this.adminService = adminService;
@@ -40,25 +43,6 @@ public class AdminController {
         List<Courses> coursesInAd = courseService.getAllCourses();
         model.addAttribute("coursesInAd", coursesInAd);
         return "admin-all-course";
-        // try {
-        //     // Fetch all courses
-        //     List<Courses> courses = courseService.getAllCourses();
-
-        //     // Calculate the total number of courses
-        //     int totalCourses = courses.size();
-
-        //     // Add courses and total number of courses to the model
-        //     model.addAttribute("courses", courses);
-        //     model.addAttribute("totalCourses", totalCourses);
-
-        //     model.addAttribute("pageUrl", "/admin/all-course");
-
-        //     return "admin-all-course"; 
-        // } catch (Exception e) {
-        //     e.printStackTrace();
-        //     model.addAttribute("errorMessage", "An error occurred while fetching courses.");
-        //     return "error-page";
-        // }
     }
 
     @GetMapping("/admin/course-category")
@@ -108,7 +92,6 @@ public class AdminController {
             model.addAttribute("error", "Course not found");
         }
 
-        // model.addAttribute("pageUrl", "/admin/course?course_id=" + courseId);
         return "admin-course-detail"; 
     }
 
@@ -124,8 +107,6 @@ public class AdminController {
         return "admin-edit-course"; 
     }
   
-
-
     // Show all student created accounts
     @GetMapping("/admin/student")
     public String adminStudent(Model model) {
@@ -168,23 +149,25 @@ public class AdminController {
     }
             
 
-    @GetMapping("/admin-review")
+    @GetMapping("/admin/review")
     public String adminReview(Model model) {
-        try {
-            // Fetch all reviews
-            // List<Reviews> reviews = adminService.getAllStudentsAll();
+        List<Reviews> reviews = reviewService.getAllReviews();
+        model.addAttribute("reviews", reviews);
+        // try {
+        //     // Fetch all reviews
+        //     List<Reviews> reviews = reviewService.getAllReviews();
     
-            // Add the list of reviews to the model
-            // model.addAttribute("reviews", reviews);
+        //     // Add the list of reviews to the model
+        //     model.addAttribute("reviews", reviews);
     
-            // Calculate the total number of reviews
-            // int totalReviews = reviews.size();
-            // model.addAttribute("totalReviews", totalReviews);
-        } catch (Exception e) {
-            model.addAttribute("errorMessage", "An error occurred while fetching reviews.");
-        }
+        //     // Calculate the total number of reviews
+        //     int totalReviews = reviews.size();
+        //     model.addAttribute("totalReviews", totalReviews);
+        // } catch (Exception e) {
+        //     model.addAttribute("errorMessage", "An error occurred while fetching reviews.");
+        // }
     
-        model.addAttribute("pageUrl", "/admin-review");
+        model.addAttribute("pageUrl", "/admin/review");
         return "admin-review";
     }
 

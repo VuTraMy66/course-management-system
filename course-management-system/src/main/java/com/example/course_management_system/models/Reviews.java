@@ -1,92 +1,96 @@
-// package com.example.course_management_system.models;
+package com.example.course_management_system.models;
 
-// import java.time.LocalDateTime;
+import java.time.LocalDateTime;
 
-// import jakarta.persistence.Column;
-// import jakarta.persistence.Entity;
-// import jakarta.persistence.Id;
-// import jakarta.persistence.JoinColumn;
-// import jakarta.persistence.ManyToOne;
-// import jakarta.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
-// @Entity
-// @Table(name = "Reviews")
+@Entity
+@Table(name = "Reviews")
 
-// public class Reviews {
-//     @Id
+public class Reviews {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "reviewId")
+    private int reviewId;
 
-//     @Column(name = "review_id")
-//     private int reviewID;
+    @Column(name = "comment")
+    private String comment;
 
-//     @Column(name = "comment")
-//     private String comment;
+    @Column(name = "rating")
+    private int rating;
 
-//     @Column(name = "rating")
-//     private int rating;
+    @Column(name = "reviewDate")
+    private LocalDateTime reviewDate = LocalDateTime.now();
 
-//     @Column(name = "review-date")
-//     private LocalDateTime reviewDate;
+    @ManyToOne
+        @JoinColumn(name = "userId")
+        private int userId;
 
-//     @ManyToOne
-//         @JoinColumn(name = "user_id")
-//         private int userID;
+    @ManyToOne
+        @JoinColumn(name = "courseId")
+        private int courseId;
 
-//     @ManyToOne
-//         @JoinColumn(name = "course_id")
-//         private int courseID;
+    public Reviews() {}
 
-//     public Reviews() {}
+    public Reviews(int reviewId, String comment, int rating, LocalDateTime reviewDate, int userId, int courseId){
+        this.reviewId = reviewId;
+        this.comment = comment;
+        this.rating = rating;
+        this.reviewDate = reviewDate;
+        this.userId = userId;
+        this.courseId = courseId;
+    }
 
-//     public Reviews(int reviewID, String comment, int rating, LocalDateTime reviewDate, int userID, int courseID){
-//         this.reviewID = reviewID;
-//         this.comment = comment;
-//         this.rating = rating;
-//         this.reviewDate = reviewDate;
-//         this.userID = userID;
-//         this.courseID = courseID;
-//     }
+    public int getReviewID(){
+        return reviewId;
+    }
+    public void setReviewID(int reviewID){
+        this.reviewId = reviewID;
+    }
 
-//     public int getReviewID(){
-//         return reviewID;
-//     }
-//     public void setReviewID(int reviewID){
-//         this.reviewID = reviewID;
-//     }
+    public String getComment(){
+        return comment;
+    }
+    public void setComment(String comment){
+        this.comment = comment;
+    }
 
-//     public String getComment(){
-//         return comment;
-//     }
-//     public void setComment(String comment){
-//         this.comment = comment;
-//     }
+    public int getRating(){
+        if(rating < 1 || rating > 5){
+            throw new IllegalArgumentException("Rating must between 1 and 5!");
+        }
+        return rating;
+    }
+    public void setRating(int rating){
+        this.rating = rating;
+    }
 
-//     public int getRating(){
-//         return rating;
-//     }
-//     public void setRating(int rating){
-//         this.rating = rating;
-//     }
+    public LocalDateTime getReviewDate(){
+        return reviewDate;
+    }
+    public void setReviewDate(LocalDateTime reviewDate){
+        this.reviewDate = reviewDate;
+    }
 
-//     public LocalDateTime getReviewDate(){
-//         return reviewDate;
-//     }
-//     public void setReviewDate(LocalDateTime reviewDate){
-//         this.reviewDate = reviewDate;
-//     }
+    public int getUserId(){
+        return userId;
+    }
+    public void setUserId(int userId){
+        this.userId = userId;
+    }
 
-//     public int getUserID(){
-//         return userID;
-//     }
-//     public void setUserID(int userID){
-//         this.userID = userID;
-//     }
+    public int getCourseId(){
+        return courseId;
+    }
+    public void setCourseId(int courseId){
+        this.courseId = courseId;
+    }
 
-//     public int getCourseID(){
-//         return courseID;
-//     }
-//     public void setCourseID(int courseID){
-//         this.courseID = courseID;
-//     }
-
-    
-// }
+}

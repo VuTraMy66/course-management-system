@@ -152,36 +152,26 @@ public class AdminController {
 
     @GetMapping("/admin/review")
     public String adminReview(Model model) {
-    try {
         List<Reviews> reviews = reviewService.getAllReviews();
         model.addAttribute("reviews", reviews);
         model.addAttribute("pageUrl", "/admin/review");
         return "admin-review";
-    } catch (Exception e) {
-        // Log the exception (you can use a logger here)
-        System.err.println("Error retrieving reviews: " + e.getMessage());
-        
-        // Add error message to model to inform user (optional)
-        model.addAttribute("errorMessage", "Failed to load reviews. Please try again later.");
-        
-        return "error"; // Return an error page or redirect to an error view
     }
-}
 
-    // delete sessions funct
-    @GetMapping("/admin-delete-sessions/{sessionId}")
-    public String adminDeleteSession(@PathVariable("sessionId") int sessionId, Model model) {
-        try {
-            // Delete sessions
-            adminService.deleteSession(sessionId);
+    // // delete sessions funct
+    // @GetMapping("/admin-delete-sessions/{sessionId}")
+    // public String adminDeleteSession(@PathVariable("sessionId") int sessionId, Model model) {
+    //     try {
+    //         // Delete sessions
+    //         adminService.deleteSession(sessionId);
             
-            model.addAttribute("successMessage", "Session deleted successfully.");
+    //         model.addAttribute("successMessage", "Session deleted successfully.");
 
-            return "redirect:/admin-session";
-        } catch (Exception e) {
-            e.printStackTrace();
-            model.addAttribute("errorMessage", "An error occurred while deleting session.");
-            return "error-page";
-        }
-    }   
+    //         return "redirect:/admin-session";
+    //     } catch (Exception e) {
+    //         e.printStackTrace();
+    //         model.addAttribute("errorMessage", "An error occurred while deleting session.");
+    //         return "error-page";
+    //     }
+    // }   
 }

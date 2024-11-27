@@ -57,23 +57,33 @@
                                             <td>
                                                 <div class="d-flex align-items-center position-relative">
                                                     <div class="avatar avatar-xs mb-2 mb-md-0">
-                                                        <img th:src="https://eduport.webestica.com/assets/images/avatar/09.jpg" class="rounded-circle" alt="">
+                                                        <img th:src="@{${review.user.avatar}}" class="rounded-circle" alt="">
                                                     </div>
                                                     <div class="mb-0 ms-2">
-                                                        <h5 class="mb-0"><a href="#">Lori Stevens</a></h5>
+                                                        <h5 class="mb-0"><a href="#" th:text="${review.user.firstname} + ' ' + ${review.user.lastname}">Lori Stevens</a></h5>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td>
-                                                <h5 class="table-responsive-title mb-0"><a href="#">Building Scalable APIs with GraphQL</a></h5>
+                                                <h5 class="table-responsive-title mb-0"><a href="#" th:text="${review.course.name}"></a></h5>
                                             </td>
                                             <td>
                                                 <ul class="list-inline mb-0">
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
+                                                    <li class="list-inline-item me-0 small">
+                                                        <i th:class="'fas fa-star ' + (${review.rating >= 1 ? 'text-warning' : 'text-secondary'})"></i>
+                                                    </li>
+                                                    <li class="list-inline-item me-0 small">
+                                                        <i th:class="'fas fa-star ' + (${review.rating >= 2 ? 'text-warning' : 'text-secondary'})"></i>
+                                                    </li>
+                                                    <li class="list-inline-item me-0 small">
+                                                        <i th:class="'fas fa-star ' + (${review.rating >= 3 ? 'text-warning' : 'text-secondary'})"></i>
+                                                    </li>
+                                                    <li class="list-inline-item me-0 small">
+                                                        <i th:class="'fas fa-star ' + (${review.rating >= 4 ? 'text-warning' : 'text-secondary'})"></i>
+                                                    </li>
+                                                    <li class="list-inline-item me-0 small">
+                                                        <i th:class="'fas fa-star ' + (${review.rating >= 5 ? 'text-warning' : 'text-secondary'})"></i>
+                                                    </li>
                                                 </ul>
                                             </td>
                                             <td>
@@ -86,291 +96,19 @@
                                                 <button class="btn btn-danger-soft btn-round me-1 mb-1 mb-md-0" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Delete">
                                                     <i class="bi bi-trash"></i>
                                                 </button>
-                                                <a href="#" class="btn btn-sm btn-info-soft mb-0 h6" data-bs-toggle="modal" data-bs-target="#viewReview">View</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center position-relative">
-                                                    <div class="avatar avatar-xs mb-2 mb-md-0">
-                                                        <img src="https://eduport.webestica.com/assets/images/avatar/01.jpg" class="rounded-circle" alt="">
-                                                    </div>
-                                                    <div class="mb-0 ms-2">
-                                                        <h5 class="mb-0"><a href="#">Carolyn Ortiz</a></h5>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <h5 class="table-responsive-title mb-0"><a href="#">Graphic Design Masterclass</a></h5>
-                                            </td>
-                                            <td>
-                                                <ul class="list-inline mb-0">
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                </ul>
-                                            </td>
-                                            <td>
-                                                <span class="fs-5">23 June, 2021</span>
-                                            </td>
-                                            <td>
-                                                <a href="#" class="btn btn-success-soft btn-round me-1 mb-1 mb-md-0" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Edit">
-                                                    <i class="bi bi-pencil-square"></i>
+                                                <a href="#" class="btn btn-sm btn-info-soft mb-0 h6" data-bs-toggle="modal" data-bs-target="#viewReview"
+                                                    th:data-review-rating="${review.rating}"
+                                                    th:data-review-comment="${review.comment}"
+                                                    th:data-review-date="${review.formattedReviewDate}"
+                                                    th:data-review-user-name="${review.user.firstname} + ' ' + ${review.user.lastname}"
+                                                    th:data-review-user-avatar="${review.user.avatar}"
+                                                    th:data-review-course-name="${review.course.name}">
+                                                    View
                                                 </a>
-                                                <button class="btn btn-danger-soft btn-round me-1 mb-1 mb-md-0" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Delete">
-                                                    <i class="bi bi-trash"></i>
-                                                </button>
-                                                <a href="#" class="btn btn-sm btn-info-soft mb-0 h6" data-bs-toggle="modal" data-bs-target="#viewReview">View</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center position-relative">
-                                                    <div class="avatar avatar-xs mb-2 mb-md-0">
-                                                        <img src="https://eduport.webestica.com/assets/images/avatar/03.jpg" class="rounded-circle" alt="">
-                                                    </div>
-                                                    <div class="mb-0 ms-2">
-                                                        <h5 class="mb-0"><a href="#">Dennis Barrett</a></h5>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <h5 class="table-responsive-title mb-0"><a href="#">JavaScript: Full Understanding</a></h5>
-                                            </td>
-                                            <td>
-                                                <ul class="list-inline mb-0">
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star-half-alt text-warning"></i></li>
-                                                </ul>
-                                            </td>
-                                            <td>
-                                                <span class="fs-5">23 June, 2021</span>
-                                            </td>
-                                            <td>
-                                                <a href="#" class="btn btn-success-soft btn-round me-1 mb-1 mb-md-0" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Edit">
-                                                    <i class="bi bi-pencil-square"></i>
-                                                </a>
-                                                <button class="btn btn-danger-soft btn-round me-1 mb-1 mb-md-0" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Delete">
-                                                    <i class="bi bi-trash"></i>
-                                                </button>
-                                                <a href="#" class="btn btn-sm btn-info-soft mb-0 h6" data-bs-toggle="modal" data-bs-target="#viewReview">View</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center position-relative">
-                                                    <div class="avatar avatar-xs mb-2 mb-md-0">
-                                                        <img src="https://eduport.webestica.com/assets/images/avatar/04.jpg" class="rounded-circle" alt="">
-                                                    </div>
-                                                    <div class="mb-0 ms-2">
-                                                        <h5 class="mb-0"><a href="#">Billy Vasquez</a></h5>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <h5 class="table-responsive-title mb-0"><a href="#">Time Management Mastery: Do More, Stress Less</a></h5>
-                                            </td>
-                                            <td>
-                                                <ul class="list-inline mb-0">
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star-half-alt text-warning"></i></li>
-                                                </ul>
-                                            </td>
-                                            <td>
-                                                <span class="fs-5">23 June, 2021</span>
-                                            </td>
-                                            <td>
-                                                <a href="#" class="btn btn-success-soft btn-round me-1 mb-1 mb-md-0" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Edit">
-                                                    <i class="bi bi-pencil-square"></i>
-                                                </a>
-                                                <button class="btn btn-danger-soft btn-round me-1 mb-1 mb-md-0" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Delete">
-                                                    <i class="bi bi-trash"></i>
-                                                </button>
-                                                <a href="#" class="btn btn-sm btn-info-soft mb-0 h6" data-bs-toggle="modal" data-bs-target="#viewReview">View</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center position-relative">
-                                                    <div class="avatar avatar-xs mb-2 mb-md-0">
-                                                        <img src="https://eduport.webestica.com/assets/images/avatar/05.jpg" class="rounded-circle" alt="">
-                                                    </div>
-                                                    <div class="mb-0 ms-2">
-                                                        <h5 class="mt-2"><a href="#">Jacqueline Miller</a></h5>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <h5 class="table-responsive-title mb-0"><a href="#">The complete Digital Marketing Course - 8 Course in 1</a></h5>
-                                            </td>
-                                            <td>
-                                                <ul class="list-inline mb-0">
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="far fa-star text-warning"></i></li>
-                                                </ul>
-                                            </td>
-                                            <td>
-                                                <span class="fs-5">23 June, 2021</span>
-                                            </td>
-                                            <td>
-                                                <a href="#" class="btn btn-success-soft btn-round me-1 mb-1 mb-md-0" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Edit">
-                                                    <i class="bi bi-pencil-square"></i>
-                                                </a>
-                                                <button class="btn btn-danger-soft btn-round me-1 mb-1 mb-md-0" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Delete">
-                                                    <i class="bi bi-trash"></i>
-                                                </button>
-                                                <a href="#" class="btn btn-sm btn-info-soft mb-0 h6" data-bs-toggle="modal" data-bs-target="#viewReview">View</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center position-relative">
-                                                    <div class="avatar avatar-xs mb-2 mb-md-0">
-                                                        <img src="https://eduport.webestica.com/assets/images/avatar/06.jpg" class="rounded-circle" alt="">
-                                                    </div>
-                                                    <div class="mb-0 ms-2">
-                                                        <h5 class="mt-2"><a href="#">Amanda Reed</a></h5>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <h5 class="table-responsive-title mb-0"><a href="#">Microsoft Excel - Excel from Beginner to Advanced</a></h5>
-                                            </td>
-                                            <td>
-                                                <ul class="list-inline mb-0">
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="far fa-star text-warning"></i></li>
-                                                </ul>
-                                            </td>
-                                            <td>
-                                                <span class="fs-5">23 June, 2021</span>
-                                            </td>
-                                            <td>
-                                                <a href="#" class="btn btn-success-soft btn-round me-1 mb-1 mb-md-0" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Edit">
-                                                    <i class="bi bi-pencil-square"></i>
-                                                </a>
-                                                <button class="btn btn-danger-soft btn-round me-1 mb-1 mb-md-0" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Delete">
-                                                    <i class="bi bi-trash"></i>
-                                                </button>
-                                                <a href="#" class="btn btn-sm btn-info-soft mb-0 h6" data-bs-toggle="modal" data-bs-target="#viewReview">View</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center position-relative">
-                                                    <div class="avatar avatar-xs mb-2 mb-md-0">
-                                                        <img src="https://eduport.webestica.com/assets/images/avatar/07.jpg" class="rounded-circle" alt="">
-                                                    </div>
-                                                    <div class="mb-0 ms-2">
-                                                        <h5 class="mt-2"><a href="#">Samuel Bishop</a></h5>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <h5 class="table-responsive-title mb-0"><a href="#">Behavior, Psychology and Care Training</a></h5>
-                                            </td>
-                                            <td>
-                                                <ul class="list-inline mb-0">
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="far fa-star text-warning"></i></li>
-                                                </ul>
-                                            </td>
-                                            <td>
-                                                <span class="fs-5">23 June, 2021</span>
-                                            </td>
-                                            <td>
-                                                <a href="#" class="btn btn-success-soft btn-round me-1 mb-1 mb-md-0" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Edit">
-                                                    <i class="bi bi-pencil-square"></i>
-                                                </a>
-                                                <button class="btn btn-danger-soft btn-round me-1 mb-1 mb-md-0" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Delete">
-                                                    <i class="bi bi-trash"></i>
-                                                </button>
-                                                <a href="#" class="btn btn-sm btn-info-soft mb-0 h6" data-bs-toggle="modal" data-bs-target="#viewReview">View</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center position-relative">
-                                                    <div class="avatar avatar-xs mb-2 mb-md-0">
-                                                        <img src="https://eduport.webestica.com/assets/images/avatar/10.jpg" class="rounded-circle" alt="">
-                                                    </div>
-                                                    <div class="mb-0 ms-2">
-                                                        <h5 class="mb-0"><a href="#">Louis Ferguson</a></h5>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <h5 class="table-responsive-title mb-0"><a href="#">Create a Design System in Figma</a></h5>
-                                            </td>
-                                            <td>
-                                                <ul class="list-inline mb-0">
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star-half-alt text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="far fa-star text-warning"></i></li>
-                                                </ul>
-                                            </td>
-                                            <td>
-                                                <span class="fs-5">23 June, 2021</span>
-                                            </td>
-                                            <td>
-                                                <a href="#" class="btn btn-success-soft btn-round me-1 mb-1 mb-md-0" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Edit">
-                                                    <i class="bi bi-pencil-square"></i>
-                                                </a>
-                                                <button class="btn btn-danger-soft btn-round me-1 mb-1 mb-md-0" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Delete">
-                                                    <i class="bi bi-trash"></i>
-                                                </button>
-                                                <a href="#" class="btn btn-sm btn-info-soft mb-0 h6" data-bs-toggle="modal" data-bs-target="#viewReview">View</a>
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
-                            </div>
-                            <div class="card-footer">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <p class="mb-0 text-center text-start">Showing 1 to 8 of 20 entries</p>
-                                    <nav>
-                                        <ul class="pagination justify-content-center mb-0">
-                                            <li class="page-item disabled">
-                                                <a class="page-link mx-1 rounded" href="#" tabindex="-1" aria-disabled="true">
-                                                    <i class="bi bi-chevron-left"></i>
-                                                </a>
-                                            </li>
-                                            <li class="page-item active">
-                                                <a class="page-link mx-1 rounded" href="#">1</a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a class="page-link mx-1 rounded" href="#">2</a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a class="page-link mx-1 rounded" href="#">3</a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a class="page-link mx-1 rounded" href="#">
-                                                    <i class="bi bi-chevron-right"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -587,23 +325,31 @@
                 <div class="modal-body">
                     <div class="d-flex">
                         <div class="avatar avatar-md me-4 flex-shrink-0">
-                            <img class="avatar-img rounded-circle" src="https://eduport.webestica.com/assets/images/avatar/09.jpg" alt="avatar">
+                            <img class="avatar-img rounded-circle" id="modal-avatar" alt="avatar">
                         </div>
                         <div>
-                            <div class="d-sm-flex mt-1 mt-md-0 align-items-center">
-                                
-                                <h5 class="me-3 mb-0">Lori Stevens</h5>
-                                <ul class="list-inline mb-0">
-                                    <li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
-                                    <li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
-                                    <li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
-                                    <li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
-                                    <li class="list-inline-item me-0"><i class="far fa-star text-warning"></i></li>
+                            <div class="d-sm-flex mt-1 mt-md-0 align-items-center justify-content-between">
+                                <h5 id="modal-user-name" class="me-3 mb-0"></h5>
+                                <ul class="list-inline mb-0" id="modal-rating">
+                                    <li class="list-inline-item me-0 small">
+                                        <i class="fas fa-star text-warning"></i>
+                                    </li>
+                                    <li class="list-inline-item me-0 small">
+                                        <i class="fas fa-star text-warning"></i>
+                                    </li>
+                                    <li class="list-inline-item me-0 small">
+                                        <i class="fas fa-star text-warning"></i>
+                                    </li>
+                                    <li class="list-inline-item me-0 small">
+                                        <i class="fas fa-star text-warning"></i>
+                                    </li>
+                                    <li class="list-inline-item me-0 small">
+                                        <i class="fas fa-star text-warning"></i>
+                                    </li>
                                 </ul>
                             </div>
-                            <p class="small mb-2">2 days ago</p>
-                            <p class="mb-2 fs-5">Handsome met debating sir dwelling age material. As style lived he worse dried. Offered related so visitors we private removed. Moderate do subjects to distance. </p>
-                            <p class="mb-2 fs-5">As style lived he worse dried. Offered related so visitors we private removed. Moderate do subjects to distance. </p>
+                            <p class="small mb-2" id="modal-review-date"></p>
+                            <p class="mb-2 fs-5" id="modal-review-comment"></p>
                         </div>	
                     </div>
                 </div>
@@ -613,6 +359,43 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // Wait for the DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function () {
+            // Listen for click events on the "View" button
+            document.querySelectorAll('[data-bs-toggle="modal"]').forEach(function(button) {
+                button.addEventListener('click', function() {
+                    // Get the data attributes for the selected review
+                    var reviewRating = parseInt(this.getAttribute('data-review-rating'));
+                    var reviewComment = this.getAttribute('data-review-comment');
+                    var reviewDate = this.getAttribute('data-review-date');
+                    var reviewUserName = this.getAttribute('data-review-user-name');
+                    var reviewUserAvatar = this.getAttribute('data-review-user-avatar');
+                    var reviewCourseName = this.getAttribute('data-review-course-name');
+
+                    // Populate the modal with the data
+                    document.getElementById('modal-user-name').innerText = reviewUserName;
+                    document.getElementById('modal-avatar').src = reviewUserAvatar;
+                    document.getElementById('modal-review-date').innerText = reviewDate;
+                    document.getElementById('modal-review-comment').innerText = reviewComment;
+
+                    // Update the rating stars
+                    var stars = document.getElementById('modal-rating').children;
+                    for (var i = 0; i < stars.length; i++) {
+                        // Reset all star classes
+                        stars[i].classList.remove('text-warning');
+                        stars[i].classList.add('text-secondary');
+
+                        // Add 'text-warning' to the correct number of stars based on the review rating
+                        if (i < reviewRating) {
+                            stars[i].classList.add('text-warning');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 
     <!-- Scroll  -->
     <div th:replace="fragments/scroll-to-top.html :: scroll"></div> 

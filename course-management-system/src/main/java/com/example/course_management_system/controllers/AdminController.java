@@ -61,31 +61,56 @@ public class AdminController {
 
     @GetMapping("/admin/course-category")
     public String adminCourseCategory(Model model) {
-        model.addAttribute("pageUrl", "/admin-course-category");
+        model.addAttribute("pageUrl", "/admin/course-category");
         return "admin-course-category"; 
     }
 
-    @GetMapping("/admin/course-category2")
-    public String adminCourseCategory2(Model model) {
-        model.addAttribute("pageUrl", "/admin-course-category2");
-        return "admin-course-category2"; 
+    @GetMapping("/admin/course-category/{category}")
+    public String adminCourseCategoryDetail(@PathVariable("category") String category, Model model) {
+        String formattedCategory = convertCategoryFormat(category);
+        List<Courses> coursesCategory = courseService.getAllCourseByCategory(formattedCategory);
+
+        int courseCount = coursesCategory.size();
+
+        model.addAttribute("coursesCategory", coursesCategory);
+        model.addAttribute("category", formattedCategory);
+        model.addAttribute("courseCount", courseCount);
+        model.addAttribute("pageUrl", "/admin/course-category/" + category);
+        return "admin-course-category-detail"; 
+    }
+
+    private String convertCategoryFormat(String category) {
+        switch (category) {
+            case "data-science":
+                return "Data Science";
+            case "programming":
+                return "Programming";
+            case "uiux-design":
+                return "UI/UX Design";
+            case "web-development":
+                return "Web Development";
+            case "artificial-intelligence":
+                return "Artificial Intelligence";
+            default:
+                return category; 
+        }
     }
 
     @GetMapping("/admin/course-detail")
     public String adminCourseDetail(Model model) {
-        model.addAttribute("pageUrl", "/admin-course-detail");
+        model.addAttribute("pageUrl", "/admin/course-detail");
         return "admin-course-detail"; 
     }
 
     @GetMapping("/admin/add-course")
     public String adminAddCourse(Model model) {
-        model.addAttribute("pageUrl", "/admin-add-course");
+        model.addAttribute("pageUrl", "/admin/add-course");
         return "admin-add-course"; 
     }
 
     @GetMapping("/admin/edit-course")
     public String adminEditCourse(Model model) {
-        model.addAttribute("pageUrl", "/admin-edit-course");
+        model.addAttribute("pageUrl", "/admin/edit-course");
         return "admin-edit-course"; 
     }
   

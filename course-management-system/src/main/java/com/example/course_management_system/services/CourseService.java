@@ -14,13 +14,17 @@ public class CourseService {
     @Autowired
     private CourseRepository courseRepository;
     
-        public CourseService (CourseRepository courseRepository) {
-            this.courseRepository = courseRepository;
+    public CourseService (CourseRepository courseRepository) {
+        this.courseRepository = courseRepository;
     }
 
     // Retrieve all courses
     public List<Courses> getAllCourses() {
         return courseRepository.findAll();
+    }
+
+    public List<Courses> getAllCourseByCategory(String category) {
+        return courseRepository.findByCategory(category);
     }
 
     //  Retrieve a course by its ID

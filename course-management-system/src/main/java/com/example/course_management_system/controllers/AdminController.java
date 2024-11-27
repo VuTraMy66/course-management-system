@@ -75,6 +75,24 @@ public class AdminController {
     }    
 
 
+    // Delete courses
+    @GetMapping("/admin-delete-course/{courseId}")
+    public String adminDeleteCourse(@PathVariable("CourseId") int CourseId, Model model) {
+        try {
+            // Delete course
+            adminService.deleteCourse(CourseId);
+            
+            model.addAttribute("successMessage", "Course deleted successfully.");
+
+            return "redirect:/admin-course";
+        } catch (Exception e) {
+            e.printStackTrace();
+            model.addAttribute("errorMessage", "An error occurred while deleting course.");
+            return "error-page";
+        }
+    }
+
+
     @GetMapping("/admin/course-category")
     public String adminCourseCategory(Model model) {
         model.addAttribute("pageUrl", "/admin-course-category");

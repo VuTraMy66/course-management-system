@@ -23,4 +23,6 @@ public interface CoursesRepositories extends JpaRepository<Courses, Integer> {
     List<Courses> findByName(String name);
 
     Optional<Courses> findById(int courseId);
+
+    void deleteById(int courseId);
 }

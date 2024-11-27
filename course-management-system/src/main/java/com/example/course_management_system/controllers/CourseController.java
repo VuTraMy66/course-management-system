@@ -1,6 +1,8 @@
 package com.example.course_management_system.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.http.HttpStatus;
+// import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,6 +28,16 @@ public class CourseController {
     public Optional<Courses> getCourseById(@PathVariable int courseId) {
         return coursesService.getCourseById(courseId);
     }
+
+    // @DeleteMapping("/delete-course/{courseId}")
+    // public ResponseEntity<String> deleteCourse(@PathVariable int courseId) {
+    //     try {
+    //         coursesService.deleteCourse(courseId);
+    //         return ResponseEntity.ok("Course deleted successfully.");
+    //     } catch (Exception e) {
+    //         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Course not found.");
+    //     }
+    // }
 }
 
 

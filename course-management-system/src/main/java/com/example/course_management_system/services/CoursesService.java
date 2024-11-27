@@ -26,6 +26,14 @@ public class CoursesService {
         return coursesRepositories.findById(courseId);  
     }
 
+    //delete course
+    public void deleteCourse(int courseId) {
+        if (!coursesRepositories.existsById(courseId)) {
+            throw new RuntimeException("Course not found with ID: " + courseId);
+        }
+        coursesRepositories.deleteById(courseId);
+    }
+
     //  Retrieve courses by name
     // List<Courses> getCoursesByName(String name);
 
@@ -37,7 +45,6 @@ public class CoursesService {
 
     //  Delete a course by ID
     // void deleteCourse(int courseId);
-}
 
 // @Override
     //  public Courses getCourseById(int courseId) {
@@ -60,10 +67,4 @@ public class CoursesService {
     //     return coursesRepositories.save(course);
     // }
 
-    // @Override
-    // public void deleteCourse(int courseId) {
-    //     if (!coursesRepositories.existsById(courseId)) {
-    //         throw new RuntimeException("Course not found with ID: " + courseId);
-    //     }
-    //     coursesRepositories.deleteById(courseId);
-    // }
+}

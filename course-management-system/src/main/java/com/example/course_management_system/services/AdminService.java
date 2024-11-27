@@ -56,6 +56,15 @@ public class AdminService {
         sessionRepository.deleteById(sessionId);
     }
 
+
+    //delete course
+    public void deleteCourse(int courseId) {
+        if (!coursesRepositories.existsById(courseId)) {
+            throw new RuntimeException("Course not found with ID: " + courseId);
+        }
+        coursesRepositories.deleteById(courseId);
+    }
+
     // List<Reviews> getAllStudentsAll(); 
 
     // List<Reviews> getAllStudentsAll(); 

@@ -1,6 +1,7 @@
 package com.example.course_management_system.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.course_management_system.models.Courses;
 import com.example.course_management_system.models.Users;
 import com.example.course_management_system.services.AdminService;
+import com.example.course_management_system.services.CoursesService;
 
 @Controller
 public class AdminController {
@@ -46,6 +48,33 @@ public class AdminController {
         }
     }
 
+    // Show single course
+    @Autowired
+    private CoursesService coursesService;
+
+    @GetMapping("/admin/course/{courseId}")
+    public String AdminSingleCourse(@PathVariable int courseId, Model model) {
+        try {
+            // Fetch course by id using Optional
+            Optional<Courses> courseOptional = coursesService.getCourseById(courseId);
+
+            // If course is not found, return error page
+            if (courseOptional.isEmpty()) {
+                model.addAttribute("errorMessage", "Course not found");
+                return "error";  // Return error view
+            }
+
+            // If course exists, add course data to model
+            model.addAttribute("course", courseOptional.get());  // Get the course from Optional
+            return "course-details";  // Return course details view
+        } catch (Exception e) {
+            e.printStackTrace();
+            model.addAttribute("errorMessage", "An error occurred while fetching the course details.");
+            return "error";
+        }
+    }    
+
+
     @GetMapping("/admin/course-category")
     public String adminCourseCategory(Model model) {
         model.addAttribute("pageUrl", "/admin-course-category");
@@ -79,6 +108,7 @@ public class AdminController {
     @Autowired private AdminService adminService;
 
     // Show all student created accounts
+
     @GetMapping("/admin-student")
     public String adminStudent(Model model) {
         try {

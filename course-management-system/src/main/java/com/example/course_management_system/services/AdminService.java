@@ -40,17 +40,21 @@ public class AdminService {
         return userRepository.findById(id);
     }
 
-    // Course
+    //Course
     public List<Courses> getAllCourses() {
         return coursesRepositories.findAll();
     }
 
+    //Fetch single course by id
+    public Optional<Courses> getCourseById(int courseId) {
+        return coursesRepositories.findById(courseId);
+    } 
 
     //List<Reviews> getAllStudentsAll();
 
     public void deleteSession(int sessionId){
         sessionRepository.deleteById(sessionId);
-    } 
+    }
 
     // List<Reviews> getAllStudentsAll(); 
 

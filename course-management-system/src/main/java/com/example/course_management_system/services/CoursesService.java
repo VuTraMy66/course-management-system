@@ -1,6 +1,7 @@
 package com.example.course_management_system.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -20,8 +21,10 @@ public class CoursesService {
         return coursesRepositories.findAll();
     }
 
-    //  Retrieve a course by its ID
-    // Courses getCourseById(int courseId);
+    //Fetch single course by id
+    public Optional<Courses> getCourseById(int courseId) {
+        return coursesRepositories.findById(courseId);  
+    }
 
     //  Retrieve courses by name
     // List<Courses> getCoursesByName(String name);

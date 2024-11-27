@@ -51,6 +51,9 @@
                     <div class="col-md-6">
                         <div class="card-body">
                             <form action="/login" method="POST">
+                                <div th:if="${param.error}">
+                                    <p style="color: red;" th:text="${param.error}"></p>
+                                </div>
                                 <!-- Email input -->
                                 <div class="form-floating mb-4">
                                     <input type="username" id="username" class="form-control form-control-lg" placeholder="Username"/>
@@ -83,13 +86,19 @@
                                 </div>
                             </form>
 
-                            <div th:if="${param.errorMessage}">
-                                <p style="color: red;">${errorMessage}</p>
-                            </div>
-                    
-                            <div th:if="${param.logout}">
-                                <p>You have been logged out successfully.</p>
-                            </div>
+                            <script>
+                                document.querySelector("form").addEventListener("submit", function(event) {
+                                    // event.preventDefault();
+
+                                    const username = document.getElementById("username").value;
+                                    const password = document.getElementById("password").value;
+
+                                    console.log("Username: " + username);
+                                    console.log("Password: " + password);
+
+                                    // this.submit();
+                                })
+                            </script>
                         </div>
                     </div>
                 </div>

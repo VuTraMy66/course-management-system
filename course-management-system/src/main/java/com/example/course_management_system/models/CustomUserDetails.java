@@ -5,15 +5,15 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-public class CustomerUserDetails implements UserDetails{
+public class CustomUserDetails implements UserDetails{
 
     private Users user;
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public CustomerUserDetails() {}
+    public CustomUserDetails() {}
 
-    public CustomerUserDetails(Users user, Collection<? extends GrantedAuthority> authorities) {
+    public CustomUserDetails(Users user, Collection<? extends GrantedAuthority> authorities) {
         super();
         this.user = user;
         this.authorities = authorities;

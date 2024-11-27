@@ -2,7 +2,6 @@ package com.example.course_management_system.models;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -16,7 +15,7 @@ import jakarta.persistence.Table;
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "userId")
+    @Column(name = "user_id")
     private int userId;
 
     @Column(name = "username")
@@ -43,7 +42,7 @@ public class Users {
     @Column(name = "role")
     private String role = "student";
 
-    @Column(name = "dateCreated")
+    @Column(name = "date_created")
     private LocalDateTime dateCreated;
 
     // private List<Enrollments> enrollments;

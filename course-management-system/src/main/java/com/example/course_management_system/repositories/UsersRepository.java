@@ -16,4 +16,6 @@ public interface UsersRepository extends JpaRepository<Users, Integer> {
 
     Users findByUsername(String username);
 
+    @Query(value = "insert into Users (userid, username, password, phone, email, role) VALUES(:user.userid, :user.username, :user.password, :user.phone, :user.email, :user.role)")
+    Users addUser(Users user);
 }

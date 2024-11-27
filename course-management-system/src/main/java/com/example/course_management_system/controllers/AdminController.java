@@ -1,7 +1,6 @@
 package com.example.course_management_system.controllers;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,14 +8,34 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.course_management_system.models.Courses;
 import com.example.course_management_system.models.Users;
+import com.example.course_management_system.services.AccountService;
 import com.example.course_management_system.services.AdminService;
 import com.example.course_management_system.services.CoursesService;
+import com.example.course_management_system.util.Constant;
+import com.example.course_management_system.util.Encryption;
 
 @Controller
 public class AdminController {
+
+    @Autowired 
+    private AccountService accountService;
+    private AdminService adminService;
+    private CoursesService courseService;
+    private Encryption sha_encode = new Encryption();
+    private String secretKey = Constant.SECRETKEY;
+	private String salt = Constant.SALT;
+
+    
+
+    public AdminController(AdminService adminService, CoursesService courseService) {
+        this.adminService = adminService;
+        this.courseService = courseService;
+    }
 
     @RequestMapping("/admin")
     public String showAdminDashboard(Model model) {
@@ -27,120 +46,89 @@ public class AdminController {
     // Show all courses
     @GetMapping("/admin/all-course")
     public String adminAllCourse(Model model) {
-        try {
-            // Fetch all courses
-            List<Courses> courses = adminService.getAllCourses();
+        List<Courses> coursesInAd = courseService.getAllCourses();
+        model.addAttribute("coursesInAd", coursesInAd);
+        return "admin-all-course";
+        // try {
+        //     // Fetch all courses
+        //     List<Courses> courses = courseService.getAllCourses();
 
-            // Calculate the total number of courses
-            int totalCourses = courses.size();
+        //     // Calculate the total number of courses
+        //     int totalCourses = courses.size();
 
-            // Add courses and total number of courses to the model
-            model.addAttribute("courses", courses);
-            model.addAttribute("totalCourses", totalCourses);
+        //     // Add courses and total number of courses to the model
+        //     model.addAttribute("courses", courses);
+        //     model.addAttribute("totalCourses", totalCourses);
 
-            model.addAttribute("pageUrl", "/admin/all-course");
+        //     model.addAttribute("pageUrl", "/admin/all-course");
 
-            return "admin-all-course"; 
-        } catch (Exception e) {
-            e.printStackTrace();
-            model.addAttribute("errorMessage", "An error occurred while fetching courses.");
-            return "error-page";
-        }
+        //     return "admin-all-course"; 
+        // } catch (Exception e) {
+        //     e.printStackTrace();
+        //     model.addAttribute("errorMessage", "An error occurred while fetching courses.");
+        //     return "error-page";
+        // }
     }
 
-    // Show single course
-    @Autowired
-    private CoursesService coursesService;
-
-    @GetMapping("/admin/single-course/{courseId}")
-    public String AdminSingleCourse(@PathVariable int courseId, Model model) {
-        try {
-            // Fetch course by id using Optional
-            Optional<Courses> courseOptional = coursesService.getCourseById(courseId);
-
-            // If course is not found, return error page
-            if (courseOptional.isEmpty()) {
-                model.addAttribute("errorMessage", "Course not found");
-                return "error";  // Return error view
-            }
-
-            // If course exists, add course data to model
-            model.addAttribute("course", courseOptional.get());  // Get the course from Optional
-            return "course-details";  // Return course details view
-        } catch (Exception e) {
-            e.printStackTrace();
-            model.addAttribute("errorMessage", "An error occurred while fetching the course details.");
-            return "error";
-        }
-    }    
-
-
-    // Delete courses
-    @GetMapping("/admin-delete-course/{courseId}")
-    public String adminDeleteCourse(@PathVariable("CourseId") int CourseId, Model model) {
-        try {
-            // Delete course
-            adminService.deleteCourse(CourseId);
-            
-            model.addAttribute("successMessage", "Course deleted successfully.");
-
-            return "redirect:/admin-course";
-        } catch (Exception e) {
-            e.printStackTrace();
-            model.addAttribute("errorMessage", "An error occurred while deleting course.");
-            return "error-page";
-        }
+    @GetMapping("/admin/course-category")
+    public String adminCourseCategory(Model model) {
+        model.addAttribute("pageUrl", "/admin/course-category");
+        return "admin-course-category"; 
     }
 
+    @GetMapping("/admin/course-category/{category}")
+    public String adminCourseCategoryDetail(@PathVariable("category") String category, Model model) {
+        String formattedCategory = convertCategoryFormat(category);
+        List<Courses> coursesCategory = courseService.getAllCourseByCategory(formattedCategory);
 
-    @GetMapping("/admin/courses/{category}")
-    public String adminCoursesByCategory(@PathVariable("category") String category, Model model) {
-        try {
-            // Fetch all courses for the given category
-            List<Courses> courses = coursesService.getCoursesByCategory(category);
-            model.addAttribute("courses", courses);  // Add courses to model
-            model.addAttribute("category", category);  // Add category to model for display
-            model.addAttribute("pageUrl", "/admin-course-category");
+        int courseCount = coursesCategory.size();
 
-            // Return the view name to display courses
-            return "admin-course-category";  // This will render admin-course-category.html in templates
-        } catch (Exception e) {
-            e.printStackTrace();
-            model.addAttribute("errorMessage", "An error occurred while loading courses.");
-            return "error-page";  // Render an error page if something goes wrong
-        }
+        model.addAttribute("coursesCategory", coursesCategory);
+        model.addAttribute("category", formattedCategory);
+        model.addAttribute("courseCount", courseCount);
+        model.addAttribute("pageUrl", "/admin/course-category/" + category);
+        return "admin-course-category-detail"; 
     }
-    
 
-    @GetMapping("/admin/course-category2")
-    public String adminCourseCategory2(Model model) {
-        model.addAttribute("pageUrl", "/admin-course-category2");
-        return "admin-course-category2"; 
+    private String convertCategoryFormat(String category) {
+        switch (category) {
+            case "data-science":
+                return "Data Science";
+            case "programming":
+                return "Programming";
+            case "uiux-design":
+                return "UI/UX Design";
+            case "web-development":
+                return "Web Development";
+            case "artificial-intelligence":
+                return "Artificial Intelligence";
+            default:
+                return category; 
+        }
     }
 
     @GetMapping("/admin/course-detail")
     public String adminCourseDetail(Model model) {
-        model.addAttribute("pageUrl", "/admin-course-detail");
+        model.addAttribute("pageUrl", "/admin/course-detail");
         return "admin-course-detail"; 
     }
 
     @GetMapping("/admin/add-course")
     public String adminAddCourse(Model model) {
-        model.addAttribute("pageUrl", "/admin-add-course");
+        model.addAttribute("pageUrl", "/admin/add-course");
         return "admin-add-course"; 
     }
 
     @GetMapping("/admin/edit-course")
     public String adminEditCourse(Model model) {
-        model.addAttribute("pageUrl", "/admin-edit-course");
+        model.addAttribute("pageUrl", "/admin/edit-course");
         return "admin-edit-course"; 
     }
   
-    @Autowired private AdminService adminService;
+
 
     // Show all student created accounts
-
-    @GetMapping("/admin-student")
+    @GetMapping("/admin/student")
     public String adminStudent(Model model) {
         try {
             // Fetch all students
@@ -153,7 +141,7 @@ public class AdminController {
             model.addAttribute("users", users);
             model.addAttribute("totalStudents", totalStudents);
 
-            model.addAttribute("pageUrl", "/admin-student");
+            model.addAttribute("pageUrl", "/admin/student");
             
             return "admin-student"; 
         } catch (Exception e) {
@@ -216,5 +204,55 @@ public class AdminController {
             model.addAttribute("errorMessage", "An error occurred while deleting session.");
             return "error-page";
         }
-    }   
+    }
+
+    @SuppressWarnings("static-access")
+    @RequestMapping(value="login", method=RequestMethod.POST)
+    private String login(Model model, @RequestParam("username")String username, @RequestParam("password")String password) {
+        // check input
+        if (username.isEmpty() || password.isEmpty()) {
+			// alertMsg = "Tài khoản hoặc mật khẩu không đúng";
+			// req.setAttribute("error", alertMsg);
+			//req.getRequestDispatcher("/login.jsp").forward(req, resp);
+			return "login";
+		}
+        // enscypt password
+
+        String encode_password = sha_encode.encrypt(password, secretKey, salt);
+        // 
+        Users user = accountService.login(username, encode_password);
+        if (user.getRole().equals("student")){
+            // User info 
+
+            //
+            return "student";
+        }
+        else if (user.getRole().equals("admin")){
+            return "admin";
+        } 
+        else {
+            return "login";
+        }
+
+	}
+
+    @RequestMapping(value="register", method=RequestMethod.POST)
+    private String register(Model model, @RequestParam("username")String username, @RequestParam("password")String password, @RequestParam("repeatPassword")String rePassword){
+		if (password.equals(rePassword)) {
+            String encode_password = Encryption.encrypt(password, secretKey, salt);
+            Users user = new Users(username, encode_password);
+            boolean success = accountService.register(user);
+            if (!success){
+                return "register";
+            }
+
+            else{
+                return "login";
+            }
+		} else {
+            return "register";
+		}
+	}
+       
+
 }

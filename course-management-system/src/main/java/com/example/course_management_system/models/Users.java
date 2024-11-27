@@ -37,7 +37,7 @@ public class Users {
     private String email;
 
     @Column(name = "avatar")
-    private String avatar = "https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg";
+    private String avatar = "https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg";
 
     @Column(name = "role")
     private String role = "student";
@@ -48,8 +48,19 @@ public class Users {
     // private List<Enrollments> enrollments;
 
     public Users() {}
+    
+    public Users(String username, String password, String phone, String email, String role){
+        this.username = username;
+        this.password = password;
+        this.firstname = "";
+        this.lastname = "";
+        this.phone = phone;
+        this.email = email;
+        this.role = role;
+        this.dateCreated = LocalDateTime.now();
+    }
 
-    public Users(int userId, String username, String password, String firstname, String lastname, String phone, String email, String avatar, String role) {
+    public Users(int userId, String username, String password, String firstname, String lastname, String phone, String email, String avatar, String role, LocalDateTime dateCreated) {
         this.userId = userId;
         this.username = username;
         this.password = password;
@@ -59,6 +70,7 @@ public class Users {
         this.email = email;
         this.avatar = (avatar != null) ? avatar : this.avatar;
         this.role = role;
+        this.dateCreated = LocalDateTime.now();
     }
 
     public int getUserId() {

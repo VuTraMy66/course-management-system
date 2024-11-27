@@ -1,6 +1,7 @@
 package com.example.course_management_system.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,10 @@ public class CourseService {
 
     public List<Courses> getAllCourseByCategory(String category) {
         return courseRepository.findByCategory(category);
+    }
+
+    public Optional<Courses> getCourseById(int coureId) {
+        return courseRepository.findById(coureId);
     }
 
     //  Retrieve a course by its ID
@@ -54,10 +59,7 @@ public class CourseService {
     //     return coursesRepositories.findByName(name);
     // }
 
-    // @Override
-    // public List<Courses> getCoursesByCategory(String category) {
-    //     return coursesRepositories.findByCategory(category);
-    // }
+    
 
     // @Override
     // public Courses createCourse(Courses course) {

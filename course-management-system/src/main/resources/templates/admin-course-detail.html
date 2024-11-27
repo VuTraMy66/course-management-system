@@ -22,15 +22,15 @@
         <div class="col-20">
             <div th:replace="~{fragments/admin-sidebar.html :: admin-sidebar}"></div>
         </div>
-        <div class="col-80">
-            <div th:replace="fragments/nav-admin.html :: admin-nav"></div>
+        <div class="col-80" th:object="${courseDetail}">
+            <div th:replace="~{fragments/nav-admin.html :: admin-nav}"></div>
             <div class="page-content">
                 <div class="page-content-wrapper border">
                     <!-- Title -->
                     <div class="row mb-3">
                         <div class="col-12 d-sm-flex justify-content-between align-items-center">
                             <h1 class="fw-bold mb-2 mb-sm-0">Course Details</h1>
-                            <a href="/admin-edit-course" class="btn btn-primary mb-0">Edit Course</a>
+                            <a href="/admin/edit-course" class="btn btn-primary mb-0">Edit Course</a>
                         </div>
                     </div>
                     <div class="row g-4">
@@ -38,15 +38,15 @@
                         <div class="col-xxl-6">
                             <div class="card bg-transparent border rounded-3 h-100">
                                 <div class="card-header bg-light border-bottom text-dark">
-                                    <h2 class="mb-0">The Complete Digital Marketing Course</h2>
+                                    <h2 class="mb-0" th:text="${courseDetail.name}"></h2>
                                 </div>
                                 <div class="card-body">
                                     <div class="row g-4">
                                         <div class="col-md-6">
-                                            <img src="https://eduport.webestica.com/assets/images/courses/4by3/01.jpg" class="rounded" alt="">
+                                            <img th:src="${courseDetail.image}" alt="" class="img-4by3-lg rounded fixed-image-size3" />
                                         </div>
                                         <div class="col-md-6">
-                                            <p class="mb-3 fs-5">Satisfied conveying a dependent contented he gentleman agreeable do be. Warrant private blushes removed an in equally totally if. Delivered dejection necessary objection do Mr prevailed. Mr feeling does chiefly cordial in do.</p>
+                                            <p class="mb-3 fs-5" th:text="${courseDetail.description}"></p>
                                         </div>
                                     </div>
                                     <div class="row mt-3">
@@ -54,11 +54,11 @@
                                             <ul class="list-group list-group-borderless">
                                                 <li class="list-group-item">
                                                     <span>Release date:</span>
-                                                    <span class="h5 mb-0">29 Aug 2020</span>
+                                                    <span class="h5 mb-0" th:text="${courseDetail.formattedCreatedAt}"></span>
                                                 </li>
                                                 <li class="list-group-item">
                                                     <span>Duration:</span>
-                                                    <span class="h5 mb-0">4h 50m</span>
+                                                    <span class="h5 mb-0" th:text="${courseDetail.formattedDuration}"></span>
                                                 </li>
                                                 <li class="list-group-item">
                                                     <span>Total Enrolled:</span>
@@ -74,7 +74,7 @@
                                             <ul class="list-group list-group-borderless">
                                                 <li class="list-group-item">
                                                     <span>Skills:</span>
-                                                    <span class="h5 mb-0">All level</span>
+                                                    <span class="h5 mb-0" th:text="${courseDetail.skillLevel}"></span>
                                                 </li>
                                                 <li class="list-group-item">
                                                     <span>Total Lesson:</span>

@@ -1,6 +1,7 @@
 package com.example.course_management_system.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.course_management_system.models.Courses;
 import com.example.course_management_system.models.Users;
@@ -33,7 +35,7 @@ public class AdminController {
     }
 
     // Show all courses
-    @GetMapping("/admin/all-course")
+    @GetMapping("/admin/courses")
     public String adminAllCourse(Model model) {
         List<Courses> coursesInAd = courseService.getAllCourses();
         model.addAttribute("coursesInAd", coursesInAd);
@@ -96,9 +98,17 @@ public class AdminController {
         }
     }
 
-    @GetMapping("/admin/course-detail")
-    public String adminCourseDetail(Model model) {
-        model.addAttribute("pageUrl", "/admin/course-detail");
+    @GetMapping("/admin/course")
+    public String adminCourseDetail(@RequestParam("course_id") int courseId, Model model) {
+        Optional<Courses> courseDetail = courseService.getCourseById(courseId);
+
+        if (courseDetail.isPresent()) {
+            model.addAttribute("courseDetail", courseDetail.get());
+        } else {
+            model.addAttribute("error", "Course not found");
+        }
+
+        // model.addAttribute("pageUrl", "/admin/course?course_id=" + courseId);
         return "admin-course-detail"; 
     }
 

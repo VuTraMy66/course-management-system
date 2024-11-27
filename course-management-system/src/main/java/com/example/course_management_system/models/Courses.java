@@ -94,7 +94,7 @@ public class Courses {
     }
 
     public String getFormattedCreatedAt() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
         return createdAt.format(formatter);
     }
 
@@ -129,7 +129,7 @@ public class Courses {
     public String getFormattedDuration() {
         int hours = duration / 60;
         int minutes = duration % 60;
-        return String.format("%02d:%02d", hours, minutes);
+        return String.format("%dh %dm", hours, minutes);
     }
 
     public void setDuration(int duration) {

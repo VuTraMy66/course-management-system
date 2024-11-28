@@ -184,12 +184,15 @@ public class AdminController {
             }
         }
 
+        int totalRating = reviews.size();
+
         int percentHigh = (int) Math.round(((double) highReview / reviews.size()) * 100);
         int percentLow = (int) Math.round(((double) lowReview / reviews.size()) * 100);
 
         model.addAttribute("coursesReview", coursesReview);
         model.addAttribute("courseRatings", courseRatings);
         model.addAttribute("reviews", reviews);
+        model.addAttribute("totalRating", totalRating);
         model.addAttribute("highReview", percentHigh);
         model.addAttribute("lowReview", percentLow);
         model.addAttribute("pageUrl", "/admin/review");

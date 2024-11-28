@@ -123,7 +123,7 @@ public class Users {
     }
 
     public String getFormattedDateCreated() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
         return dateCreated.format(formatter);
     }
 

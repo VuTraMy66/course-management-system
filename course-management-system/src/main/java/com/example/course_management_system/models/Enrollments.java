@@ -1,6 +1,7 @@
 // package com.example.course_management_system.models;
 
 // import java.time.LocalDateTime;
+// import java.time.format.DateTimeFormatter;
 
 // import jakarta.persistence.Column;
 // import jakarta.persistence.Entity;
@@ -14,14 +15,18 @@
 // public class Enrollments {
 //     @Id
 //     @GeneratedValue(strategy = GenerationType.IDENTITY)
-//     @Column(name = "enrollId")
+//     @Column(name = "enroll_id")
 //     private int enrollId;
 
-//     private Users user;
+    
+//         @Column(name = "user_id")
+//         private Users user;
 
-//     private Courses course;
+    
+//         @Column(name = "course_id")
+//         private Courses course;
 
-//     @Column(name = "enrollAt")
+//     @Column(name = "enroll_at")
 //     private LocalDateTime enrollAt;
 
 //     @Column(name = "status")
@@ -36,6 +41,10 @@
 //         this.status = status;
 //     }
 
+//     public int getEnrollId() {
+//         return enrollId;
+//     }
+
 //     public Users getUser() {
 //         return user;
 //     }
@@ -44,8 +53,13 @@
 //         return course;
 //     }
 
-//     public LocalDateTime getEnrollAt() {
-//         return enrollAt;
+//     public String getFormattedEnrollAt() {
+//         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+//         return enrollAt.format(formatter);
+//     }
+
+//     public void setEnrollAt(LocalDateTime enrollAt) {
+//         this.enrollAt = LocalDateTime.now();
 //     }
 
 //     public String getStatus() {

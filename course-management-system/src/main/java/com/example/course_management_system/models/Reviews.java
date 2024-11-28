@@ -38,22 +38,20 @@ public class Reviews {
         @JoinColumn(name = "course_id")
         private Courses course;
 
-    public Reviews() {}
+    public Reviews() {
+        this.reviewDate = LocalDateTime.now();
+    }
 
-    public Reviews(int reviewId, String comment, int rating, LocalDateTime reviewDate, Users user, Courses course){
+    public Reviews(int reviewId, String comment, int rating, Users user, Courses course){
         this.reviewId = reviewId;
         this.comment = comment;
         this.rating = rating;
-        this.reviewDate = reviewDate;
         this.user = user;
         this.course = course;
     }
 
     public int getReviewID(){
         return reviewId;
-    }
-    public void setReviewID(int reviewID){
-        this.reviewId = reviewID;
     }
 
     public String getComment(){
@@ -69,11 +67,16 @@ public class Reviews {
         }
         return rating;
     }
+
     public void setRating(int rating){
         this.rating = rating;
     }
 
-    public String getFormattedReviewDate(){
+    public LocalDateTime getReviewDate() {
+        return reviewDate;
+    }
+
+    public String getFormattedReviewDate() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
         return reviewDate.format(formatter);
     }
@@ -83,17 +86,17 @@ public class Reviews {
         return reviewDate.format(formatter);
     }
 
-    public Users getUser(){
+    public Users getUser() {
         return user;
     }
-    public void setUser(Users user){
+    public void setUser(Users user) {
         this.user = user;
     }
 
-    public Courses getCourse(){
+    public Courses getCourse() {
         return course;
     }
-    public void setCourse(Courses course){
+    public void setCourse(Courses course) {
         this.course = course;
     }
 

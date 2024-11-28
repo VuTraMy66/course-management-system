@@ -23,21 +23,21 @@ public class AdminService {
         this.userRepository = userRepository;
     }
 
-    // View student
-    // Fetch all students with role "student"
-    public List<Users> getAllStudents() {
-        return (List<Users>) userRepository.findByRole("student");
-    }
+    // // View student
+    // // Fetch all students with role "student"
+    // public List<Users> getAllStudents() {
+    //     return (List<Users>) userRepository.findByRole("student");
+    // }
 
-    // Delete a student by their user ID
-    public void deleteStudent(int userId) {
-        userRepository.deleteById(userId);
-    }
+    // // Delete a student by their user ID
+    // public void deleteStudent(int userId) {
+    //     userRepository.deleteById(userId);
+    // }
 
-    // Find a user by their ID
-    public Optional<Users> findUserById(int id) {
-        return userRepository.findById(id);
-    }
+    // // Find a user by their ID
+    // public Optional<Users> findUserById(int id) {
+    //     return userRepository.findById(id);
+    // }
 
     //List<Reviews> getAllStudentsAll();
 

@@ -133,7 +133,7 @@
                                     </div>
                                 </div>
                                 <div class="d-flex flex-column gap-1">
-                                    <h2 class="fw-bold mb-0" style="color: #212529;">1,958</h2>
+                                    <h2 class="fw-bold mb-0" style="color: #212529;" th:text="${totalCourses}"></h2>
                                     <div class="d-flex flex-row gap-2">
                                         <span class="text-success fw-semibold">
                                             <i data-feather="trending-up" class="me-1" style="max-width: 15px; max-height: 15px;"></i>
@@ -157,7 +157,7 @@
                                     </div>
                                 </div>
                                 <div class="d-flex flex-column gap-1">
-                                    <h2 class="fw-bold mb-0" style="color: #212529;">1,600</h2>
+                                    <h2 class="fw-bold mb-0" style="color: #212529;" th:text="${totalStudents}"></h2>
                                     <div class="d-flex flex-row gap-2">
                                         <span class="text-danger fw-semibold">120+</span>
                                         <span class="fw-medium">Number of students</span>
@@ -202,7 +202,7 @@
                                     </div>
                                 </div>
                                 <div class="d-flex flex-column gap-1">
-                                    <h2 class="fw-bold mb-0" style="color: #212529;">22,786</h2>
+                                    <h2 class="fw-bold mb-0" style="color: #212529;" th:text="${totalStudents}"></h2>
                                     <div class="d-flex flex-row gap-2">
                                         <span class="text-success fw-semibold">
                                             <i data-feather="trending-up" class="me-1" style="max-width: 15px; max-height: 15px;"></i>
@@ -220,19 +220,19 @@
                         <div class="card">
                             <div class="card-header d-flex align-items-center justify-content-between card-header-height">
                                 <h4 class="mb-0">Featured Students</h4>
-                                <a href="#" class="btn btn-outline-secondary btn-sm fw-semibold">View all</a>
+                                <a href="/admin/student" class="btn btn-outline-secondary btn-sm fw-semibold">View all</a>
                             </div>
                             <div class="card-body">
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item px-0 pt-0">
+                                    <li class="list-group-item px-0 pt-0" th:each="user: ${users}">
                                         <div class="row">
                                             <div class="col-auto">
                                                 <div class="avatar avatar-md avatar-indicators avatar-offline">
-                                                    <img alt="avatar" src="https://geeksui.codescandy.com/geeks/assets/images/avatar/avatar-1.jpg" class="rounded-circle" />
+                                                    <img alt="avatar" th:src="${user.avatar}" class="rounded-circle" />
                                                 </div>
                                             </div>
                                             <div class="col ms-n3">
-                                                <h4 class="mb-0 h5">Rob Percival</h4>
+                                                <h4 class="mb-0 h5" th:text="${user.firstname + ' ' + user.lastname}"></h4>
                                                 <span class="me-2 fs-6">
                                                     <span class="text-dark me-1 fw-semibold">42</span>
                                                     Courses participating
@@ -246,172 +246,6 @@
                                                 <span class="dropdown dropstart">
                                                     <a class="btn-icon btn btn-ghost btn-sm rounded-circle" href="#" role="button" id="courseDropdown7" data-bs-toggle="dropdown" data-bs-offset="-20,20" aria-expanded="false">
                                                         <i data-feather="more-vertical" style="width: 14px; height: 14px;"></i>
-                                                    </a>
-                                                    <span class="dropdown-menu" aria-labelledby="courseDropdown7">
-                                                        <span class="dropdown-header">Settings</span>
-                                                        <a class="dropdown-item" href="#">
-                                                            <i data-feather="edit" class="dropdown-item-icon me-2"></i>
-                                                            Edit
-                                                        </a>
-                                                        <a class="dropdown-item" href="#">
-                                                            <i data-feather="trash" class="dropdown-item-icon me-2"></i>
-                                                            Remove
-                                                        </a>
-                                                    </span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item px-0">
-                                        <div class="row">
-                                            <div class="col-auto">
-                                                <div class="avatar avatar-md avatar-indicators avatar-online">
-                                                    <img alt="avatar" src="https://geeksui.codescandy.com/geeks/assets/images/avatar/avatar-2.jpg" class="rounded-circle" />
-                                                </div>
-                                            </div>
-                                            <div class="col ms-n3">
-                                                <h4 class="mb-0 h5">Rob Percival</h4>
-                                                <span class="me-2 fs-6">
-                                                    <span class="text-dark me-1 fw-semibold">42</span>
-                                                    Courses participating
-                                                </span>
-                                                <span class="me-2 fs-6">
-                                                    <span class="text-dark me-1 fw-semibold">1,10,124</span>
-                                                    Completed courses
-                                                </span>
-                                            </div>
-                                            <div class="col-auto">
-                                                <span class="dropdown dropstart">
-                                                    <a class="btn-icon btn btn-ghost btn-sm rounded-circle" href="#" role="button" id="courseDropdown8" data-bs-toggle="dropdown" data-bs-offset="-20,20" aria-expanded="false">
-                                                        <i data-feather="more-vertical" style="width: 14px; max-height: auto;"></i>
-                                                    </a>
-                                                    <span class="dropdown-menu" aria-labelledby="courseDropdown7">
-                                                        <span class="dropdown-header">Settings</span>
-                                                        <a class="dropdown-item" href="#">
-                                                            <i data-feather="edit" class="dropdown-item-icon me-2"></i>
-                                                            Edit
-                                                        </a>
-                                                        <a class="dropdown-item" href="#">
-                                                            <i data-feather="trash" class="dropdown-item-icon me-2"></i>
-                                                            Remove
-                                                        </a>
-                                                    </span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item px-0">
-                                        <div class="row">
-                                            <div class="col-auto">
-                                                <div class="avatar avatar-md avatar-indicators avatar-away">
-                                                    <img alt="avatar" src="https://geeksui.codescandy.com/geeks/assets/images/avatar/avatar-3.jpg" class="rounded-circle" />
-                                                </div>
-                                            </div>
-                                            <div class="col ms-n3">
-                                                <h4 class="mb-0 h5">Rob Percival</h4>
-                                                <span class="me-2 fs-6">
-                                                    <span class="text-dark me-1 fw-semibold">42</span>
-                                                    Courses participating
-                                                </span>
-                                                <span class="me-2 fs-6">
-                                                    <span class="text-dark me-1 fw-semibold">1,10,124</span>
-                                                    Completed courses
-                                                </span>
-                                            </div>
-                                            <div class="col-auto">
-                                                <span class="dropdown dropstart">
-                                                    <a class="btn-icon btn btn-ghost btn-sm rounded-circle" href="#" role="button" id="courseDropdown9" data-bs-toggle="dropdown" data-bs-offset="-20,20" aria-expanded="false">
-                                                        <i data-feather="more-vertical" style="width: 14px; max-height: auto;"></i>
-                                                    </a>
-                                                    <span class="dropdown-menu" aria-labelledby="courseDropdown7">
-                                                        <span class="dropdown-header">Settings</span>
-                                                        <a class="dropdown-item" href="#">
-                                                            <i data-feather="edit" class="dropdown-item-icon me-2"></i>
-                                                            Edit
-                                                        </a>
-                                                        <a class="dropdown-item" href="#">
-                                                            <i data-feather="trash" class="dropdown-item-icon me-2"></i>
-                                                            Remove
-                                                        </a>
-                                                    </span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item px-0">
-                                        <div class="row">
-                                            <div class="col-auto">
-                                                <div class="avatar avatar-md avatar-indicators avatar-info">
-                                                    <img alt="avatar" src="https://geeksui.codescandy.com/geeks/assets/images/avatar/avatar-6.jpg" class="rounded-circle" />
-                                                </div>
-                                            </div>
-                                            <div class="col ms-n3">
-                                                <h4 class="mb-0 h5">Rob Percival</h4>
-                                                <span class="me-2 fs-6">
-                                                    <span class="text-dark me-1 fw-semibold">42</span>
-                                                    Courses participating
-                                                </span>
-                                                <span class="me-2 fs-6">
-                                                    <span class="text-dark me-1 fw-semibold">1,10,124</span>
-                                                    Completed courses
-                                                </span>
-                                            </div>
-                                            <div class="col-auto">
-                                                <span class="dropdown dropstart">
-                                                    <a
-                                                        class="btn-icon btn btn-ghost btn-sm rounded-circle"
-                                                        href="#"
-                                                        role="button"
-                                                        id="courseDropdown10"
-                                                        data-bs-toggle="dropdown"
-                                                        data-bs-offset="-20,20"
-                                                        aria-expanded="false">
-                                                        <i data-feather="more-vertical" style="width: 14px; max-height: auto;"></i>
-                                                    </a>
-                                                    <span class="dropdown-menu" aria-labelledby="courseDropdown7">
-                                                        <span class="dropdown-header">Settings</span>
-                                                        <a class="dropdown-item" href="#">
-                                                            <i data-feather="edit" class="dropdown-item-icon me-2"></i>
-                                                            Edit
-                                                        </a>
-                                                        <a class="dropdown-item" href="#">
-                                                            <i data-feather="trash" class="dropdown-item-icon me-2"></i>
-                                                            Remove
-                                                        </a>
-                                                    </span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item px-0">
-                                        <div class="row">
-                                            <div class="col-auto">
-                                                <div class="avatar avatar-md avatar-indicators avatar-busy">
-                                                <img alt="avatar" src="https://geeksui.codescandy.com/geeks/assets/images/avatar/avatar-7.jpg" class="rounded-circle" />
-                                                </div>
-                                            </div>
-                                            <div class="col ms-n3">
-                                                <h4 class="mb-0 h5">Rob Percival</h4>
-                                                <span class="me-2 fs-6">
-                                                    <span class="text-dark me-1 fw-semibold">42</span>
-                                                    Courses participating
-                                                </span>
-                                                <span class="me-2 fs-6">
-                                                    <span class="text-dark me-1 fw-semibold">1,10,124</span>
-                                                    Completed courses
-                                                </span>
-                                            </div>
-                                            <div class="col-auto">
-                                                <span class="dropdown dropstart">
-                                                    <a
-                                                        class="btn-icon btn btn-ghost btn-sm rounded-circle"
-                                                        href="#"
-                                                        role="button"
-                                                        id="courseDropdown11"
-                                                        data-bs-toggle="dropdown"
-                                                        data-bs-offset="-20,20"
-                                                        aria-expanded="false">
-                                                        <i data-feather="more-vertical" style="width: 14px; max-height: auto;"></i>
                                                     </a>
                                                     <span class="dropdown-menu" aria-labelledby="courseDropdown7">
                                                         <span class="dropdown-header">Settings</span>

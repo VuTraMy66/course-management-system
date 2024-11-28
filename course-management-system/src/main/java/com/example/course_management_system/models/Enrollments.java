@@ -1,72 +1,86 @@
-// package com.example.course_management_system.models;
+package com.example.course_management_system.models;
 
-// import java.time.LocalDateTime;
-// import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-// import jakarta.persistence.Column;
-// import jakarta.persistence.Entity;
-// import jakarta.persistence.GeneratedValue;
-// import jakarta.persistence.GenerationType;
-// import jakarta.persistence.Id;
-// import jakarta.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
-// @Entity
-// @Table(name = "Enrollments")
-// public class Enrollments {
-//     @Id
-//     @GeneratedValue(strategy = GenerationType.IDENTITY)
-//     @Column(name = "enroll_id")
-//     private int enrollId;
+@Entity
+@Table(name = "Enrollments")
+public class Enrollments {
 
-    
-//         @Column(name = "user_id")
-//         private Users user;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "enroll_id")
+    private int enrollId;
 
-    
-//         @Column(name = "course_id")
-//         private Courses course;
+    @Column(name = "enroll_at")
+    private LocalDateTime enrollAt;
 
-//     @Column(name = "enroll_at")
-//     private LocalDateTime enrollAt;
+    @Column(name = "status", nullable = false)
+    private String status;
 
-//     @Column(name = "status")
-//     private String status;
+    @ManyToOne
+        @JoinColumn(name = "user_id")
+        private Users user;
 
-//     public Enrollments() {}
+    @ManyToOne
+        @JoinColumn(name = "course_id")
+        private Courses course;
 
-//     public Enrollments(Users user, Courses course, LocalDateTime enrollAt, String status) {
-//         this.user = user;
-//         this.course = course;
-//         this.enrollAt = enrollAt;
-//         this.status = status;
-//     }
+    public Enrollments() {
+        this.enrollAt = LocalDateTime.now();
+        this.status = "learning";
+    }
 
-//     public int getEnrollId() {
-//         return enrollId;
-//     }
+    public Enrollments(int enrollId, String status, Users user, Courses course) {
+        this.enrollId = enrollId;
+        this.status = status;
+        this.user = user;
+        this.course = course;
+    }
 
-//     public Users getUser() {
-//         return user;
-//     }
+    public int getEnrollId() {
+        return enrollId;
+    }
 
-//     public Courses getCourse() {
-//         return course;
-//     }
+    public LocalDateTime getEnrollAt() {
+        return enrollAt;
+    }
 
-//     public String getFormattedEnrollAt() {
-//         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
-//         return enrollAt.format(formatter);
-//     }
+    public String getFormattedEnrollAt() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+        return enrollAt.format(formatter);
+    }
 
-//     public void setEnrollAt(LocalDateTime enrollAt) {
-//         this.enrollAt = LocalDateTime.now();
-//     }
+    public String getStatus() {
+        return status;
+    }
 
-//     public String getStatus() {
-//         return status;
-//     }
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
-//     public void setStatus(String status) {
-//         this.status = status;
-//     }
-// }
+    public Users getUser() {
+        return user;
+    }
+
+    public void setUser(Users user) {
+        this.user = user;
+    }
+
+    public Courses getCourse() {
+        return course;
+    }
+
+    public void setCourse(Courses course) {
+        this.course = course;
+    }
+}

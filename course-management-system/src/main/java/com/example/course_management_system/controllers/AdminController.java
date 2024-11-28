@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,11 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.course_management_system.models.Courses;
+import com.example.course_management_system.models.Enrollments;
 import com.example.course_management_system.models.Reviews;
 import com.example.course_management_system.models.Users;
 import com.example.course_management_system.services.AdminService;
 import com.example.course_management_system.services.CourseService;
+import com.example.course_management_system.services.EnrollmentService;
 import com.example.course_management_system.services.ReviewService;
+import com.example.course_management_system.services.UserService;
 
 @Controller
 public class AdminController {
@@ -26,16 +30,35 @@ public class AdminController {
     @Autowired 
     private AdminService adminService;
     private CourseService courseService;
+    private EnrollmentService enrollmentService;
     private ReviewService reviewService;
+    private UserService userService;
 
-    public AdminController(AdminService adminService, CourseService courseService, ReviewService reviewService) {
+    public AdminController(AdminService adminService, CourseService courseService, EnrollmentService enrollmentService, ReviewService reviewService, UserService userService) {
         this.adminService = adminService;
         this.courseService = courseService;
+        this.enrollmentService = enrollmentService;
         this.reviewService = reviewService;
+        this.userService = userService;
     }
 
     @RequestMapping("/admin")
     public String showAdminDashboard(Model model) {
+        List<Courses> courses = courseService.getAllCourses();
+        List<Users> users = userService.getAllStudents();
+
+        int totalCourses = courses.size();
+        int totalStudents = users.size();
+
+        users.sort((user1, user2) -> Integer.compare(user2.getUserId(), user1.getUserId()));
+
+        // Limit the list to 8 users
+        List<Users> topUsers = users.stream().limit(8).collect(Collectors.toList());
+
+
+        model.addAttribute("users", topUsers);
+        model.addAttribute("totalCourses", totalCourses);
+        model.addAttribute("totalStudents", totalStudents);
         model.addAttribute("pageUrl", "/admin");
         return "admin"; 
     }
@@ -119,17 +142,41 @@ public class AdminController {
     public String adminStudent(Model model) {
         try {
             // Fetch all students
-            List<Users> users = adminService.getAllStudents();
-
-             // Calculate the total number of students
+            List<Users> users = userService.getAllStudents();
+    
+            // List to store enrollments for each user
+            Map<Integer, List<Enrollments>> coursesOfStudent = new HashMap<>();
+    
+            // Variable to calculate total number of courses for all students
+            int totalCourses = 0;  // Total courses for all students
+    
+            // Map to store total courses for each student
+            Map<Integer, Integer> totalCoursesOfEachStudent = new HashMap<>();
+    
+            // Fetch enrollments for each user and calculate total courses for each student
+            for (Users user : users) {
+                // Fetch enrollments for this student
+                List<Enrollments> enrollments = enrollmentService.getEnrollmentsByUserId(user.getUserId());
+                coursesOfStudent.put(user.getUserId(), enrollments);
+    
+                // Calculate total courses for this student
+                totalCoursesOfEachStudent.put(user.getUserId(), enrollments.size());
+    
+                // Add to the total courses for all students
+                totalCourses += enrollments.size();
+            }
+    
+            // Calculate the total number of students
             int totalStudents = users.size();
-
-            // Add users and total number of students to the model
+    
+            // Add users, enrollments, and total number of students to the model
             model.addAttribute("users", users);
+            model.addAttribute("coursesOfStudent", coursesOfStudent);
             model.addAttribute("totalStudents", totalStudents);
-
+            model.addAttribute("totalCoursesOfEachStudent", totalCoursesOfEachStudent); // Total courses per student
+            model.addAttribute("totalCourses", totalCourses); // Total courses for all students
             model.addAttribute("pageUrl", "/admin/student");
-            
+    
             return "admin-student"; 
         } catch (Exception e) {
             e.printStackTrace();
@@ -137,13 +184,13 @@ public class AdminController {
             return "error-page";
         }
     }
-
+    
     // Delete student
     @GetMapping("/admin/delete-student/{userId}")
     public String adminDeleteStudent(@PathVariable("userId") int userId, Model model) {
         try {
             // Delete student
-            adminService.deleteStudent(userId);
+            userService.deleteStudent(userId);
             
             model.addAttribute("successMessage", "Student deleted successfully.");
 

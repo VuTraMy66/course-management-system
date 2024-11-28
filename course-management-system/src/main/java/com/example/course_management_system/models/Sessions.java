@@ -15,17 +15,17 @@ public class Sessions {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "sessionId")
+    @Column(name = "session_id")
     private int sessionId;
 
     @Column(name = "title")
     private String title;
 
-    @Column(name = "videoUrl")
+    @Column(name = "video_url")
     private String videoUrl;
 
     @ManyToOne
-        @JoinColumn(name = "courseId")
+        @JoinColumn(name = "course_id")
         private Courses course;
 
     @Column(name = "description")
@@ -34,10 +34,8 @@ public class Sessions {
     @Column(name = "duration")
     private int duration;
 
-    // Default constructor
     public Sessions() {}
 
-    // Constructor with parameters
     public Sessions(int sessionId, String title, String videoUrl, Courses course, String description, int duration) {
         this.sessionId = sessionId;
         this.title = title;
@@ -47,7 +45,6 @@ public class Sessions {
         this.duration = duration;
     }
 
-    // Getter and Setter methods
     public int getSessionId() {
         return sessionId;
     }

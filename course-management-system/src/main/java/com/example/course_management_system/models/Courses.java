@@ -47,7 +47,9 @@ public class Courses {
     @Transient
     private double averageRating;
 
-    public Courses() {}
+    public Courses() {
+        this.createdAt = LocalDateTime.now();
+    }
 
     public Courses(String name, String description, String category, String skillLevel, String status, int duration, String image) {
         this.name = name;
@@ -57,11 +59,9 @@ public class Courses {
         this.status = status;
         this.duration = duration;
         this.image = image;
-        this.createdAt = LocalDateTime.now();
     }
 
     // Getters and setters
-
     public int getCourseId() {
         return courseId;
     }
@@ -95,6 +95,10 @@ public class Courses {
             throw new IllegalArgumentException("Invalid category: " + category);
         }
         this.category = category;
+    }
+
+    public LocalDateTime getCreateAt() {
+        return createdAt;
     }
 
     public String getFormattedCreatedAt() {

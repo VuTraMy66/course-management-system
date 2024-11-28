@@ -18,10 +18,10 @@ public class Users {
     @Column(name = "user_id")
     private int userId;
 
-    @Column(name = "username")
+    @Column(name = "username", nullable = false, unique = true)
     private String username;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
 
     @Column(name = "firstname")
@@ -37,31 +37,32 @@ public class Users {
     private String email;
 
     @Column(name = "avatar")
-    private String avatar = "https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg";
+    private String avatar;
 
-    @Column(name = "role")
-    private String role = "student";
+    @Column(name = "role", nullable = false)
+    private String role;
 
-    @Column(name = "date_created")
+    @Column(name = "date_created", nullable = false, updatable = false)
     private LocalDateTime dateCreated;
 
-    // private List<Enrollments> enrollments;
+    public Users() {
+        this.dateCreated = LocalDateTime.now();
+        this.role = "student";
+    }
 
-    public Users() {}
-
-    public Users(int userId, String username, String password, String firstname, String lastname, String phone, String email, String avatar, String role, LocalDateTime dateCreated) {
-        this.userId = userId;
+    public Users(String username, String password, String firstname, String lastname, String phone, String email, String avatar, String role) {
+        this();
         this.username = username;
         this.password = password;
         this.firstname = firstname;
         this.lastname = lastname;
         this.phone = phone;
         this.email = email;
-        this.avatar = (avatar != null) ? avatar : this.avatar;
+        this.avatar = avatar;
         this.role = role;
-        this.dateCreated = LocalDateTime.now();
     }
 
+    // Getters and Setters
     public int getUserId() {
         return userId;
     }
@@ -119,7 +120,15 @@ public class Users {
     }
 
     public void setAvatar(String avatar) {
-        this.avatar = avatar;
+        if (avatar == null || avatar.isEmpty()) {
+            this.avatar = "https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg";
+        } else {
+            this.avatar = avatar;
+        }
+    }
+
+    public LocalDateTime getDateCreated() {
+        return dateCreated;
     }
 
     public String getFormattedDateCreated() {
@@ -131,4 +140,7 @@ public class Users {
         return role;
     }
 
+    public void setRole(String role) {
+        this.role = role;
+    }
 }

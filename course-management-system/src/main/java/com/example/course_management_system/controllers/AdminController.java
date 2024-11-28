@@ -89,6 +89,23 @@ public class AdminController {
 
     @GetMapping("/admin/course-category")
     public String adminCourseCategory(Model model) {
+        List<Courses> coursesOfP = courseService.getAllCourseByCategory("Programming");
+        List<Courses> coursesOfDS = courseService.getAllCourseByCategory("Data Science");
+        List<Courses> coursesOfUD = courseService.getAllCourseByCategory("UI/UX Design");
+        List<Courses> coursesOfWD = courseService.getAllCourseByCategory("Web Development");
+        List<Courses> coursesOfAI = courseService.getAllCourseByCategory("Artificial Intelligence");
+
+        int totalP = coursesOfP.size();
+        int totalDS = coursesOfDS.size();
+        int totalUD = coursesOfUD.size();
+        int totalWD = coursesOfWD.size();
+        int totalAI = coursesOfAI.size();
+
+        model.addAttribute("totalP", totalP);
+        model.addAttribute("totalDS", totalDS);
+        model.addAttribute("totalUD", totalUD);
+        model.addAttribute("totalWD", totalWD);
+        model.addAttribute("totalAI", totalAI);
         model.addAttribute("pageUrl", "/admin/course-category");
         return "admin-course-category"; 
     }
@@ -98,11 +115,19 @@ public class AdminController {
         String formattedCategory = convertCategoryFormat(category);
         List<Courses> coursesCategory = courseService.getAllCourseByCategory(formattedCategory);
 
+        Map<Integer, Integer> totalStudentsPerCourse = new HashMap<>();
+
+        for (Courses course : coursesCategory) {
+            List<Enrollments> enrollments = enrollmentService.getEnrollmentsByCourseId(course.getCourseId());
+            totalStudentsPerCourse.put(course.getCourseId(), enrollments.size());
+        }
+
         int courseCount = coursesCategory.size();
 
         model.addAttribute("coursesCategory", coursesCategory);
         model.addAttribute("category", formattedCategory);
         model.addAttribute("courseCount", courseCount);
+        model.addAttribute("totalStudentsPerCourse", totalStudentsPerCourse);
         model.addAttribute("pageUrl", "/admin/course-category/" + category);
         return "admin-course-category-detail"; 
     }
@@ -218,6 +243,13 @@ public class AdminController {
             course.setAverageRating(averageRating); 
         }
 
+        Map<Integer, Integer> totalStudentsPerCourse = new HashMap<>();
+
+        for (Courses course : coursesReview) {
+            List<Enrollments> enrollments = enrollmentService.getEnrollmentsByCourseId(course.getCourseId());
+            totalStudentsPerCourse.put(course.getCourseId(), enrollments.size());
+        }
+
         int highReview = 0;
         int lowReview = 0;
 
@@ -239,6 +271,7 @@ public class AdminController {
         model.addAttribute("courseRatings", courseRatings);
         model.addAttribute("reviews", reviews);
         model.addAttribute("totalRating", totalRating);
+        model.addAttribute("totalStudentsPerCourse", totalStudentsPerCourse);
         model.addAttribute("highReview", percentHigh);
         model.addAttribute("lowReview", percentLow);
         model.addAttribute("pageUrl", "/admin/review");

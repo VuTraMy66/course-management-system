@@ -69,19 +69,19 @@
                                             <td>
                                                 <ul class="list-inline mb-0">
                                                     <li class="list-inline-item me-0 small">
-                                                        <i th:class="'fas fa-star ' + (${review.rating >= 1 ? 'text-warning' : 'text-secondary'})"></i>
+                                                        <i th:class="(${review.rating >= 1 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'"></i>
                                                     </li>
                                                     <li class="list-inline-item me-0 small">
-                                                        <i th:class="'fas fa-star ' + (${review.rating >= 2 ? 'text-warning' : 'text-secondary'})"></i>
+                                                        <i th:class="(${review.rating >= 2 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'"></i>
                                                     </li>
                                                     <li class="list-inline-item me-0 small">
-                                                        <i th:class="'fas fa-star ' + (${review.rating >= 3 ? 'text-warning' : 'text-secondary'})"></i>
+                                                        <i th:class="(${review.rating >= 3 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'"></i>
                                                     </li>
                                                     <li class="list-inline-item me-0 small">
-                                                        <i th:class="'fas fa-star ' + (${review.rating >= 4 ? 'text-warning' : 'text-secondary'})"></i>
+                                                        <i th:class="(${review.rating >= 4 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'"></i>
                                                     </li>
                                                     <li class="list-inline-item me-0 small">
-                                                        <i th:class="'fas fa-star ' + (${review.rating >= 5 ? 'text-warning' : 'text-secondary'})"></i>
+                                                        <i th:class="(${review.rating >= 5 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'"></i>
                                                     </li>
                                                 </ul>
                                             </td>
@@ -136,23 +136,23 @@
                                                     <a th:href="@{/admin/course(course_id=${course.courseId})}" class="stretched-link" th:text="${course.name}"></a>
                                                 </h5>
                                             </td>
-                                            <td th:text="${courseRatings[course.courseId]}">2,568</td>
+                                            <td class="ps-5" th:text="${totalStudentsPerCourse[course.courseId]}"></td>
                                             <td>
                                                 <ul class="list-inline mb-0">
                                                     <li class="list-inline-item me-0 small">
-                                                        <i th:class="'fas fa-star ' + (${courseRatings[course.courseId] >= 1.0 ? 'text-warning' : 'text-secondary'})"></i>
+                                                        <i th:class="(${courseRatings[course.courseId] >= 1.0 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'"></i>
                                                     </li>
                                                     <li class="list-inline-item me-0 small">
-                                                        <i th:class="'fas fa-star ' + (${courseRatings[course.courseId] >= 2.0 ? 'text-warning' : 'text-secondary'})"></i>
+                                                        <i th:class="(${courseRatings[course.courseId] >= 2.0 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'"></i>
                                                     </li>
                                                     <li class="list-inline-item me-0 small">
-                                                        <i th:class="'fas fa-star ' + (${courseRatings[course.courseId] >= 3.0 ? 'text-warning' : 'text-secondary'})"></i>
+                                                        <i th:class="(${courseRatings[course.courseId] >= 3.0 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'"></i>
                                                     </li>
                                                     <li class="list-inline-item me-0 small">
-                                                        <i th:class="'fas fa-star ' + (${courseRatings[course.courseId] >= 4.0 ? 'text-warning' : 'text-secondary'})"></i>
+                                                        <i th:class="(${courseRatings[course.courseId] >= 4.0 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'"></i>
                                                     </li>
                                                     <li class="list-inline-item me-0 small">
-                                                        <i th:class="'fas fa-star ' + (${courseRatings[course.courseId] >= 5.0 ? 'text-warning' : 'text-secondary'})"></i>
+                                                        <i th:class="(${courseRatings[course.courseId] >= 5.0 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'"></i>
                                                     </li>
                                                 </ul>
                                             </td>
@@ -238,19 +238,19 @@
                                 <h5 id="modal-user-name" class="me-3 mb-0"></h5>
                                 <ul class="list-inline mb-0" id="modal-rating">
                                     <li class="list-inline-item me-0 small">
-                                        <i class="fas fa-star text-warning"></i>
+                                        <i class="far fa-star text-warning"></i>
                                     </li>
                                     <li class="list-inline-item me-0 small">
-                                        <i class="fas fa-star text-warning"></i>
+                                        <i class="far fa-star text-warning"></i>
                                     </li>
                                     <li class="list-inline-item me-0 small">
-                                        <i class="fas fa-star text-warning"></i>
+                                        <i class="far fa-star text-warning"></i>
                                     </li>
                                     <li class="list-inline-item me-0 small">
-                                        <i class="fas fa-star text-warning"></i>
+                                        <i class="far fa-star text-warning"></i>
                                     </li>
                                     <li class="list-inline-item me-0 small">
-                                        <i class="fas fa-star text-warning"></i>
+                                        <i class="far fa-star text-warning"></i>
                                     </li>
                                 </ul>
                             </div>
@@ -287,16 +287,17 @@
                     document.getElementById('modal-review-comment').innerText = reviewComment;
 
                     // Update the rating stars
-                    var stars = document.getElementById('modal-rating').children;
+                    var stars = document.querySelectorAll('#modal-rating i');
+                    // Reset all stars to empty state before adding filled stars
                     for (var i = 0; i < stars.length; i++) {
-                        // Reset all star classes
-                        stars[i].classList.remove('text-warning');
-                        stars[i].classList.add('text-secondary');
+                        stars[i].classList.remove('fas'); // Remove filled star
+                        stars[i].classList.add('far'); // Add empty star
+                    }
 
-                        // Add 'text-warning' to the correct number of stars based on the review rating
-                        if (i < reviewRating) {
-                            stars[i].classList.add('text-warning');
-                        }
+                    // Add filled stars based on reviewRating
+                    for (var i = 0; i < reviewRating; i++) {
+                        stars[i].classList.remove('far'); // Remove empty star
+                        stars[i].classList.add('fas'); // Add filled star
                     }
                 });
             });

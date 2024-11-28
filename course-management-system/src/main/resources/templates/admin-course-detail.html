@@ -126,19 +126,19 @@
                                                     <td>
                                                         <ul class="list-inline mb-0">
                                                             <li class="list-inline-item me-0 small">
-                                                                <i th:class="'fas fa-star fs-6 ' + (${review.rating >= 1 ? 'text-warning' : 'text-secondary'})"></i>
+                                                                <i th:class="(${review.rating >= 1 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'"></i>
                                                             </li>
                                                             <li class="list-inline-item me-0 small">
-                                                                <i th:class="'fas fa-star fs-6 ' + (${review.rating >= 2 ? 'text-warning' : 'text-secondary'})"></i>
+                                                                <i th:class="(${review.rating >= 2 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'"></i>
                                                             </li>
                                                             <li class="list-inline-item me-0 small">
-                                                                <i th:class="'fas fa-star fs-6 ' + (${review.rating >= 3 ? 'text-warning' : 'text-secondary'})"></i>
+                                                                <i th:class="(${review.rating >= 3 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'"></i>
                                                             </li>
                                                             <li class="list-inline-item me-0 small">
-                                                                <i th:class="'fas fa-star fs-6 ' + (${review.rating >= 4 ? 'text-warning' : 'text-secondary'})"></i>
+                                                                <i th:class="(${review.rating >= 4 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'"></i>
                                                             </li>
                                                             <li class="list-inline-item me-0 small">
-                                                                <i th:class="'fas fa-star fs-6 ' + (${review.rating >= 5 ? 'text-warning' : 'text-secondary'})"></i>
+                                                                <i th:class="(${review.rating >= 5 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'"></i>
                                                             </li>
                                                         </ul>
                                                     </td>
@@ -425,16 +425,17 @@
                     document.getElementById('modal-review-comment').innerText = reviewComment;
 
                     // Update the rating stars
-                    var stars = document.getElementById('modal-rating').children;
+                    var stars = document.querySelectorAll('#modal-rating i');
+                    // Reset all stars to empty state before adding filled stars
                     for (var i = 0; i < stars.length; i++) {
-                        // Reset all star classes
-                        stars[i].classList.remove('text-warning');
-                        stars[i].classList.add('text-secondary');
+                        stars[i].classList.remove('fas'); // Remove filled star
+                        stars[i].classList.add('far'); // Add empty star
+                    }
 
-                        // Add 'text-warning' to the correct number of stars based on the review rating
-                        if (i < reviewRating) {
-                            stars[i].classList.add('text-warning');
-                        }
+                    // Add filled stars based on reviewRating
+                    for (var i = 0; i < reviewRating; i++) {
+                        stars[i].classList.remove('far'); // Remove empty star
+                        stars[i].classList.add('fas'); // Add filled star
                     }
                 });
             });

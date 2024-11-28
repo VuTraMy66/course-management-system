@@ -82,15 +82,13 @@
                                                             </div>
                                                             <div class="d-flex flex-column gap-1">
                                                                 <h4 class="mb-0 text-primary-hover" th:text="${courseCategory.name}"></h4>
-                                                                <span>Added on <span th:text="${courseCategory.formattedCreatedAt}"></span></span>
+                                                                <span class="fs-5">Added on <span th:text="${courseCategory.formattedCreatedAt}"></span></span>
                                                             </div>
                                                         </div>
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <div>
-                                                        <h5 class="mb-0">1245</h5>
-                                                    </div>
+                                                    <h5 class="mb-0 ps-4" th:text="${totalStudentsPerCourse[courseCategory.courseId]}"></h5>
                                                 </td>
                                                 <td>
                                                     <ul class="list-inline mb-0">
@@ -103,7 +101,7 @@
                                                 </td>
                                                 <td>
                                                     <a href="#" class="btn btn-outline-secondary btn-sm">Delete</a>
-                                                    <a href="#" class="btn btn-primary btn-sm">View</a>
+                                                    <a th:href="@{/admin/course(course_id=${courseCategory.courseId})}" class="btn btn-primary btn-sm">View</a>
                                                 </td>
                                             </tr>
                                         </tbody>

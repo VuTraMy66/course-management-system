@@ -118,7 +118,7 @@
                                                             <a th:if="${courseInAd.status == 'draft'}" href="#" class="btn btn-success btn-sm">Publish</a>
     
                                                             <!-- Delete button should appear if course status is 'draft' -->
-                                                            <a th:if="${courseInAd.status == 'draft'}" href="#" class="btn btn-outline-secondary btn-sm">Delete</a>
+                                                            <a th:if="${courseInAd.status == 'draft'}" th:href="@{/admin/delete-course/{courseId}(courseId=${courseInAd.courseId})}" class="btn btn-outline-secondary btn-sm">Delete</a>
                                                             
                                                             <!-- Change Status button should appear if course status is 'published' -->
                                                             <a th:if="${courseInAd.status == 'published'}" href="#" class="btn btn-secondary btn-sm">Change Status</a>

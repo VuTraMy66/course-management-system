@@ -36,6 +36,10 @@ public class CourseService {
         courseRepository.save(course);
     }
 
+    public void deleteCourseById(int courseId) {
+        courseRepository.deleteById(courseId);
+    } 
+
     //  Retrieve a course by its ID
     // Courses getCourseById(int courseId);
 

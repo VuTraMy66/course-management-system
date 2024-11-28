@@ -239,6 +239,12 @@ public class AdminController {
         courseService.saveCourse(course);
         return "redirect:/admin/course?course_id=" + course.getCourseId();
     }
+
+    @GetMapping("/admin/delete-course/{courseId}")
+    public String deleteCourse(@PathVariable("courseId") int courseId) {
+        courseService.deleteCourseById(courseId);
+        return "redirect:/admin/courses";
+    }
   
     // Show all student created accounts
     @GetMapping("/admin/student")

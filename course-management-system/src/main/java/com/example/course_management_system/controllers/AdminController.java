@@ -1,6 +1,8 @@
 package com.example.course_management_system.controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,9 +88,13 @@ public class AdminController {
     @GetMapping("/admin/course")
     public String adminCourseDetail(@RequestParam("course_id") int courseId, Model model) {
         Optional<Courses> courseDetail = courseService.getCourseById(courseId);
+        List<Reviews> reviewsOfCourse = reviewService.getReviewsByCourseId(courseId);
+        double averageRating = reviewService.calculateAverageRating(courseId);
 
         if (courseDetail.isPresent()) {
             model.addAttribute("courseDetail", courseDetail.get());
+            model.addAttribute("reviewsOfCourse", reviewsOfCourse);
+            model.addAttribute("averageRating", averageRating);
         } else {
             model.addAttribute("error", "Course not found");
         }
@@ -153,7 +159,39 @@ public class AdminController {
     @GetMapping("/admin/review")
     public String adminReview(Model model) {
         List<Reviews> reviews = reviewService.getAllReviews();
+        List<Courses> coursesReview = courseService.getAllCourses();
+
+        // Map to hold ratings for each course
+        Map<Integer, Double> courseRatings = new HashMap<>();
+
+        // Loop through each course and calculate average rating
+        for (Courses course : coursesReview) {
+            double averageRating = reviewService.calculateAverageRating(course.getCourseId());
+            courseRatings.put(course.getCourseId(), averageRating);
+            // Optionally, set average rating on the course object (not stored in DB)
+            course.setAverageRating(averageRating); 
+        }
+
+        int highReview = 0;
+        int lowReview = 0;
+
+        for (Reviews review : reviews) {
+            if(review.getRating() >= 4) {
+                highReview++;
+            }
+            else if(review.getRating() < 4) {
+                lowReview++;
+            }
+        }
+
+        int percentHigh = (int) Math.round(((double) highReview / reviews.size()) * 100);
+        int percentLow = (int) Math.round(((double) lowReview / reviews.size()) * 100);
+
+        model.addAttribute("coursesReview", coursesReview);
+        model.addAttribute("courseRatings", courseRatings);
         model.addAttribute("reviews", reviews);
+        model.addAttribute("highReview", percentHigh);
+        model.addAttribute("lowReview", percentLow);
         model.addAttribute("pageUrl", "/admin/review");
         return "admin-review";
     }

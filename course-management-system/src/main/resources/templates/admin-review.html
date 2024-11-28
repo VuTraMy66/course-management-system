@@ -16,7 +16,6 @@
 
     <link rel="stylesheet" th:href="@{/css/styles.css}"/>
     <link rel="stylesheet" th:href="@{/css/admin.css}"/>
-
 </head>
 <body>
     <section class="containe">
@@ -41,7 +40,7 @@
                             <div class="card-header h3 text-dark">
                                 Feedback
                             </div>
-                            <div class="table-responsive border-0 overflow-y-hidden">
+                            <div class="table-responsive border-0" style="max-height: 500px; overflow-y: scroll;">
                                 <table class="table mb-0 text-nowrap table-centered table-hover">
                                     <thead class="table-light">
                                         <tr>
@@ -60,7 +59,7 @@
                                                         <img th:src="@{${review.user.avatar}}" class="rounded-circle" alt="">
                                                     </div>
                                                     <div class="mb-0 ms-2">
-                                                        <h5 class="mb-0"><a href="#" th:text="${review.user.firstname} + ' ' + ${review.user.lastname}">Lori Stevens</a></h5>
+                                                        <h5 class="mb-0"><a href="#" th:text="${review.user.firstname} + ' ' + ${review.user.lastname}"></a></h5>
                                                     </div>
                                                 </div>
                                             </td>
@@ -117,9 +116,9 @@
                     <div class="col-xxl-7">
                         <div class="card rounded-3">
                             <div class="card-header h3 text-dark">
-                                Top Rated Courses
+                                Courses Rating
                             </div>
-                            <div class="table-responsive border-0 overflow-y-hidden">
+                            <div class="table-responsive border-0" style="height: 500px; overflow-y: scroll;">
                                 <table class="table mb-0 text-nowrap table-centered table-hover">
                                     <thead class="table-light">
                                         <tr>
@@ -130,135 +129,39 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
+                                        <tr th:each="course : ${coursesReview}">
                                             <td class="text-center text-start d-flex align-items-center position-relative">
-                                                <div class="w-60px"><img src="https://eduport.webestica.com/assets/images/courses/4by3/08.jpg" class="rounded" alt=""></div>
+                                                <div class="w-60px"><img th:src="${course.image}" class="rounded fixed-image-size4" alt=""></div>
                                                 <h5 class="mb-0 ms-2 text-start" style="max-width: 200px; white-space: normal; overflow-wrap: break-word;">
-                                                    <a href="#" class="stretched-link">Building Scalable APIs with GraphQL</a>
+                                                    <a th:href="@{/admin/course(course_id=${course.courseId})}" class="stretched-link" th:text="${course.name}"></a>
                                                 </h5>
                                             </td>
-                                            <td>2,568</td>
+                                            <td th:text="${courseRatings[course.courseId]}">2,568</td>
                                             <td>
                                                 <ul class="list-inline mb-0">
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
+                                                    <li class="list-inline-item me-0 small">
+                                                        <i th:class="'fas fa-star ' + (${courseRatings[course.courseId] >= 1.0 ? 'text-warning' : 'text-secondary'})"></i>
+                                                    </li>
+                                                    <li class="list-inline-item me-0 small">
+                                                        <i th:class="'fas fa-star ' + (${courseRatings[course.courseId] >= 2.0 ? 'text-warning' : 'text-secondary'})"></i>
+                                                    </li>
+                                                    <li class="list-inline-item me-0 small">
+                                                        <i th:class="'fas fa-star ' + (${courseRatings[course.courseId] >= 3.0 ? 'text-warning' : 'text-secondary'})"></i>
+                                                    </li>
+                                                    <li class="list-inline-item me-0 small">
+                                                        <i th:class="'fas fa-star ' + (${courseRatings[course.courseId] >= 4.0 ? 'text-warning' : 'text-secondary'})"></i>
+                                                    </li>
+                                                    <li class="list-inline-item me-0 small">
+                                                        <i th:class="'fas fa-star ' + (${courseRatings[course.courseId] >= 5.0 ? 'text-warning' : 'text-secondary'})"></i>
+                                                    </li>
                                                 </ul>
                                             </td>
                                             <td>
-                                                <a href="/admin-course-detail" class="btn btn-sm btn-info-soft mb-0 h6">View</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center text-start d-flex align-items-center position-relative">
-                                                <div class="w-60px"><img src="https://eduport.webestica.com/assets/images/courses/4by3/02.jpg" class="rounded" alt=""></div>
-                                                <h5 class="mb-0 ms-2 text-start" style="max-width: 200px; white-space: normal; overflow-wrap: break-word;"><a href="#" class="stretched-link">Graphic Design Masterclass</a></h5>
-                                            </td>
-                                            <td>2,568</td>
-                                            <td>
-                                                <ul class="list-inline mb-0">
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                </ul>
-                                            </td>
-                                            <td>
-                                                <a href="/admin-course-detail" class="btn btn-sm btn-info-soft mb-0 h6">View</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center text-start d-flex align-items-center position-relative">
-                                                <div class="w-60px"><img src="https://eduport.webestica.com/assets/images/courses/4by3/10.jpg" class="rounded" alt=""></div>
-                                                <h5 class="mb-0 ms-2 text-start" style="max-width: 200px; white-space: normal; overflow-wrap: break-word;"><a href="#" class="stretched-link">Bootstrap 5 From Scratch</a></h5>
-                                            </td>
-                                            <td>1,458</td>
-                                            <td>
-                                                <ul class="list-inline mb-0">
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                </ul>
-                                            </td>
-                                            <td>
-                                                <a href="#" class="btn btn-sm btn-info-soft mb-0 h6" data-bs-toggle="modal" data-bs-target="#viewReview">View</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center text-start d-flex align-items-center position-relative">
-                                                <div class="w-60px"><img src="https://eduport.webestica.com/assets/images/courses/4by3/04.jpg" class="rounded" alt=""></div>
-                                                <h5 class="mb-0 ms-2 text-start" style="max-width: 200px; white-space: normal; overflow-wrap: break-word;"><a href="#" class="stretched-link">Learn Invision</a></h5>
-                                            </td>
-                                            <td>6,845</td>
-                                            <td>
-                                                <ul class="list-inline mb-0">
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                </ul>
-                                            </td>
-                                            <td>
-                                                <a href="#" class="btn btn-sm btn-info-soft mb-0 h6" data-bs-toggle="modal" data-bs-target="#viewReview">View</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center text-start d-flex align-items-center position-relative">
-                                                <div class="w-60px"><img src="https://eduport.webestica.com/assets/images/courses/4by3/07.jpg" class="rounded" alt=""></div>
-                                                <h5 class="mb-0 ms-2 text-start" style="max-width: 200px; white-space: normal; overflow-wrap: break-word;">
-                                                    <a href="#" class="stretched-link">Deep Learning with React-Native</a>
-                                                </h5>
-                                            </td>
-                                            <td>3,845</td>
-                                            <td>
-                                                <ul class="list-inline mb-0">
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                </ul>
-                                            </td>
-                                            <td>
-                                                <a href="#" class="btn btn-sm btn-info-soft mb-0 h6" data-bs-toggle="modal" data-bs-target="#viewReview">View</a>
+                                                <a th:href="@{/admin/course(course_id=${course.courseId})}" class="btn btn-sm btn-info-soft mb-0 h6">View</a>
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
-                            </div>
-                            <div class="card-footer">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <p class="mb-0 text-center text-start">Showing 1 to 5 of 20 entries</p>
-                                    <nav>
-                                        <ul class="pagination justify-content-center mb-0">
-                                            <li class="page-item disabled">
-                                                <a class="page-link mx-1 rounded" href="#" tabindex="-1" aria-disabled="true">
-                                                    <i class="bi bi-chevron-left"></i>
-                                                </a>
-                                            </li>
-                                            <li class="page-item active">
-                                                <a class="page-link mx-1 rounded" href="#">1</a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a class="page-link mx-1 rounded" href="#">2</a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a class="page-link mx-1 rounded" href="#">3</a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a class="page-link mx-1 rounded" href="#">
-                                                    <i class="bi bi-chevron-right"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -272,13 +175,13 @@
                                     <div class="col-sm-6 mb-4">
                                         <div class="bg-success bg-opacity-10 p-3 rounded">
                                             <p class="mb-0 fs-5">Total Positive Review</p>
-                                            <h3 class="mb-0">85%</h4>
+                                            <h4 class="mb-0" th:text="${highReview} + '%'"></h4>
                                         </div>
                                     </div>
                                     <div class="col-sm-6 mb-4">
                                         <div class="bg-danger bg-opacity-10 p-3 rounded">
                                             <p class="mb-0 fs-5">Total Negative Review</p>
-                                            <h3 class="mb-0">15%</h5>
+                                            <h5 class="mb-0" th:text="${lowReview} + '%'"></h5>
                                         </div>
                                     </div>
                                 </div>
@@ -288,12 +191,15 @@
                     </div>
                     
                     <script>
+                        var high = [[${highReview}]];
+                        var low = [[${lowReview}]];
+                        
                         var options = {
                             chart: {
                                 type: 'donut',
                                 height: 350
                             },
-                            series: [85, 15],
+                            series: [high, low],
                             labels: ['Positive Reviews', 'Negative Reviews'],
                             colors: ['rgb(12, 188, 135)', 'rgb(214, 41, 62)'],
                             legend: {

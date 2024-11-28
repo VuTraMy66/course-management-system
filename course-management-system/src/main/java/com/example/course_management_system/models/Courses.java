@@ -9,6 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "Courses")
@@ -42,6 +43,9 @@ public class Courses {
 
     @Column(name = "image")
     private String image;
+
+    @Transient
+    private double averageRating;
 
     public Courses() {}
 
@@ -145,6 +149,14 @@ public class Courses {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public double getAverageRating() {
+        return averageRating;
+    }
+
+    public void setAverageRating(double averageRating) {
+        this.averageRating = averageRating;
     }
 }
 

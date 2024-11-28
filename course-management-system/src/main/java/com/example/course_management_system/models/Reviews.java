@@ -78,6 +78,11 @@ public class Reviews {
         return reviewDate.format(formatter);
     }
 
+    public String getFormattedReviewDate2(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return reviewDate.format(formatter);
+    }
+
     public Users getUser(){
         return user;
     }

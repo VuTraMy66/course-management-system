@@ -21,9 +21,24 @@ public class ReviewService {
         return reviewRepository.findAll();
     }
 
-    // public List<Reviews> getReviewsByCourseId(int courseId) {
-    //     return reviewRepository.findByCourseId(courseId);
-    // }
+    public List<Reviews> getReviewsByCourseId(int courseId) {
+        return reviewRepository.findByCourse_CourseId(courseId);
+    }
+
+    public double calculateAverageRating(int courseId) {
+        List<Reviews> courseReviews = reviewRepository.findByCourse_CourseId(courseId);
+        if (courseReviews.isEmpty()) {
+            return 0.0;
+        }
+        
+        double totalRating = 0.0;
+        for (Reviews review : courseReviews) {
+            totalRating += review.getRating();
+        }
+        
+        double average = totalRating / courseReviews.size();
+        return Math.round(average * 10.0) / 10.0;
+    }
 
     // public List<Reviews> getReviewsByStudentId(int userId) {
     //     return reviewRepository.findReviewsByStudentId(userId);

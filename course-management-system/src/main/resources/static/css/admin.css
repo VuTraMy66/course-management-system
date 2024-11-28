@@ -412,8 +412,13 @@ img {
 
 .fixed-image-size3 {
     width: 236.8px;
-    height: 100%; 
+    height: 140px; 
     object-fit: cover; 
 }
 
+.fixed-image-size4 {
+    width: 60px;
+    height: 45px; 
+    object-fit: cover; 
+}
 

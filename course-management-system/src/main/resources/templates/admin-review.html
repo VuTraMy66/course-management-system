@@ -89,7 +89,16 @@
                                                 <span class="fs-5" th:text="${review.formattedReviewDate}"></span>
                                             </td>
                                             <td>
-                                                <a href="#" class="btn btn-success-soft btn-round me-1 mb-1 mb-md-0" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Edit">
+                                                <a href="#" class="btn btn-success-soft btn-round me-1 mb-1 mb-md-0" 
+                                                    data-bs-toggle="modal" 
+                                                    data-bs-target="#viewReview" 
+                                                    data-bs-original-title="Edit"
+                                                    th:data-review-rating="${review.rating}"
+                                                    th:data-review-comment="${review.comment}"
+                                                    th:data-review-date="${review.formattedReviewDate}"
+                                                    th:data-review-user-name="${review.user.firstname} + ' ' + ${review.user.lastname}"
+                                                    th:data-review-user-avatar="${review.user.avatar}"
+                                                    th:data-review-course-name="${review.course.name}">
                                                     <i class="bi bi-pencil-square"></i>
                                                 </a>
                                                 <button class="btn btn-danger-soft btn-round me-1 mb-1 mb-md-0" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Delete">

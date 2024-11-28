@@ -23,7 +23,6 @@ public class EnrollmentService {
         return enrollmentRepository.findByCourse_CourseId(courseId);
     }
 
-    @Query("SELECT e FROM Enrollments e WHERE e.user.userId = :userId AND (e.status = 'learning' OR e.status = 'completed')")
     public List<Enrollments> getEnrollmentsByUserId(@Param("userId") int userId) {
         return enrollmentRepository.findByUser_UserId(userId);
     }

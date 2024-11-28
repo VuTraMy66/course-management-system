@@ -87,7 +87,7 @@
                                                 <thead class="table-light">
                                                     <tr>
                                                         <th>Courses</th>
-                                                        <th>Students Enrolled</th>
+                                                        <th class="text-center">Students Enrolled</th>
                                                         <th>Status</th>
                                                         <th>Action</th>
                                                     </tr>
@@ -102,15 +102,13 @@
                                                                     </div>
                                                                     <div class="d-flex flex-column gap-1">
                                                                         <h4 class="mb-0 text-primary-hover" th:text="${courseInAd.name}"></h4>
-                                                                        <span>Added on <span th:text="${courseInAd.formattedCreatedAt}"></span></span>
+                                                                        <span class="fs-5">Added on <span th:text="${courseInAd.formattedCreatedAt}"></span></span>
                                                                     </div>
                                                                 </div>
                                                             </a>
                                                         </td>
                                                         <td>
-                                                            <div>
-                                                                <h5 class="mb-0">1245</h5>
-                                                            </div>
+                                                            <h5 class="mb-0 text-center" th:text="${totalStudentsPerCourse[courseInAd.courseId]}"></h5>
                                                         </td>
                                                         <td>
                                                             <span th:class="'badge-dot ' + (${courseInAd.status == 'draft' ? 'bg-warning' : 'bg-success'}) + ' me-1 d-inline-block align-middle'"></span>
@@ -137,7 +135,7 @@
                                                 <thead class="table-light">
                                                     <tr>
                                                         <th>Courses</th>
-                                                        <th>Students Enrolled</th>
+                                                        <th class="text-center">Students Enrolled</th>
                                                         <th>Status</th>
                                                         <th>Action</th>
                                                     </tr>
@@ -152,15 +150,13 @@
                                                                     </div>
                                                                     <div class="d-flex flex-column gap-1">
                                                                         <h4 class="mb-0 text-primary-hover" th:text="${courseInAd.name}"></h4>
-                                                                        <span>Added on <span th:text="${courseInAd.formattedCreatedAt}"></span></span>
+                                                                        <span class="fs-5">Added on <span th:text="${courseInAd.formattedCreatedAt}"></span></span>
                                                                     </div>
                                                                 </div>
                                                             </a>
                                                         </td>
                                                         <td>
-                                                            <div class="d-flex align-items-center flex-row gap-2">
-                                                                <h5 class="mb-0">Guy Hawkins</h5>
-                                                            </div>
+                                                            <h5 class="mb-0 text-center" th:text="${totalStudentsPerCourse[courseInAd.courseId]}"></h5>
                                                         </td>
                                                         <td>
                                                             <span class="badge-dot bg-success me-1 d-inline-block align-middle"></span>
@@ -181,7 +177,7 @@
                                                 <thead class="table-light">
                                                     <tr>
                                                         <th>Courses</th>
-                                                        <th>Students Enrolled</th>
+                                                        <th class="text-center">Students Enrolled</th>
                                                         <th>Status</th>
                                                         <th>Action</th>
                                                     </tr>
@@ -196,15 +192,13 @@
                                                                     </div>
                                                                     <div class="d-flex flex-column gap-1">
                                                                         <h4 class="mb-0 text-primary-hover" th:text="${courseInAd.name}"></h4>
-                                                                        <span>Added on <span th:text="${courseInAd.formattedCreatedAt}"></span></span>
+                                                                        <span class="fs-5">Added on <span th:text="${courseInAd.formattedCreatedAt}"></span></span>
                                                                     </div>
                                                                 </div>
                                                             </a>
                                                         </td>
                                                         <td>
-                                                            <div class="d-flex align-items-center flex-row gap-2">
-                                                                <h5 class="mb-0">Guy Hawkins</h5>
-                                                            </div>
+                                                            <h5 class="mb-0 text-center" th:text="${totalStudentsPerCourse[courseInAd.courseId]}"></h5>
                                                         </td>
                                                         <td>
                                                             <span class="badge-dot bg-warning me-1 d-inline-block align-middle"></span>
@@ -213,34 +207,6 @@
                                                         <td>
                                                             <a href="#" class="btn btn-success btn-sm">Publish</a>
                                                             <a href="#" class="btn btn-outline-secondary btn-sm">Delete</a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <a href="#" class="text-inherit">
-                                                                <div class="d-flex align-items-center flex-row gap-3">
-                                                                    <div>
-                                                                        <img src="https://geeksui.codescandy.com/geeks/assets/images/course/course-graphql.jpg" alt="" class="img-4by3-lg rounded" />
-                                                                    </div>
-                                                                    <div class="d-flex flex-column gap-1">
-                                                                        <h4 class="mb-0 text-primary-hover">Guide to Static Sites with Gatsby...</h4>
-                                                                        <span>Added on 6 July, 2023</span>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                        </td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center flex-row gap-2">
-                                                                <h5 class="mb-0">1654</h5>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <span class="badge-dot bg-warning me-1 d-inline-block align-middle"></span>
-                                                            Draft
-                                                        </td>
-                                                        <td>
-                                                            <a href="#" class="btn btn-outline-secondary btn-sm">Delete</a>
-                                                            <a href="#" class="btn btn-success btn-sm">Publish</a>
                                                         </td>
                                                     </tr>
                                                 </tbody>

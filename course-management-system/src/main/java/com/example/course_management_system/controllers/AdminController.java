@@ -66,9 +66,25 @@ public class AdminController {
     // Show all courses
     @GetMapping("/admin/courses")
     public String adminAllCourse(Model model) {
-        List<Courses> coursesInAd = courseService.getAllCourses();
-        model.addAttribute("coursesInAd", coursesInAd);
-        return "admin-all-course";
+        try {
+            List<Courses> coursesInAd = courseService.getAllCourses();
+            
+            Map<Integer, Integer> totalStudentsPerCourse = new HashMap<>();
+
+            for (Courses course : coursesInAd) {
+                List<Enrollments> enrollments = enrollmentService.getEnrollmentsByCourseId(course.getCourseId());
+                totalStudentsPerCourse.put(course.getCourseId(), enrollments.size());
+            }
+
+            model.addAttribute("coursesInAd", coursesInAd);
+            model.addAttribute("totalStudentsPerCourse", totalStudentsPerCourse);
+
+            return "admin-all-course";
+        } catch (Exception e) {
+            e.printStackTrace();
+            model.addAttribute("errorMessage", "An error occurred while fetching courses or enrollments.");
+            return "error-page";
+        }
     }
 
     @GetMapping("/admin/course-category")
@@ -141,40 +157,23 @@ public class AdminController {
     @GetMapping("/admin/student")
     public String adminStudent(Model model) {
         try {
-            // Fetch all students
             List<Users> users = userService.getAllStudents();
-    
-            // List to store enrollments for each user
+
             Map<Integer, List<Enrollments>> coursesOfStudent = new HashMap<>();
-    
-            // Variable to calculate total number of courses for all students
-            int totalCourses = 0;  // Total courses for all students
-    
-            // Map to store total courses for each student
             Map<Integer, Integer> totalCoursesOfEachStudent = new HashMap<>();
     
-            // Fetch enrollments for each user and calculate total courses for each student
             for (Users user : users) {
-                // Fetch enrollments for this student
                 List<Enrollments> enrollments = enrollmentService.getEnrollmentsByUserId(user.getUserId());
                 coursesOfStudent.put(user.getUserId(), enrollments);
-    
-                // Calculate total courses for this student
                 totalCoursesOfEachStudent.put(user.getUserId(), enrollments.size());
-    
-                // Add to the total courses for all students
-                totalCourses += enrollments.size();
             }
     
-            // Calculate the total number of students
             int totalStudents = users.size();
     
-            // Add users, enrollments, and total number of students to the model
             model.addAttribute("users", users);
             model.addAttribute("coursesOfStudent", coursesOfStudent);
             model.addAttribute("totalStudents", totalStudents);
-            model.addAttribute("totalCoursesOfEachStudent", totalCoursesOfEachStudent); // Total courses per student
-            model.addAttribute("totalCourses", totalCourses); // Total courses for all students
+            model.addAttribute("totalCoursesOfEachStudent", totalCoursesOfEachStudent);
             model.addAttribute("pageUrl", "/admin/student");
     
             return "admin-student"; 

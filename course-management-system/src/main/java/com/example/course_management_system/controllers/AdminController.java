@@ -220,16 +220,18 @@ public class AdminController {
     }
 
     @PostMapping("/admin/update-course")
-    public String updateCourse(@ModelAttribute Courses course) {
-        Optional<Courses> existingCourse = courseService.getCourseById(course.getCourseId());
+    public String updateCourse(@ModelAttribute("course") Courses course, int courseId) {
+        Optional<Courses> existingCourse = courseService.getCourseById(courseId);
+        int id = courseId;
         Courses courseToUpdate = existingCourse.get();
             courseToUpdate.setName(course.getName());
             courseToUpdate.setCategory(course.getCategory());
             courseToUpdate.setSkillLevel(course.getSkillLevel());
             courseToUpdate.setDescription(course.getDescription());
             courseToUpdate.setDuration(course.getDuration());
+            courseToUpdate.setImage(course.getImage());
             courseService.saveCourse(courseToUpdate);
-        return "redirect:/admin/courses"; // Redirect to course detail page
+        return "redirect:/admin/course?course_id=" + id;
     }
 
     @PostMapping("/admin/save-course")

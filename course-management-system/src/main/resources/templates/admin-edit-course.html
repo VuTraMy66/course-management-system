@@ -100,22 +100,22 @@
                                                     </div>
                                                     <div class="mb-3">
                                                         <label class="form-label" for="addCourseCategory">Courses category</label>
-                                                        <select class="form-select" id="addCourseCategory">
-                                                            <option value="" th:selected="${course.category == ''}">Select category</option>
-                                                            <option value="Data Science" th:selected="${course.category == 'Data Science'}">Data Science</option>
-                                                            <option value="Programming" th:selected="${course.category == 'Programming'}">Programming</option>
-                                                            <option value="Web Development" th:selected="${course.category == 'Web Development'}">Web Development</option>
-                                                            <option value="Artificial Intelligence" th:selected="${course.category == 'Artificial Intelligence'}">Artificial Intelligence</option>
-                                                            <option value="UI / UX Design" th:selected="${course.category == 'UI / UX Design'}">UI / UX Design</option>
+                                                        <select class="form-select" id="addCourseCategory" th:field="*{category}">
+                                                            <option value="">Select category</option>
+                                                            <option value="Data Science">Data Science</option>
+                                                            <option value="Programming">Programming</option>
+                                                            <option value="Web Development">Web Development</option>
+                                                            <option value="Artificial Intelligence">Artificial Intelligence</option>
+                                                            <option value="UI / UX Design">UI / UX Design</option>
                                                         </select>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label class="form-label" for="addCourseLevel">Courses level</label>
                                                         <select class="form-select" id="addCourseLevel" th:field="*{skillLevel}">
-                                                            <option value="" th:selected="${course.skillLevel == ''}">Select level</option>
-                                                            <option value="beginner" th:selected="${course.skillLevel == 'beginner'}">Beignner</option>
-                                                            <option value="intermediate" th:selected="${course.skillLevel == 'intermediate'}">Intermediate</option>
-                                                            <option value="advanced" th:selected="${course.skillLevel == 'advanced'}">Advance</option>
+                                                            <option value="" >Select level</option>
+                                                            <option value="beginner">Beignner</option>
+                                                            <option value="intermediate">Intermediate</option>
+                                                            <option value="advanced">Advance</option>
                                                         </select>
                                                     </div>
                                                     <div class="mb-3">
@@ -142,18 +142,12 @@
                                                 <div class="card-body">
                                                     <div class="custom-file-container mb-4" data-upload-id="courseImage">
                                                         <div class="label-container d-flex justify-content-between align-items-center">
-                                                            <label>Upload Course Image</label>
+                                                            <label for="courseImageUrl" class="form-label">Course Image URL</label>
                                                             <a class="clear-button" id="clearImage" title="Clear Image">
                                                                 <i class="bi bi-x" style="height: 15px; width: 15px;"></i>
                                                             </a>
                                                         </div>
-                                                        <label class="input-container">
-                                                            <input accept="*" aria-label="Choose File" type="file" id="file-upload-with-preview-courseImage" class="input-hidden" data-has-listeners="true"/>
-                                                            <span class="input-visible">
-                                                                Choose file...
-                                                                <span class="browse-button">Browse</span>
-                                                            </span>
-                                                        </label>
+                                                        <input type="text" id="courseImageUrl" name="image" class="form-control" placeholder="Enter image URL" th:field="*{image}" />
                                                         <small class="d-block mt-2">Upload an image that represents your course.</small>
                                                     </div>
                                                     <div class="mt-3 mb-4" id="imagePreview" th:style="${course.image != null} ? '' : 'display: none;'">
@@ -168,22 +162,22 @@
                                         </div>
 
                                         <script>
-                                            document.getElementById('file-upload-with-preview-courseImage').addEventListener('change', function(e) {
-                                                const file = e.target.files[0];
-                                                if (file) {
-                                                    const reader = new FileReader();
-                                                    reader.onload = function(event) {
-                                                        document.getElementById('imagePreview').style.display = 'block';
-                                                        document.getElementById('preview').setAttribute('src', event.target.result);
-                                                    }
-                                                    reader.readAsDataURL(file); 
+                                            document.getElementById('courseImageUrl').addEventListener('input', function(e) {
+                                                const imageUrl = e.target.value; 
+                                                const previewImage = document.getElementById('preview');
+                                        
+                                                if (imageUrl) {
+                                                    document.getElementById('imagePreview').style.display = 'block';
+                                                    previewImage.setAttribute('src', imageUrl); 
+                                                } else {
+                                                    document.getElementById('imagePreview').style.display = 'none';
                                                 }
                                             });
-
+                                        
                                             document.getElementById('clearImage').addEventListener('click', function() {
-                                                document.getElementById('file-upload-with-preview-courseImage').value = ''; 
-                                                document.getElementById('imagePreview').style.display = 'none'; 
-                                                document.getElementById('preview').setAttribute('src', '');
+                                                document.getElementById('courseImageUrl').value = ''; 
+                                                document.getElementById('imagePreview').style.display = 'none';
+                                                document.getElementById('preview').setAttribute('src', ''); 
                                             });
                                         </script>
 
@@ -329,12 +323,6 @@
                 if (this.currentTab < 4) {
                     this.currentTab++;
                     this.showTab(this.currentTab);
-                }
-                
-                // Kiểm tra nếu đã đến bước cuối cùng (bước 4)
-                if (this.currentTab === 4) {
-                    // Lấy form và gọi submit
-                    document.querySelector('form').submit();
                 }
             },
                 

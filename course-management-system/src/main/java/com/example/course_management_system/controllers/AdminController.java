@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -184,10 +186,15 @@ public class AdminController {
         List<Reviews> reviewsOfCourse = reviewService.getReviewsByCourseId(courseId);
         double averageRating = reviewService.calculateAverageRating(courseId);
 
+        List<Enrollments> enrollments = enrollmentService.getEnrollmentsByCourseId(courseId);
+        int totalStudentsPerCourse = enrollments.size();
+
+
         if (courseDetail.isPresent()) {
             model.addAttribute("courseDetail", courseDetail.get());
             model.addAttribute("reviewsOfCourse", reviewsOfCourse);
             model.addAttribute("averageRating", averageRating);
+            model.addAttribute("totalStudentsPerCourse", totalStudentsPerCourse);
         } else {
             model.addAttribute("error", "Course not found");
         }
@@ -197,14 +204,38 @@ public class AdminController {
 
     @GetMapping("/admin/add-course")
     public String adminAddCourse(Model model) {
+        model.addAttribute("course", new Courses());
         model.addAttribute("pageUrl", "/admin/add-course");
         return "admin-add-course"; 
     }
 
     @GetMapping("/admin/edit-course")
-    public String adminEditCourse(Model model) {
+    public String adminEditCourse(@RequestParam("course_id") int courseId, Model model) {
+        Optional<Courses> courseEdit = courseService.getCourseById(courseId);
+        if (courseEdit.isPresent()) {
+            model.addAttribute("course", courseEdit.get());
+        }
         model.addAttribute("pageUrl", "/admin/edit-course");
         return "admin-edit-course"; 
+    }
+
+    @PostMapping("/admin/update-course")
+    public String updateCourse(@ModelAttribute Courses course) {
+        Optional<Courses> existingCourse = courseService.getCourseById(course.getCourseId());
+        Courses courseToUpdate = existingCourse.get();
+            courseToUpdate.setName(course.getName());
+            courseToUpdate.setCategory(course.getCategory());
+            courseToUpdate.setSkillLevel(course.getSkillLevel());
+            courseToUpdate.setDescription(course.getDescription());
+            courseToUpdate.setDuration(course.getDuration());
+            courseService.saveCourse(courseToUpdate);
+        return "redirect:/admin/courses"; // Redirect to course detail page
+    }
+
+    @PostMapping("/admin/save-course")
+    public String saveCourse(Courses course) {
+        courseService.saveCourse(course);
+        return "redirect:/admin/course?course_id=" + course.getCourseId();
     }
   
     // Show all student created accounts

@@ -30,7 +30,7 @@
                     <div class="row mb-3">
                         <div class="col-12 d-sm-flex justify-content-between align-items-center">
                             <h1 class="fw-bold mb-2 mb-sm-0">Course Details</h1>
-                            <a href="/admin/edit-course" class="btn btn-primary mb-0">Edit Course</a>
+                            <a th:href="@{/admin/edit-course(course_id=${courseDetail.courseId})}" class="btn btn-primary mb-0">Edit Course</a>
                         </div>
                     </div>
                     <div class="row g-4">
@@ -62,7 +62,7 @@
                                                 </li>
                                                 <li class="list-group-item">
                                                     <span>Total Enrolled:</span>
-                                                    <span class="h5 mb-0">12,000+</span>
+                                                    <span class="h5 mb-0" th:text="${totalStudentsPerCourse}"></span>
                                                 </li>
                                                 <li class="list-group-item">
                                                     <span>Certificate:</span>

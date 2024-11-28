@@ -126,10 +126,10 @@
                             <div class="card-body d-flex flex-column gap-3">
                                 <div class="d-flex align-items-center justify-content-between lh-1">
                                     <div>
-                                        <span class="fs-6 text-uppercase fw-semibold ls-md">Completed Courses</span>
+                                        <span class="fs-6 text-uppercase fw-semibold ls-md">Total Courses</span>
                                     </div>
                                     <div>
-                                        <span class="bi bi-journal-check fs-3 text-primary" style="width: 20px; height: 20px;"></span>
+                                        <span class="bi bi-book fs-3 text-primary" style="width: 20px; height: 20px;"></span>
                                     </div>
                                 </div>
                                 <div class="d-flex flex-column gap-1">
@@ -137,9 +137,9 @@
                                     <div class="d-flex flex-row gap-2">
                                         <span class="text-success fw-semibold">
                                             <i data-feather="trending-up" class="me-1" style="max-width: 15px; max-height: 15px;"></i>
-                                            +20
+                                            +2
                                         </span>
-                                        <span class="fw-medium">Number of courses</span>
+                                        <span class="fw-medium">courses</span>
                                     </div>
                                 </div>
                             </div>
@@ -150,41 +150,41 @@
                             <div class="card-body d-flex flex-column gap-3">
                                 <div class="d-flex align-items-center justify-content-between lh-1">
                                     <div>
-                                        <span class="fs-6 text-uppercase fw-semibold ls-md">Enrolled Courses</span>
+                                        <span class="fs-6 text-uppercase fw-semibold ls-md">Total Categories</span>
+                                    </div>
+                                    <div>
+                                        <span class="fs-3 text-primary bi bi-journal-check" style="width: 20px; height: 20px;"></span>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-column gap-1">
+                                    <h2 class="fw-bold mb-0" style="color: #212529;">12</h2>
+                                    <div class="d-flex flex-row gap-2">
+                                        <span class="text-success fw-semibold">
+                                            <i data-feather="trending-up" class="me-1" style="max-width: 15px; max-height: 15px;"></i>
+                                            +7
+                                        </span>
+                                        <span class="fw-medium">categories</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-md-12 col-12">
+                        <div class="card">
+                            <div class="card-body d-flex flex-column gap-3">
+                                <div class="d-flex align-items-center justify-content-between lh-1">
+                                    <div>
+                                        <span class="fs-6 text-uppercase fw-semibold ls-md">Total Enrollments</span>
                                     </div>
                                     <div>
                                         <span class="fs-3 text-primary bi bi-person" style="width: 20px; height: 20px;"></span>
                                     </div>
                                 </div>
                                 <div class="d-flex flex-column gap-1">
-                                    <h2 class="fw-bold mb-0" style="color: #212529;" th:text="${totalStudents}"></h2>
+                                    <h2 class="fw-bold mb-0" style="color: #212529;" th:text="${totalEnrollments}"></h2>
                                     <div class="d-flex flex-row gap-2">
-                                        <span class="text-danger fw-semibold">120+</span>
-                                        <span class="fw-medium">Number of students</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-6 col-md-12 col-12">
-                        <div class="card">
-                            <div class="card-body d-flex flex-column gap-3">
-                                <div class="d-flex align-items-center justify-content-between lh-1">
-                                    <div>
-                                        <span class="fs-6 text-uppercase fw-semibold ls-md">Course In Progress</span>
-                                    </div>
-                                    <div>
-                                        <span class="fs-3 text-primary bi bi-book" style="width: 20px; height: 20px;"></span>
-                                    </div>
-                                </div>
-                                <div class="d-flex flex-column gap-1">
-                                    <h2 class="fw-bold mb-0" style="color: #212529;">1,235</h2>
-                                    <div class="d-flex flex-row gap-2">
-                                        <span class="text-success fw-semibold">
-                                            <i data-feather="trending-up" class="me-1" style="max-width: 15px; max-height: 15px;"></i>
-                                            +1200
-                                        </span>
-                                        <span class="fw-medium">Courses</span>
+                                        <span class="text-danger fw-semibold">+10</span>
+                                        <span class="fw-medium">enrollments</span>
                                     </div>
                                 </div>
                             </div>
@@ -208,7 +208,7 @@
                                             <i data-feather="trending-up" class="me-1" style="max-width: 15px; max-height: 15px;"></i>
                                             +2
                                         </span>
-                                        <span class="fw-medium">Students</span>
+                                        <span class="fw-medium">students</span>
                                     </div>
                                 </div>
                             </div>
@@ -222,9 +222,9 @@
                                 <h4 class="mb-0">Featured Students</h4>
                                 <a href="/admin/student" class="btn btn-outline-secondary btn-sm fw-semibold">View all</a>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body" style="padding-top: 0rem; padding-bottom: 0rem;">
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item px-0 pt-0" th:each="user: ${users}">
+                                    <li class="list-group-item px-0 pt-3" th:each="user: ${users}">
                                         <div class="row">
                                             <div class="col-auto">
                                                 <div class="avatar avatar-md avatar-indicators avatar-offline">
@@ -234,12 +234,10 @@
                                             <div class="col ms-n3">
                                                 <h4 class="mb-0 h5" th:text="${user.firstname + ' ' + user.lastname}"></h4>
                                                 <span class="me-2 fs-6">
-                                                    <span class="text-dark me-1 fw-semibold">42</span>
-                                                    Courses participating
+                                                    <span class="text-dark me-1 fw-semibold" th:text="${totalCoursesOfEachStudent[user.userId]}"></span><span th:text="${totalCoursesOfEachStudent[user.userId] <= 1 ? ' course participating' : ' courses participating'}"></span>
                                                 </span>
                                                 <span class="me-2 fs-6">
-                                                    <span class="text-dark me-1 fw-semibold">1,10,124</span>
-                                                    Completed courses
+                                                    <span class="text-dark me-1 fw-semibold" th:text="${completedCoursesOfEachStudent[user.userId]}"></span><span th:text="${completedCoursesOfEachStudent[user.userId] <= 1 ? ' completed course' : ' completed courses'}"></span>
                                                 </span>
                                             </div>
                                             <div class="col-auto">
@@ -270,152 +268,38 @@
                         <div class="card">
                             <div class="card-header d-flex align-items-center justify-content-between card-header-height">
                                 <h4 class="mb-0">Recent Courses</h4>
-                                <a href="#" class="btn btn-outline-secondary btn-sm fw-semibold">View all</a>
+                                <a href="/admin/courses" class="btn btn-outline-secondary btn-sm fw-semibold">View all</a>
                             </div>
-                            <div class="card-body">
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item px-0 pt-0">
+                            <div class="card-body" style="padding-top: 0.5rem; padding-bottom: 0.78rem;">
+                                <ul class="list-group list-group-flush" >
+                                    <li class="list-group-item px-0 pt-3" th:each="course : ${courses}">
                                         <div class="row flex-md-row gap-md-0">
                                             <div class="col-md-3 col-12">
-                                                <a href="#">
-                                                    <img src="https://geeksui.codescandy.com/geeks/assets/images/course/course-laravel.jpg" alt="" class="img-fluid rounded" />
+                                                <a th:href="@{/admin/course(course_id=${course.courseId})}">
+                                                    <img th:src="${course.image}" class="img-fluid rounded fixed-image-size2" />
                                                 </a>
                                             </div>
                                             <div class="col-md-8 col-10">
                                                 <div class="d-flex flex-column gap-2">
-                                                    <a href="#">
-                                                        <h4 class="text-primary-hover mb-0">Revolutionize how you build the web...</h4>
+                                                    <a th:href="@{/admin/course(course_id=${course.courseId})}">
+                                                        <h4 class="text-primary-hover mb-0" th:text="${course.name}"></h4>
                                                     </a>
                                                     <ul class="mb-3 list-inline fs-6">
                                                         <li class="list-inline-item">
                                                             <span>
                                                                 <i class="bi bi-clock align-baseline"></i>
                                                             </span>
-                                                            <span>2h 30m</span>
+                                                            <span th:text="${course.formattedDuration}"></span>
                                                         </li>
                                                         <li class="list-inline-item">
                                                             <svg class="me-1 mt-n1" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE"></rect>
-                                                                <rect x="7" y="5" width="2" height="9" rx="1" fill="#754FFE"></rect>
-                                                                <rect x="11" y="2" width="2" height="12" rx="1" fill="#DBD8E9"></rect>
+                                                                <rect x="3" y="8" width="2" height="6" rx="1" th:attr="fill=${course.skillLevel == 'beginner' || course.skillLevel == 'intermediate' || course.skillLevel == 'advanced' ? '#754FFE' : '#DBD8E9'}"></rect>
+                                                                <rect x="7" y="5" width="2" height="9" rx="1" th:attr="fill=${course.skillLevel == 'intermediate' || course.skillLevel == 'advanced' ? '#754FFE' : '#DBD8E9'}"></rect>
+                                                                <rect x="11" y="2" width="2" height="12" rx="1" th:attr="fill=${course.skillLevel == 'advanced' ? '#754FFE' : '#DBD8E9'}"></rect>
                                                             </svg>
-                                                            Intermediate
+                                                            <span th:text="${course.skillLevel}"></span>
                                                         </li>
                                                     </ul>
-                                                </div>
-                                            </div>
-                                            <div class="col-1 col-auto d-flex justify-content-center">
-                                                <span class="dropdown dropstart">
-                                                    <a class="btn-icon btn btn-ghost btn-sm rounded-circle" href="#" role="button" id="courseDropdown7" data-bs-toggle="dropdown" data-bs-offset="-20,20" aria-expanded="false">
-                                                        <i data-feather="more-vertical" style="width: 14px; max-height: auto;"></i>
-                                                    </a>
-                                                    <span class="dropdown-menu" aria-labelledby="courseDropdown7" style="transform: translate3d(-20px, -20px, 0px);">
-                                                        <span class="dropdown-header">Settings</span>
-                                                        <a class="dropdown-item" href="#">
-                                                            <i data-feather="edit" class="dropdown-item-icon me-2"></i>
-                                                            Edit
-                                                        </a>
-                                                        <a class="dropdown-item" href="#">
-                                                            <i data-feather="trash" class="dropdown-item-icon me-2"></i>
-                                                            Remove
-                                                        </a>
-                                                    </span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item px-0">
-                                        <div class="row flex-md-row gap-md-0">
-                                            <div class="col-md-3 col-12">
-                                                <a href="#">
-                                                    <img src="https://geeksui.codescandy.com/geeks/assets/images/course/course-gatsby.jpg" alt="" class="img-fluid rounded" />
-                                                </a>
-                                            </div>
-                                            <div class="col-md-8 col-10">
-                                                <div class="d-flex flex-column gap-2">
-                                                    <a href="#">
-                                                        <h5 class="text-primary-hover mb-0">Guide to Static Sites with Gatsby.js</h5>
-                                                    </a>
-                                                    <div class="d-flex align-items-center gap-2">
-                                                        <img src="https://geeksui.codescandy.com/geeks/assets/images/avatar/avatar-8.jpg" alt="" class="rounded-circle avatar-xs" />
-                                                        <span class="fs-6">Jenny Wilson</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-1 col-auto d-flex justify-content-center">
-                                                <span class="dropdown dropstart">
-                                                    <a class="btn-icon btn btn-ghost btn-sm rounded-circle" href="#" role="button" id="courseDropdown7" data-bs-toggle="dropdown" data-bs-offset="-20,20" aria-expanded="false">
-                                                        <i data-feather="more-vertical" style="width: 14px; max-height: auto;"></i>
-                                                    </a>
-                                                    <span class="dropdown-menu" aria-labelledby="courseDropdown7" style="transform: translate3d(-20px, -20px, 0px);">
-                                                        <span class="dropdown-header">Settings</span>
-                                                        <a class="dropdown-item" href="#">
-                                                            <i data-feather="edit" class="dropdown-item-icon me-2"></i>
-                                                            Edit
-                                                        </a>
-                                                        <a class="dropdown-item" href="#">
-                                                            <i data-feather="trash" class="dropdown-item-icon me-2"></i>
-                                                            Remove
-                                                        </a>
-                                                    </span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item px-0">
-                                        <div class="row flex-md-row gap-md-0">
-                                            <div class="col-md-3 col-12">
-                                                <a href="#">
-                                                    <img src="https://geeksui.codescandy.com/geeks/assets/images/course/course-javascript.jpg" alt="" class="img-fluid rounded" />
-                                                </a>
-                                            </div>
-                                            <div class="col-md-8 col-12">
-                                                <div class="d-flex flex-column gap-2">
-                                                    <a href="#">
-                                                        <h5 class="text-primary-hover mb-0">The Modern JavaScript Courses</h5>
-                                                    </a>
-                                                    <div class="d-flex align-items-center gap-2">
-                                                        <img src="https://geeksui.codescandy.com/geeks/assets/images/avatar/avatar-1.jpg" alt="" class="rounded-circle avatar-xs" />
-                                                        <span class="fs-6">Guy Hawkins</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-1 col-auto d-flex justify-content-center">
-                                                <span class="dropdown dropstart">
-                                                    <a class="btn-icon btn btn-ghost btn-sm rounded-circle" href="#" role="button" id="courseDropdown7" data-bs-toggle="dropdown" data-bs-offset="-20,20" aria-expanded="false">
-                                                        <i data-feather="more-vertical" style="width: 14px; max-height: auto;"></i>
-                                                    </a>
-                                                    <span class="dropdown-menu" aria-labelledby="courseDropdown7" style="transform: translate3d(-20px, -20px, 0px);">
-                                                        <span class="dropdown-header">Settings</span>
-                                                        <a class="dropdown-item" href="#">
-                                                            <i data-feather="edit" class="dropdown-item-icon me-2"></i>
-                                                            Edit
-                                                        </a>
-                                                        <a class="dropdown-item" href="#">
-                                                            <i data-feather="trash" class="dropdown-item-icon me-2"></i>
-                                                            Remove
-                                                        </a>
-                                                    </span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item px-0">
-                                        <div class="row flex-md-rowngap-md-0">
-                                            <div class="col-md-3 col-12">
-                                                <a href="#">
-                                                    <img src="https://geeksui.codescandy.com/geeks/assets/images/course/course-wordpress.jpg" alt="" class="img-fluid rounded" />
-                                                </a>
-                                            </div>
-                                            <div class="col-md-8 col-10">
-                                                <div class="d-flex flex-column gap-2">
-                                                    <a href="#">
-                                                        <h5 class="text-primary-hover mb-0">Online WordPress Courses Become an Expert Today</h5>
-                                                    </a>
-                                                    <div class="d-flex align-items-center gap-2">
-                                                        <img src="https://geeksui.codescandy.com/geeks/assets/images/avatar/avatar-5.jpg" alt="" class="rounded-circle avatar-xs" />
-                                                        <span class="fs-6">Robert Fox</span>
-                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="col-1 col-auto d-flex justify-content-center">

@@ -19,6 +19,10 @@ public class EnrollmentService {
         this.enrollmentRepository = enrollmentRepository;
     }
 
+    public List<Enrollments> getAllEnrollments() {
+        return enrollmentRepository.findAll();
+    }
+
     public List<Enrollments> getEnrollmentsByCourseId(int courseId) {
         return enrollmentRepository.findByCourse_CourseId(courseId);
     }
@@ -26,4 +30,6 @@ public class EnrollmentService {
     public List<Enrollments> getEnrollmentsByUserId(@Param("userId") int userId) {
         return enrollmentRepository.findByUser_UserId(userId);
     }
+
+    
 }

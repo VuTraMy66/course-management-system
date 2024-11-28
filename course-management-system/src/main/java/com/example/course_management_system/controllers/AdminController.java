@@ -46,19 +46,48 @@ public class AdminController {
     public String showAdminDashboard(Model model) {
         List<Courses> courses = courseService.getAllCourses();
         List<Users> users = userService.getAllStudents();
+        List<Enrollments> enrolls = enrollmentService.getAllEnrollments();
 
         int totalCourses = courses.size();
         int totalStudents = users.size();
+        int totalEnrollments = enrolls.size();
 
-        users.sort((user1, user2) -> Integer.compare(user2.getUserId(), user1.getUserId()));
+        // Maps to store enrollments and completed courses count for each student
+        Map<Integer, Integer> totalCoursesOfEachStudent = new HashMap<>();
+        Map<Integer, Integer> completedCoursesOfEachStudent = new HashMap<>();
 
-        // Limit the list to 8 users
-        List<Users> topUsers = users.stream().limit(8).collect(Collectors.toList());
+        for (Users user : users) {
+            List<Enrollments> enrollments = enrollmentService.getEnrollmentsByUserId(user.getUserId());
+            totalCoursesOfEachStudent.put(user.getUserId(), enrollments.size());
 
+            // Filter enrollments for completed courses
+            int completedCoursesCount = (int) enrollments.stream()
+                    .filter(enrollment -> "completed".equalsIgnoreCase(enrollment.getStatus())) // Adjust based on status value
+                    .count();
+            completedCoursesOfEachStudent.put(user.getUserId(), completedCoursesCount);
+        }
 
-        model.addAttribute("users", topUsers);
+        // Sort students by total enrolled courses in descending order and limit to top 8
+        List<Users> sortedUsers = users.stream()
+            .sorted((u1, u2) -> Integer.compare(
+                totalCoursesOfEachStudent.get(u2.getUserId()),
+                totalCoursesOfEachStudent.get(u1.getUserId())
+                ))
+            .limit(8)
+            .collect(Collectors.toList());
+
+        List<Courses> lastSixCourses = courses.stream()
+            .sorted((c1, c2) -> Integer.compare(c2.getCourseId(), c1.getCourseId()))
+            .limit(6)
+            .collect(Collectors.toList());
+
+        model.addAttribute("courses", lastSixCourses);
+        model.addAttribute("users", sortedUsers);
         model.addAttribute("totalCourses", totalCourses);
         model.addAttribute("totalStudents", totalStudents);
+        model.addAttribute("totalEnrollments", totalEnrollments);
+        model.addAttribute("totalCoursesOfEachStudent", totalCoursesOfEachStudent);
+        model.addAttribute("completedCoursesOfEachStudent", completedCoursesOfEachStudent);
         model.addAttribute("pageUrl", "/admin");
         return "admin"; 
     }

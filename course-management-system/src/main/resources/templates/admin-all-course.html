@@ -143,7 +143,7 @@
                                                 <tbody>
                                                     <tr th:each="courseInAd : ${coursesInAd}" th:if="${courseInAd.status == 'published'}">
                                                         <td>
-                                                            <a href="#" class="text-inherit">
+                                                            <a th:href="@{/admin/course(course_id=${courseInAd.courseId})}" class="text-inherit">
                                                                 <div class="d-flex align-items-center flex-row gap-3">
                                                                     <div>
                                                                         <img th:src="${courseInAd.image}" alt="" class="img-4by3-lg rounded fixed-image-size2" />
@@ -185,7 +185,7 @@
                                                 <tbody>
                                                     <tr th:each="courseInAd : ${coursesInAd}" th:if="${courseInAd.status == 'draft'}">
                                                         <td>
-                                                            <a href="/admin/course/{courseId}" class="text-inherit">
+                                                            <a th:href="@{/admin/course(course_id=${courseInAd.courseId})}" class="text-inherit">
                                                                 <div class="d-flex align-items-center flex-row gap-3">
                                                                     <div>
                                                                         <img th:src="${courseInAd.image}" alt="" class="img-4by3-lg rounded fixed-image-size2" />

@@ -6,12 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.course_management_system.models.Courses;
+import com.example.course_management_system.models.Sessions;
 import com.example.course_management_system.models.Users;
 import com.example.course_management_system.services.AdminService;
+import com.example.course_management_system.services.SessionService;
 
 @Controller
 public class AdminController {
@@ -140,7 +144,7 @@ public class AdminController {
         return "admin-review";
     }
 
-    // delete sessions funct
+    // delete sessions 
     @GetMapping("/admin-delete-sessions/{sessionId}")
     public String adminDeleteSession(@PathVariable("sessionId") int sessionId, Model model) {
         try {
@@ -156,4 +160,65 @@ public class AdminController {
             return "error-page";
         }
     }   
+
+    @Autowired
+    private SessionService sessionService;
+
+    // Show the session creation form
+    @GetMapping("/admin/create-session")
+    public String showCreateSessionForm(Model model) {
+        List<Courses> courses = adminService.getAllCourses();  // Get all courses
+        model.addAttribute("courses", courses);  // Add courses to model
+        model.addAttribute("session", new Sessions());  // Empty session object
+        model.addAttribute("pageUrl", "/admin/create-session");
+        return "admin-create-session"; // Show the session creation form view
+    }
+
+    // Handle the session creation form submission
+    @PostMapping("/admin/create-session")
+    public String createSession(@ModelAttribute Sessions session, Model model) {
+        try {
+            sessionService.createSession(session);  // Create session
+            model.addAttribute("successMessage", "Session created successfully!");
+            return "redirect:/admin";  // Redirect back to the admin dashboard
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "An error occurred while creating the session.");
+            return "error-page"; // Error page in case of failure
+        }
+    }
+
+    // Show the edit session form
+    @GetMapping("/admin/edit-session/{sessionId}")
+    public String showEditSessionForm(@PathVariable("sessionId") int sessionId, Model model) {
+        try {
+            // Retrieve the session to edit
+            Sessions session = sessionService.finSessionById(sessionId).orElseThrow(() -> new Exception("Session not found"));
+            List<Courses> courses = adminService.getAllCourses();  // Get all courses
+ 
+            // Add the session and courses to the model
+            model.addAttribute("session", session);
+            model.addAttribute("courses", courses); 
+            model.addAttribute("pageUrl", "/admin/edit-session");
+            return "admin-edit-session";  // The view where the session can be edited
+        } catch (Exception e) {
+            e.printStackTrace();
+            model.addAttribute("errorMessage", "An error occurred while fetching the session details.");
+            return "error-page"; // Error page if session is not found
+        }
+    }
+ 
+    // Handle the session edit form submission
+    @PostMapping("/admin/edit-session")
+    public String editSession(@ModelAttribute Sessions session, Model model) {
+        try {
+            // Update the session
+            sessionService.updateSession(session);
+            model.addAttribute("successMessage", "Session updated successfully!");
+            return "redirect:/admin";  // Redirect back to the admin dashboard
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "An error occurred while updating the session.");
+            return "error-page"; // Error page if something goes wrong
+        }
+    }
+    
 }

@@ -110,6 +110,7 @@ public class AdminController {
 
             model.addAttribute("coursesInAd", coursesInAd);
             model.addAttribute("totalStudentsPerCourse", totalStudentsPerCourse);
+            model.addAttribute("pageUrl", "/admin/courses");
 
             return "admin-all-course";
         } catch (Exception e) {
@@ -270,6 +271,13 @@ public class AdminController {
         return "redirect:/admin/courses";
     }
 
+    @GetMapping("/admin/{courseId}/add-lesson")
+    public String adminAddLesson(@PathVariable("courseId") int courseId, Model model) {
+        model.addAttribute("lesson", new Lessons());
+        model.addAttribute("pageUrl", "/admin/" + courseId + "/add-lesson");
+        return "admin-add-lesson"; 
+    }
+
     @GetMapping("/admin/edit-lesson")
     public String adminEditLesson(@RequestParam("lesson_id") int lessonId, Model model) {
         Optional<Lessons> lessonEdit = lessonService.getLessonById(lessonId);
@@ -291,10 +299,36 @@ public class AdminController {
             lessonToUpdate.setVideoUrl(lesson.getVideoUrl());
             lessonToUpdate.setDuration(lesson.getDuration());
             lessonService.saveLesson(lessonToUpdate);
+
+            // Update the total duration of the course
+            Optional<Courses> courseOptional = courseService.getCourseById(courseId);
+            if (courseOptional.isPresent()) {
+                Courses course = courseOptional.get();  // Get the course object
+                int totalDuration = lessonService.getTotalDurationByCourseId(courseId);  // Calculate total duration of lessons in the course
+                course.setDuration(totalDuration);  // Set the updated duration on the course
+                courseService.saveCourse(course);  // Save the updated course
+            }
+
             return "redirect:/admin/course?course_id=" + courseId;
         } else {
             return "error";
         }
+    }
+
+    @PostMapping("/admin/save-lesson")
+    public String saveLesson(@ModelAttribute Lessons lesson, @RequestParam("courseId") int courseId) {
+        Optional<Courses> courseOptional = courseService.getCourseById(courseId); 
+        if (courseOptional.isPresent()) {
+            Courses course = courseOptional.get(); 
+            lesson.setCourse(course);  
+            lessonService.saveLesson(lesson);
+
+            // Update the total duration of the course
+            int totalDuration = lessonService.getTotalDurationByCourseId(courseId);
+            course.setDuration(totalDuration);  // Update the course duration
+            courseService.saveCourse(course);  // Save the updated course
+        }
+        return "redirect:/admin/course?course_id=" + courseId; // Redirect to course list
     }
   
     // Show all student created accounts

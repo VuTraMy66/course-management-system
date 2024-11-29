@@ -30,6 +30,11 @@ public class LessonService {
         lessonRepository.save(lesson);
     }
 
+    public int getTotalDurationByCourseId(int courseId) {
+        List<Lessons> lessons = lessonRepository.findByCourse_CourseId(courseId);
+        return lessons.stream().mapToInt(Lessons::getDuration).sum();
+    }
+
     // public 
     // void deleteSession(int sessionId);  //delete session
 

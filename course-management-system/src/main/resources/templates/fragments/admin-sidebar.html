@@ -28,7 +28,7 @@
                     </a>
                     <div id="navCourses" th:class="${pageUrl == '/admin/courses' || pageUrl == '/admin/course-category' ? 'collapse show' : 'collapse'}" data-bs-parent="#sideNavbar">
                         <ul class="nav flex-column">
-                            <li th:class="${pageUrl == '/admin/course' ? 'nav-item active' : 'nav-item'}">
+                            <li th:class="${pageUrl == '/admin/courses' ? 'nav-item active' : 'nav-item'}">
                                 <a class="nav-link" href="/admin/courses">All Courses</a>
                             </li>
                             <li th:class="${pageUrl == '/admin/course-category' ? 'nav-item active' : 'nav-item'}">

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Add Course</title>
+    <title>Admin - Add Lesson</title>
     <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/feather-icons"></script>
@@ -39,11 +39,11 @@
                         <div class="offset-lg-1 col-lg-10 col-md-12 col-12">
                             <div class="d-lg-flex align-items-center justify-content-between">
                                 <div class="mb-4 mb-lg-0">
-                                    <h1 class="text-white mb-1">Add New Course</h1>
-                                    <p class="mb-0 text-white lead">Just fill the form and create your course.</p>
+                                    <h1 class="text-white mb-1">Add New Lesson</h1>
+                                    <p class="mb-0 text-white lead">Just fill the form and create your lesson.</p>
                                 </div>
                                 <div>
-                                    <a href="/admin/courses" class="btn btn-white">Back to Course</a>
+                                    <a th:href="@{/admin/course(course_id=${courseId})}" class="btn btn-white">Back to Course</a>
                                 </div>
                             </div>
                         </div>
@@ -66,7 +66,7 @@
                                     <div class="step" data-target="#test-l-2">
                                         <button type="button" class="step-trigger" role="tab" id="courseFormtrigger2" aria-controls="test-l-2" aria-selected="false">
                                             <span class="bs-stepper-circle">2</span>
-                                            <span class="bs-stepper-label">Courses Media</span>
+                                            <span class="bs-stepper-label">Lessons Media</span>
                                         </button>
                                     </div>
                                     <!-- <div class="bs-stepper-line"></div>
@@ -85,46 +85,25 @@
                                     </div>
                                 </div>
                                 <!-- Stepper content -->
-                                <div class="bs-stepper-content mt-5">
-                                    <form th:object="${course}" th:action="@{/admin/save-course}" method="post" id="courseForm">
+                                <div class="bs-stepper-content mt-5" th:object="${lesson}">
+                                    <form th:action="@{/admin/save-lesson}" method="post">
+                                        <input type="hidden" name="courseId" th:value="${courseId}"/>
                                         <div id="test-l-1" role="tabpanel" class="bs-stepper-pane fade active" aria-labelledby="courseFormtrigger1">
                                             <div class="card mb-3">
                                                 <div class="card-header border-bottom px-4 py-3">
                                                     <h4 class="mb-0">Basic Information</h4>
                                                 </div>
                                                 <div class="card-body">
+                                                    <input type="hidden" th:field="*{lessonId}" />
                                                     <div class="mb-3">
-                                                        <label for="addCourseTitle" class="form-label">Course title</label>
-                                                        <input id="addCourseTitle" name="addCourseTitle" class="form-control" type="text" placeholder="Course title " th:field="*{name}"/>
-                                                        <small class="mt-1">Write a 60 character course title.</small>
+                                                        <label for="addCourseTitle" class="form-label">Lesson title</label>
+                                                        <input id="addCourseTitle" class="form-control" type="text" placeholder="Lesson title " th:field="*{title}"/>
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label class="form-label" for="addCourseCategory">Courses category</label>
-                                                        <select class="form-select" id="addCourseCategory" th:field="*{category}">
-                                                            <option value="" >Select category</option>
-                                                            <option value="Data Science">Data Science</option>
-                                                            <option value="Programming">Programming</option>
-                                                            <option value="Web Development">Web Development</option>
-                                                            <option value="Artificial Intelligence">Artificial Intelligence</option>
-                                                            <option value="UI / UX Design">UI / UX Design</option>
-                                                        </select>
-                                                        <small class="mt-1">Help people find your courses by choosing categories that represent your course.</small>
+                                                        <label class="form-label">Lesson description</label>
+                                                        <textarea class="form-control" rows="5" placeholder="Insert lesson description here..." th:field="*{description}"></textarea>
+                                                        <small>A brief summary of your lesson.</small>
                                                     </div>
-                                                    <div class="mb-3">
-                                                        <label class="form-label" for="addCourseLevel">Courses level</label>
-                                                        <select class="form-select" id="addCourseLevel" th:field="*{skillLevel}">
-                                                            <option value="" >Select level</option>
-                                                            <option value="beginner">Beignner</option>
-                                                            <option value="intermediate">Intermediate</option>
-                                                            <option value="advanced">Advance</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label class="form-label">Course description</label>
-                                                        <textarea class="form-control" rows="5" placeholder="Insert course description here..." th:field="*{description}"></textarea>
-                                                        <small>A brief summary of your courses.</small>
-                                                    </div>
-                                                    
                                                 </div>
                                             </div>
                                             <div class="text-end">
@@ -134,21 +113,18 @@
                                         <div id="test-l-2" role="tabpanel" class="bs-stepper-pane fade" aria-labelledby="courseFormtrigger2">
                                             <div class="card mb-3 border-0">
                                                 <div class="card-header border-bottom px-4 py-3">
-                                                    <h4 class="mb-0">Courses Media</h4>
+                                                    <h4 class="mb-0">Lessons Media</h4>
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="custom-file-container mb-4" data-upload-id="courseImage">
-                                                        <div class="label-container d-flex justify-content-between align-items-center">
-                                                            <label for="courseImageUrl" class="form-label">Course Image URL</label>
-                                                            <a class="clear-button" id="clearImage" title="Clear Image">
-                                                                <i class="bi bi-x" style="height: 15px; width: 15px;"></i>
-                                                            </a>
+                                                        <div class="mb-3">
+                                                            <label for="addVideoUrl" class="form-label">Video URL</label>
+                                                            <input id="addVideoUrl" class="form-control" type="text" placeholder="Enter the video URL of lesson " th:field="*{videoUrl}"/>
                                                         </div>
-                                                        <input type="text" id="courseImageUrl" name="image" class="form-control" placeholder="Enter image URL" th:field="*{image}" />
-                                                        <small class="d-block mt-2">Upload an image that represents your course.</small>
-                                                    </div>
-                                                    <div class="mt-3 mb-4" id="imagePreview" th:style="${course.image != null} ? '' : 'display: none;'">
-                                                        <img id="preview" class="img-fluid rounded" th:src="@{${course.image}}" alt="Course Image Preview" />
+                                                        <div class="mb-3">
+                                                            <label for="addCourseTitle" class="form-label">Duration</label>
+                                                            <input id="addCourseTitle" class="form-control" type="text" placeholder="Duration in minute " th:field="*{duration}"/>
+                                                        </div>
                                                     </div>
                                                 </div>                                                
                                             </div>
@@ -158,27 +134,7 @@
                                             </div>
                                         </div>
 
-                                        <script>
-                                            document.getElementById('courseImageUrl').addEventListener('input', function(e) {
-                                                const imageUrl = e.target.value; 
-                                                const previewImage = document.getElementById('preview');
-                                        
-                                                if (imageUrl) {
-                                                    document.getElementById('imagePreview').style.display = 'block';
-                                                    previewImage.setAttribute('src', imageUrl); 
-                                                } else {
-                                                    document.getElementById('imagePreview').style.display = 'none';
-                                                }
-                                            });
-                                        
-                                            document.getElementById('clearImage').addEventListener('click', function() {
-                                                document.getElementById('courseImageUrl').value = ''; 
-                                                document.getElementById('imagePreview').style.display = 'none';
-                                                document.getElementById('preview').setAttribute('src', ''); 
-                                            });
-                                        </script>
-
-                                        <!-- <div id="test-l-3" role="tabpanel" class="bs-stepper-pane fade" aria-labelledby="courseFormtrigger3">
+                                        <!-- <div id="test-l-3" role="tabpanel" class="bs-stepper-pane fade" aria-labelledby="courseFormtrigger3" >
                                             <div class="card mb-3 border-0">
                                                 <div class="card-header border-bottom px-4 py-3">
                                                     <h4 class="mb-0">Curriculum</h4>
@@ -186,59 +142,59 @@
                                                 <div class="card-body">
                                                     <div class="bg-light rounded p-2 mb-4">
                                                         <div class="list-group list-group-flush border-top-0" id="courseList">
-                                                            <div class="list-group-item rounded px-3 text-nowrap mb-2" id="introduction">
+                                                            <div class="list-group-item rounded px-3 text-nowrap mb-2" >
                                                                 <div class="mt-3 mb-3">
-                                                                    <label for="addSessionTitle" class="form-label">Session title</label>
-                                                                    <input id="addSessionTitle" name="addSessionTitle" class="form-control" type="text" placeholder="Session title " />
-                                                                    <small class="mt-1">Write a 60 character session title.</small>
+                                                                    <label for="addLessonTitle" class="form-label">Lesson title</label>
+                                                                    <input id="addLessonTitle" name="addLessonTitle" class="form-control" type="text" placeholder="Lesson title " />
+                                                                    <small class="mt-1">Write a 60 character lesson title.</small>
                                                                 </div>
                                                                 <div class="mb-3">
                                                                     <label class="form-label">Short description</label>
-                                                                    <textarea class="form-control" rows="5" placeholder="Insert session description here..."></textarea>
+                                                                    <textarea class="form-control" rows="5" placeholder="Insert lesson description here..."></textarea>
                                                                 </div>
                                                                 <div class="mb-3">
-                                                                    <label for="addSessionUrl" class="form-label">Video URL</label>
-                                                                    <input id="addSessionUrl" name="addSessionUrl" class="form-control" type="text" placeholder="Url... " />
+                                                                    <label for="addLessonUrl" class="form-label">Video URL</label>
+                                                                    <input id="addLessonUrl" name="addLessonUrl" class="form-control" type="text" placeholder="Url... " />
                                                                 </div>
                                                                 <div class="mt-3 mb-3">
-                                                                    <label for="addSessionDuration" class="form-label">Duration</label>
-                                                                    <input id="addSessionDuratio" name="addSessionTitle" class="form-control" type="text" placeholder="Session title " />
+                                                                    <label for="addLessonDuration" class="form-label">Duration</label>
+                                                                    <input id="addLessonDuratio" name="addLessonTitle" class="form-control" type="text" placeholder="Lesson title " />
                                                                     <small>Duration in minutes.</small>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <a id="addSessionBtn" class="btn btn-outline-primary btn-sm mt-3">Add Session +</a>
+                                                        <a id="addLessonBtn" class="btn btn-outline-primary btn-sm mt-3">Add Lesson +</a>
 
                                                         <script>
-                                                            document.getElementById('addSessionBtn').addEventListener('click', function () {
+                                                            document.getElementById('addLessonBtn').addEventListener('click', function () {
                                                                 // Create new list-group-item element
-                                                                const newSession = document.createElement('div');
-                                                                newSession.className = 'list-group-item rounded px-3 text-nowrap mb-2';
+                                                                const newLesson = document.createElement('div');
+                                                                newLesson.className = 'list-group-item rounded px-3 text-nowrap mb-2';
 
-                                                                // Define the inner HTML for the new session
-                                                                newSession.innerHTML = `
+                                                                // Define the inner HTML for the new lesson
+                                                                newLesson.innerHTML = `
                                                                     <div class="mt-3 mb-3">
-                                                                        <label for="addSessionTitle" class="form-label">Session title</label>
-                                                                        <input name="addSessionTitle" class="form-control" type="text" placeholder="Session title" />
-                                                                        <small class="mt-1">Write a 60 character session title.</small>
+                                                                        <label for="addLessonTitle" class="form-label">Lesson title</label>
+                                                                        <input name="addLessonTitle" class="form-control" type="text" placeholder="Lesson title" />
+                                                                        <small class="mt-1">Write a 60 character lesson title.</small>
                                                                     </div>
                                                                     <div class="mb-3">
                                                                         <label class="form-label">Short Description</label>
-                                                                        <textarea class="form-control" rows="5" placeholder="Insert session description here..."></textarea>
+                                                                        <textarea class="form-control" rows="5" placeholder="Insert lesson description here..."></textarea>
                                                                     </div>
                                                                     <div class="mb-3">
-                                                                        <label for="addSessionUrl" class="form-label">Video URL</label>
-                                                                        <input name="addSessionUrl" class="form-control" type="text" placeholder="Url..." />
+                                                                        <label for="addLessonUrl" class="form-label">Video URL</label>
+                                                                        <input name="addLessonUrl" class="form-control" type="text" placeholder="Url..." />
                                                                     </div>
                                                                     <div class="mt-3 mb-3">
-                                                                        <label for="addSessionDuration" class="form-label">Duration</label>
-                                                                        <input id="addSessionDuratio" name="addSessionTitle" class="form-control" type="text" placeholder="Session title " />
+                                                                        <label for="addLessonDuration" class="form-label">Duration</label>
+                                                                        <input id="addLessonDuratio" name="addLessonTitle" class="form-control" type="text" placeholder="Lesson title " />
                                                                         <small>Duration in minutes.</small>
                                                                     </div>
                                                                 `;
 
-                                                                // Append the new session to the course list
-                                                                document.getElementById('courseList').appendChild(newSession);
+                                                                // Append the new lesson to the course list
+                                                                document.getElementById('courseList').appendChild(newLesson);
                                                             });
 
                                                         </script>
@@ -261,24 +217,13 @@
                                             </div>
                                             <div class="d-flex justify-content-between mb-8">
                                                 <a class="btn btn-secondary" type="button" onclick="courseForm.previous()">Previous</a>
-                                                <input type="hidden" id="courseStatus" name="status" value="draft"> 
                                                 <div>
-                                                    <button class="btn btn-secondary" onclick="setCourseStatus('draft')">Save Draft</button>
-                                                    <button class="btn btn-primary ms-2" onclick="setCourseStatus('published')">Submit</button>
+                                                    <!-- <button type="submit" class="btn btn-secondary">Save draft</button> -->
+                                                    <button type="submit" class="btn btn-danger">Submit</button>
                                                 </div>
                                             </div>
                                         </div>
                                     </form>
-                                    <script>
-                                        // JavaScript function to set the course status and submit the form
-                                        function setCourseStatus(status) {
-                                            // Set the value of the hidden input field
-                                            document.getElementById('courseStatus').value = status;
-                                            
-                                            // Submit the form manually
-                                            document.getElementById('courseForm').submit();
-                                        }
-                                    </script>
                                 </div>
                             </div>
                         </div>
@@ -343,7 +288,7 @@
                     this.showTab(this.currentTab);
                 }
             },
-    
+                
             // Move to the previous tab
             previous() {
                 if (this.currentTab > 1) {

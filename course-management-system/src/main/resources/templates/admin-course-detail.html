@@ -184,7 +184,7 @@
                                                         <a th:href="@{/admin/edit-lesson(lesson_id=${lesson.lessonId})}" class="me-1 text-inherit" title="Edit">
                                                             <i data-feather="edit" style="height: 14px; width: 14px;"></i>
                                                         </a>
-                                                        <a href="#" class="me-1 text-inherit" data-bs-toggle="tooltip" data-placement="top" title="Delete">
+                                                        <a th:href="@{/admin/delete-lesson/{lessonId}(lessonId=${lesson.lessonId})}" class="me-1 text-inherit" data-bs-toggle="tooltip" data-placement="top" title="Delete">
                                                             <i data-feather="trash-2" style="height: 14px; width: 14px;"></i>
                                                         </a>
                                                         <a href="#" class="text-inherit" th:data-bs-target="'#collapse' + ${lesson.lessonId}" data-bs-toggle="collapse" aria-expanded="false"  th:aria-controls="'collapse' + ${lesson.lessonId}">

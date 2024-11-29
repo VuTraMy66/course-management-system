@@ -35,15 +35,7 @@ public class LessonService {
         return lessons.stream().mapToInt(Lessons::getDuration).sum();
     }
 
-    // public 
-    // void deleteSession(int sessionId);  //delete session
-
-    // void getSessionById(int sessionId);  
-
-    // void createSession(Sessions session);
-
-    // void updateSession(Sessions session);
-
-    // Optional<Sessions> finSessionById(int SessionId);  
-
+    public void deleteLesson(int lessonId) {
+        lessonRepository.deleteById(lessonId);
+    }
 }

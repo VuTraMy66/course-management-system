@@ -334,24 +334,24 @@ public class AdminController {
     @GetMapping("/admin/delete-lesson/{lessonId}")
     public String adminDeleteLesson(@PathVariable("lessonId") int lessonId) {
         try {
-            // Retrieve the lesson by ID
+            // Retrieve the lesson and its associated course in one go
             Optional<Lessons> lessonOptional = lessonService.getLessonById(lessonId);
             if (lessonOptional.isPresent()) {
                 Lessons lesson = lessonOptional.get();
-                // Get the associated courseId from the lesson
-                int courseId = lesson.getCourse().getCourseId();
+                Courses course = lesson.getCourse();
+                int courseId = course.getCourseId();
+                
 
                 // Delete the lesson
                 lessonService.deleteLesson(lessonId);
 
                 // Recalculate the total duration of the course after lesson deletion
                 int totalDuration = lessonService.getTotalDurationByCourseId(courseId);
-                Optional<Courses> courseOptional = courseService.getCourseById(courseId);
-                if (courseOptional.isPresent()) {
-                    Courses course = courseOptional.get();
-                    course.setDuration(totalDuration);  // Update the course duration
-                    courseService.saveCourse(course);  // Save the updated course
+                if (totalDuration < 0) {
+                    totalDuration = 0; 
                 }
+                course.setDuration(totalDuration);  // Update course duration
+                courseService.saveCourse(course);  // Save the updated course
 
                 return "redirect:/admin/course?course_id=" + courseId;  // Redirect to the course page
             } else {
@@ -362,7 +362,7 @@ public class AdminController {
             return "error-page";  // Handle any errors that might occur during deletion
         }
     }
-    
+
     // Show all student created accounts
     @GetMapping("/admin/student")
     public String adminStudent(Model model) {

@@ -3,23 +3,34 @@ package com.example.course_management_system.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.course_management_system.models.Sessions;
+import com.example.course_management_system.repositories.SessionRepository;
 
 @Service
-public interface SessionService {
+public class SessionService {
+    @Autowired
+    private SessionRepository sessionRepository;
 
-    List <Sessions> getAllSessions();
+    public SessionService (SessionRepository sessionRepository) {
+        this.sessionRepository = sessionRepository;
+    }
 
-    void deleteSession(int sessionId);  //delete session
+    public List<Sessions> getAllSessionsOfCourse(int courseId) {
+        return sessionRepository.findSessionsByCourseId(courseId);
+    }
 
-    void getSessionById(int sessionId);  
+    // public 
+    // void deleteSession(int sessionId);  //delete session
 
-    void createSession(Sessions session);
+    // void getSessionById(int sessionId);  
 
-    void updateSession(Sessions session);
+    // void createSession(Sessions session);
 
-    Optional<Sessions> finSessionById(int SessionId);  
+    // void updateSession(Sessions session);
+
+    // Optional<Sessions> finSessionById(int SessionId);  
 
 }

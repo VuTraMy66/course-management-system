@@ -143,7 +143,7 @@
                                                         </ul>
                                                     </td>
                                                     <td>
-                                                        <a href="#" class="me-1 text-inherit" data-bs-toggle="modal" data-bs-target="#viewReview" title="Edit"
+                                                        <a href="#" class="me-1 text-inherit" data-bs-toggle="modal" data-bs-target="#reviewModal" title="Edit"
                                                         th:data-review-rating="${review.rating}"
                                                         th:data-review-comment="${review.comment}"
                                                         th:data-review-date="${review.formattedReviewDate}"
@@ -181,7 +181,11 @@
                                                         </a>
                                                     </h4>
                                                     <div>
-                                                        <a href="#" class="me-1 text-inherit" data-bs-toggle="modal" data-bs-target="#editModal" title="Edit">
+                                                        <a href="#" class="me-1 text-inherit" data-bs-toggle="modal" data-bs-target="#lessonModal" title="Edit"
+                                                            th:data-lesson-title="${lesson.title}"
+                                                            th:data-lesson-description="${lesson.description}"
+                                                            th:data-lesson-url="${lesson.videoUrl}"
+                                                            th:data-lesson-duration="${lesson.duration}">
                                                             <i data-feather="edit" style="height: 14px; width: 14px;"></i>
                                                         </a>
                                                         <a href="#" class="me-1 text-inherit" data-bs-toggle="tooltip" data-placement="top" title="Delete">
@@ -204,6 +208,11 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row mb-3">
+                            <div class="col-12 d-sm-flex justify-content-end align-items-center">
+                                <a  class="btn btn-primary mb-0">Add Lesson</a>
+                            </div>
+                        </div>
                     </div> 
                 </div>
             </div>
@@ -211,7 +220,7 @@
     </section>
 
     <!-- Lesson Edit Modal -->
-    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal fade" id="lessonModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -222,15 +231,15 @@
                     <form>
                         <div class="mb-3">
                             <label for="tiltLessonInput" class="form-label">Lesson title</label>
-                            <input type="text" class="form-control" id="tiltLessonInput" value="Introduction" placeholder="Enter lesson title">
+                            <input type="text" class="form-control" id="tiltLessonInput"  placeholder="Enter lesson title">
                         </div>
                         <div class="mb-3">
                             <label for="descriptionInput" class="form-label">Description</label>
-                            <textarea class="form-control" id="descriptionInput" rows="4">What we can do with Javascript. How to connect Javascript to our HTML page. Simple javascript devtools. Getting started writing simple javascript code.</textarea>
+                            <textarea class="form-control" id="descriptionInput" rows="4"></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="videoUrlInput" class="form-label">Video URL</label>
-                            <input type="text" class="form-control" id="videoUrlInput" value="fdgyns" placeholder="Enter video URL...">
+                            <input type="text" class="form-control" id="videoUrlInput"  placeholder="Enter video URL...">
                         </div>
                     </form>
                 </div>
@@ -243,7 +252,7 @@
     </div>
 
     <!-- Review Popup  -->
-    <div class="modal fade" id="viewReview" tabindex="-1" aria-labelledby="viewReviewLabel" aria-hidden="true">
+    <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="viewReviewLabel" aria-hidden="true">
         <div class="modal-dialog ">
             <div class="modal-content">
                 <div class="modal-header bg-dark">
@@ -289,11 +298,10 @@
     </div>
 
     <script>
-        // Wait for the DOM to be fully loaded
         document.addEventListener('DOMContentLoaded', function () {
-            // Listen for click events on the "View" button
-            document.querySelectorAll('[data-bs-toggle="modal"]').forEach(function(button) {
-                button.addEventListener('click', function() {
+            // Modal for Review
+            document.querySelectorAll('[data-bs-target="#reviewModal"]').forEach(function (button) {
+                button.addEventListener('click', function () {
                     // Get the data attributes for the selected review
                     var reviewRating = parseInt(this.getAttribute('data-review-rating'));
                     var reviewComment = this.getAttribute('data-review-comment');
@@ -321,6 +329,24 @@
                         stars[i].classList.remove('far'); // Remove empty star
                         stars[i].classList.add('fas'); // Add filled star
                     }
+                });
+            });
+
+            // Modal for Lesson
+            document.querySelectorAll('[data-bs-target="#lessonModal"]').forEach(item => {
+                item.addEventListener('click', function () {
+                    var lessonTitle = this.getAttribute('data-lesson-title');
+                    var lessonDescription = this.getAttribute('data-lesson-description');
+                    var lessonUrl = this.getAttribute('data-lesson-url');
+                    
+                    // Populate modal fields with the selected lesson's data
+                    document.getElementById("tiltLessonInput").value = lessonTitle;
+                    document.getElementById("descriptionInput").value = lessonDescription;
+                    document.getElementById("videoUrlInput").value = lessonUrl;
+
+                    titleInput.value = title;
+                    description9Input.value = description;
+                    urlInput.value = url;
                 });
             });
         });

@@ -39,7 +39,7 @@ public class Courses {
     private String status = "draft";
 
     @Column(name = "duration")
-    private int duration;
+    private int duration = 1;
 
     @Column(name = "image")
     private String image;
@@ -141,9 +141,6 @@ public class Courses {
     }
 
     public void setDuration(int duration) {
-        if (duration <= 0) {
-            throw new IllegalArgumentException("Duration must be greater than 0");
-        }
         this.duration = duration;
     }
 

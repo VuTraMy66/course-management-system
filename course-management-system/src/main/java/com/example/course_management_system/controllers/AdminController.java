@@ -252,9 +252,10 @@ public class AdminController {
     }
 
     @PostMapping("/admin/save-course")
-    public String saveCourse(Courses course) {
-        courseService.saveCourse(course);
-        return "redirect:/admin/course?course_id=" + course.getCourseId();
+    public String saveCourse(@ModelAttribute Courses course, @RequestParam("status") String status) {
+        course.setStatus(status); // Assign the status
+        courseService.saveCourse(course); // Save the course
+        return "redirect:/admin/courses"; // Redirect to course list
     }
 
     @GetMapping("/admin/delete-course/{courseId}")

@@ -1,25 +1,24 @@
 package com.example.course_management_system.services;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.course_management_system.models.Sessions;
-import com.example.course_management_system.repositories.SessionRepository;
+import com.example.course_management_system.models.Lessons;
+import com.example.course_management_system.repositories.LessonRepository;
 
 @Service
-public class SessionService {
+public class LessonService {
     @Autowired
-    private SessionRepository sessionRepository;
+    private LessonRepository lessonRepository;
 
-    public SessionService (SessionRepository sessionRepository) {
-        this.sessionRepository = sessionRepository;
+    public LessonService (LessonRepository lessonRepository) {
+        this.lessonRepository = lessonRepository;
     }
 
-    public List<Sessions> getAllSessionsOfCourse(int courseId) {
-        return sessionRepository.findSessionsByCourseId(courseId);
+    public List<Lessons> getAllLessonsOfCourse(int courseId) {
+        return lessonRepository.findByCourse_CourseId(courseId);
     }
 
     // public 

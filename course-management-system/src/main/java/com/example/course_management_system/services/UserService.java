@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.course_management_system.models.Users;
-import com.example.course_management_system.repositories.SessionRepository;
+import com.example.course_management_system.repositories.LessonRepository;
 import com.example.course_management_system.repositories.UsersRepository;
 
 @Service

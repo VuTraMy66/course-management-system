@@ -18,11 +18,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.course_management_system.models.Courses;
 import com.example.course_management_system.models.Enrollments;
+import com.example.course_management_system.models.Lessons;
 import com.example.course_management_system.models.Reviews;
 import com.example.course_management_system.models.Users;
-import com.example.course_management_system.services.AdminService;
 import com.example.course_management_system.services.CourseService;
 import com.example.course_management_system.services.EnrollmentService;
+import com.example.course_management_system.services.LessonService;
 import com.example.course_management_system.services.ReviewService;
 import com.example.course_management_system.services.UserService;
 
@@ -30,17 +31,17 @@ import com.example.course_management_system.services.UserService;
 public class AdminController {
 
     @Autowired 
-    private AdminService adminService;
     private CourseService courseService;
     private EnrollmentService enrollmentService;
     private ReviewService reviewService;
+    private LessonService  lessonService;
     private UserService userService;
-
-    public AdminController(AdminService adminService, CourseService courseService, EnrollmentService enrollmentService, ReviewService reviewService, UserService userService) {
-        this.adminService = adminService;
+    
+    public AdminController(CourseService courseService, EnrollmentService enrollmentService, ReviewService reviewService, LessonService lessonService, UserService userService) {
         this.courseService = courseService;
         this.enrollmentService = enrollmentService;
         this.reviewService = reviewService;
+        this.lessonService = lessonService;
         this.userService = userService;
     }
 
@@ -206,12 +207,17 @@ public class AdminController {
         List<Enrollments> enrollments = enrollmentService.getEnrollmentsByCourseId(courseId);
         int totalStudentsPerCourse = enrollments.size();
 
+        List<Lessons> lessons = lessonService.getAllLessonsOfCourse(courseId);
+        int totalLessons = lessons.size();
+
 
         if (courseDetail.isPresent()) {
             model.addAttribute("courseDetail", courseDetail.get());
             model.addAttribute("reviewsOfCourse", reviewsOfCourse);
             model.addAttribute("averageRating", averageRating);
             model.addAttribute("totalStudentsPerCourse", totalStudentsPerCourse);
+            model.addAttribute("lessons", lessons);
+            model.addAttribute("totalLessons", totalLessons);
         } else {
             model.addAttribute("error", "Course not found");
         }
@@ -229,8 +235,10 @@ public class AdminController {
     @GetMapping("/admin/edit-course")
     public String adminEditCourse(@RequestParam("course_id") int courseId, Model model) {
         Optional<Courses> courseEdit = courseService.getCourseById(courseId);
+        List<Lessons> lessons = lessonService.getAllLessonsOfCourse(courseId);
         if (courseEdit.isPresent()) {
             model.addAttribute("course", courseEdit.get());
+            model.addAttribute("lessons", lessons);
         }
         model.addAttribute("pageUrl", "/admin/edit-course");
         return "admin-edit-course"; 
@@ -242,7 +250,7 @@ public class AdminController {
         int id = courseId;
         Courses courseToUpdate = existingCourse.get();
             courseToUpdate.setName(course.getName());
-            courseToUpdate.setCategory(course.getCategory());
+            courseToUpdate.setCategory(course.getCategory());                                                                    
             courseToUpdate.setSkillLevel(course.getSkillLevel());
             courseToUpdate.setDescription(course.getDescription());
             courseToUpdate.setDuration(course.getDuration());
@@ -364,20 +372,20 @@ public class AdminController {
         return "admin-review";
     }
 
-    // delete sessions funct
-    @GetMapping("/admin-delete-sessions/{sessionId}")
-    public String adminDeleteSession(@PathVariable("sessionId") int sessionId, Model model) {
-        try {
-            // Delete sessions
-            adminService.deleteSession(sessionId);
+//     // delete sessions funct
+//     @GetMapping("/admin-delete-sessions/{sessionId}")
+//     public String adminDeleteSession(@PathVariable("sessionId") int sessionId, Model model) {
+//         try {
+//             // Delete sessions
+//             adminService.deleteSession(sessionId);
             
-    //         model.addAttribute("successMessage", "Session deleted successfully.");
+//     //         model.addAttribute("successMessage", "Session deleted successfully.");
 
-            return "redirect:/admin-session";
-        } catch (Exception e) {
-            e.printStackTrace();
-            model.addAttribute("errorMessage", "An error occurred while deleting session.");
-            return "error-page";
-        }
-    }   
+//             return "redirect:/admin-session";
+//         } catch (Exception e) {
+//             e.printStackTrace();
+//             model.addAttribute("errorMessage", "An error occurred while deleting session.");
+//             return "error-page";
+//         }
+//     }   
 }

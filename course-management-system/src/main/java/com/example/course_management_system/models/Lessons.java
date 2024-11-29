@@ -10,13 +10,13 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Sessions")
-public class Sessions {
+@Table(name = "Lessons")
+public class Lessons {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "session_id")
-    private int sessionId;
+    @Column(name = "lesson_id")
+    private int lessonId;
 
     @Column(name = "title")
     private String title;
@@ -34,10 +34,10 @@ public class Sessions {
     @Column(name = "duration")
     private int duration;
 
-    public Sessions() {}
+    public Lessons() {}
 
-    public Sessions(int sessionId, String title, String videoUrl, Courses course, String description, int duration) {
-        this.sessionId = sessionId;
+    public Lessons(int lessonId, String title, String videoUrl, Courses course, String description, int duration) {
+        this.lessonId = lessonId;
         this.title = title;
         this.videoUrl = videoUrl;
         this.course = course;
@@ -45,12 +45,12 @@ public class Sessions {
         this.duration = duration;
     }
 
-    public int getSessionId() {
-        return sessionId;
+    public int getLessonId() {
+        return lessonId;
     }
 
-    public void setSessionId(int sessionId) {
-        this.sessionId = sessionId;
+    public void setSessonId(int lessonId) {
+        this.lessonId = lessonId;
     }
 
     public String getTitle() {

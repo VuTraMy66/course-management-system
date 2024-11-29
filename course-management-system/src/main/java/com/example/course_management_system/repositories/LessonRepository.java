@@ -2,17 +2,16 @@ package com.example.course_management_system.repositories;
 
 import java.util.List;
 
-import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.course_management_system.models.Sessions;
+import com.example.course_management_system.models.Lessons;
 
 @Repository
-public interface SessionRepository extends JpaRepository<Sessions, Integer> {
+public interface LessonRepository extends JpaRepository<Lessons, Integer> {
 
-    @Query("SELECT s FROM Sessions s WHERE s.course.courseId = :courseId")
-    List<Sessions> findSessionsByCourseId(Integer courseId);
+    // @Query("SELECT s FROM Sessions s WHERE s.course.course_id = :courseId")
+    List<Lessons> findByCourse_CourseId(int courseId);
        
     // // Fetch all sessions
     // List<Sessions> findAll();

@@ -69,17 +69,17 @@
                                             <span class="bs-stepper-label">Courses Media</span>
                                         </button>
                                     </div>
-                                    <div class="bs-stepper-line"></div>
+                                    <!-- <div class="bs-stepper-line"></div>
                                     <div class="step" data-target="#test-l-3">
                                         <button type="button" class="step-trigger" role="tab" id="courseFormtrigger3" aria-controls="test-l-3" aria-selected="false">
                                             <span class="bs-stepper-circle">3</span>
                                             <span class="bs-stepper-label">Curriculum</span>
                                         </button>
-                                    </div>
+                                    </div> -->
                                     <div class="bs-stepper-line"></div>
-                                    <div class="step" data-target="#test-l-4">
-                                        <button type="button" class="step-trigger" role="tab" id="courseFormtrigger4" aria-controls="test-l-4" aria-selected="false">
-                                            <span class="bs-stepper-circle">4</span>
+                                    <div class="step" data-target="#test-l-3">
+                                        <button type="button" class="step-trigger" role="tab" id="courseFormtrigger3" aria-controls="test-l-3" aria-selected="false">
+                                            <span class="bs-stepper-circle">3</span>
                                             <span class="bs-stepper-label">Settings</span>
                                         </button>
                                     </div>
@@ -178,7 +178,7 @@
                                             });
                                         </script>
 
-                                        <div id="test-l-3" role="tabpanel" class="bs-stepper-pane fade" aria-labelledby="courseFormtrigger3">
+                                        <!-- <div id="test-l-3" role="tabpanel" class="bs-stepper-pane fade" aria-labelledby="courseFormtrigger3">
                                             <div class="card mb-3 border-0">
                                                 <div class="card-header border-bottom px-4 py-3">
                                                     <h4 class="mb-0">Curriculum</h4>
@@ -249,8 +249,8 @@
                                                 <a class="btn btn-secondary" type="button" onclick="courseForm.previous()">Previous</a>
                                                 <a class="btn btn-primary" type="button" onclick="courseForm.next()">Next</a>
                                             </div>
-                                        </div>
-                                        <div id="test-l-4" role="tabpanel" class="bs-stepper-pane fade" aria-labelledby="courseFormtrigger4">
+                                        </div> -->
+                                        <div id="test-l-3" role="tabpanel" class="bs-stepper-pane fade" aria-labelledby="courseFormtrigger3">
                                             <div class="card mb-3 border-0">
                                                 <div class="card-header border-bottom px-4 py-3">
                                                     <h4 class="mb-0">Requirements</h4>
@@ -338,7 +338,7 @@
     
             // Move to the next tab
             next() {
-                if (this.currentTab < 4) {
+                if (this.currentTab < 3) {
                     this.currentTab++;
                     this.showTab(this.currentTab);
                 }

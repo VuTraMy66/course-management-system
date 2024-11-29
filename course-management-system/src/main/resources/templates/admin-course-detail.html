@@ -181,11 +181,7 @@
                                                         </a>
                                                     </h4>
                                                     <div>
-                                                        <a href="#" class="me-1 text-inherit" data-bs-toggle="modal" data-bs-target="#lessonModal" title="Edit"
-                                                            th:data-lesson-title="${lesson.title}"
-                                                            th:data-lesson-description="${lesson.description}"
-                                                            th:data-lesson-url="${lesson.videoUrl}"
-                                                            th:data-lesson-duration="${lesson.duration}">
+                                                        <a th:href="@{/admin/edit-lesson(lesson_id=${lesson.lessonId})}" class="me-1 text-inherit" title="Edit">
                                                             <i data-feather="edit" style="height: 14px; width: 14px;"></i>
                                                         </a>
                                                         <a href="#" class="me-1 text-inherit" data-bs-toggle="tooltip" data-placement="top" title="Delete">
@@ -199,6 +195,7 @@
                                                 <div th:id="'collapse' + ${lesson.lessonId}" class="collapse" th:aria-labelledby="${lesson.lessonId}" data-bs-parent="#courseList">
                                                     <div class="p-md-2">
                                                         <span class=" text-wrap fs-5" th:text="${lesson.description}"></span>
+                                                        <div class="fs-5 mt-2">Duration: <span th:text="${lesson.formattedDuration}"></span></div>
                                                         <div class="text-end "><a class="mt-3 text-truncate h5 btn btn-outline-primary btn-sm" th:href="${lesson.videoUrl}">Learn</a></div>
                                                     </div>
                                                 </div>
@@ -220,36 +217,42 @@
     </section>
 
     <!-- Lesson Edit Modal -->
-    <div class="modal fade" id="lessonModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <!-- <div class="modal fade" id="lessonModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title" id="editModalLabel">Edit</h3>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <form>
+                <form id="updateLessonForm" method="POST">
+                    <div class="modal-body">
                         <div class="mb-3">
                             <label for="tiltLessonInput" class="form-label">Lesson title</label>
-                            <input type="text" class="form-control" id="tiltLessonInput"  placeholder="Enter lesson title">
+                            <input type="text" class="form-control" id="tiltLessonInput" name="title"  placeholder="Enter lesson title">
                         </div>
                         <div class="mb-3">
                             <label for="descriptionInput" class="form-label">Description</label>
-                            <textarea class="form-control" id="descriptionInput" rows="4"></textarea>
+                            <textarea class="form-control" id="descriptionInput" name="description" rows="4"></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="videoUrlInput" class="form-label">Video URL</label>
-                            <input type="text" class="form-control" id="videoUrlInput"  placeholder="Enter video URL...">
+                            <input type="text" class="form-control" id="videoUrlInput" name="videoUrl"  placeholder="Enter video URL...">
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="saveChanges()">Save changes</button>
-                </div>
+                        <div class="mb-3">
+                            <label for="durationInput" class="form-label">Duration <small>(in minute)</small></label>
+                            <input type="text" class="form-control" id="durationInput" name="duration"  placeholder="Enter duration...">
+                        </div>
+                        <input type="hidden" id="lessonIdInput" name="lessonId">
+                        <input type="hidden" id="courseIdInput" name="courseId">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" id="submitBtn">Save changes</button>
+                    </div>
+                </form>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- Review Popup  -->
     <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="viewReviewLabel" aria-hidden="true">
@@ -329,24 +332,6 @@
                         stars[i].classList.remove('far'); // Remove empty star
                         stars[i].classList.add('fas'); // Add filled star
                     }
-                });
-            });
-
-            // Modal for Lesson
-            document.querySelectorAll('[data-bs-target="#lessonModal"]').forEach(item => {
-                item.addEventListener('click', function () {
-                    var lessonTitle = this.getAttribute('data-lesson-title');
-                    var lessonDescription = this.getAttribute('data-lesson-description');
-                    var lessonUrl = this.getAttribute('data-lesson-url');
-                    
-                    // Populate modal fields with the selected lesson's data
-                    document.getElementById("tiltLessonInput").value = lessonTitle;
-                    document.getElementById("descriptionInput").value = lessonDescription;
-                    document.getElementById("videoUrlInput").value = lessonUrl;
-
-                    titleInput.value = title;
-                    description9Input.value = description;
-                    urlInput.value = url;
                 });
             });
         });

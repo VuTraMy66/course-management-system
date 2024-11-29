@@ -34,7 +34,7 @@ public class AdminController {
     private CourseService courseService;
     private EnrollmentService enrollmentService;
     private ReviewService reviewService;
-    private LessonService  lessonService;
+    private LessonService lessonService;
     private UserService userService;
     
     public AdminController(CourseService courseService, EnrollmentService enrollmentService, ReviewService reviewService, LessonService lessonService, UserService userService) {
@@ -235,10 +235,8 @@ public class AdminController {
     @GetMapping("/admin/edit-course")
     public String adminEditCourse(@RequestParam("course_id") int courseId, Model model) {
         Optional<Courses> courseEdit = courseService.getCourseById(courseId);
-        List<Lessons> lessons = lessonService.getAllLessonsOfCourse(courseId);
         if (courseEdit.isPresent()) {
             model.addAttribute("course", courseEdit.get());
-            model.addAttribute("lessons", lessons);
         }
         model.addAttribute("pageUrl", "/admin/edit-course");
         return "admin-edit-course"; 
@@ -270,6 +268,33 @@ public class AdminController {
     public String deleteCourse(@PathVariable("courseId") int courseId) {
         courseService.deleteCourseById(courseId);
         return "redirect:/admin/courses";
+    }
+
+    @GetMapping("/admin/edit-lesson")
+    public String adminEditLesson(@RequestParam("lesson_id") int lessonId, Model model) {
+        Optional<Lessons> lessonEdit = lessonService.getLessonById(lessonId);
+        if (lessonEdit.isPresent()) {
+            model.addAttribute("lesson", lessonEdit.get());
+        }
+        return "admin-edit-lesson"; 
+    }
+
+    @PostMapping("/admin/update-lesson")
+    public String updateLesson(@ModelAttribute("lesson") Lessons lesson, int lessonId, @RequestParam("courseId") int courseId) {
+        Optional<Lessons> existingLesson = lessonService.getLessonById(lessonId);
+
+        if (existingLesson.isPresent()) {
+            Lessons lessonToUpdate = existingLesson.get();
+            
+            lessonToUpdate.setTitle(lesson.getTitle());
+            lessonToUpdate.setDescription(lesson.getDescription());
+            lessonToUpdate.setVideoUrl(lesson.getVideoUrl());
+            lessonToUpdate.setDuration(lesson.getDuration());
+            lessonService.saveLesson(lessonToUpdate);
+            return "redirect:/admin/course?course_id=" + courseId;
+        } else {
+            return "error";
+        }
     }
   
     // Show all student created accounts

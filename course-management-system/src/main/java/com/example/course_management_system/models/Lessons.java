@@ -89,6 +89,12 @@ public class Lessons {
         return duration;
     }
 
+    public String getFormattedDuration() {
+        int hours = duration / 60;
+        int minutes = duration % 60;
+        return String.format("%dh %dm", hours, minutes);
+    }
+
     public void setDuration(int duration) {
         this.duration = duration;
     }

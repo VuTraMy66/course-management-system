@@ -92,19 +92,5 @@ public class Sessions {
     public void setDuration(int duration) {
         this.duration = duration;
     }
-
-    // Optional: For better logging or debugging purposes
-    
-    /* @Override
-    public String toString() {
-        return "Lessons{" +
-               "sessionId=" + sessionId +
-               ", title='" + title + '\'' +
-               ", videoUrl='" + videoUrl + '\'' +
-               ", courseId=" + courseId +
-               ", description='" + description + '\'' +
-               ", duration=" + duration +
-               '}';
-    }  */
 }
 

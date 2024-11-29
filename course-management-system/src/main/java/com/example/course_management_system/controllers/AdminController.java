@@ -118,6 +118,23 @@ public class AdminController {
         }
     }
 
+    @PostMapping("/admin/change-status")
+    public String adminChangeStatus(Model model, @RequestParam("courseId") int courseId) {
+        Optional<Courses> courseChangeStatus = courseService.getCourseById(courseId);
+        if (courseChangeStatus.isPresent()) {
+            Courses course = courseChangeStatus.get();
+            if ("draft".equalsIgnoreCase(course.getStatus())) {
+                course.setStatus("published");
+            } else if ("published".equalsIgnoreCase(course.getStatus())) {
+                course.setStatus("draft");
+            }
+            courseService.saveCourse(course);
+            model.addAttribute("successMessage", "Course status changed to active.");
+            return "redirect:/admin/courses";
+        }
+        return "redirect:/admin/courses";
+    }
+
     @GetMapping("/admin/course-category")
     public String adminCourseCategory(Model model) {
         List<Courses> coursesOfP = courseService.getAllCourseByCategory("Programming");
@@ -160,7 +177,7 @@ public class AdminController {
         model.addAttribute("courseCount", courseCount);
         model.addAttribute("totalStudentsPerCourse", totalStudentsPerCourse);
         model.addAttribute("pageUrl", "/admin/course-category/" + category);
-        return "admin-course-category-detail"; 
+        return "admin-course-category-detail";
     }
 
     private String convertCategoryFormat(String category) {

@@ -39,45 +39,4 @@ public class CourseService {
     public void deleteCourseById(int courseId) {
         courseRepository.deleteById(courseId);
     } 
-
-    //  Retrieve a course by its ID
-    // Courses getCourseById(int courseId);
-
-    //  Retrieve courses by name
-    // List<Courses> getCoursesByName(String name);
-
-    //  Retrieve courses by category
-    // List<Courses> getCoursesByCategory(String category);
-
-    //  Create a new course
-    // Courses createCourse(Courses course);
-
-    //  Delete a course by ID
-    // void deleteCourse(int courseId);
 }
-
-// @Override
-    //  public Courses getCourseById(int courseId) {
-    //     throw new UnsupportedOperationException("Unimplemented method 'getCourseById'");
-
-    //  }
-        
-    // @Override
-    // public List<Courses> getCoursesByName(String name) {
-    //     return coursesRepositories.findByName(name);
-    // }
-
-    
-
-    // @Override
-    // public Courses createCourse(Courses course) {
-    //     return coursesRepositories.save(course);
-    // }
-
-    // @Override
-    // public void deleteCourse(int courseId) {
-    //     if (!coursesRepositories.existsById(courseId)) {
-    //         throw new RuntimeException("Course not found with ID: " + courseId);
-    //     }
-    //     coursesRepositories.deleteById(courseId);
-    // }

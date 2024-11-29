@@ -115,13 +115,18 @@
                                                             <span th:text="${courseInAd.status}">
                                                         </td>
                                                         <td>
-                                                            <a th:if="${courseInAd.status == 'draft'}" href="#" class="btn btn-success btn-sm">Publish</a>
-    
-                                                            <!-- Delete button should appear if course status is 'draft' -->
-                                                            <a th:if="${courseInAd.status == 'draft'}" th:href="@{/admin/delete-course/{courseId}(courseId=${courseInAd.courseId})}" class="btn btn-outline-secondary btn-sm">Delete</a>
-                                                            
-                                                            <!-- Change Status button should appear if course status is 'published' -->
-                                                            <a th:if="${courseInAd.status == 'published'}" href="#" class="btn btn-secondary btn-sm">Change Status</a>
+                                                            <!-- Form for changing course status -->
+                                                            <form th:action="@{/admin/change-status}" method="post">
+                                                                <input type="hidden" name="courseId" th:value="${courseInAd.courseId}" />
+                                                                <button th:if="${courseInAd.status == 'published'}" class="btn btn-secondary btn-sm" type="submit">Change Status</button>
+                                                            </form>
+                                                        
+                                                            <!-- Form for deleting course -->
+                                                            <form th:action="@{/admin/change-status}" method="post" class="d-flex align-items-center">
+                                                                <input type="hidden" name="courseId" th:value="${courseInAd.courseId}" />
+                                                                <button th:if="${courseInAd.status == 'draft'}" class="btn btn-success btn-sm" type="submit">Publish</button>
+                                                                <a th:if="${courseInAd.status == 'draft'}" class="btn btn-outline-secondary btn-sm ms-2" th:href="@{/admin/delete-course/{courseId}(courseId=${courseInAd.courseId})}">Delete</a>
+                                                            </form>
                                                         </td>
                                                     </tr>
                                                 </tbody>

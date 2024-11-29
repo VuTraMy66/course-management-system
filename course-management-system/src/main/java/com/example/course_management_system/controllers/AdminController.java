@@ -278,20 +278,20 @@ public class AdminController {
         return "admin-review";
     }
 
-    // // delete sessions funct
-    // @GetMapping("/admin-delete-sessions/{sessionId}")
-    // public String adminDeleteSession(@PathVariable("sessionId") int sessionId, Model model) {
-    //     try {
-    //         // Delete sessions
-    //         adminService.deleteSession(sessionId);
+    // delete sessions funct
+    @GetMapping("/admin-delete-sessions/{sessionId}")
+    public String adminDeleteSession(@PathVariable("sessionId") int sessionId, Model model) {
+        try {
+            // Delete sessions
+            adminService.deleteSession(sessionId);
             
     //         model.addAttribute("successMessage", "Session deleted successfully.");
 
-    //         return "redirect:/admin-session";
-    //     } catch (Exception e) {
-    //         e.printStackTrace();
-    //         model.addAttribute("errorMessage", "An error occurred while deleting session.");
-    //         return "error-page";
-    //     }
-    // }   
+            return "redirect:/admin-session";
+        } catch (Exception e) {
+            e.printStackTrace();
+            model.addAttribute("errorMessage", "An error occurred while deleting session.");
+            return "error-page";
+        }
+    }   
 }

@@ -6,8 +6,8 @@
             <div class="navbar-nav flex-column" style="width: 100%;">
                 <span class="navbar-header">Dashboard</span>
                 <ul class="list-unstyled ms-n2 mb-4 col-12">
-                    <li th:class="${pageUrl == '/student-dashboard' ? 'nav-item active' : 'nav-item'}">
-                        <a class="nav-link" href="/student-dashboard">
+                    <li th:class="${pageUrl == '/student/dashboard' ? 'nav-item active' : 'nav-item'}">
+                        <a class="nav-link" href="/student/dashboard">
                             <i class="nav-icon me-2" data-feather="home"></i> Dashboard
                         </a>
                     </li>
@@ -16,8 +16,8 @@
                             <i class="nav-icon me-2" data-feather="book"></i> My Courses
                         </a>
                     </li>
-                    <li th:class="${pageUrl == '/student-review' ? 'nav-item active' : 'nav-item'}">
-                        <a class="nav-link" href="/student-review">
+                    <li th:class="${pageUrl == '/student/review' ? 'nav-item active' : 'nav-item'}">
+                        <a class="nav-link" href="/student/review">
                             <i class="nav-icon me-2" data-feather="star"></i> My Reviews
                         </a>
                     </li>
@@ -30,8 +30,8 @@
                 </ul>
                 <span class="navbar-header">Account Setting</span>
                 <ul class="list-unstyled ms-n2 mb-4">
-                    <li th:class="${pageUrl == '/student-profile' ? 'nav-item active' : 'nav-item'}">
-                        <a class="nav-link" href="/student-profile">
+                    <li th:class="${pageUrl == '/student/profile' ? 'nav-item active' : 'nav-item'}">
+                        <a class="nav-link" href="/student/profile">
                             <i class="nav-icon me-2" data-feather="settings"></i> Profile
                         </a>
                     </li>

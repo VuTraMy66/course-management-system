@@ -41,22 +41,25 @@ public class SecurityConfig {
             
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/admin/**").hasAuthority("admin")
+                .requestMatchers("/student/**").hasAuthority("student") 
                 .anyRequest().permitAll()
                 // .requestMatchers("/student/**").authenticated()                   
         )
         .formLogin(form -> form
-            // .loginPage("/login")
-            // .loginProcessingUrl("/login")
-            // .usernameParameter("username")
-            // .passwordParameter("password")
             .defaultSuccessUrl("/admin", true) 
             .failureUrl("/login?error=true")
             .successHandler((request, response, authentication) -> {
                 String username = authentication.getName(); 
                 System.out.println("Authenticated User: " + username);
-                response.sendRedirect("/admin");
+                if (authentication.getAuthorities().stream()
+                        .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("admin"))) {
+                    response.sendRedirect("/admin");
+                } else if (authentication.getAuthorities().stream()
+                        .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("student"))) {
+                    response.sendRedirect("/"); 
+                }
             })
-            .permitAll()               
+            .permitAll()
         )
         .logout(config -> config
             .logoutSuccessUrl("/") 

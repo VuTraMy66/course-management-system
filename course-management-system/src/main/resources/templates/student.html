@@ -55,7 +55,7 @@
                             <a class="nav-link active" id="learning-tab" data-bs-toggle="pill" href="#learning" role="tab" aria-controls="learning" aria-selected="true">Learning</a>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="complete-tab" data-bs-toggle="pill" href="#complete" role="tab" aria-controls="complete" aria-selected="false">Completed</a>
+                            <a class="nav-link" id="completed-tab" data-bs-toggle="pill" href="#completed" role="tab" aria-controls="completed" aria-selected="false">Completed</a>
                         </li>
                         <li class="nav-item ms-0" role="presentation">
                             <a class="nav-link" id="dropped-tab" data-bs-toggle="pill" href="#dropped" role="tab" aria-controls="dropped" aria-selected="false">Dropped</a>
@@ -65,194 +65,46 @@
                     <div class="tab-content" id="tabContent">
                         <!-- Bookmark -->
                         <div class="tab-pane fade" id="dropped" role="tabpanel" aria-labelledby="dropped-tab">
-                            <div class="row">
-                                <div class="col-lg-3 col-md-6 col-12">
+                            <div class="row" th:if="${#lists.size(droppeds) > 0}">
+                                <div class="col-lg-3 col-md-6 col-12" th:each="dropped : ${droppeds}">
                                     <div class="card mb-4 card-hover">
-                                        <a href="#"><img src="https://geeksui.codescandy.com/geeks/assets/images/course/course-react.jpg" alt="course" class="card-img-top"></a>
+                                        <a th:href="@{/course(course_id=${dropped.courseId})}"><img th:src="${dropped.image}" alt="course" class="card-img-top fixed-image-size"></a>
                                         <div class="card-body">
-                                            <h3 class="h4 mb-2 text-truncate-line-2"><a href="#" class="text-inherit text-dark-hover">How to easily create a website with React</a></h3>
-                                            <ul class="mb-3 list-inline">
+                                            <h3 class="h4 mb-2 text-truncate-line-2"><a th:href="@{/course(course_id=${dropped.courseId})}" class="text-inherit text-dark-hover" th:text="${dropped.name}"></a></h3>
+                                            <ul class="mb-3 list-inline" style="vertical-align: text-bottom;">
                                                 <li class="list-inline-item">
                                                     <span class="align-text-bottom">
                                                         <i class="clock-icon" data-feather="clock"></i>    
                                                     </span>
-                                                    <span>3h 56m</span>
+                                                    <span class="fs-5" th:text="${dropped.formattedDuration}"></span>
                                                 </li>
                                                 <li class="list-inline-item">
-                                                    <svg class="me-1 mt-n1" style="margin-bottom: 4px;" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE"></rect>
-                                                        <rect x="7" y="5" width="2" height="9" rx="1" fill="#DBD8E9"></rect>
-                                                        <rect x="11" y="2" width="2" height="12" rx="1" fill="#DBD8E9"></rect>
+                                                    <svg class="me-1 mt-n1" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <rect x="3" y="8" width="2" height="6" rx="1" th:attr="fill=${dropped.skillLevel == 'beginner' || dropped.skillLevel == 'intermediate' || dropped.course.skillLevel == 'advanced' ? '#754FFE' : '#DBD8E9'}"></rect>
+                                                        <rect x="7" y="5" width="2" height="9" rx="1" th:attr="fill=${dropped.skillLevel == 'intermediate' || dropped.skillLevel == 'advanced' ? '#754FFE' : '#DBD8E9'}"></rect>
+                                                        <rect x="11" y="2" width="2" height="12" rx="1" th:attr="fill=${dropped.skillLevel == 'advanced' ? '#754FFE' : '#DBD8E9'}"></rect>
                                                     </svg>
-                                                    Beginner
+                                                    <span class="fs-5" th:text="${dropped.skillLevel}"></span>
                                                 </li>
                                             </ul>
                                             <div class="mt-3 d-flex align-baseline lh-1">
-                                                <span class="fs-6">
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                                <span class="text-secondary fw-semibold" style="vertical-align: text-bottom;" th:text="${droppedRatings[dropped.courseId]}"></span>
+                                                <span class="fs-6 ms-1">
+                                                    <i th:class="(${droppedRatings[dropped.courseId] >= 1.0 ? 'fas fa-star' : (droppedRatings[dropped.courseId] >= 0.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'" style="vertical-align: text-bottom;" width="10px" height="10px"></i>
+                                                    <i th:class="(${droppedRatings[dropped.courseId] >= 2.0 ? 'fas fa-star' : (droppedRatings[dropped.courseId] >= 1.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'" style="vertical-align: text-bottom;" width="10px" height="10px"></i>
+                                                    <i th:class="(${droppedRatings[dropped.courseId] >= 3.0 ? 'fas fa-star' : (droppedRatings[dropped.courseId] >= 2.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'" style="vertical-align: text-bottom;" width="10px" height="10px"></i>
+                                                    <i th:class="(${droppedRatings[dropped.courseId] >= 4.0 ? 'fas fa-star' : (droppedRatings[dropped.courseId] >= 3.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'" style="vertical-align: text-bottom;" width="10px" height="10px"></i>
+                                                    <i th:class="(${droppedRatings[dropped.courseId] >= 5.0 ? 'fas fa-star' : (droppedRatings[dropped.courseId] >= 4.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'" style="vertical-align: text-bottom;" width="10px" height="10px"></i>
                                                 </span>
-                                                <span class="text-warning mx-1">4.5</span>
-                                                <span class="fs-6">(9,300)</span>
+                                                <span class="text-gray-500 ms-1" style="vertical-align: text-bottom;" th:text="'(' + ${droppedReviews[dropped.courseId]} + ')'"></span>
                                             </div>
                                         </div>
                                         <div class="card-footer">
                                             <div class="row align-items-center g-0">
-                                                <div class="col ms-2">
-                                                    <span>Morris Mccoy</span>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <a href="#" class="removeBookmark">
-                                                        <i class="bi bi-bookmark-fill" style="color: #5A87C7;"></i>
+                                                <div class="col">
+                                                    <a class="text-uppercase fs-6 view fw-medium" th:href="@{/course(course_id=${dropped.courseId})}">View Course 
+                                                        <i data-feather="chevron-right" width="12" height="12" class="icon-view"></i>
                                                     </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-12">
-                                    <div class="card mb-4 card-hover">
-                                        <a href="#"><img src="https://geeksui.codescandy.com/geeks/assets/images/course/course-graphql.jpg" alt="course" class="card-img-top"></a>
-                                        <div class="card-body">
-                                            <h3 class="h4 mb-2 text-truncate-line-2"><a href="#" class="text-inherit text-dark-hover">GraphQL: introduction to graphQL for beginners</a></h3>
-                                            <ul class="mb-3 list-inline">
-                                                <li class="list-inline-item">
-                                                    <span class="align-text-bottom">
-                                                        <i class="clock-icon" data-feather="clock"></i>    
-                                                    </span>
-                                                    <span>2h 46m</span>
-                                                </li>
-                                                <li class="list-inline-item">
-                                                    <svg class="me-1 mt-n1" style="margin-bottom: 4px;" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE"></rect>
-                                                        <rect x="7" y="5" width="2" height="9" rx="1" fill="#754FFE"></rect>
-                                                        <rect x="11" y="2" width="2" height="12" rx="1" fill="#754FFE"></rect>
-                                                    </svg>
-                                                    Advance
-                                                </li>
-                                            </ul>
-                                            <div class="mt-3 d-flex align-baseline lh-1">
-                                                <span class="fs-6">
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                </span>
-                                                <span class="text-warning mx-1">4.5</span>
-                                                <span class="fs-6">(7,800)</span>
-                                            </div>
-                                        </div>
-                                        <div class="card-footer">
-                                            <div class="row align-items-center g-0">
-                                                <div class="col-auto">
-                                                    <img src="https://geeksui.codescandy.com/geeks/assets/images/avatar/avatar-2.jpg" class="rounded-circle avatar-xs" alt="avatar">
-                                                </div>
-                                                <div class="col ms-2">
-                                                    <span>Ted Hawkins</span>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <a href="#" class="removeBookmark">
-                                                        <i class="bi bi-bookmark-fill" style="color: #5A87C7;"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-12">
-                                    <div class="card mb-4 card-hover">
-                                        <a href="#"><img src="https://geeksui.codescandy.com/geeks/assets/images/course/course-angular.jpg" alt="course" class="card-img-top"></a>
-                                        <div class="card-body">
-                                            <h3 class="h4 mb-2 text-truncate-line-2"><a href="#" class="text-inherit text-dark-hover">Angular - the complete guide for beginner</a></h3>
-                                            <ul class="mb-3 list-inline">
-                                                <li class="list-inline-item">
-                                                    <span class="align-text-bottom">
-                                                        <i class="clock-icon" data-feather="clock"></i>    
-                                                    </span>
-                                                    <span>1h 30m</span>
-                                                </li>
-                                                <li class="list-inline-item">
-                                                    <svg class="me-1 mt-n1" style="margin-bottom: 4px;" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE"></rect>
-                                                        <rect x="7" y="5" width="2" height="9" rx="1" fill="#DBD8E9"></rect>
-                                                        <rect x="11" y="2" width="2" height="12" rx="1" fill="#DBD8E9"></rect>
-                                                    </svg>
-                                                    Beginner
-                                                </li>
-                                            </ul>
-                                            <div class="mt-3 d-flex align-baseline lh-1">
-                                                <span class="fs-6">
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                </span>
-                                                <span class="text-warning mx-1">4.5</span>
-                                                <span class="fs-6">(9,300)</span>
-                                            </div>
-                                        </div>
-                                        <div class="card-footer">
-                                            <div class="row align-items-center g-0">
-                                                <div class="col-auto">
-                                                    <img src="https://geeksui.codescandy.com/geeks/assets/images/avatar/avatar-4.jpg" class="rounded-circle avatar-xs" alt="avatar">
-                                                </div>
-                                                <div class="col ms-2">
-                                                    <span>Juanita Bell</span>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <a href="#" class="removeBookmark">
-                                                        <i class="bi bi-bookmark-fill" style="color: #5A87C7;"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-12">
-                                    <div class="card mb-4 card-hover">
-                                        <a href="#"><img src="https://geeksui.codescandy.com/geeks/assets/images/course/course-python.jpg" alt="course" class="card-img-top"></a>
-                                        <div class="card-body">
-                                            <h3 class="h4 mb-2 text-truncate-line-2"><a href="#" class="text-inherit text-dark-hover">The Python Course: build web application</a></h3>
-                                            <ul class="mb-3 list-inline">
-                                                <li class="list-inline-item">
-                                                    <span class="align-text-bottom">
-                                                        <i class="clock-icon" data-feather="clock"></i>    
-                                                    </span>
-                                                    <span>2h 30m</span>
-                                                </li>
-                                                <li class="list-inline-item">
-                                                    <svg class="me-1 mt-n1" style="margin-bottom: 4px;" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE"></rect>
-                                                        <rect x="7" y="5" width="2" height="9" rx="1" fill="#754FFE"></rect>
-                                                        <rect x="11" y="2" width="2" height="12" rx="1" fill="#DBD8E9"></rect>
-                                                    </svg>
-                                                    Intermediate
-                                                </li>
-                                            </ul>
-                                            <div class="mt-3 d-flex align-baseline lh-1">
-                                                <span class="fs-6">
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                </span>
-                                                <span class="text-warning mx-1">4.5</span>
-                                                <span class="fs-6">(3,245)</span>
-                                            </div>
-                                        </div>
-                                        <div class="card-footer">
-                                            <div class="row align-items-center g-0">
-                                                <div class="col-auto">
-                                                    <img src="https://geeksui.codescandy.com/geeks/assets/images/avatar/avatar-5.jpg" class="rounded-circle avatar-xs" alt="avatar">
-                                                </div>
-                                                <div class="col ms-2">
-                                                    <span>Claire Robertson</span>
                                                 </div>
                                                 <div class="col-auto">
                                                     <a href="#" class="removeBookmark">
@@ -264,795 +116,142 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-lg-3 col-md-6 col-12">
-                                    
-                                    <div class="card mb-4 card-hover">
-                                        <a href="#"><img src="https://geeksui.codescandy.com/geeks/assets/images/course/course-gatsby.jpg" alt="course" class="card-img-top"></a>
-                                         
-                                        <div class="card-body">
-                                            <h3 class="h4 mb-2 text-truncate-line-2"><a href="#" class="text-inherit text-dark-hover">Gatsby JS: build blog with GraphQL and React</a></h3>
-                                             
-                                            <ul class="mb-3 list-inline">
-                                                <li class="list-inline-item">
-                                                    <span class="align-text-bottom">
-                                                        <i class="clock-icon" data-feather="clock"></i>    
-                                                    </span>
-                                                    <span>3h 56m</span>
-                                                </li>
-                                                <li class="list-inline-item">
-                                                    <svg class="me-1 mt-n1" style="margin-bottom: 4px;" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE">
-                                                        <rect x="7" y="5" width="2" height="9" rx="1" fill="#DBD8E9">
-                                                        <rect x="11" y="2" width="2" height="12" rx="1" fill="#DBD8E9">
-                                                    </svg>
-                                                    Beginner
-                                                </li>
-                                            </ul>
-                                            <div class="mt-3 d-flex align-baseline lh-1">
-                                                <span class="fs-6">
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                </span>
-                                                <span class="text-warning mx-1">4.5</span>
-                                                <span class="fs-6">(5,300)</span>
-                                            </div>
-                                        </div>
-                                        <!-- Card Footer -->
-                                        <div class="card-footer">
-                                            <div class="row align-items-center g-0">
-                                                <div class="col-auto">
-                                                    <img src="https://geeksui.codescandy.com/geeks/assets/images/avatar/avatar-5.jpg" class="rounded-circle avatar-xs" alt="avatar">
-                                                </div>
-                                                <div class="col ms-2">
-                                                    <span>Morris Mccoy</span>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <a href="#" class="removeBookmark">
-                                                        <i class="bi bi-bookmark-fill" style="color: #5A87C7;"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-12">
-                                    
-                                    <div class="card mb-4 card-hover">
-                                        <a href="#"><img src="https://geeksui.codescandy.com/geeks/assets/images/course/course-javascript.jpg" alt="course" class="card-img-top"></a>
-                                         
-                                        <div class="card-body">
-                                            <h3 class="h4 mb-2 text-truncate-line-2"><a href="#" class="text-inherit text-dark-hover">JavaScript: modern javaScript from the beginning</a></h3>
-                                             
-                                            <ul class="mb-3 list-inline">
-                                                <li class="list-inline-item">
-                                                    <span class="align-text-bottom">
-                                                        <i class="clock-icon" data-feather="clock"></i>    
-                                                    </span>
-                                                    <span>2h 46m</span>
-                                                </li>
-                                                <li class="list-inline-item">
-                                                    <svg class="me-1 mt-n1" style="margin-bottom: 4px;" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE">
-                                                        <rect x="7" y="5" width="2" height="9" rx="1" fill="#754FFE">
-                                                        <rect x="11" y="2" width="2" height="12" rx="1" fill="#754FFE">
-                                                    </svg>
-                                                    Advance
-                                                </li>
-                                            </ul>
-                                            <div class="mt-3 d-flex align-baseline lh-1">
-                                                <span class="fs-6">
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                </span>
-                                                <span class="text-warning mx-1">4.5</span>
-                                                <span class="fs-6">(9,300)</span>
-                                            </div>
-                                        </div>
-                                        <!-- Card Footer -->
-                                        <div class="card-footer">
-                                            <div class="row align-items-center g-0">
-                                                <div class="col-auto">
-                                                    <img src="https://geeksui.codescandy.com/geeks/assets/images/avatar/avatar-6.jpg" class="rounded-circle avatar-xs" alt="avatar">
-                                                </div>
-                                                <div class="col ms-2">
-                                                    <span>Ted Hawkins</span>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <a href="#" class="removeBookmark">
-                                                        <i class="bi bi-bookmark-fill" style="color: #5A87C7;"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-12">
-                                    
-                                    <div class="card mb-4 card-hover">
-                                        <a href="#"><img src="https://geeksui.codescandy.com/geeks/assets/images/course/course-css.jpg" alt="course" class="card-img-top"></a>
-                                         
-                                        <div class="card-body">
-                                            <h3 class="h4 mb-2 text-truncate-line-2"><a href="#" class="text-inherit text-dark-hover">CSS: ultimate CSS course from beginner to advanced</a></h3>
-                                             
-                                            <ul class="mb-3 list-inline">
-                                                <li class="list-inline-item">
-                                                    <span class="align-middle">
-                                                        <span class="align-text-bottom">
-                                                            <i class="clock-icon" data-feather="clock"></i>    
-                                                        </span>
-                                                    <span>1h 30m</span>
-                                                </li>
-                                                <li class="list-inline-item">
-                                                    <svg class="me-1 mt-n1" style="margin-bottom: 4px;" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE">
-                                                        <rect x="7" y="5" width="2" height="9" rx="1" fill="#DBD8E9">
-                                                        <rect x="11" y="2" width="2" height="12" rx="1" fill="#DBD8E9">
-                                                    </svg>
-                                                    Beginner
-                                                </li>
-                                            </ul>
-                                            <div class="mt-3 d-flex align-baseline lh-1">
-                                                <span class="fs-6">
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                </span>
-                                                <span class="text-warning mx-1">4.5</span>
-                                                <span class="fs-6">(5,586)</span>
-                                            </div>
-                                        </div>
-                                        <!-- Card Footer -->
-                                        <div class="card-footer">
-                                            <div class="row align-items-center g-0">
-                                                <div class="col-auto">
-                                                    <img src="https://geeksui.codescandy.com/geeks/assets/images/avatar/avatar-7.jpg" class="rounded-circle avatar-xs" alt="avatar">
-                                                </div>
-                                                <div class="col ms-2">
-                                                    <span>Juanita Bell</span>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <a href="#" class="removeBookmark">
-                                                        <i class="bi bi-bookmark-fill" style="color: #5A87C7;"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-12">
-                                    
-                                    <div class="card mb-4 card-hover">
-                                        <a href="#"><img src="https://geeksui.codescandy.com/geeks/assets/images/course/course-wordpress.jpg" alt="course" class="card-img-top"></a>
-                                         
-                                        <div class="card-body">
-                                            <h3 class="h4 mb-2 text-truncate-line-2"><a href="#" class="text-inherit text-dark-hover">Wordpress: complete WordPress theme & plugin dvelopment course</a></h3>
-                                             
-                                            <ul class="mb-3 list-inline">
-                                                <li class="list-inline-item">
-                                                    <span class="align-text-bottom">
-                                                        <i class="clock-icon" data-feather="clock"></i>    
-                                                    </span>
-                                                    <span>2h 30m</span>
-                                                </li>
-                                                <li class="list-inline-item">
-                                                    <svg class="me-1 mt-n1" style="margin-bottom: 4px;" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE">
-                                                        <rect x="7" y="5" width="2" height="9" rx="1" fill="#754FFE">
-                                                        <rect x="11" y="2" width="2" height="12" rx="1" fill="#DBD8E9">
-                                                    </svg>
-                                                    Intermediate
-                                                </li>
-                                            </ul>
-                                            <div class="mt-3 d-flex align-baseline lh-1">
-                                                <span class="fs-6">
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                </span>
-                                                <span class="text-warning mx-1">4.5</span>
-                                                <span class="fs-6">(6,245)</span>
-                                            </div>
-                                        </div>
-                                         
-                                        <div class="card-footer">
-                                            <div class="row align-items-center g-0">
-                                                <div class="col-auto">
-                                                    <img src="https://geeksui.codescandy.com/geeks/assets/images/avatar/avatar-8.jpg" class="rounded-circle avatar-xs" alt="avatar">
-                                                </div>
-                                                <div class="col ms-2">
-                                                    <span>Claire Robertson</span>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <a href="#" class="removeBookmark">
-                                                        <i class="bi bi-bookmark-fill" style="color: #5A87C7;"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
+                            <div class="row" th:if="${#lists.size(droppeds) > 0}">
                                 <div class="offset-lg-3 col-lg-6 col-md-12 col-12 text-center mt-5">
                                     <p>You’ve reached the end of the list</p>
+                                </div>
+                            </div>
+                            <div class="row" th:if="${#lists.size(droppeds) == 0}">
+                                <div class="offset-lg-3 col-lg-6 col-md-12 col-12 text-center mt-5">
+                                    <p>You haven’t dropped any courses yet.</p>
                                 </div>
                             </div>
                         </div>
                         <!-- Learning  -->
                         <div class="tab-pane fade show active" id="learning" role="tabpanel" aria-labelledby="learning-tab">
-                            <div class="row">
-                                <div class="col-lg-3 col-md-6 col-12">
+                            <div class="row" th:if="${#lists.size(learnings) > 0}">
+                                <div class="col-lg-3 col-md-6 col-12" th:each="learning : ${learnings}">
                                     <div class="card mb-4 card-hover">
-                                        <a href="#"><img src="https://geeksui.codescandy.com/geeks/assets/images/course/course-react.jpg" alt="course" class="card-img-top"></a>
+                                        <a th:href="@{/course(course_id=${learning.courseId})}"><img th:src="${learning.image}" alt="course" class="card-img-top fixed-image-size"></a>
                                         <div class="card-body">
-                                            <h3 class="h4 mb-2 text-truncate-line-2"><a href="#" class="text-inherit text-dark-hover">How to easily create a website with React</a></h3>
-                                            <ul class="mb-3 list-inline">
-                                                <li class="list-inline-item">
-                                                    <span class="align-text-bottom">
+                                            <h3 class="h4 mb-2 text-truncate-line-2"><a th:href="@{/course(course_id=${learning.courseId})}" class="text-inherit text-dark-hover" th:text="${learning.name}"></a></h3>
+                                             <ul class="mb-3 list-inline" style="vertical-align: text-bottom;">
+                                                <li class="list-inline-item" >
+                                                    <span class="align-text-bottom" >
                                                         <i class="clock-icon" data-feather="clock"></i>    
                                                     </span>
-                                                    <span>3h 56m</span>
+                                                    <span class="fs-5" th:text="${learning.formattedDuration}"></span>
                                                 </li>
-                                                <li class="list-inline-item">
-                                                    <svg class="me-1 mt-n1" style="margin-bottom: 4px;" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE"></rect>
-                                                        <rect x="7" y="5" width="2" height="9" rx="1" fill="#DBD8E9"></rect>
-                                                        <rect x="11" y="2" width="2" height="12" rx="1" fill="#DBD8E9"></rect>
+                                                <li class="list-inline-item" style="vertical-align: text-bottom;">
+                                                    <svg class="me-1 mt-n1" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <rect x="3" y="8" width="2" height="6" rx="1" th:attr="fill=${learning.skillLevel == 'beginner' || learning.skillLevel == 'intermediate' || learning.skillLevel == 'advanced' ? '#754FFE' : '#DBD8E9'}"></rect>
+                                                        <rect x="7" y="5" width="2" height="9" rx="1" th:attr="fill=${learning.skillLevel == 'intermediate' || learning.skillLevel == 'advanced' ? '#754FFE' : '#DBD8E9'}"></rect>
+                                                        <rect x="11" y="2" width="2" height="12" rx="1" th:attr="fill=${learning.skillLevel == 'advanced' ? '#754FFE' : '#DBD8E9'}"></rect>
                                                     </svg>
-                                                    Beginner
+                                                    <span class="fs-5" th:text="${learning.skillLevel}"></span>
                                                 </li>
                                             </ul>
-                                            <div class="mt-3 d-flex align-baseline lh-1">
-                                                <span class="fs-6">
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                            <div class="mt-3 align-baseline lh-1">
+                                                <span class="text-secondary fw-semibold" style="vertical-align: text-bottom;" th:text="${learningRatings[learning.courseId]}"></span>
+                                                <span class="fs-6 ms-1">
+                                                    <i th:class="(${learningRatings[learning.courseId] >= 1.0 ? 'fas fa-star' : (learningRatings[learning.courseId] >= 0.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'" style="vertical-align: text-bottom;" width="10px" height="10px"></i>
+                                                    <i th:class="(${learningRatings[learning.courseId] >= 2.0 ? 'fas fa-star' : (learningRatings[learning.courseId] >= 1.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'" style="vertical-align: text-bottom;" width="10px" height="10px"></i>
+                                                    <i th:class="(${learningRatings[learning.courseId] >= 3.0 ? 'fas fa-star' : (learningRatings[learning.courseId] >= 2.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'" style="vertical-align: text-bottom;" width="10px" height="10px"></i>
+                                                    <i th:class="(${learningRatings[learning.courseId] >= 4.0 ? 'fas fa-star' : (learningRatings[learning.courseId] >= 3.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'" style="vertical-align: text-bottom;" width="10px" height="10px"></i>
+                                                    <i th:class="(${learningRatings[learning.courseId] >= 5.0 ? 'fas fa-star' : (learningRatings[learning.courseId] >= 4.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'" style="vertical-align: text-bottom;" width="10px" height="10px"></i>
                                                 </span>
-                                                <span class="text-warning mx-1">4.5</span>
-                                                <span class="fs-6">(6,300)</span>
+                                                <span class="text-gray-500 ms-1" style="vertical-align: text-bottom;" th:text="'(' + ${learningReviews[learning.courseId]} + ')'"></span>
                                             </div>
                                         </div>
                                         <div class="card-footer">
                                             <div class="row align-items-center g-0">
-                                                <div class="col-auto">
-                                                    <img src="https://geeksui.codescandy.com/geeks/assets/images/avatar/avatar-6.jpg" class="rounded-circle avatar-xs" alt="avatar">
-                                                </div>
-                                                <div class="col ms-2">
-                                                    <span>Morris Mccoy</span>
+                                                <div class="col">
+                                                    <a class="text-uppercase fs-6 view fw-medium" th:href="@{/course(course_id=${learning.courseId})}">View Course 
+                                                        <i data-feather="chevron-right" width="12" height="12" class="icon-view"></i>
+                                                    </a>
                                                 </div>
                                                 <div class="col-auto">
                                                     <a href="#" class="removeBookmark">
                                                         <i class="bi bi-bookmark-fill" style="color: #5A87C7;"></i>
                                                     </a>
                                                 </div>
-                                            </div>
-                                            <div class="progress mt-3" style="height: 5px">
-                                                <div class="progress-bar bg-success" role="progressbar" style="width: 45%" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-12">
-                                    <div class="card mb-4 card-hover">
-                                        <a href="#"><img src="https://geeksui.codescandy.com/geeks/assets/images/course/course-graphql.jpg" alt="course" class="card-img-top"></a>
-                                        <div class="card-body">
-                                            <h3 class="h4 mb-2 text-truncate-line-2"><a href="#" class="text-inherit text-dark-hover">GraphQL: introduction to graphQL for beginners</a></h3>
-                                            <ul class="mb-3 list-inline">
-                                                <li class="list-inline-item">
-                                                    <span class="align-text-bottom">
-                                                        <i class="clock-icon" data-feather="clock"></i>    
-                                                    </span>
-                                                    <span>2h 46m</span>
-                                                </li>
-                                                <li class="list-inline-item">
-                                                    <svg class="me-1 mt-n1" style="margin-bottom: 4px;" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE"></rect>
-                                                        <rect x="7" y="5" width="2" height="9" rx="1" fill="#754FFE"></rect>
-                                                        <rect x="11" y="2" width="2" height="12" rx="1" fill="#754FFE"></rect>
-                                                    </svg>
-                                                    Advance
-                                                </li>
-                                            </ul>
-                                            <div class="mt-3 d-flex align-baseline lh-1">
-                                                <span class="fs-6">
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                </span>
-                                                <span class="text-warning mx-1">4.5</span>
-                                                <span class="fs-6">(7,800)</span>
-                                            </div>
-                                        </div>
-                                        <div class="card-footer">
-                                            <div class="row align-items-center g-0">
-                                                <div class="col-auto">
-                                                    <img src="https://geeksui.codescandy.com/geeks/assets/images/avatar/avatar-7.jpg" class="rounded-circle avatar-xs" alt="avatar">
-                                                </div>
-                                                <div class="col ms-2">
-                                                    <span>Ted Hawkins</span>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <a href="#" class="removeBookmark">
-                                                        <i class="bi bi-bookmark-fill" style="color: #5A87C7;"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="progress mt-3" style="height: 5px">
-                                                <div class="progress-bar bg-success" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-12">
-                                    
-                                    <div class="card mb-4 card-hover">
-                                        <a href="#"><img src="https://geeksui.codescandy.com/geeks/assets/images/course/course-angular.jpg" alt="course" class="card-img-top"></a>
-                                         
-                                        <div class="card-body">
-                                            <h3 class="h4 mb-2 text-truncate-line-2"><a href="#" class="text-inherit text-dark-hover">Angular - the complete guide for beginner</a></h3>
-                                             
-                                            <ul class="mb-3 list-inline">
-                                                <li class="list-inline-item">
-                                                    <span class="align-text-bottom">
-                                                        <i class="clock-icon" data-feather="clock"></i>    
-                                                    </span>
-                                                    <span>1h 30m</span>
-                                                </li>
-                                                <li class="list-inline-item">
-                                                    <svg class="me-1 mt-n1" style="margin-bottom: 4px;" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE"></rect>
-                                                        <rect x="7" y="5" width="2" height="9" rx="1" fill="#DBD8E9"></rect>
-                                                        <rect x="11" y="2" width="2" height="12" rx="1" fill="#DBD8E9"></rect>
-                                                    </svg>
-                                                    Beginner
-                                                </li>
-                                            </ul>
-                                            <div class="mt-3 d-flex align-baseline lh-1">
-                                                <span class="fs-6">
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                </span>
-                                                <span class="text-warning mx-1">4.5</span>
-                                                <span class="fs-6">(5,410)</span>
-                                            </div>
-                                        </div>
-                                         
-                                        <div class="card-footer">
-                                            <div class="row align-items-center g-0">
-                                                <div class="col-auto">
-                                                    <img src="https://geeksui.codescandy.com/geeks/assets/images/avatar/avatar-8.jpg" class="rounded-circle avatar-xs" alt="avatar">
-                                                </div>
-                                                <div class="col ms-2">
-                                                    <span>Juanita Bell</span>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <a href="#" class="removeBookmark">
-                                                        <i class="bi bi-bookmark-fill" style="color: #5A87C7;"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="progress mt-3" style="height: 5px">
-                                                <div class="progress-bar bg-success" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-12">
-                                    <div class="card mb-4 card-hover">
-                                        <a href="#"><img src="https://geeksui.codescandy.com/geeks/assets/images/course/course-python.jpg" alt="course" class="card-img-top"></a>
-                                        <div class="card-body">
-                                            <h3 class="h4 mb-2 text-truncate-line-2"><a href="#" class="text-inherit text-dark-hover">The Python Course: build web application</a></h3>
-                                            <ul class="mb-3 list-inline">
-                                                <li class="list-inline-item">
-                                                    <span class="align-text-bottom">
-                                                        <i class="clock-icon" data-feather="clock"></i>    
-                                                    </span>
-                                                    <span>2h 30m</span>
-                                                </li>
-                                                <li class="list-inline-item">
-                                                    <svg class="me-1 mt-n1" style="margin-bottom: 4px;" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE"></rect>
-                                                        <rect x="7" y="5" width="2" height="9" rx="1" fill="#754FFE"></rect>
-                                                        <rect x="11" y="2" width="2" height="12" rx="1" fill="#DBD8E9"></rect>
-                                                    </svg>
-                                                    Intermediate
-                                                </li>
-                                            </ul>
-                                            <div class="mt-3 d-flex align-baseline lh-1">
-                                                <span class="fs-6">
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                </span>
-                                                <span class="text-warning mx-1">4.5</span>
-                                                <span class="fs-6">(9,300)</span>
-                                            </div>
-                                        </div>
-                                         
-                                        <div class="card-footer">
-                                            <div class="row align-items-center g-0">
-                                                <div class="col-auto">
-                                                    <img src="https://geeksui.codescandy.com/geeks/assets/images/avatar/avatar-9.jpg" class="rounded-circle avatar-xs" alt="avatar">
-                                                </div>
-                                                <div class="col ms-2">
-                                                    <span>Claire Robertson</span>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <a href="#" class="removeBookmark">
-                                                        <i class="bi bi-bookmark-fill" style="color: #5A87C7;"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="progress mt-3" style="height: 5px">
-                                                <div class="progress-bar bg-success" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-12">
-                                    
-                                    <div class="card mb-4 card-hover">
-                                        <a href="#"><img src="https://geeksui.codescandy.com/geeks/assets/images/course/course-python.jpg" alt="course" class="card-img-top"></a>
-                                         
-                                        <div class="card-body">
-                                            <h3 class="h4 mb-2 text-truncate-line-2"><a href="#" class="text-inherit text-dark-hover">The Python Course: build web application</a></h3>
-                                             
-                                            <ul class="mb-3 list-inline">
-                                                <li class="list-inline-item">
-                                                    <span class="align-text-bottom">
-                                                        <i class="clock-icon" data-feather="clock"></i>    
-                                                    </span>
-                                                    <span>2h 30m</span>
-                                                </li>
-                                                <li class="list-inline-item">
-                                                    <svg class="me-1 mt-n1" style="margin-bottom: 4px;" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE"></rect>
-                                                        <rect x="7" y="5" width="2" height="9" rx="1" fill="#754FFE"></rect>
-                                                        <rect x="11" y="2" width="2" height="12" rx="1" fill="#DBD8E9"></rect>
-                                                    </svg>
-                                                    Intermediate
-                                                </li>
-                                            </ul>
-                                            <div class="mt-3 d-flex align-baseline lh-1">
-                                                <span class="fs-6">
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                </span>
-                                                <span class="text-warning mx-1">4.5</span>
-                                                <span class="fs-6">(13,245)</span>
-                                            </div>
-                                        </div>
-                                        <div class="card-footer">
-                                            <div class="row align-items-center g-0">
-                                                <div class="col-auto">
-                                                    <img src="https://geeksui.codescandy.com/geeks/assets/images/avatar/avatar-9.jpg" class="rounded-circle avatar-xs" alt="avatar">
-                                                </div>
-                                                <div class="col ms-2">
-                                                    <span>Claire Robertson</span>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <a href="#" class="removeBookmark">
-                                                        <i class="bi bi-bookmark-fill" style="color: #5A87C7;"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="progress mt-3" style="height: 5px">
-                                                <div class="progress-bar bg-success" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row" th:if="${#lists.size(learnings) > 0}">
                                 <div class="offset-lg-3 col-lg-6 col-md-12 col-12 text-center mt-5">
                                     <p>You’ve reached the end of the list</p>
+                                </div>
+                            </div>
+                            <div class="row" th:if="${#lists.size(learnings) == 0}">
+                                <div class="offset-lg-3 col-lg-6 col-md-12 col-12 text-center mt-5">
+                                    <p>You don't have any learning courses at the moment.</p>
                                 </div>
                             </div>
                         </div>
                         <!-- Completed -->
-                        <div class="tab-pane fade" id="complete" role="tabpanel" aria-labelledby="learning-tab">
-                            <div class="row">
-                                <div class="col-lg-3 col-md-6 col-12">
+                        <div class="tab-pane fade" id="completed" role="tabpanel" aria-labelledby="completed-tab">
+                            <div class="row" th:if="${#lists.size(completeds) > 0}">
+                                <div class="col-lg-3 col-md-6 col-12" th:each="completed : ${completeds}">
                                     <div class="card mb-4 card-hover">
-                                        <a href="#"><img src="https://geeksui.codescandy.com/geeks/assets/images/course/course-react.jpg" alt="course" class="card-img-top"></a>
+                                        <a th:href="@{/course(course_id=${completed.courseId})}"><img th:src="${completed.image}" alt="course" class="card-img-top fixed-image-size"></a>
                                         <div class="card-body">
-                                            <h3 class="h4 mb-2 text-truncate-line-2"><a href="#" class="text-inherit text-dark-hover">How to easily create a website with React</a></h3>
-                                            <ul class="mb-3 list-inline">
+                                            <h3 class="h4 mb-2 text-truncate-line-2"><a href="#" class="text-inherit text-dark-hover" th:text="${completed.name}"></a></h3>
+                                            <ul class="mb-3 list-inline" style="vertical-align: text-bottom;">
                                                 <li class="list-inline-item">
                                                     <span class="align-text-bottom">
                                                         <i class="clock-icon" data-feather="clock"></i>    
                                                     </span>
-                                                    <span>3h 56m</span>
+                                                    <span class="fs-5" th:text="${completed.formattedDuration}"></span>
                                                 </li>
                                                 <li class="list-inline-item">
-                                                    <svg class="me-1 mt-n1" style="margin-bottom: 4px;" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE"></rect>
-                                                        <rect x="7" y="5" width="2" height="9" rx="1" fill="#DBD8E9"></rect>
-                                                        <rect x="11" y="2" width="2" height="12" rx="1" fill="#DBD8E9"></rect>
+                                                    <svg class="me-1 mt-n1" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <rect x="3" y="8" width="2" height="6" rx="1" th:attr="fill=${completed.skillLevel == 'beginner' || completed.skillLevel == 'intermediate' || completed.skillLevel == 'advanced' ? '#754FFE' : '#DBD8E9'}"></rect>
+                                                        <rect x="7" y="5" width="2" height="9" rx="1" th:attr="fill=${completed.skillLevel == 'intermediate' || completed.skillLevel == 'advanced' ? '#754FFE' : '#DBD8E9'}"></rect>
+                                                        <rect x="11" y="2" width="2" height="12" rx="1" th:attr="fill=${completed.skillLevel == 'advanced' ? '#754FFE' : '#DBD8E9'}"></rect>
                                                     </svg>
-                                                    Beginner
+                                                    <span class="fs-5" th:text="${completed.skillLevel}" ></span>
                                                 </li>
                                             </ul>
                                             <div class="mt-3 d-flex align-baseline lh-1">
-                                                <span class="fs-6">
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                                <span class="text-secondary fw-semibold" th:text="${completedRatings[completed.courseId]}"></span>
+                                                <span class="fs-6 ms-1">
+                                                    <i th:class="(${completedRatings[completed.courseId] >= 1.0 ? 'fas fa-star' : (completedRatings[completed.courseId] >= 0.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'" style="vertical-align: text-bottom;" width="10px" height="10px"></i>
+                                                    <i th:class="(${completedRatings[completed.courseId] >= 2.0 ? 'fas fa-star' : (completedRatings[completed.courseId] >= 1.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'" style="vertical-align: text-bottom;" width="10px" height="10px"></i>
+                                                    <i th:class="(${completedRatings[completed.courseId] >= 3.0 ? 'fas fa-star' : (completedRatings[completed.courseId] >= 2.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'" style="vertical-align: text-bottom;" width="10px" height="10px"></i>
+                                                    <i th:class="(${completedRatings[completed.courseId] >= 4.0 ? 'fas fa-star' : (completedRatings[completed.courseId] >= 3.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'" style="vertical-align: text-bottom;" width="10px" height="10px"></i>
+                                                    <i th:class="(${completedRatings[completed.courseId] >= 5.0 ? 'fas fa-star' : (completedRatings[completed.courseId] >= 4.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'" style="vertical-align: text-bottom;" width="10px" height="10px"></i>
                                                 </span>
-                                                <span class="text-warning mx-1">4.5</span>
-                                                <span class="fs-6">(6,300)</span>
+                                                <span class="text-gray-500 ms-1" th:text="'(' + ${completedReviews[completed.courseId]} + ')'"></span>
                                             </div>
                                         </div>
                                         <div class="card-footer">
                                             <div class="row align-items-center g-0">
-                                                <div class="col ms-2">
-                                                    <span>Morris Mccoy</span>
+                                                <div class="col">
+                                                    <a class="text-uppercase fs-6 view fw-medium" th:href="@{/course(course_id=${completed.courseId})}">View Course 
+                                                        <i data-feather="chevron-right" width="12" height="12" class="icon-view"></i>
+                                                    </a>
                                                 </div>
                                                 <div class="col-auto">
                                                     <a href="#" class="removeBookmark">
                                                         <i class="bi bi-bookmark-fill" style="color: #5A87C7;"></i>
                                                     </a>
                                                 </div>
-                                            </div>
-                                            <div class="progress mt-3" style="height: 5px">
-                                                <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-12">
-                                    <div class="card mb-4 card-hover">
-                                        <a href="#"><img src="https://geeksui.codescandy.com/geeks/assets/images/course/course-graphql.jpg" alt="course" class="card-img-top"></a>
-                                        <div class="card-body">
-                                            <h3 class="h4 mb-2 text-truncate-line-2"><a href="#" class="text-inherit text-dark-hover">GraphQL: introduction to graphQL for beginners</a></h3>
-                                            <ul class="mb-3 list-inline">
-                                                <li class="list-inline-item">
-                                                    <span class="align-text-bottom">
-                                                        <i class="clock-icon" data-feather="clock"></i>    
-                                                    </span>
-                                                    <span>2h 46m</span>
-                                                </li>
-                                                <li class="list-inline-item">
-                                                    <svg class="me-1 mt-n1" style="margin-bottom: 4px;" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE"></rect>
-                                                        <rect x="7" y="5" width="2" height="9" rx="1" fill="#754FFE"></rect>
-                                                        <rect x="11" y="2" width="2" height="12" rx="1" fill="#754FFE"></rect>
-                                                    </svg>
-                                                    Advance
-                                                </li>
-                                            </ul>
-                                            <div class="mt-3 d-flex align-baseline lh-1">
-                                                <span class="fs-6">
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                </span>
-                                                <span class="text-warning mx-1">4.5</span>
-                                                <span class="fs-6">(7,800)</span>
-                                            </div>
-                                        </div>
-                                        <div class="card-footer">
-                                            <div class="row align-items-center g-0">
-                                                <div class="col-auto">
-                                                    <img src="https://geeksui.codescandy.com/geeks/assets/images/avatar/avatar-7.jpg" class="rounded-circle avatar-xs" alt="avatar">
-                                                </div>
-                                                <div class="col ms-2">
-                                                    <span>Ted Hawkins</span>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <a href="#" class="removeBookmark">
-                                                        <i class="bi bi-bookmark-fill" style="color: #5A87C7;"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="progress mt-3" style="height: 5px">
-                                                <div class="progress-bar bg-success" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-12">
-                                    
-                                    <div class="card mb-4 card-hover">
-                                        <a href="#"><img src="https://geeksui.codescandy.com/geeks/assets/images/course/course-angular.jpg" alt="course" class="card-img-top"></a>
-                                         
-                                        <div class="card-body">
-                                            <h3 class="h4 mb-2 text-truncate-line-2"><a href="#" class="text-inherit text-dark-hover">Angular - the complete guide for beginner</a></h3>
-                                             
-                                            <ul class="mb-3 list-inline">
-                                                <li class="list-inline-item">
-                                                    <span class="align-text-bottom">
-                                                        <i class="clock-icon" data-feather="clock"></i>    
-                                                    </span>
-                                                    <span>1h 30m</span>
-                                                </li>
-                                                <li class="list-inline-item">
-                                                    <svg class="me-1 mt-n1" style="margin-bottom: 4px;" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE"></rect>
-                                                        <rect x="7" y="5" width="2" height="9" rx="1" fill="#DBD8E9"></rect>
-                                                        <rect x="11" y="2" width="2" height="12" rx="1" fill="#DBD8E9"></rect>
-                                                    </svg>
-                                                    Beginner
-                                                </li>
-                                            </ul>
-                                            <div class="mt-3 d-flex align-baseline lh-1">
-                                                <span class="fs-6">
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                </span>
-                                                <span class="text-warning mx-1">4.5</span>
-                                                <span class="fs-6">(5,410)</span>
-                                            </div>
-                                        </div>
-                                         
-                                        <div class="card-footer">
-                                            <div class="row align-items-center g-0">
-                                                <div class="col-auto">
-                                                    <img src="https://geeksui.codescandy.com/geeks/assets/images/avatar/avatar-8.jpg" class="rounded-circle avatar-xs" alt="avatar">
-                                                </div>
-                                                <div class="col ms-2">
-                                                    <span>Juanita Bell</span>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <a href="#" class="removeBookmark">
-                                                        <i class="bi bi-bookmark-fill" style="color: #5A87C7;"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="progress mt-3" style="height: 5px">
-                                                <div class="progress-bar bg-success" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-12">
-                                    
-                                    <div class="card mb-4 card-hover">
-                                        <a href="#"><img src="https://geeksui.codescandy.com/geeks/assets/images/course/course-python.jpg" alt="course" class="card-img-top"></a>
-                                         
-                                        <div class="card-body">
-                                            <h3 class="h4 mb-2 text-truncate-line-2"><a href="#" class="text-inherit text-dark-hover">The Python Course: build web application</a></h3>
-                                             
-                                            <ul class="mb-3 list-inline">
-                                                <li class="list-inline-item">
-                                                    <span class="align-text-bottom">
-                                                        <i class="clock-icon" data-feather="clock"></i>    
-                                                    </span>
-                                                    <span>2h 30m</span>
-                                                </li>
-                                                <li class="list-inline-item">
-                                                    <svg class="me-1 mt-n1" style="margin-bottom: 4px;" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE"></rect>
-                                                        <rect x="7" y="5" width="2" height="9" rx="1" fill="#754FFE"></rect>
-                                                        <rect x="11" y="2" width="2" height="12" rx="1" fill="#DBD8E9"></rect>
-                                                    </svg>
-                                                    Intermediate
-                                                </li>
-                                            </ul>
-                                            <div class="mt-3 d-flex align-baseline lh-1">
-                                                <span class="fs-6">
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                </span>
-                                                <span class="text-warning mx-1">4.5</span>
-                                                <span class="fs-6">(9,300)</span>
-                                            </div>
-                                        </div>
-                                         
-                                        <div class="card-footer">
-                                            <div class="row align-items-center g-0">
-                                                <div class="col-auto">
-                                                    <img src="https://geeksui.codescandy.com/geeks/assets/images/avatar/avatar-9.jpg" class="rounded-circle avatar-xs" alt="avatar">
-                                                </div>
-                                                <div class="col ms-2">
-                                                    <span>Claire Robertson</span>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <a href="#" class="removeBookmark">
-                                                        <i class="bi bi-bookmark-fill" style="color: #5A87C7;"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="progress mt-3" style="height: 5px">
-                                                <div class="progress-bar bg-success" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-12">
-                                    
-                                    <div class="card mb-4 card-hover">
-                                        <a href="#"><img src="https://geeksui.codescandy.com/geeks/assets/images/course/course-python.jpg" alt="course" class="card-img-top"></a>
-                                         
-                                        <div class="card-body">
-                                            <h3 class="h4 mb-2 text-truncate-line-2"><a href="#" class="text-inherit text-dark-hover">The Python Course: build web application</a></h3>
-                                             
-                                            <ul class="mb-3 list-inline">
-                                                <li class="list-inline-item">
-                                                    <span class="align-text-bottom">
-                                                        <i class="clock-icon" data-feather="clock"></i>    
-                                                    </span>
-                                                    <span>2h 30m</span>
-                                                </li>
-                                                <li class="list-inline-item">
-                                                    <svg class="me-1 mt-n1" style="margin-bottom: 4px;" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE"></rect>
-                                                        <rect x="7" y="5" width="2" height="9" rx="1" fill="#754FFE"></rect>
-                                                        <rect x="11" y="2" width="2" height="12" rx="1" fill="#DBD8E9"></rect>
-                                                    </svg>
-                                                    Intermediate
-                                                </li>
-                                            </ul>
-                                            <div class="mt-3 d-flex align-baseline lh-1">
-                                                <span class="fs-6">
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                    <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                                </span>
-                                                <span class="text-warning mx-1">4.5</span>
-                                                <span class="fs-6">(13,245)</span>
-                                            </div>
-                                        </div>
-                                         
-                                        <div class="card-footer">
-                                            <div class="row align-items-center g-0">
-                                                <div class="col-auto">
-                                                    <img src="https://geeksui.codescandy.com/geeks/assets/images/avatar/avatar-9.jpg" class="rounded-circle avatar-xs" alt="avatar">
-                                                </div>
-                                                <div class="col ms-2">
-                                                    <span>Claire Robertson</span>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <a href="#" class="removeBookmark">
-                                                        <i class="bi bi-bookmark-fill" style="color: #5A87C7;"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="progress mt-3" style="height: 5px">
-                                                <div class="progress-bar bg-success" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row" th:if="${#lists.size(completeds) > 0}">
                                 <div class="offset-lg-3 col-lg-6 col-md-12 col-12 text-center mt-5">
                                     <p>You’ve reached the end of the list</p>
+                                </div>
+                            </div>
+                            <div class="row" th:if="${#lists.size(completeds) == 0}">
+                                <div class="offset-lg-3 col-lg-6 col-md-12 col-12 text-center mt-5">
+                                    <p>You haven't completed any courses yet.</p>
                                 </div>
                             </div>
                         </div>

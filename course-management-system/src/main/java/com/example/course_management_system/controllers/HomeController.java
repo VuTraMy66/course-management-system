@@ -86,7 +86,6 @@ public class HomeController {
         int totalReviews = reviews.size();
 
         List<Users> users = userService.getAllStudents();
-        List<Enrollments> enrolls = enrollmentService.getAllEnrollments();
 
         Map<Integer, Integer> totalCoursesOfEachStudent = new HashMap<>();
 
@@ -127,12 +126,28 @@ public class HomeController {
 
     @RequestMapping("/student/dashboard")
     public String studentDashboard(HttpServletRequest request, Model model) {
+
+        Users student = AuthenticationUtils.getAuthenticatedUser(); 
+        if (student != null) {
+            model.addAttribute("student", student);
+        }
+
+        boolean isAuthenticated = authService.isAuthenticated();
+        model.addAttribute("isAuthenticated", isAuthenticated);
         model.addAttribute("pageUrl", request.getRequestURI());
         return "student-dashboard";
     }
 
     @RequestMapping("/student/review")
     public String studentReview(HttpServletRequest request, Model model) {
+
+        Users student = AuthenticationUtils.getAuthenticatedUser(); 
+        if (student != null) {
+            model.addAttribute("student", student);
+        }
+
+        boolean isAuthenticated = authService.isAuthenticated();
+        model.addAttribute("isAuthenticated", isAuthenticated);
         model.addAttribute("pageUrl", request.getRequestURI());
         return "student-review";
     }

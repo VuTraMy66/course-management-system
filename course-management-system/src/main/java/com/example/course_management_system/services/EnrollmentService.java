@@ -31,5 +31,8 @@ public class EnrollmentService {
         return enrollmentRepository.findByUser_UserId(userId);
     }
 
-    
+    public List<Enrollments> getEnrollmentsByUserIdWithStatus(@Param("userId") int userId, @Param("status") String status) {
+        return enrollmentRepository.findByUser_UserIdAndStatus(userId, status);
+    }
+
 }

@@ -49,6 +49,9 @@ public class Courses {
     @Transient
     private double averageRating;
 
+    @Transient
+    private int reviewCount;
+
     public Courses() {
         this.createdAt = LocalDateTime.now();
     }
@@ -160,6 +163,14 @@ public class Courses {
 
     public void setAverageRating(double averageRating) {
         this.averageRating = averageRating;
+    }
+
+    public double getReviewCount() {
+        return reviewCount;
+    }
+
+    public void setReviewCount(int reviewCount) {
+        this.reviewCount = reviewCount;
     }
 }
 

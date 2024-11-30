@@ -40,6 +40,10 @@ public class ReviewService {
         return Math.round(average * 10.0) / 10.0;
     }
 
+    public int getReviewCount(int courseId) {
+        return reviewRepository.countByCourse_CourseId(courseId);
+    }
+
     // public List<Reviews> getReviewsByStudentId(int userId) {
     //     return reviewRepository.findReviewsByStudentId(userId);
     // }

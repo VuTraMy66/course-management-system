@@ -21,7 +21,6 @@ import com.example.course_management_system.models.Enrollments;
 import com.example.course_management_system.models.Lessons;
 import com.example.course_management_system.models.Reviews;
 import com.example.course_management_system.models.Users;
-import com.example.course_management_system.services.AuthService;
 import com.example.course_management_system.services.CourseService;
 import com.example.course_management_system.services.EnrollmentService;
 import com.example.course_management_system.services.LessonService;

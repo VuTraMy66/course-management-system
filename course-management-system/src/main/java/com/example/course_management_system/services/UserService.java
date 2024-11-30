@@ -34,12 +34,8 @@ public class UserService {
         return userRepository.findById(id);
     }
 
-    // public Users handleUserLogin(String username, String password) {
-    //     Users user = userRepository.findByUsername(username);
-        
-    //     if (user != null && user.getPassword().equals(password)) {
-    //         return user;
-    //     }
-    //     return null;
-    // }
+    public void saveUser(Users user) {
+        userRepository.save(user);
+    }
+
 }

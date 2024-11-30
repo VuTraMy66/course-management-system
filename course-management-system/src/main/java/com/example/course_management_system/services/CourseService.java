@@ -39,4 +39,8 @@ public class CourseService {
     public void deleteCourseById(int courseId) {
         courseRepository.deleteById(courseId);
     } 
+
+    public List<Courses> filterCourses(List<String> categories, double rating, List<String> skillLevels) {
+        return courseRepository.findFilteredCourses(categories, rating, skillLevels);
+    }
 }

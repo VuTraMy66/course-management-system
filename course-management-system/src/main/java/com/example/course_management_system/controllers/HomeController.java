@@ -37,16 +37,16 @@ public class HomeController {
         return "register";
     }
 
-    @RequestMapping("/student-dashboard")
+    @RequestMapping("/student/dashboard")
     public String studentDashboard(HttpServletRequest request, Model model) {
         model.addAttribute("pageUrl", request.getRequestURI());
-        return "/student-dashboard";
+        return "student-dashboard";
     }
 
-    @RequestMapping("/student-review")
+    @RequestMapping("/student/review")
     public String studentReview(HttpServletRequest request, Model model) {
         model.addAttribute("pageUrl", request.getRequestURI());
-        return "/student-review";
+        return "student-review";
     }
     
 }

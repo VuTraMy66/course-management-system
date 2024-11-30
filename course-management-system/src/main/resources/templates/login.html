@@ -50,10 +50,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="card-body">
-                            <form action="/login" method="POST">
-                                <div th:if="${param.error}">
-                                    <p style="color: red;" th:text="${param.error}"></p>
-                                </div>
+                            <form th:action="@{/login}" method="POST">
                                 <!-- Email input -->
                                 <div class="form-floating mb-4">
                                     <input type="username" id="username" class="form-control form-control-lg" placeholder="Username"/>

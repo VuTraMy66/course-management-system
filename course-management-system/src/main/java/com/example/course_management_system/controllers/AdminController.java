@@ -47,6 +47,11 @@ public class AdminController {
 
     @RequestMapping("/admin")
     public String showAdminDashboard(Model model) {
+        Users admin = AuthenticationUtils.getAuthenticatedUser(); 
+        if (admin != null) {
+            model.addAttribute("admin", admin);
+        }
+
         List<Courses> courses = courseService.getAllCourses();
         List<Users> users = userService.getAllStudents();
         List<Enrollments> enrolls = enrollmentService.getAllEnrollments();
@@ -99,6 +104,11 @@ public class AdminController {
     @GetMapping("/admin/courses")
     public String adminAllCourse(Model model) {
         try {
+            Users admin = AuthenticationUtils.getAuthenticatedUser(); 
+            if (admin != null) {
+                model.addAttribute("admin", admin);
+            }
+
             List<Courses> coursesInAd = courseService.getAllCourses();
             
             Map<Integer, Integer> totalStudentsPerCourse = new HashMap<>();
@@ -129,7 +139,7 @@ public class AdminController {
                 course.setStatus("published");
             } else if ("published".equalsIgnoreCase(course.getStatus())) {
                 course.setStatus("draft");
-            }
+        }
             courseService.saveCourse(course);
             model.addAttribute("successMessage", "Course status changed to active.");
             return "redirect:/admin/courses";
@@ -139,6 +149,11 @@ public class AdminController {
 
     @GetMapping("/admin/course-category")
     public String adminCourseCategory(Model model) {
+        Users admin = AuthenticationUtils.getAuthenticatedUser(); 
+        if (admin != null) {
+            model.addAttribute("admin", admin);
+        }
+
         List<Courses> coursesOfP = courseService.getAllCourseByCategory("Programming");
         List<Courses> coursesOfDS = courseService.getAllCourseByCategory("Data Science");
         List<Courses> coursesOfUD = courseService.getAllCourseByCategory("UI/UX Design");
@@ -162,6 +177,11 @@ public class AdminController {
 
     @GetMapping("/admin/course-category/{category}")
     public String adminCourseCategoryDetail(@PathVariable("category") String category, Model model) {
+        Users admin = AuthenticationUtils.getAuthenticatedUser(); 
+        if (admin != null) {
+            model.addAttribute("admin", admin);
+        }
+
         String formattedCategory = convertCategoryFormat(category);
         List<Courses> coursesCategory = courseService.getAllCourseByCategory(formattedCategory);
 
@@ -201,6 +221,11 @@ public class AdminController {
 
     @GetMapping("/admin/course")
     public String adminCourseDetail(@RequestParam("course_id") int courseId, Model model) {
+        Users admin = AuthenticationUtils.getAuthenticatedUser(); 
+        if (admin != null) {
+            model.addAttribute("admin", admin);
+        }
+
         Optional<Courses> courseDetail = courseService.getCourseById(courseId);
         List<Reviews> reviewsOfCourse = reviewService.getReviewsByCourseId(courseId);
         double averageRating = reviewService.calculateAverageRating(courseId);
@@ -228,6 +253,11 @@ public class AdminController {
 
     @GetMapping("/admin/add-course")
     public String adminAddCourse(Model model) {
+        Users admin = AuthenticationUtils.getAuthenticatedUser(); 
+        if (admin != null) {
+            model.addAttribute("admin", admin);
+        }
+
         model.addAttribute("course", new Courses());
         model.addAttribute("pageUrl", "/admin/add-course");
         return "admin-add-course"; 
@@ -235,6 +265,11 @@ public class AdminController {
 
     @GetMapping("/admin/edit-course")
     public String adminEditCourse(@RequestParam("course_id") int courseId, Model model) {
+        Users admin = AuthenticationUtils.getAuthenticatedUser(); 
+        if (admin != null) {
+            model.addAttribute("admin", admin);
+        }
+
         Optional<Courses> courseEdit = courseService.getCourseById(courseId);
         if (courseEdit.isPresent()) {
             model.addAttribute("course", courseEdit.get());
@@ -273,6 +308,11 @@ public class AdminController {
 
     @GetMapping("/admin/{courseId}/add-lesson")
     public String adminAddLesson(@PathVariable("courseId") int courseId, Model model) {
+        Users admin = AuthenticationUtils.getAuthenticatedUser(); 
+        if (admin != null) {
+            model.addAttribute("admin", admin);
+        }
+
         model.addAttribute("lesson", new Lessons());
         model.addAttribute("pageUrl", "/admin/" + courseId + "/add-lesson");
         return "admin-add-lesson"; 
@@ -280,6 +320,11 @@ public class AdminController {
 
     @GetMapping("/admin/edit-lesson")
     public String adminEditLesson(@RequestParam("lesson_id") int lessonId, Model model) {
+        Users admin = AuthenticationUtils.getAuthenticatedUser(); 
+        if (admin != null) {
+            model.addAttribute("admin", admin);
+        }
+
         Optional<Lessons> lessonEdit = lessonService.getLessonById(lessonId);
         if (lessonEdit.isPresent()) {
             model.addAttribute("lesson", lessonEdit.get());
@@ -367,6 +412,11 @@ public class AdminController {
     @GetMapping("/admin/student")
     public String adminStudent(Model model) {
         try {
+            Users admin = AuthenticationUtils.getAuthenticatedUser(); 
+            if (admin != null) {
+                model.addAttribute("admin", admin);
+            }
+
             List<Users> users = userService.getAllStudents();
 
             Map<Integer, List<Enrollments>> coursesOfStudent = new HashMap<>();
@@ -414,6 +464,11 @@ public class AdminController {
 
     @GetMapping("/admin/review")
     public String adminReview(Model model) {
+        Users admin = AuthenticationUtils.getAuthenticatedUser(); 
+        if (admin != null) {
+            model.addAttribute("admin", admin);
+        }
+
         List<Reviews> reviews = reviewService.getAllReviews();
         List<Courses> coursesReview = courseService.getAllCourses();
 

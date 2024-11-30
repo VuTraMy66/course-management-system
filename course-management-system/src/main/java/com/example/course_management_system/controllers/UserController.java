@@ -2,7 +2,10 @@ package com.example.course_management_system.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.course_management_system.services.UserService;
 
@@ -16,12 +19,4 @@ public class UserController {
     public String viewLoginPage() {
         return "login";
     }
-
-    // @PostMapping("/login")
-    // public String handleLogin(@RequestParam("username") String username,
-    //                           @RequestParam("password") String password,
-    //                           Model model) {
-    
-    //     return "login";
-    // }
 }

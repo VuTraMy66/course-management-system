@@ -19,91 +19,10 @@
 <body>
     <section class="containe">
         <div class="col-20">
-            <div th:replace="fragments/admin-sidebar.html :: admin-sidebar"></div>
+            <div th:replace="~{fragments/admin-sidebar.html :: admin-sidebar}"></div>
         </div>
         <div class="col-80">
-            <nav class="navbar-default navbar navbar-expand-lg">
-                <div class="ms-lg-3 d-none d-md-none d-lg-block">
-                    <form class="d-flex align-items-center">
-                        <span class="position-absolute ps-3">
-                            <i data-feather="search" class="search-icon"></i>
-                        </span>
-                        <input type="search" class="form-control ps-6" placeholder="Search Entire Dashboard" />
-                    </form>
-                </div>
-                <div class="ms-auto d-flex">
-                    <ul class="navbar-nav navbar-right-wrap ms-2 d-flex nav-top-wrap">
-                        <li class="dropdown stopevent">
-                            <a
-                                class="btn btn-light btn-icon rounded-circle indicator indicator-primary"
-                                href="#"
-                                role="button"
-                                id="dropdownNotification"
-                                data-bs-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false">
-                                <i data-feather="bell"></i>
-                            </a>
-                        </li>
-                        <li class="dropdown ms-2">
-                            <a class="rounded-circle" href="#" role="button" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="true">
-                                <div class="avatar avatar-md avatar-indicators avatar-online">
-                                    <img alt="avatar" src="https://geeksui.codescandy.com/geeks/assets/images/avatar/avatar-1.jpg" class="rounded-circle" />
-                                </div>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUser">
-                                <div class="dropdown-item">
-                                    <div class="d-flex">
-                                        <div class="avatar avatar-md avatar-indicators avatar-online">
-                                            <img alt="avatar" src="https://geeksui.codescandy.com/geeks/assets/images/avatar/avatar-1.jpg" class="rounded-circle" />
-                                        </div>
-                                        <div class="ms-3 lh-1">
-                                            <h5 class="mb-1">Annette Black</h5>
-                                            <p class="mb-0">annette@geeksui.com</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="dropdown-divider"></div>
-                                <ul class="list-unstyled">
-                                    <li class="dropdown-submenu dropstart-lg">
-                                        <a class="dropdown-item dropdown-list-group-item dropdown-toggle" href="#">
-                                            <i data-feather="circle" class="sub-icon me-2"></i>
-                                            Status
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="../../pages/profile-edit.html">
-                                            <i data-feather="user" class="sub-icon me-2"></i>
-                                            Profile
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="../../pages/student-subscriptions.html">
-                                            <i data-feather="star" class="sub-icon me-2"></i>
-                                            Subscription
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#">
-                                            <i data-feather="settings" class="sub-icon me-2"></i>
-                                            Settings
-                                        </a>
-                                    </li>
-                                </ul>
-                                <div class="dropdown-divider"></div>
-                                <ul class="list-unstyled">
-                                    <li>
-                                        <a class="dropdown-item" href="../../index.html">
-                                            <i data-feather="power" class=" me-2"></i>
-                                            Sign Out
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+            <div th:replace="fragments/nav-admin.html :: admin-nav"></div>
             <section class="container-fluid p-4">
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-12">
@@ -309,11 +228,11 @@
                                                     </a>
                                                     <span class="dropdown-menu" aria-labelledby="courseDropdown7" style="transform: translate3d(-20px, -20px, 0px);">
                                                         <span class="dropdown-header">Settings</span>
-                                                        <a class="dropdown-item" href="#">
+                                                        <a class="dropdown-item" th:href="@{/admin/edit-course(course_id=${course.courseId})}">
                                                             <i data-feather="edit" class="dropdown-item-icon me-2"></i>
                                                             Edit
                                                         </a>
-                                                        <a class="dropdown-item" href="#">
+                                                        <a class="dropdown-item" th:href="@{/admin/delete-course/{courseId}(courseId=${course.courseId})}">
                                                             <i data-feather="trash" class="dropdown-item-icon me-2"></i>
                                                             Remove
                                                         </a>

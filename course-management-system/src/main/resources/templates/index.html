@@ -417,18 +417,18 @@
                 </div>
             </div>
             <div class="row mb-4">
-                <div class="col-xl-3 col-lg-4 col-md-6 col-12">
-                    <div class="card border">
-                        <a href="#!">
-                            <img src="https://geeksui.codescandy.com/geeks/assets/images/course/figma.jpg" alt="figma" class="card-img-top img-fluid w-100" />
+                <div class="col-xl-3 col-lg-4 col-md-6 col-12 mb-4" th:each="course : ${courses}">
+                    <div class="card card-lift">
+                        <a th:href="@{/course(course_id=${course.courseId})}">
+                            <img th:src="${course.image}" class="card-img-top img-fluid w-100 fixed-image-size6" />
                         </a>
                         <div class="card-body d-flex flex-column gap-4">
                             <div class="d-flex flex-column gap-2">
                                 <div>
-                                    <span class="badge text-light-emphasis bg-light-subtle border border-light-subtle rounded-pill">UX / UI Design</span>
+                                    <span class="badge text-light-emphasis bg-light-subtle border border-light-subtle rounded-pill" th:text="${course.category}"></span>
                                 </div>
                                 <h3 class="mb-0 h4">
-                                    <a href="#!" class="text-inherit">Figma UI / UX Design Course for the Beginner</a>
+                                    <a th:href="@{/course(course_id=${course.courseId})}" class="text-inherit" th:text="${course.name}"></a>
                                 </h3>
                                 <ul class="mb-3 list-inline">
                                     <li class="list-inline-item">
@@ -438,587 +438,34 @@
                                                 <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"></path>
                                             </svg>
                                         </span>
-                                        <span>2h 30m</span>
+                                        <span th:text="${course.formattedDuration}"></span>
                                     </li>
                                     <li class="list-inline-item">
                                         <svg class="me-1 mt-n1" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE"></rect>
-                                            <rect x="7" y="5" width="2" height="9" rx="1" fill="#754FFE"></rect>
-                                            <rect x="11" y="2" width="2" height="12" rx="1" fill="#DBD8E9"></rect>
+                                            <rect x="3" y="8" width="2" height="6" rx="1" th:attr="fill=${course.skillLevel == 'beginner' || course.skillLevel == 'intermediate' || course.skillLevel == 'advanced' ? '#754FFE' : '#DBD8E9'}"></rect>
+                                            <rect x="7" y="5" width="2" height="9" rx="1" th:attr="fill=${course.skillLevel == 'intermediate' || course.skillLevel == 'advanced' ? '#754FFE' : '#DBD8E9'}"></rect>
+                                            <rect x="11" y="2" width="2" height="12" rx="1" th:attr="fill=${course.skillLevel == 'advanced' ? '#754FFE' : '#DBD8E9'}"></rect>
                                         </svg>
-                                        Intermediate
+                                        <span th:text="${course.skillLevel}"></span>
                                     </li>
                                 </ul>
                                 <div class="lh-1">
-                                    <span class="text-secondary fw-semibold">5.0</span>
-                                    <span class="align-text-top">
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
+                                    <span class="text-secondary fw-semibold" th:text="${courseRatings[course.courseId]}"></span>
+                                    <span class="align-text-top fs-5">
+                                        <i th:class="(${courseRatings[course.courseId] >= 1.0 ? 'fas fa-star' : (courseRatings[course.courseId] >= 0.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'" style="vertical-align: text-bottom;" width="12px" height="12px"></i>
+                                        <i th:class="(${courseRatings[course.courseId] >= 2.0 ? 'fas fa-star' : (courseRatings[course.courseId] >= 1.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'" style="vertical-align: text-bottom;" width="12px" height="12px"></i>
+                                        <i th:class="(${courseRatings[course.courseId] >= 3.0 ? 'fas fa-star' : (courseRatings[course.courseId] >= 2.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'" style="vertical-align: text-bottom;" width="12px" height="12px"></i>
+                                        <i th:class="(${courseRatings[course.courseId] >= 4.0 ? 'fas fa-star' : (courseRatings[course.courseId] >= 3.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'" style="vertical-align: text-bottom;" width="12px" height="12px"></i>
+                                        <i th:class="(${courseRatings[course.courseId] >= 5.0 ? 'fas fa-star' : (courseRatings[course.courseId] >= 4.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'" style="vertical-align: text-bottom;" width="12px" height="12px"></i>
                                     </span>
-                                    <span class="text-gray-500">(245)</span>
+                                    <span class="text-gray-500" th:text="'(' + ${courseReviewCounts[course.courseId]} + ')'"></span>
                                 </div>
                             </div>
                         </div>
                         <div class="card-footer">
                             <div class="row align-items-center g-0">
                                 <div class="col">
-                                    <a class="text-uppercase fs-6 view fw-medium" href="">View Course 
-                                        <i data-feather="chevron-right" width="12" height="12" class="icon-view"></i>
-                                    </a>
-                                </div>
-                                <div class="col-auto">
-                                    <a href="#" class="text-reset bookmark">
-                                        <i data-feather="bookmark" class="icon-hover fs-4"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6 col-12">
-                    <div class="card border">
-                        <a href="#!">
-                            <img src="https://geeksui.codescandy.com/geeks/assets/images/course/python.jpg" alt="figma" class="card-img-top img-fluid w-100" />
-                        </a>
-                        <div class="card-body d-flex flex-column gap-4">
-                            <div class="d-flex flex-column gap-2">
-                                <div>
-                                    <span class="badge text-light-emphasis bg-light-subtle border border-light-subtle rounded-pill">Web Development</span>
-                                </div>
-                                <h3 class="mb-0 h4">
-                                    <a href="#!" class="text-inherit">Master the basics of data analysis with Python</a>
-                                </h3>
-                                <ul class="mb-3 list-inline">
-                                    <li class="list-inline-item">
-                                        <span>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-clock align-baseline" viewBox="0 0 16 16">
-                                                <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"></path>
-                                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"></path>
-                                            </svg>
-                                        </span>
-                                        <span>2h 30m</span>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <svg class="me-1 mt-n1" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE"></rect>
-                                            <rect x="7" y="5" width="2" height="9" rx="1" fill="#754FFE"></rect>
-                                            <rect x="11" y="2" width="2" height="12" rx="1" fill="#DBD8E9"></rect>
-                                        </svg>
-                                        Intermediate
-                                    </li>
-                                </ul>
-                                <div class="lh-1">
-                                    <span class="text-secondary fw-semibold">4.5</span>
-                                    <span class="align-text-top">
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                    </span>
-                                    <span class="text-gray-500">(3,124)</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <div class="row align-items-center g-0">
-                                <div class="col">
-                                    <a class="text-uppercase fs-6 view fw-medium" href="">View Course 
-                                        <i data-feather="chevron-right" width="12" height="12" class="icon-view"></i>
-                                    </a>
-                                </div>
-                                <div class="col-auto">
-                                    <a href="#" class="text-reset bookmark">
-                                        <i data-feather="bookmark" class="icon-hover fs-4"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6 col-12">
-                    <div class="card border">
-                        <a href="#!">
-                            <img src="https://geeksui.codescandy.com/geeks/assets/images/course/nuxt.jpg" alt="figma" class="card-img-top img-fluid w-100" />
-                        </a>
-                        <div class="card-body d-flex flex-column gap-4">
-                            <div class="d-flex flex-column gap-2">
-                                <div>
-                                    <span class="badge text-light-emphasis bg-light-subtle border border-light-subtle rounded-pill">Design</span>
-                                </div>
-                                <h3 class="mb-0 h4">
-                                    <a href="#!" class="text-inherit">About the Nuxt.js Fundamentals course</a>
-                                </h3>
-                                <ul class="mb-3 list-inline">
-                                    <li class="list-inline-item">
-                                        <span>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-clock align-baseline" viewBox="0 0 16 16">
-                                                <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"></path>
-                                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"></path>
-                                            </svg>
-                                        </span>
-                                        <span>2h 30m</span>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <svg class="me-1 mt-n1" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE"></rect>
-                                            <rect x="7" y="5" width="2" height="9" rx="1" fill="#754FFE"></rect>
-                                            <rect x="11" y="2" width="2" height="12" rx="1" fill="#DBD8E9"></rect>
-                                        </svg>
-                                        Intermediate
-                                    </li>
-                                </ul>
-                                <div class="lh-1">
-                                    <span class="text-secondary fw-semibold">4.5</span>
-                                    <span class="align-text-top">
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                    </span>
-                                    <span class="text-gray-500">(121)</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <div class="row align-items-center g-0">
-                                <div class="col">
-                                    <a class="text-uppercase fs-6 view fw-medium" href="">View Course 
-                                        <i data-feather="chevron-right" width="12" height="12" class="icon-view"></i>
-                                    </a>
-                                </div>
-                                <div class="col-auto">
-                                    <a href="#" class="text-reset bookmark">
-                                        <i data-feather="bookmark" class="icon-hover fs-4"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6 col-12">
-                    <div class="card border">
-                        <a href="#!">
-                            <img src="https://geeksui.codescandy.com/geeks/assets/images/course/bootstrap.jpg" alt="figma" class="card-img-top img-fluid w-100" />
-                        </a>
-                        <div class="card-body d-flex flex-column gap-4">
-                            <div class="d-flex flex-column gap-2">
-                                <div>
-                                    <span class="badge text-light-emphasis bg-light-subtle border border-light-subtle rounded-pill">Programming</span>
-                                </div>
-                                <h3 class="mb-0 h4">
-                                    <a href="#!" class="text-inherit">Create Modern Website Using HTML,CSS And Bootstrap</a>
-                                </h3>
-                                <ul class="mb-3 list-inline">
-                                    <li class="list-inline-item">
-                                        <span>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-clock align-baseline" viewBox="0 0 16 16">
-                                                <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"></path>
-                                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"></path>
-                                            </svg>
-                                        </span>
-                                        <span>2h 30m</span>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <svg class="me-1 mt-n1" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE"></rect>
-                                            <rect x="7" y="5" width="2" height="9" rx="1" fill="#754FFE"></rect>
-                                            <rect x="11" y="2" width="2" height="12" rx="1" fill="#DBD8E9"></rect>
-                                        </svg>
-                                        Intermediate
-                                    </li>
-                                </ul>
-                                <div class="lh-1">
-                                    <span class="text-secondary fw-semibold">4.5</span>
-                                    <span class="align-text-top">
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                    </span>
-                                    <span class="text-gray-500">(13,245)</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <div class="row align-items-center g-0">
-                                <div class="col">
-                                    <a class="text-uppercase fs-6 view fw-medium" href="">View Course 
-                                        <i data-feather="chevron-right" width="12" height="12" class="icon-view"></i>
-                                    </a>
-                                </div>
-                                <div class="col-auto">
-                                    <a href="#" class="text-reset bookmark">
-                                        <i data-feather="bookmark" class="icon-hover fs-4"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row my-4">
-                <div class="col-xl-3 col-lg-4 col-md-6 col-12">
-                    <div class="card border">
-                        <a href="#!">
-                            <img src="https://geeksui.codescandy.com/geeks/assets/images/course/nuxt.jpg" alt="figma" class="card-img-top img-fluid w-100" />
-                        </a>
-                        <div class="card-body d-flex flex-column gap-4">
-                            <div class="d-flex flex-column gap-2">
-                                <div>
-                                    <span class="badge text-light-emphasis bg-light-subtle border border-light-subtle rounded-pill">Design</span>
-                                </div>
-                                <h3 class="mb-0 h4">
-                                    <a href="#!" class="text-inherit">About the Nuxt.js Fundamentals course</a>
-                                </h3>
-                                <ul class="mb-3 list-inline">
-                                    <li class="list-inline-item">
-                                        <span>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-clock align-baseline" viewBox="0 0 16 16">
-                                                <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"></path>
-                                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"></path>
-                                            </svg>
-                                        </span>
-                                        <span>2h 30m</span>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <svg class="me-1 mt-n1" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE"></rect>
-                                            <rect x="7" y="5" width="2" height="9" rx="1" fill="#754FFE"></rect>
-                                            <rect x="11" y="2" width="2" height="12" rx="1" fill="#DBD8E9"></rect>
-                                        </svg>
-                                        Intermediate
-                                    </li>
-                                </ul>
-                                <div class="lh-1">
-                                    <span class="text-secondary fw-semibold">4.5</span>
-                                    <span class="align-text-top">
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                    </span>
-                                    <span class="text-gray-500">(121)</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <div class="row align-items-center g-0">
-                                <div class="col">
-                                    <a class="text-uppercase fs-6 view fw-medium" href="">View Course 
-                                        <i data-feather="chevron-right" width="12" height="12" class="icon-view"></i>
-                                    </a>
-                                </div>
-                                <div class="col-auto">
-                                    <a href="#" class="text-reset bookmark">
-                                        <i data-feather="bookmark" class="icon-hover fs-4"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6 col-12">
-                    <div class="card border">
-                        <a href="#!">
-                            <img src="https://geeksui.codescandy.com/geeks/assets/images/course/bootstrap.jpg" alt="figma" class="card-img-top img-fluid w-100" />
-                        </a>
-                        <div class="card-body d-flex flex-column gap-4">
-                            <div class="d-flex flex-column gap-2">
-                                <div>
-                                    <span class="badge text-light-emphasis bg-light-subtle border border-light-subtle rounded-pill">Web Development</span>
-                                </div>
-                                <h3 class="mb-0 h4">
-                                    <a href="#!" class="text-inherit">Create Modern Website Using HTML, CSS And Bootstrap</a>
-                                </h3>
-                                <ul class="mb-3 list-inline">
-                                    <li class="list-inline-item">
-                                        <span>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-clock align-baseline" viewBox="0 0 16 16">
-                                                <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"></path>
-                                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"></path>
-                                            </svg>
-                                        </span>
-                                        <span>2h 30m</span>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <svg class="me-1 mt-n1" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE"></rect>
-                                            <rect x="7" y="5" width="2" height="9" rx="1" fill="#754FFE"></rect>
-                                            <rect x="11" y="2" width="2" height="12" rx="1" fill="#DBD8E9"></rect>
-                                        </svg>
-                                        Intermediate
-                                    </li>
-                                </ul>
-                                <div class="lh-1">
-                                    <span class="text-secondary fw-semibold">4.5</span>
-                                    <span class="align-text-top">
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                    </span>
-                                    <span class="text-gray-500">(13,245)</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <div class="row align-items-center g-0">
-                                <div class="col">
-                                    <a class="text-uppercase fs-6 view fw-medium" href="">View Course 
-                                        <i data-feather="chevron-right" width="12" height="12" class="icon-view"></i>
-                                    </a>
-                                </div>
-                                <div class="col-auto">
-                                    <a href="#" class="text-reset bookmark">
-                                        <i data-feather="bookmark" class="icon-hover fs-4"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6 col-12">
-                    <div class="card border">
-                        <a href="#!">
-                            <img src="https://geeksui.codescandy.com/geeks/assets/images/course/nuxt.jpg" alt="figma" class="card-img-top img-fluid w-100" />
-                        </a>
-                        <div class="card-body d-flex flex-column gap-4">
-                            <div class="d-flex flex-column gap-2">
-                                <div>
-                                    <span class="badge text-light-emphasis bg-light-subtle border border-light-subtle rounded-pill">Design</span>
-                                </div>
-                                <h3 class="mb-0 h4">
-                                    <a href="#!" class="text-inherit">About the Nuxt.js Fundamentals course</a>
-                                </h3>
-                                <ul class="mb-3 list-inline">
-                                    <li class="list-inline-item">
-                                        <span>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-clock align-baseline" viewBox="0 0 16 16">
-                                                <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"></path>
-                                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"></path>
-                                            </svg>
-                                        </span>
-                                        <span>2h 30m</span>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <svg class="me-1 mt-n1" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE"></rect>
-                                            <rect x="7" y="5" width="2" height="9" rx="1" fill="#754FFE"></rect>
-                                            <rect x="11" y="2" width="2" height="12" rx="1" fill="#DBD8E9"></rect>
-                                        </svg>
-                                        Intermediate
-                                    </li>
-                                </ul>
-                                <div class="lh-1">
-                                    <span class="text-secondary fw-semibold">4.5</span>
-                                    <span class="align-text-top">
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                    </span>
-                                    <span class="text-gray-500">(121)</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <div class="row align-items-center g-0">
-                                <div class="col">
-                                    <a class="text-uppercase fs-6 view fw-medium" href="">View Course 
-                                        <i data-feather="chevron-right" width="12" height="12" class="icon-view"></i>
-                                    </a>
-                                </div>
-                                <div class="col-auto">
-                                    <a href="#" class="text-reset bookmark">
-                                        <i data-feather="bookmark" class="icon-hover fs-4"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6 col-12">
-                    <div class="card border">
-                        <a href="#!">
-                            <img src="https://geeksui.codescandy.com/geeks/assets/images/course/bootstrap.jpg" alt="figma" class="card-img-top img-fluid w-100" />
-                        </a>
-                        <div class="card-body d-flex flex-column gap-4">
-                            <div class="d-flex flex-column gap-2">
-                                <div>
-                                    <span class="badge text-light-emphasis bg-light-subtle border border-light-subtle rounded-pill">Programming</span>
-                                </div>
-                                <h3 class="mb-0 h4">
-                                    <a href="#!" class="text-inherit">Create Modern Website Using HTML,CSS And Bootstrap</a>
-                                </h3>
-                                <ul class="mb-3 list-inline">
-                                    <li class="list-inline-item">
-                                        <span>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-clock align-baseline" viewBox="0 0 16 16">
-                                                <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"></path>
-                                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"></path>
-                                            </svg>
-                                        </span>
-                                        <span>2h 30m</span>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <svg class="me-1 mt-n1" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE"></rect>
-                                            <rect x="7" y="5" width="2" height="9" rx="1" fill="#754FFE"></rect>
-                                            <rect x="11" y="2" width="2" height="12" rx="1" fill="#DBD8E9"></rect>
-                                        </svg>
-                                        Intermediate
-                                    </li>
-                                </ul>
-                                <div class="lh-1">
-                                    <span class="text-secondary fw-semibold">4.5</span>
-                                    <span class="align-text-top">
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                    </span>
-                                    <span class="text-gray-500">(13,245)</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <div class="row align-items-center g-0">
-                                <div class="col">
-                                    <a class="text-uppercase fs-6 view fw-medium" href="">View Course 
-                                        <i data-feather="chevron-right" width="12" height="12" class="icon-view"></i>
-                                    </a>
-                                </div>
-                                <div class="col-auto">
-                                    <a href="#" class="text-reset bookmark">
-                                        <i data-feather="bookmark" class="icon-hover fs-4"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row my-4">
-                <div class="col-xl-3 col-lg-4 col-md-6 col-12">
-                    <div class="card border">
-                        <a href="#!">
-                            <img src="https://geeksui.codescandy.com/geeks/assets/images/course/nuxt.jpg" alt="figma" class="card-img-top img-fluid w-100" />
-                        </a>
-                        <div class="card-body d-flex flex-column gap-4">
-                            <div class="d-flex flex-column gap-2">
-                                <div>
-                                    <span class="badge text-light-emphasis bg-light-subtle border border-light-subtle rounded-pill">Design</span>
-                                </div>
-                                <h3 class="mb-0 h4">
-                                    <a href="#!" class="text-inherit">About the Nuxt.js Fundamentals course</a>
-                                </h3>
-                                <ul class="mb-3 list-inline">
-                                    <li class="list-inline-item">
-                                        <span>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-clock align-baseline" viewBox="0 0 16 16">
-                                                <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"></path>
-                                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"></path>
-                                            </svg>
-                                        </span>
-                                        <span>2h 30m</span>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <svg class="me-1 mt-n1" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE"></rect>
-                                            <rect x="7" y="5" width="2" height="9" rx="1" fill="#754FFE"></rect>
-                                            <rect x="11" y="2" width="2" height="12" rx="1" fill="#DBD8E9"></rect>
-                                        </svg>
-                                        Intermediate
-                                    </li>
-                                </ul>
-                                <div class="lh-1">
-                                    <span class="text-secondary fw-semibold">4.5</span>
-                                    <span class="align-text-top">
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                    </span>
-                                    <span class="text-gray-500">(121)</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <div class="row align-items-center g-0">
-                                <div class="col">
-                                    <a class="text-uppercase fs-6 view fw-medium" href="">View Course 
-                                        <i data-feather="chevron-right" width="12" height="12" class="icon-view"></i>
-                                    </a>
-                                </div>
-                                <div class="col-auto">
-                                    <a href="#" class="text-reset bookmark">
-                                        <i data-feather="bookmark" class="icon-hover fs-4"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6 col-12">
-                    <div class="card border">
-                        <a href="#!">
-                            <img src="https://geeksui.codescandy.com/geeks/assets/images/course/bootstrap.jpg" alt="figma" class="card-img-top img-fluid w-100" />
-                        </a>
-                        <div class="card-body d-flex flex-column gap-4">
-                            <div class="d-flex flex-column gap-2">
-                                <div>
-                                    <span class="badge text-light-emphasis bg-light-subtle border border-light-subtle rounded-pill">Web Development</span>
-                                </div>
-                                <h3 class="mb-0 h4">
-                                    <a href="#!" class="text-inherit">Create Modern Website Using HTML,CSS And Bootstrap</a>
-                                </h3>
-                                <ul class="mb-3 list-inline">
-                                    <li class="list-inline-item">
-                                        <span>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-clock align-baseline" viewBox="0 0 16 16">
-                                                <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"></path>
-                                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"></path>
-                                            </svg>
-                                        </span>
-                                        <span>2h 30m</span>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <svg class="me-1 mt-n1" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE"></rect>
-                                            <rect x="7" y="5" width="2" height="9" rx="1" fill="#754FFE"></rect>
-                                            <rect x="11" y="2" width="2" height="12" rx="1" fill="#DBD8E9"></rect>
-                                        </svg>
-                                        Intermediate
-                                    </li>
-                                </ul>
-                                <div class="lh-1">
-                                    <span class="text-secondary fw-semibold">4.5</span>
-                                    <span class="align-text-top">
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                        <i class="bi bi-star-fill text-warning" style="vertical-align: text-bottom;"></i>
-                                    </span>
-                                    <span class="text-gray-500">(13,245)</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <div class="row align-items-center g-0">
-                                <div class="col">
-                                    <a class="text-uppercase fs-6 view fw-medium" href="">View Course 
+                                    <a class="text-uppercase fs-6 view fw-medium" th:href="@{/course(course_id=${course.courseId})}">View Course 
                                         <i data-feather="chevron-right" width="12" height="12" class="icon-view"></i>
                                     </a>
                                 </div>
@@ -1034,8 +481,8 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    <div class="text-center mt-8">
-                        <a href="/course" class="btn btn-outline-primary">
+                    <div class="text-center mt-7">
+                        <a href="/courses" class="btn btn-outline-primary">
                             <span>Show All Courses</span>
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"></path>
@@ -1065,26 +512,26 @@
                             <div class="bg-body shadow text-center p-4 rounded-3 position-relative mb-5 mb-md-0" style="z-index: -2;">
                                 
                                 <div class="avatar avatar-xl mb-3">
-                                    <img class="avatar-img rounded-circle" src="https://eduport.webestica.com/assets/images/avatar/01.jpg" alt="avatar">
+                                    <img class="avatar-img rounded-circle" th:src="${topReviews[0].user.avatar}" alt="avatar">
                                 </div>
                                 <!-- Content -->
                                 <blockquote>
                                     <p class="fs-5">
                                         <span class="me-1 small"><i class="fa fa-quote-left" aria-hidden="true"></i></span>
-                                            Moonlight newspaper up its enjoyment agreeable depending. Timed voice share led him to widen noisy young. At weddings believed laughing
+                                            <span th:text="${topReviews[0].comment}"></span>
                                         <span class="ms-1 small"><i class="fas fa-quote-right"></i></span>
                                     </p>
                                 </blockquote>
                                 
                                 <ul class="list-inline mb-2">
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star-half-alt text-warning"></i></li>
+                                    <li class="list-inline-item me-0 small"><i th:class="(${topReviews[0].rating >= 1.0 ? 'fas fa-star' : (topReviews[0].rating >= 0.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'"></i></li>
+                                    <li class="list-inline-item me-0 small"><i th:class="(${topReviews[0].rating >= 2.0 ? 'fas fa-star' : (topReviews[0].rating >= 1.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'"></i></li>
+                                    <li class="list-inline-item me-0 small"><i th:class="(${topReviews[0].rating >= 3.0 ? 'fas fa-star' : (topReviews[0].rating >= 2.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'"></i></li>
+                                    <li class="list-inline-item me-0 small"><i th:class="(${topReviews[0].rating >= 4.0 ? 'fas fa-star' : (topReviews[0].rating >= 3.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'"></i></li>
+                                    <li class="list-inline-item me-0 small"><i th:class="(${topReviews[0].rating >= 5.0 ? 'fas fa-star' : (topReviews[0].rating >= 4.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'"></i></li>
                                 </ul>
                                 
-                                <h6 class="mb-0">Carolyn Ortiz</h6>
+                                <h6 class="mb-0" th:text="${topReviews[0].user.firstname + ' ' + topReviews[0].user.lastname}"></h6>
                             </div>
                         </div>
     
@@ -1095,33 +542,13 @@
                                 <div class="icon-lg bg-warning rounded-circle position-absolute top-0 start-100 translate-middle">
                                     <i class="bi bi-shield-fill-check text-dark"></i>
                                 </div>
-                                <h6 class="mb-3">100+ Students</h6>
-                                <div class="d-flex align-items-center mb-3">
+                                <h6>100+ Students</h6>
+                                <div class="d-flex align-items-center mt-3" th:each="user : ${users}">
                                     <div class="avatar avatar-sm">
-                                        <img class="avatar-img rounded-1" src="https://eduport.webestica.com/assets/images/avatar/09.jpg" alt="avatar">
-                                    </div>
-                                    
-                                    <div class="ms-2">
-                                        <h6 class="mb-0">Lori Stevens</h6>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center mb-3">
-                                    
-                                    <div class="avatar avatar-sm">
-                                        <img class="avatar-img rounded-1" src="https://eduport.webestica.com/assets/images/avatar/04.jpg" alt="avatar">
+                                        <img class="avatar-img rounded-1" th:src="${user.avatar}" alt="avatar">
                                     </div>
                                     <div class="ms-2">
-                                        <h6 class="mb-0">Billy Vasquez</h6>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    
-                                    <div class="avatar avatar-sm">
-                                        <img class="avatar-img rounded-1" src="https://eduport.webestica.com/assets/images/avatar/02.jpg" alt="avatar">
-                                    </div>
-                                    
-                                    <div class="ms-2">
-                                        <h6 class="mb-0">Larry Lawson</h6>
+                                        <h6 class="mb-0" th:text="${user.firstname + ' ' + user.lastname}"></h6>
                                     </div>
                                 </div>
                             </div>
@@ -1184,16 +611,16 @@
     
                             <div class="p-3 bg-primary d-inline-block rounded-4 shadow-lg text-center" style="background:url(https://eduport.webestica.com/assets/images/pattern/02.png) no-repeat center center; background-size:cover;">
                                 
-                                <h5 class="text-white mb-0">4.5/5.0</h5>
+                                <h5 class="text-white mb-0"><span th:text="${averageRating}"></span>/5.0</h5>
                                 
                                 <ul class="list-inline mb-2">
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star-half-alt text-warning"></i></li>
+                                    <li class="list-inline-item me-0 small"><i th:class="(${averageRating >= 1.0 ? 'fas fa-star' : (averageRating >= 0.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'"></i></li>
+                                    <li class="list-inline-item me-0 small"><i th:class="(${averageRating >= 2.0 ? 'fas fa-star' : (averageRating >= 1.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'"></i></li>
+                                    <li class="list-inline-item me-0 small"><i th:class="(${averageRating >= 3.0 ? 'fas fa-star' : (averageRating >= 2.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'"></i></li>
+                                    <li class="list-inline-item me-0 small"><i th:class="(${averageRating >= 4.0 ? 'fas fa-star' : (averageRating >= 3.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'"></i></li>
+                                    <li class="list-inline-item me-0 small"><i th:class="(${averageRating >= 5.0 ? 'fas fa-star' : (averageRating >= 4.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'"></i></li>
                                 </ul>
-                                <p class="text-white mb-0">Based on 3265 ratings</p>
+                                <p class="text-white mb-0">Based on <span th:text="${totalReviews}"></span> ratings</p>
                             </div>
                         </div>
     
@@ -1202,26 +629,26 @@
                             <div class="bg-body shadow text-center p-4 rounded-3">
                                 
                                 <div class="avatar avatar-xl mb-3">
-                                    <img class="avatar-img rounded-circle" src="https://eduport.webestica.com/assets/images/avatar/03.jpg" alt="avatar">
+                                    <img class="avatar-img rounded-circle" th:src="${topReviews[1].user.avatar}" alt="avatar">
                                 </div>
                                 <!-- Content -->
                                 <blockquote>
                                     <p>
                                         <span class="me-1 small"><i class="fas fa-quote-left"></i></span> 
-                                            At weddings believed laughing although the Moonlight newspaper up its enjoyment agreeable depending.
+                                        <span th:text="${topReviews[1].comment}"></span>
                                         <span class="ms-1 small"><i class="fas fa-quote-right"></i></span>
                                     </p>
                                 </blockquote>
                                 
                                 <ul class="list-inline mb-2">
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star-half-alt text-warning"></i></li>
+                                    <li class="list-inline-item me-0 small"><i th:class="(${topReviews[1].rating >= 1.0 ? 'fas fa-star' : (topReviews[1].rating >= 0.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'"></i></li>
+                                    <li class="list-inline-item me-0 small"><i th:class="(${topReviews[1].rating >= 2.0 ? 'fas fa-star' : (topReviews[1].rating >= 1.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'"></i></li>
+                                    <li class="list-inline-item me-0 small"><i th:class="(${topReviews[1].rating >= 3.0 ? 'fas fa-star' : (topReviews[1].rating >= 2.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'"></i></li>
+                                    <li class="list-inline-item me-0 small"><i th:class="(${topReviews[1].rating >= 4.0 ? 'fas fa-star' : (topReviews[1].rating >= 3.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'"></i></li>
+                                    <li class="list-inline-item me-0 small"><i th:class="(${topReviews[1].rating >= 5.0 ? 'fas fa-star' : (topReviews[1].rating >= 4.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'"></i></li>
                                 </ul>
                                 
-                                <h6 class="mb-0">Dennis Barrett</h6>
+                                <h6 class="mb-0" th:text="${topReviews[1].user.firstname + ' ' + topReviews[1].user.lastname}"></h6>
                             </div>
                         </div>
                     </div> 

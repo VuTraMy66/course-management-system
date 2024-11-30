@@ -140,7 +140,7 @@
                                     <tbody>
                                         <tr th:each="course : ${coursesReview}">
                                             <td class="text-center text-start d-flex align-items-center position-relative">
-                                                <div class="w-60px"><img th:src="${course.image}" class="rounded fixed-image-size4" alt=""></div>
+                                                <img th:src="${course.image}" class="rounded fixed-image-size4" alt="">
                                                 <h5 class="mb-0 ms-2 text-start" style="max-width: 200px; white-space: normal; overflow-wrap: break-word;">
                                                     <a th:href="@{/admin/course(course_id=${course.courseId})}" class="stretched-link" th:text="${course.name}"></a>
                                                 </h5>
@@ -148,20 +148,20 @@
                                             <td class="ps-5" th:text="${totalStudentsPerCourse[course.courseId]}"></td>
                                             <td>
                                                 <ul class="list-inline mb-0">
-                                                    <li class="list-inline-item me-0 small">
-                                                        <i th:class="(${courseRatings[course.courseId] >= 1.0 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'"></i>
+                                                    <li class="list-inline-item me-0 fs-6">
+                                                        <i th:class="(${courseRatings[course.courseId] >= 1.0 ? 'fas fa-star' : (courseRatings[course.courseId] >= 0.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'"></i>
                                                     </li>
-                                                    <li class="list-inline-item me-0 small">
-                                                        <i th:class="(${courseRatings[course.courseId] >= 2.0 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'"></i>
+                                                    <li class="list-inline-item me-0 fs-6">
+                                                        <i th:class="(${courseRatings[course.courseId] >= 2.0 ? 'fas fa-star' : (courseRatings[course.courseId] >= 1.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'"></i>
                                                     </li>
-                                                    <li class="list-inline-item me-0 small">
-                                                        <i th:class="(${courseRatings[course.courseId] >= 3.0 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'"></i>
+                                                    <li class="list-inline-item me-0 fs-6">
+                                                        <i th:class="(${courseRatings[course.courseId] >= 3.0 ? 'fas fa-star' : (courseRatings[course.courseId] >= 2.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'"></i>
                                                     </li>
-                                                    <li class="list-inline-item me-0 small">
-                                                        <i th:class="(${courseRatings[course.courseId] >= 4.0 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'"></i>
+                                                    <li class="list-inline-item me-0 fs-6">
+                                                        <i th:class="(${courseRatings[course.courseId] >= 4.0 ? 'fas fa-star' : (courseRatings[course.courseId] >= 3.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'"></i>
                                                     </li>
-                                                    <li class="list-inline-item me-0 small">
-                                                        <i th:class="(${courseRatings[course.courseId] >= 5.0 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'"></i>
+                                                    <li class="list-inline-item me-0 fs-6">
+                                                        <i th:class="(${courseRatings[course.courseId] >= 5.0 ? 'fas fa-star' : (courseRatings[course.courseId] >= 4.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'"></i>
                                                     </li>
                                                 </ul>
                                             </td>

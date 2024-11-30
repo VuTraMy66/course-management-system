@@ -60,7 +60,6 @@ public class AdminController {
         int totalStudents = users.size();
         int totalEnrollments = enrolls.size();
 
-        // Maps to store enrollments and completed courses count for each student
         Map<Integer, Integer> totalCoursesOfEachStudent = new HashMap<>();
         Map<Integer, Integer> completedCoursesOfEachStudent = new HashMap<>();
 
@@ -194,11 +193,21 @@ public class AdminController {
 
         int courseCount = coursesCategory.size();
 
+        Map<Integer, Double> courseRatings = new HashMap<>();
+
+        for (Courses courseCategory : coursesCategory) {
+            double averageRating = reviewService.calculateAverageRating(courseCategory.getCourseId());
+            courseRatings.put(courseCategory.getCourseId(), averageRating);
+
+            courseCategory.setAverageRating(averageRating);
+        }
+
         model.addAttribute("coursesCategory", coursesCategory);
         model.addAttribute("category", formattedCategory);
         model.addAttribute("courseCount", courseCount);
         model.addAttribute("totalStudentsPerCourse", totalStudentsPerCourse);
-        model.addAttribute("pageUrl", "/admin/course-category/" + category);
+        model.addAttribute("courseRatings", courseRatings);
+        model.addAttribute("pageUrl", "/admin/course-category");
         return "admin-course-category-detail";
     }
 

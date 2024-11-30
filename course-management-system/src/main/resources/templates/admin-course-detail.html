@@ -124,21 +124,22 @@
                                                         <span class="mb-0 fs-6" th:text="${review.formattedReviewDate2}"></span>
                                                     </td>
                                                     <td>
+                                                        <span class="h5 mb-0"><span th:text="${review.rating}"></span><i class="fas fa-star text-warning ms-1"></i></span>
                                                         <ul class="list-inline mb-0">
                                                             <li class="list-inline-item me-0 small">
-                                                                <i th:class="(${review.rating >= 1 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'"></i>
+                                                                <i th:class="(${review.rating >= 1.0 ? 'fas fa-star' : (review.rating >= 0.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'"></i>
                                                             </li>
                                                             <li class="list-inline-item me-0 small">
-                                                                <i th:class="(${review.rating >= 2 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'"></i>
+                                                                <i th:class="(${review.rating >= 2.0 ? 'fas fa-star' : (review.rating >= 1.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'"></i>
                                                             </li>
                                                             <li class="list-inline-item me-0 small">
-                                                                <i th:class="(${review.rating >= 3 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'"></i>
+                                                                <i th:class="(${review.rating >= 3.0 ? 'fas fa-star' : (review.rating >= 2.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'"></i>
                                                             </li>
                                                             <li class="list-inline-item me-0 small">
-                                                                <i th:class="(${review.rating >= 4 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'"></i>
+                                                                <i th:class="(${review.rating >= 4.0 ? 'fas fa-star' : (review.rating >= 3.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'"></i>
                                                             </li>
                                                             <li class="list-inline-item me-0 small">
-                                                                <i th:class="(${review.rating >= 5 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'"></i>
+                                                                <i th:class="(${review.rating >= 5.0 ? 'fas fa-star' : (review.rating >= 4.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'"></i>
                                                             </li>
                                                         </ul>
                                                     </td>

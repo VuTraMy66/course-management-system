@@ -85,11 +85,11 @@
                             </div>
                             <div>
                                 <span class="fs-6 ms-4 align-text-top">
-                                    <i th:class="(${averageRating >= 1.0 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'" width="12px" height="12px"></i>
-                                    <i th:class="(${averageRating >= 2.0 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'" width="12px" height="12px"></i>
-                                    <i th:class="(${averageRating >= 3.0 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'" width="12px" height="12px"></i>
-                                    <i th:class="(${averageRating >= 4.0 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'" width="12px" height="12px"></i>
-                                    <i th:class="(${averageRating >= 5.0 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'" width="12px" height="12px"></i>
+                                    <i th:class="(${averageRating >= 1.0 ? 'fas fa-star' : (averageRating >= 0.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'" width="12px" height="12px"></i>
+                                    <i th:class="(${averageRating >= 2.0 ? 'fas fa-star' : (averageRating >= 1.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'" width="12px" height="12px"></i>
+                                    <i th:class="(${averageRating >= 3.0 ? 'fas fa-star' : (averageRating >= 2.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'" width="12px" height="12px"></i>
+                                    <i th:class="(${averageRating >= 4.0 ? 'fas fa-star' : (averageRating >= 3.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'" width="12px" height="12px"></i>
+                                    <i th:class="(${averageRating >= 5.0 ? 'fas fa-star' : (averageRating >= 4.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'" width="12px" height="12px"></i>
                                 </span>
                                 <span class="text-white" th:text="'(' + (${totalReviews} != null ? ${totalReviews} : 0)  + ')'"></span>
                             </div>
@@ -187,11 +187,11 @@
                                             <div class="col-auto text-center">
                                                 <h3 class="display-2 fw-bold" th:text="${averageRating}">4.5</h3>
                                                 <span class="fs-6">
-                                                    <i th:class="(${averageRating >= 1.0 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'" width="12px" height="12px"></i>
-                                                    <i th:class="(${averageRating >= 2.0 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'" width="12px" height="12px"></i>
-                                                    <i th:class="(${averageRating >= 3.0 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'" width="12px" height="12px"></i>
-                                                    <i th:class="(${averageRating >= 4.0 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'" width="12px" height="12px"></i>
-                                                    <i th:class="(${averageRating >= 5.0 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'" width="12px" height="12px"></i>
+                                                    <i th:class="(${averageRating >= 1.0 ? 'fas fa-star' : (averageRating >= 0.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'" width="12px" height="12px"></i>
+                                                    <i th:class="(${averageRating >= 2.0 ? 'fas fa-star' : (averageRating >= 1.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'" width="12px" height="12px"></i>
+                                                    <i th:class="(${averageRating >= 3.0 ? 'fas fa-star' : (averageRating >= 2.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'" width="12px" height="12px"></i>
+                                                    <i th:class="(${averageRating >= 4.0 ? 'fas fa-star' : (averageRating >= 3.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'" width="12px" height="12px"></i>
+                                                    <i th:class="(${averageRating >= 5.0 ? 'fas fa-star' : (averageRating >= 4.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'" width="12px" height="12px"></i>
                                                 </span>
                                                 <p class="mb-0 fs-6" th:text="${'(Based on ' + totalReviews + (totalReviews <=1 ? ' review' : ' reviews') + ')'}">27</p>
                                             </div>
@@ -297,11 +297,11 @@
                                                 </h4>
                                                 <div class="mb-2">
                                                     <span class="fs-6">
-                                                        <i th:class="(${review.rating >= 1.0 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'" width="12px" height="12px"></i>
-                                                        <i th:class="(${review.rating >= 2.0 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'" width="12px" height="12px"></i>
-                                                        <i th:class="(${review.rating >= 3.0 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'" width="12px" height="12px"></i>
-                                                        <i th:class="(${review.rating >= 4.0 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'" width="12px" height="12px"></i>
-                                                        <i th:class="(${review.rating >= 5.0 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'" width="12px" height="12px"></i>
+                                                        <i th:class="(${review.rating >= 1.0 ? 'fas fa-star' : (review.rating >= 0.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'" width="12px" height="12px"></i>
+                                                        <i th:class="(${review.rating >= 2.0 ? 'fas fa-star' : (review.rating >= 1.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'" width="12px" height="12px"></i>
+                                                        <i th:class="(${review.rating >= 3.0 ? 'fas fa-star' : (review.rating >= 2.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'" width="12px" height="12px"></i>
+                                                        <i th:class="(${review.rating >= 4.0 ? 'fas fa-star' : (review.rating >= 3.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'" width="12px" height="12px"></i>
+                                                        <i th:class="(${review.rating >= 5.0 ? 'fas fa-star' : (review.rating >= 4.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'" width="12px" height="12px"></i>
                                                     </span>
                                                 </div>
                                                 <p th:text="${review.comment}">Lectures were at a really good pace and I never felt lost. The instructor was well informed and allowed me to learn and navigate Figma easily.</p>
@@ -404,11 +404,12 @@
                                 <div class="mt-3 d-flex lh-1">
                                     <span class="text-secondary fw-semibold fs-4 pe-2" th:text="${courseRatings[randomCourse.courseId]}"></span>
                                     <span class="align-text-top fs-4 pe-2">
-                                        <i th:class="(${courseRatings[randomCourse.courseId] >= 1.0 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'" width="10px" height="10px"></i>
-                                        <i th:class="(${courseRatings[randomCourse.courseId] >= 2.0 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'" width="10px" height="10px"></i>
-                                        <i th:class="(${courseRatings[randomCourse.courseId] >= 3.0 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'" width="10px" height="10px"></i>
-                                        <i th:class="(${courseRatings[randomCourse.courseId] >= 4.0 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'" width="10px" height="10px"></i>
-                                        <i th:class="(${courseRatings[randomCourse.courseId] >= 5.0 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'" width="10px" height="10px"></i>
+                                        <i th:class="(${courseRatings[randomCourse.courseId] >= 1.0 ? 'fas fa-star' : (courseRatings[randomCourse.courseId] >= 0.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'" width="12px" height="12px"></i>
+                                        <i th:class="(${courseRatings[randomCourse.courseId] >= 2.0 ? 'fas fa-star' : (courseRatings[randomCourse.courseId] >= 1.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'" width="12px" height="12px"></i>
+                                        <i th:class="(${courseRatings[randomCourse.courseId] >= 3.0 ? 'fas fa-star' : (courseRatings[randomCourse.courseId] >= 2.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'" width="12px" height="12px"></i>
+                                        <i th:class="(${courseRatings[randomCourse.courseId] >= 4.0 ? 'fas fa-star' : (courseRatings[randomCourse.courseId] >= 3.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'" width="12px" height="12px"></i>
+                                        <i th:class="(${courseRatings[randomCourse.courseId] >= 5.0 ? 'fas fa-star' : (courseRatings[randomCourse.courseId] >= 4.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'" width="12px" height="12px"></i>
+                                        
                                     </span>
                                     <span class="text-gray-500" th:text="'(' + ${courseReviewCounts[randomCourse.courseId]} + ')'"></span>
                                 </div>

@@ -507,11 +507,11 @@
                                             <div class="lh-1">
                                                 <span class="text-secondary fw-semibold" th:text="${courseRatings[course.courseId]}"></span>
                                                 <span class="align-text-top fs-4">
-                                                    <i th:class="(${courseRatings[course.courseId] >= 1.0 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'" width="12px" height="12px"></i>
-                                                    <i th:class="(${courseRatings[course.courseId] >= 2.0 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'" width="12px" height="12px"></i>
-                                                    <i th:class="(${courseRatings[course.courseId] >= 3.0 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'" width="12px" height="12px"></i>
-                                                    <i th:class="(${courseRatings[course.courseId] >= 4.0 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'" width="12px" height="12px"></i>
-                                                    <i th:class="(${courseRatings[course.courseId] >= 5.0 ? 'fas fa-star' : 'far fa-star'}) + ' text-warning'" width="12px" height="12px"></i>
+                                                    <i th:class="(${courseRatings[course.courseId] >= 1.0 ? 'fas fa-star' : (courseRatings[course.courseId] >= 0.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'" style="vertical-align: text-bottom;" width="10px" height="10px"></i>
+                                                    <i th:class="(${courseRatings[course.courseId] >= 2.0 ? 'fas fa-star' : (courseRatings[course.courseId] >= 1.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'" style="vertical-align: text-bottom;" width="10px" height="10px"></i>
+                                                    <i th:class="(${courseRatings[course.courseId] >= 3.0 ? 'fas fa-star' : (courseRatings[course.courseId] >= 2.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'" style="vertical-align: text-bottom;" width="10px" height="10px"></i>
+                                                    <i th:class="(${courseRatings[course.courseId] >= 4.0 ? 'fas fa-star' : (courseRatings[course.courseId] >= 3.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'" style="vertical-align: text-bottom;" width="10px" height="10px"></i>
+                                                    <i th:class="(${courseRatings[course.courseId] >= 5.0 ? 'fas fa-star' : (courseRatings[course.courseId] >= 4.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'" style="vertical-align: text-bottom;" width="10px" height="10px"></i>
                                                 </span>
                                                 <span class="text-gray-500" th:text="'(' + ${courseReviewCounts[course.courseId]} + ')'"></span>
                                             </div>

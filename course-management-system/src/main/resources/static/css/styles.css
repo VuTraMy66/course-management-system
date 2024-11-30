@@ -848,3 +848,9 @@ a:hover {
     height: 180px; 
     object-fit: cover; 
 }
+
+.fixed-image-size6 {
+    width: 304px;
+    height: 228px; 
+    object-fit: cover; 
+}

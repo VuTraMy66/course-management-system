@@ -419,11 +419,7 @@ img {
 .fixed-image-size4 {
     width: 60px;
     height: 45px; 
-    object-fit: cover; 
-}
-
-.sub-icon {
-    font-size: 10x;
+    object-fit: cover;
 }
 
 

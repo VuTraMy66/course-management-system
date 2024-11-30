@@ -19,6 +19,7 @@ import com.example.course_management_system.models.Courses;
 import com.example.course_management_system.models.Enrollments;
 import com.example.course_management_system.models.Lessons;
 import com.example.course_management_system.models.Reviews;
+import com.example.course_management_system.services.AuthService;
 import com.example.course_management_system.services.CourseService;
 import com.example.course_management_system.services.EnrollmentService;
 import com.example.course_management_system.services.LessonService;
@@ -32,16 +33,21 @@ public class CourseController {
     private ReviewService reviewService;
     private EnrollmentService enrollmentService;
     private LessonService lessonService;
+    private AuthService authService;
 
-    public CourseController(CourseService courseService, ReviewService reviewService,EnrollmentService enrollmentService, LessonService lessonService) {
+    public CourseController(AuthService authService, CourseService courseService, ReviewService reviewService,EnrollmentService enrollmentService, LessonService lessonService) {
         this.courseService = courseService;
         this.reviewService = reviewService;
         this.enrollmentService = enrollmentService;
         this.lessonService = lessonService;
+        this.authService = authService;
     }
 
     @GetMapping("/courses")
     public String showAllCourses(Model model) {
+        boolean isAuthenticated = authService.isAuthenticated();
+        model.addAttribute("isAuthenticated", isAuthenticated);
+
         List<Courses> courses = courseService.getAllCourses();
         Map<Integer, Double> courseRatings = new HashMap<>();
         Map<Integer, Integer> courseReviewCounts = new HashMap<>();
@@ -73,6 +79,9 @@ public class CourseController {
 
     @GetMapping("/course")
     public String courseDetail(@RequestParam("course_id") int courseId, Model model) {
+        boolean isAuthenticated = authService.isAuthenticated();
+        model.addAttribute("isAuthenticated", isAuthenticated);
+
         Optional<Courses> course = courseService.getCourseById(courseId);
         List<Courses> coursesCategory = courseService.getAllCourseByCategory(course.get().getCategory());
 

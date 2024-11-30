@@ -51,20 +51,20 @@
                 <div class="col-md-12">
                     <!-- Tab Nav -->
                     <ul class="nav nav-lb-tab mb-6" id="tab" role="tablist" style="border-bottom: 1px solid #212529;">
-                        <li class="nav-item ms-0" role="presentation">
-                            <a class="nav-link active" id="bookmarked-tab" data-bs-toggle="pill" href="#bookmarked" role="tab" aria-controls="bookmarked" aria-selected="true">Bookmarked</a>
-                        </li>
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="learning-tab" data-bs-toggle="pill" href="#learning" role="tab" aria-controls="learning" aria-selected="false">Learning</a>
+                            <a class="nav-link active" id="learning-tab" data-bs-toggle="pill" href="#learning" role="tab" aria-controls="learning" aria-selected="true">Learning</a>
                         </li>
                         <li class="nav-item" role="presentation">
                             <a class="nav-link" id="complete-tab" data-bs-toggle="pill" href="#complete" role="tab" aria-controls="complete" aria-selected="false">Completed</a>
+                        </li>
+                        <li class="nav-item ms-0" role="presentation">
+                            <a class="nav-link" id="dropped-tab" data-bs-toggle="pill" href="#dropped" role="tab" aria-controls="dropped" aria-selected="false">Dropped</a>
                         </li>
                     </ul>
                     <!-- Tab Content -->
                     <div class="tab-content" id="tabContent">
                         <!-- Bookmark -->
-                        <div class="tab-pane fade show active" id="bookmarked" role="tabpanel" aria-labelledby="bookmarked-tab">
+                        <div class="tab-pane fade" id="dropped" role="tabpanel" aria-labelledby="dropped-tab">
                             <div class="row">
                                 <div class="col-lg-3 col-md-6 col-12">
                                     <div class="card mb-4 card-hover">
@@ -490,7 +490,7 @@
                             </div>
                         </div>
                         <!-- Learning  -->
-                        <div class="tab-pane fade" id="learning" role="tabpanel" aria-labelledby="learning-tab">
+                        <div class="tab-pane fade show active" id="learning" role="tabpanel" aria-labelledby="learning-tab">
                             <div class="row">
                                 <div class="col-lg-3 col-md-6 col-12">
                                     <div class="card mb-4 card-hover">

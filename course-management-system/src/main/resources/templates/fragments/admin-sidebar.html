@@ -18,7 +18,7 @@
                         Dashboard
                     </a>
                 </li>
-                <li th:class="${pageUrl == '/admin/courses' ? 'nav-item active' : 'nav-item'}">
+                <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#navCourses" aria-expanded="false" aria-controls="navCourses">
                         <i data-feather="book" class="nav-icon me-2"></i>
                         Courses
@@ -26,22 +26,35 @@
                             <i class="bi bi-chevron-down"></i>
                         </span>
                     </a>
-                    <div id="navCourses" th:class="${pageUrl == '/admin/courses' || pageUrl == '/admin/course-category' ? 'collapse show' : 'collapse'}" data-bs-parent="#sideNavbar">
+                    <div id="navCourses" th:class="${pageUrl == '/admin/courses' || pageUrl == '/admin/courses/category' ? 'collapse show' : 'collapse'}" data-bs-parent="#sideNavbar">
                         <ul class="nav flex-column">
                             <li th:class="${pageUrl == '/admin/courses' ? 'nav-item active' : 'nav-item'}">
                                 <a class="nav-link" href="/admin/courses">All Courses</a>
                             </li>
-                            <li th:class="${pageUrl == '/admin/course-category' ? 'nav-item active' : 'nav-item'}">
-                                <a class="nav-link " href="/admin/course-category">Courses Category</a>
+                            <li th:class="${pageUrl == '/admin/courses/category' ? 'nav-item active' : 'nav-item'}">
+                                <a class="nav-link " href="/admin/courses/category">Course Category</a>
                             </li>
                         </ul>
                     </div>
                 </li>
-                <li th:class="${pageUrl == '/admin/student' ? 'nav-item active' : 'nav-item'}">
-                    <a class="nav-link" href="/admin/student">
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#navUsers" aria-expanded="false" aria-controls="navUsers">
                         <i data-feather="user" class="nav-icon me-2"></i>
-                        Students
+                        User
+                        <span class="chevron-arrow fs-4 ms-auto">
+                            <i class="bi bi-chevron-down"></i>
+                        </span>
                     </a>
+                    <div id="navUsers" th:class="${pageUrl == '/admin/student' || pageUrl == '/admin/instructor' ? 'collapse show' : 'collapse'}" data-bs-parent="#sideNavbar">
+                        <ul class="nav flex-column">
+                            <li th:class="${pageUrl == '/admin/instructor' ? 'nav-item active' : 'nav-item'}">
+                                <a class="nav-link " href="/admin/instructor">Instructors</a>
+                            </li>
+                            <li th:class="${pageUrl == '/admin/student' ? 'nav-item active' : 'nav-item'}">
+                                <a class="nav-link" href="/admin/student">Students</a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
                 <li th:class="${pageUrl == '/admin/review' ? 'nav-item active' : 'nav-item'}">
                     <a class="nav-link" href="/admin/review">

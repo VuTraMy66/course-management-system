@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.course_management_system.models.Categories;
 import com.example.course_management_system.models.Courses;
 import com.example.course_management_system.repositories.CourseRepository;
 
@@ -19,12 +20,11 @@ public class CourseService {
         this.courseRepository = courseRepository;
     }
 
-    // Retrieve all courses
     public List<Courses> getAllCourses() {
         return courseRepository.findAll();
     }
 
-    public List<Courses> getAllCourseByCategory(String category) {
+    public List<Courses> getAllCourseByCategory(Categories category) {
         return courseRepository.findByCategory(category);
     }
 
@@ -38,9 +38,9 @@ public class CourseService {
 
     public void deleteCourseById(int courseId) {
         courseRepository.deleteById(courseId);
-    } 
+    }
 
-    public List<Courses> filterCourses(List<String> categories, double rating, List<String> skillLevels) {
-        return courseRepository.findFilteredCourses(categories, rating, skillLevels);
+    public List<Courses> getCourseByInstructor(int userId) {
+        return courseRepository.findByUser_UserId(userId);
     }
 }

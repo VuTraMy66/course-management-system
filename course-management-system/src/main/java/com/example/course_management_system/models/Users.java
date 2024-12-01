@@ -121,7 +121,7 @@ public class Users {
 
     public void setAvatar(String avatar) {
         if (avatar == null || avatar.isEmpty()) {
-            this.avatar = "https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg";
+            this.avatar = "https://t4.ftcdn.net/jpg/05/49/98/39/360_F_549983970_bRCkYfk0P6PP5fKbMhZMIb07mCJ6esXL.jpg";
         } else {
             this.avatar = avatar;
         }
@@ -132,7 +132,7 @@ public class Users {
     }
 
     public String getFormattedDateCreated() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM, yyyy");
         return dateCreated.format(formatter);
     }
 

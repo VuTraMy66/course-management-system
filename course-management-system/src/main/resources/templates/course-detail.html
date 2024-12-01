@@ -193,7 +193,7 @@
                                                     <i th:class="(${averageRating >= 4.0 ? 'fas fa-star' : (averageRating >= 3.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'" width="12px" height="12px"></i>
                                                     <i th:class="(${averageRating >= 5.0 ? 'fas fa-star' : (averageRating >= 4.5 ? 'fas fa-star-half-alt' : 'far fa-star')}) + ' text-warning'" width="12px" height="12px"></i>
                                                 </span>
-                                                <p class="mb-0 fs-6" th:text="${'(Based on ' + totalReviews + (totalReviews <=1 ? ' review' : ' reviews') + ')'}">27</p>
+                                                <p class="mb-0 fs-6" th:text="${'(Based on ' + totalReviews + (totalReviews == 1 ? ' review' : ' reviews') + ')'}">27</p>
                                             </div>
                                             <!-- Progress Bar -->
                                             <div class="col order-3 order-md-2">
@@ -343,7 +343,7 @@
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item bg-transparent">
                                     <i data-feather="play-circle" class="align-middle me-2 text-primary" width="15" height="15"></i>
-                                    <span th:text="${totalLessons + (totalLessons <= 1 ? ' lesson' : ' lessons')}"></span>
+                                    <span th:text="${totalLessons + (totalLessons == 1 ? ' lesson' : ' lessons')}"></span>
                                 </li>
                                 <li class="list-group-item bg-transparent">
                                     <i data-feather="award" class="me-2 align-middle text-success" width="15" height="15"></i>
@@ -416,14 +416,15 @@
                             </div>
                             <div class="card-footer">
                                 <div class="row align-items-center g-0">
-                                    <div class="col">
-                                        <a class="text-uppercase fs-6 view fw-medium" th:href="@{/course(course_id=${randomCourse.courseId})}">View Course 
-                                            <i data-feather="chevron-right" width="12" height="12" class="icon-view"></i>
-                                        </a>
+                                    <div class="col-auto">
+                                        <img th:src="${randomCourse.user.avatar}" class="rounded-circle avatar-xs"/>
+                                    </div>
+                                    <div class="col ms-3">
+                                        <span th:text="${randomCourse.user.firstname + ' ' + randomCourse.user.lastname}"></span>
                                     </div>
                                     <div class="col-auto">
                                         <a href="#" class="text-reset bookmark">
-                                            <i data-feather="bookmark" class="icon-hover fs-4"></i>
+                                            <i data-feather="bookmark" class="icon-hover" height="16px" width="16px"></i>
                                         </a>
                                     </div>
                                 </div>

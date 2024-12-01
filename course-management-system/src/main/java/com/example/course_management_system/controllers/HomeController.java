@@ -11,11 +11,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.course_management_system.models.Categories;
 import com.example.course_management_system.models.Courses;
 import com.example.course_management_system.models.Enrollments;
 import com.example.course_management_system.models.Reviews;
 import com.example.course_management_system.models.Users;
 import com.example.course_management_system.services.AuthService;
+import com.example.course_management_system.services.CategoryService;
 import com.example.course_management_system.services.CourseService;
 import com.example.course_management_system.services.EnrollmentService;
 import com.example.course_management_system.services.LessonService;
@@ -34,14 +36,16 @@ public class HomeController {
     private EnrollmentService enrollmentService;
     private LessonService lessonService;
     private UserService userService;
+    private CategoryService categoryService;
     
-    public HomeController(AuthService authService, CourseService courseService, ReviewService reviewService,EnrollmentService enrollmentService, LessonService lessonService, UserService userService) {
+    public HomeController(AuthService authService, CourseService courseService, ReviewService reviewService, EnrollmentService enrollmentService, LessonService lessonService, UserService userService, CategoryService categoryService) {
         this.courseService = courseService;
         this.reviewService = reviewService;
         this.enrollmentService = enrollmentService;
         this.lessonService = lessonService;
         this.authService = authService;
         this.userService = userService;
+        this.categoryService = categoryService;
     }
 
     @GetMapping({"/home", "/"})
@@ -50,6 +54,7 @@ public class HomeController {
         model.addAttribute("isAuthenticated", isAuthenticated);
 
         List<Courses> courses = courseService.getAllCourses();
+
         Map<Integer, Double> courseRatings = new HashMap<>();
         Map<Integer, Integer> courseReviewCounts = new HashMap<>();
 
@@ -62,6 +67,22 @@ public class HomeController {
 
             course.setReviewCount(reviewCount);
             course.setAverageRating(averageRating);
+        }
+
+        List<Categories> allCategories = categoryService.getAllCategories();
+
+        int courseCountCategory1 = 0;
+        int courseCountCategory2 = 0;
+        int courseCountCategory3 = 0;
+        int courseCountCategory4 = 0;
+        int courseCountCategory5 = 0;
+
+        if (allCategories.size() >= 5) {
+            courseCountCategory1 = courseService.getAllCourseByCategory(allCategories.get(0)).size();
+            courseCountCategory2 = courseService.getAllCourseByCategory(allCategories.get(1)).size();
+            courseCountCategory3 = courseService.getAllCourseByCategory(allCategories.get(2)).size();
+            courseCountCategory4 = courseService.getAllCourseByCategory(allCategories.get(3)).size();
+            courseCountCategory5 = courseService.getAllCourseByCategory(allCategories.get(4)).size();
         }
 
         List<Courses> filteredCourses = courses.stream()
@@ -79,13 +100,13 @@ public class HomeController {
         List<Reviews> topReviews = sortedReviews.stream().limit(2).collect(Collectors.toList());
 
         double averageRating = reviews.stream()
-            .mapToDouble(Reviews::getRating)  // Extract rating from each review
-            .average()                       // Calculate average of ratings
+            .mapToDouble(Reviews::getRating)  
+            .average()
             .orElse(0.0); 
 
         int totalReviews = reviews.size();
 
-        List<Users> users = userService.getAllStudents();
+        List<Users> users = userService.getAllStudents("student");
 
         Map<Integer, Integer> totalCoursesOfEachStudent = new HashMap<>();
 
@@ -102,7 +123,12 @@ public class HomeController {
             .limit(3)
             .collect(Collectors.toList());
 
-
+        model.addAttribute("courseCountCategory1", courseCountCategory1);
+        model.addAttribute("courseCountCategory2", courseCountCategory2);
+        model.addAttribute("courseCountCategory3", courseCountCategory3);
+        model.addAttribute("courseCountCategory4", courseCountCategory4);
+        model.addAttribute("courseCountCategory5", courseCountCategory5);
+        model.addAttribute("category", allCategories);
         model.addAttribute("courses", topRatedCourses);
         model.addAttribute("courseRatings", courseRatings);
         model.addAttribute("courseReviewCounts", courseReviewCounts);

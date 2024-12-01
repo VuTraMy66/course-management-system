@@ -22,8 +22,8 @@ public class UserService {
         return userRepository.findByUsername(username);  
     }
 
-    public List<Users> getAllStudents() {
-        return (List<Users>) userRepository.findByRole("student");
+    public List<Users> getAllStudents(String role) {
+        return userRepository.findByRole(role);
     }
 
     public void deleteStudent(int userId) {

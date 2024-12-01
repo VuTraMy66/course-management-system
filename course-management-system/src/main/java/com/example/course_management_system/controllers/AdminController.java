@@ -16,15 +16,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.course_management_system.models.Categories;
 import com.example.course_management_system.models.Courses;
 import com.example.course_management_system.models.Enrollments;
 import com.example.course_management_system.models.Lessons;
 import com.example.course_management_system.models.Reviews;
+import com.example.course_management_system.models.Specializations;
 import com.example.course_management_system.models.Users;
+import com.example.course_management_system.services.CategoryService;
 import com.example.course_management_system.services.CourseService;
 import com.example.course_management_system.services.EnrollmentService;
 import com.example.course_management_system.services.LessonService;
 import com.example.course_management_system.services.ReviewService;
+import com.example.course_management_system.services.SpecializationService;
 import com.example.course_management_system.services.UserService;
 
 @Controller
@@ -36,13 +40,17 @@ public class AdminController {
     private ReviewService reviewService;
     private LessonService lessonService;
     private UserService userService;
+    private CategoryService categoryService;
+    private SpecializationService specializationService;
     
-    public AdminController(CourseService courseService, EnrollmentService enrollmentService, ReviewService reviewService, LessonService lessonService, UserService userService) {
+    public AdminController(CourseService courseService, EnrollmentService enrollmentService, ReviewService reviewService, LessonService lessonService, UserService userService, CategoryService categoryService, SpecializationService specializationService) {
         this.courseService = courseService;
         this.enrollmentService = enrollmentService;
         this.reviewService = reviewService;
         this.lessonService = lessonService;
         this.userService = userService;
+        this.categoryService = categoryService;
+        this.specializationService = specializationService;
     }
 
     @RequestMapping("/admin")
@@ -53,48 +61,77 @@ public class AdminController {
         }
 
         List<Courses> courses = courseService.getAllCourses();
-        List<Users> users = userService.getAllStudents();
-        List<Enrollments> enrolls = enrollmentService.getAllEnrollments();
+        List<Users> students = userService.getAllStudents("student");
+        List<Users> instructors = userService.getAllStudents("instructor");
+        List<Reviews> reviews = reviewService.getAllReviews();
 
-        int totalCourses = courses.size();
-        int totalStudents = users.size();
-        int totalEnrollments = enrolls.size();
+        Map<Integer, Integer> totalCoursesOfEachInstructor = new HashMap<>();
+        Map<Integer, Integer> totalStudentsOfEachInstructor = new HashMap<>();
+        Map<Integer, Integer> totalReviewsOfEachInstructor = new HashMap<>();
+
+        for (Users instructor : instructors) {
+            List<Courses> courseOfInstructor = courseService.getCourseByInstructor(instructor.getUserId());
+            totalCoursesOfEachInstructor.put(instructor.getUserId(), courseOfInstructor.size());
+
+            int totalStudentsEnroll = 0;
+            int totalReviews = 0;
+
+            for (Courses course : courseOfInstructor) {
+                List<Enrollments> enrolls = enrollmentService.getEnrollmentsByCourseId(course.getCourseId());
+                List<Reviews> reviewsCourse = reviewService.getReviewsByCourseId(course.getCourseId());
+                totalStudentsEnroll += enrolls.size();
+                totalReviews += reviewsCourse.size();
+            }
+            totalStudentsOfEachInstructor.put(instructor.getUserId(), totalStudentsEnroll);
+            totalReviewsOfEachInstructor.put(instructor.getUserId(), totalReviews);
+        }
+
+        List<Users> sortedInstructors = instructors.stream()
+            .sorted((u1, u2) -> Integer.compare(
+                totalStudentsOfEachInstructor.get(u2.getUserId()),
+                totalStudentsOfEachInstructor.get(u1.getUserId())
+            ))
+            .limit(5)
+            .collect(Collectors.toList());
 
         Map<Integer, Integer> totalCoursesOfEachStudent = new HashMap<>();
         Map<Integer, Integer> completedCoursesOfEachStudent = new HashMap<>();
 
-        for (Users user : users) {
-            List<Enrollments> enrollments = enrollmentService.getEnrollmentsByUserId(user.getUserId());
-            totalCoursesOfEachStudent.put(user.getUserId(), enrollments.size());
+        for (Users student : students) {
+            List<Enrollments> enrollments = enrollmentService.getEnrollmentsByUserId(student.getUserId());
+            totalCoursesOfEachStudent.put(student.getUserId(), enrollments.size());
 
-            // Filter enrollments for completed courses
             int completedCoursesCount = (int) enrollments.stream()
-                    .filter(enrollment -> "completed".equalsIgnoreCase(enrollment.getStatus())) // Adjust based on status value
+                    .filter(enrollment -> "completed".equalsIgnoreCase(enrollment.getStatus())) 
                     .count();
-            completedCoursesOfEachStudent.put(user.getUserId(), completedCoursesCount);
+            completedCoursesOfEachStudent.put(student.getUserId(), completedCoursesCount);
         }
 
-        // Sort students by total enrolled courses in descending order and limit to top 8
-        List<Users> sortedUsers = users.stream()
-            .sorted((u1, u2) -> Integer.compare(
-                totalCoursesOfEachStudent.get(u2.getUserId()),
-                totalCoursesOfEachStudent.get(u1.getUserId())
+        List<Users> sortedStudents = students.stream()
+            .sorted((u3, u4) -> Integer.compare(
+                totalCoursesOfEachStudent.get(u4.getUserId()),
+                totalCoursesOfEachStudent.get(u3.getUserId())
                 ))
-            .limit(8)
+            .limit(5)
             .collect(Collectors.toList());
 
         List<Courses> lastSixCourses = courses.stream()
             .sorted((c1, c2) -> Integer.compare(c2.getCourseId(), c1.getCourseId()))
-            .limit(6)
+            .limit(5)
             .collect(Collectors.toList());
 
         model.addAttribute("courses", lastSixCourses);
-        model.addAttribute("users", sortedUsers);
-        model.addAttribute("totalCourses", totalCourses);
-        model.addAttribute("totalStudents", totalStudents);
-        model.addAttribute("totalEnrollments", totalEnrollments);
+        model.addAttribute("students", sortedStudents);
+        model.addAttribute("instructors", sortedInstructors);
+        model.addAttribute("totalCourses", courses.size());
+        model.addAttribute("totalStudents", students.size());
+        model.addAttribute("totalInstructors", instructors.size());
+        model.addAttribute("totalReviews", reviews.size());
         model.addAttribute("totalCoursesOfEachStudent", totalCoursesOfEachStudent);
         model.addAttribute("completedCoursesOfEachStudent", completedCoursesOfEachStudent);
+        model.addAttribute("totalCoursesOfEachInstructor", totalCoursesOfEachInstructor);
+        model.addAttribute("totalStudentsOfEachInstructor", totalStudentsOfEachInstructor);
+        model.addAttribute("totalReviewsOfEachInstructor", totalReviewsOfEachInstructor);
         model.addAttribute("pageUrl", "/admin");
         return "admin"; 
     }
@@ -146,43 +183,41 @@ public class AdminController {
         return "redirect:/admin/courses";
     }
 
-    @GetMapping("/admin/course-category")
+    @GetMapping("/admin/courses/category")
     public String adminCourseCategory(Model model) {
         Users admin = AuthenticationUtils.getAuthenticatedUser(); 
         if (admin != null) {
             model.addAttribute("admin", admin);
         }
 
-        List<Courses> coursesOfP = courseService.getAllCourseByCategory("Programming");
-        List<Courses> coursesOfDS = courseService.getAllCourseByCategory("Data Science");
-        List<Courses> coursesOfUD = courseService.getAllCourseByCategory("UI/UX Design");
-        List<Courses> coursesOfWD = courseService.getAllCourseByCategory("Web Development");
-        List<Courses> coursesOfAI = courseService.getAllCourseByCategory("Artificial Intelligence");
+        List<Categories> allCategories = categoryService.getAllCategories();
 
-        int totalP = coursesOfP.size();
-        int totalDS = coursesOfDS.size();
-        int totalUD = coursesOfUD.size();
-        int totalWD = coursesOfWD.size();
-        int totalAI = coursesOfAI.size();
+        Map<String, List<Courses>> coursesByCategory = new HashMap<>();
+        Map<String, Integer> totalByCategory = new HashMap<>();
 
-        model.addAttribute("totalP", totalP);
-        model.addAttribute("totalDS", totalDS);
-        model.addAttribute("totalUD", totalUD);
-        model.addAttribute("totalWD", totalWD);
-        model.addAttribute("totalAI", totalAI);
-        model.addAttribute("pageUrl", "/admin/course-category");
-        return "admin-course-category"; 
+        for (Categories category : allCategories) {
+            List<Courses> courses = courseService.getAllCourseByCategory(category);
+            coursesByCategory.put(category.getName(), courses);
+            totalByCategory.put(category.getName(), courses.size());
+        }
+
+        model.addAttribute("categories", allCategories);
+        model.addAttribute("coursesByCategory", coursesByCategory);
+        model.addAttribute("totalByCategory", totalByCategory);
+        model.addAttribute("pageUrl", "/admin/courses/category");
+        return "admin-category"; 
     }
 
-    @GetMapping("/admin/course-category/{category}")
-    public String adminCourseCategoryDetail(@PathVariable("category") String category, Model model) {
+    @GetMapping("/admin/courses/category/")
+    public String adminCourseCategoryDetail(@RequestParam("categoryId") int categoryId, Model model) {
         Users admin = AuthenticationUtils.getAuthenticatedUser(); 
         if (admin != null) {
             model.addAttribute("admin", admin);
         }
 
-        String formattedCategory = convertCategoryFormat(category);
-        List<Courses> coursesCategory = courseService.getAllCourseByCategory(formattedCategory);
+        Categories categoryEntity = categoryService.getCategoryById(categoryId);
+
+        List<Courses> coursesCategory = courseService.getAllCourseByCategory(categoryEntity);
 
         Map<Integer, Integer> totalStudentsPerCourse = new HashMap<>();
 
@@ -203,29 +238,12 @@ public class AdminController {
         }
 
         model.addAttribute("coursesCategory", coursesCategory);
-        model.addAttribute("category", formattedCategory);
+        model.addAttribute("category", categoryEntity.getName());
         model.addAttribute("courseCount", courseCount);
         model.addAttribute("totalStudentsPerCourse", totalStudentsPerCourse);
         model.addAttribute("courseRatings", courseRatings);
-        model.addAttribute("pageUrl", "/admin/course-category");
-        return "admin-course-category-detail";
-    }
-
-    private String convertCategoryFormat(String category) {
-        switch (category) {
-            case "data-science":
-                return "Data Science";
-            case "programming":
-                return "Programming";
-            case "uiux-design":
-                return "UI/UX Design";
-            case "web-development":
-                return "Web Development";
-            case "artificial-intelligence":
-                return "Artificial Intelligence";
-            default:
-                return category; 
-        }
+        model.addAttribute("pageUrl", "/admin/courses/category");
+        return "admin-category-detail";
     }
 
     @GetMapping("/admin/course")
@@ -417,7 +435,6 @@ public class AdminController {
         }
     }
 
-    // Show all student created accounts
     @GetMapping("/admin/student")
     public String adminStudent(Model model) {
         try {
@@ -426,7 +443,7 @@ public class AdminController {
                 model.addAttribute("admin", admin);
             }
 
-            List<Users> users = userService.getAllStudents();
+            List<Users> users = userService.getAllStudents("student");
 
             Map<Integer, List<Enrollments>> coursesOfStudent = new HashMap<>();
             Map<Integer, Integer> totalCoursesOfEachStudent = new HashMap<>();
@@ -437,11 +454,9 @@ public class AdminController {
                 totalCoursesOfEachStudent.put(user.getUserId(), enrollments.size());
             }
     
-            int totalStudents = users.size();
-    
             model.addAttribute("users", users);
             model.addAttribute("coursesOfStudent", coursesOfStudent);
-            model.addAttribute("totalStudents", totalStudents);
+            model.addAttribute("totalStudents", users.size());
             model.addAttribute("totalCoursesOfEachStudent", totalCoursesOfEachStudent);
             model.addAttribute("pageUrl", "/admin/student");
     
@@ -452,9 +467,71 @@ public class AdminController {
             return "error-page";
         }
     }
+
+    @GetMapping("/admin/instructor")
+    public String adminInstructor(Model model) {
+        try {
+            Users admin = AuthenticationUtils.getAuthenticatedUser(); 
+            if (admin != null) {
+                model.addAttribute("admin", admin);
+            }
+
+            List<Users> users = userService.getAllStudents("instructor");
+
+            Map<Integer, Integer> totalCoursesOfEachInstructor = new HashMap<>();
+            Map<Integer, Integer> totalStudentsOfEachInstructor = new HashMap<>();
+            Map<Integer, Integer> totalReviewsOfEachInstructor = new HashMap<>();
+            Map<Integer, Double> totalRatingsOfEachInstructor = new HashMap<>();
+            Map<Integer, String> spec = new HashMap<>();
+
+            for (Users user : users) {
+                List<Courses> courseOfInstructor = courseService.getCourseByInstructor(user.getUserId());
+                totalCoursesOfEachInstructor.put(user.getUserId(), courseOfInstructor.size());
+
+                int totalStudentsEnroll = 0;
+                int totalReviews = 0;
+                int totalRatings = 0;
+
+                for (Courses course : courseOfInstructor) {
+                    List<Enrollments> enrolls = enrollmentService.getEnrollmentsByCourseId(course.getCourseId());
+                    List<Reviews> reviewsCourse = reviewService.getReviewsByCourseId(course.getCourseId());
+
+                    totalStudentsEnroll += enrolls.size();
+                    totalReviews += reviewsCourse.size();
+
+                    for (Reviews review : reviewsCourse) {
+                        totalRatings += review.getRating();
+                    }
+                }
+                totalStudentsOfEachInstructor.put(user.getUserId(), totalStudentsEnroll);
+                totalReviewsOfEachInstructor.put(user.getUserId(), totalReviews);
+
+                double averageRating = totalReviews > 0 ? (double) totalRatings / totalReviews : 0;
+                totalRatingsOfEachInstructor.put(user.getUserId(), Math.round(averageRating * 10.0) / 10.0);
+
+                Specializations special = specializationService.getSpecialization(user.getUserId());
+                spec.put(user.getUserId(), special.getSpecializationName());
+            }
+    
+    
+            model.addAttribute("users", users);
+            model.addAttribute("totalInstructors", users.size());
+            model.addAttribute("totalCoursesOfEachInstructor", totalCoursesOfEachInstructor);
+            model.addAttribute("totalStudentsOfEachInstructor", totalStudentsOfEachInstructor);
+            model.addAttribute("totalRatingsOfEachInstructor", totalRatingsOfEachInstructor);
+            model.addAttribute("specialization", spec);
+            model.addAttribute("pageUrl", "/admin/instructor");
+    
+            return "admin-instructor"; 
+        } catch (Exception e) {
+            e.printStackTrace();
+            model.addAttribute("errorMessage", "An error occurred while fetching users.");
+            return "error-page";
+        }
+    }
     
     // Delete student
-    @GetMapping("/admin/delete-student/{userId}")
+    @GetMapping("/admin/delete-user/{userId}")
     public String adminDeleteStudent(@PathVariable("userId") int userId, Model model) {
         try {
             // Delete student

@@ -2,14 +2,14 @@ package com.example.course_management_system.models;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 
@@ -28,8 +28,13 @@ public class Courses {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "category")
-    private String category;
+    @ManyToOne
+        @JoinColumn(name = "category_id")
+        private Categories category;
+
+    @ManyToOne
+        @JoinColumn(name = "instructor_id")
+        private Users user;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -56,7 +61,7 @@ public class Courses {
         this.createdAt = LocalDateTime.now();
     }
 
-    public Courses(String name, String description, String category, String skillLevel, String status, int duration, String image) {
+    public Courses(String name, String description, Categories category, String skillLevel, String status, int duration, String image, Users user) {
         this.name = name;
         this.description = description;
         this.category = category;
@@ -64,9 +69,9 @@ public class Courses {
         this.status = status;
         this.duration = duration;
         this.image = image;
+        this.user = user;
     }
 
-    // Getters and setters
     public int getCourseId() {
         return courseId;
     }
@@ -87,19 +92,20 @@ public class Courses {
         this.description = description;
     }
 
-    public String getCategory() {
+    public Categories getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
-        if (!category.equals("Programming") && 
-            !category.equals("Data Science") &&
-            !category.equals("UI/UX Design") &&
-            !category.equals("Web Development") &&
-            !category.equals("Artificial Intelligence")) {
-            throw new IllegalArgumentException("Invalid category: " + category);
-        }
+    public void setCategory(Categories category) {
         this.category = category;
+    }
+
+    public Users getUser() {
+        return user;
+    }
+
+    public void setUser(Users user) {
+        this.user = user;
     }
 
     public LocalDateTime getCreateAt() {
@@ -107,7 +113,7 @@ public class Courses {
     }
 
     public String getFormattedCreatedAt() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM, yyyy");
         return createdAt.format(formatter);
     }
 

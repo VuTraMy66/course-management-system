@@ -77,7 +77,7 @@ public class Reviews {
     }
 
     public String getFormattedReviewDate() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM, yyyy");
         return reviewDate.format(formatter);
     }
 

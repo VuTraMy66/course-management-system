@@ -56,7 +56,7 @@ public class Enrollments {
     }
 
     public String getFormattedEnrollAt() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM, yyyy");
         return enrollAt.format(formatter);
     }
 

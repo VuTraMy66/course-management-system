@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Course</title>
+    <title>Admin - Course</title>
     <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/feather-icons"></script>
@@ -36,7 +36,7 @@
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item">
-                                            <a href="/admin">Dashboard</a>
+                                            <a href="/admin" class="fw-semibold">Dashboard</a>
                                         </li>
                                         <li class="breadcrumb-item">
                                             <a href="/admin/courses">Courses</a>
@@ -46,7 +46,7 @@
                                 </nav>
                             </div>
                             <div>
-                                <a href="/admin/course-category" class="btn btn-outline-secondary">Back to All Category</a>
+                                <a href="/admin/courses/category" class="btn btn-outline-secondary">Back to All Category</a>
                             </div>
                         </div>
                     </div>
@@ -73,7 +73,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr th:each="courseCategory : ${coursesCategory}" th:if="${courseCategory.category == category}">
+                                            <tr th:each="courseCategory : ${coursesCategory}">
                                                 <td>
                                                     <a th:href="@{/admin/course(course_id=${courseCategory.courseId})}" class="text-inherit">
                                                         <div class="d-flex align-items-center gap-3">

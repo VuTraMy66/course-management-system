@@ -68,15 +68,6 @@ public class CourseController {
         return "course";
     }
 
-    @PostMapping("course/filter")
-    public List<Courses> filterCourses(@RequestBody Map<String, Object> filters) {
-        List<String> categories = (List<String>) filters.get("categories");
-        double rating = Double.parseDouble(filters.get("rating").toString());
-        List<String> skillLevels = (List<String>) filters.get("skillLevels");
-
-        return courseService.filterCourses(categories, rating, skillLevels);
-    }
-
     @GetMapping("/course")
     public String courseDetail(@RequestParam("course_id") int courseId, Model model) {
         boolean isAuthenticated = authService.isAuthenticated();
